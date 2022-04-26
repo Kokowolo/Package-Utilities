@@ -1,0 +1,16 @@
+{
+    "name": "kokowolo.utilities.Editor",
+    "rootNamespace": "Kokowolo.Utilities",
+    "references": [
+        "GUID:4eb9837719b274e77b9992f90890523c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

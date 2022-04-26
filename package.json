@@ -1,0 +1,25 @@
+{
+  "name": "com.kokowolo.utilities",
+  "version": "0.0.1",
+  "displayName": "Kokowolo Utilities",
+  "description": "Utility Scripts seen throughout Kokowolo Projects",
+  "unity": "2019.1",
+  "unityRelease": "0b5",
+  "changelogUrl": "https://github.com/Kokowolo/Package-Utilities/blob/main/CHANGELOG.md",
+  "dependencies": {
+    "com.unity.inputsystem": "1.3.0"
+  },
+  "keywords": [
+    "General",
+    "Utilities",
+    "Utility",
+    "Core",
+    "Base"
+  ],
+  "author": {
+    "name": "Kokowolo LLC",
+    "email": "contact@kokowolo.com",
+    "url": "https://www.kokowolo.com"
+  },
+  "hideInEditor": false
+}

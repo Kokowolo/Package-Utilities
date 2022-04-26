@@ -8,7 +8,7 @@
  * 
  * Additional Comments:
  *		While this file has been updated to better fit this project, the original version can be found here:
- *			https://forum.unity.com/threads/c-script-template-how-to-make-custom-changes.273191/ thanks to hpjohn
+ *		https://forum.unity.com/threads/c-script-template-how-to-make-custom-changes.273191/ thanks to hpjohn
  *
  *		File Line Length: 120
  */

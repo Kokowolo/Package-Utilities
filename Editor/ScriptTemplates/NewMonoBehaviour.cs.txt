@@ -1,0 +1,98 @@
+/*
+ * File Name: #SCRIPTNAME#.cs
+ * Description: This script is for ...
+ * 
+ * Author(s): #COMPANYNAME#, Will Lacey
+ * Date Created: #DATE#
+ * 
+ * Additional Comments:
+ *		While this file has been updated to better fit this project, the original version can be found here:
+ *			https://catlikecoding.com/unity/tutorials/hex-map/
+ *
+ *		File Line Length: 120
+ */
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    /************************************************************/
+    #region Enums
+
+    private enum MyEnum { Value1, Value2 }
+
+    #endregion
+    /************************************************************/
+    #region Fields
+
+    [Tooltip("this is a float")]
+    [SerializeField, Range(0, 1)] float myFloat = 0f;
+
+    #endregion
+	/************************************************************/
+    #region Properties
+
+    public static #SCRIPTNAME# Singleton { get; private set; }
+
+    #endregion
+    /************************************************************/
+    #region Functions
+
+    #region Unity Functions
+
+    private void Awake()
+    {
+        Subscribe();
+    }
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
+
+    }
+
+    private void OnDestroy()
+    {
+        Unsubscribe();
+    }
+
+    #endregion
+
+    #region Other Functions
+
+    #endregion
+
+    #region Event Handler Functions
+
+    private void Subscribe()
+    {
+
+    }
+
+    private void Unsubscribe()
+    {
+
+    }
+
+    private void HandleOnEvent()
+    {
+
+    }
+
+    #endregion
+
+    #endregion
+    /************************************************************/
+    #region Debug
+    #if UNITY_EDITOR
+
+    #endif
+    #endregion
+    /************************************************************/
+}

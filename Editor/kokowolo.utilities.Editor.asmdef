@@ -1,6 +1,6 @@
 {
     "name": "kokowolo.utilities.Editor",
-    "rootNamespace": "Kokowolo.Utilities",
+    "rootNamespace": "Kokowolo.Utilities.Editor",
     "references": [
         "GUID:4eb9837719b274e77b9992f90890523c"
     ],

@@ -11,23 +11,21 @@
  *      This script relates to MathUtils.cs
  **/
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using System;
 using UnityEngine.EventSystems;
+
+using Diagnostics = System.Diagnostics;
 
 namespace Kokowolo.Utilities
 {
-    public static class GenUtils
+    public static class General
     {
         #region Mouse Raytracing Functions
 
         public static bool IsMouseOverGUI()
         {
-            return EventSystem.current.IsPointerOverGameObject(); // is pointer with the given ID over EventSystem object?
+            return EventSystem.current.IsPointerOverGameObject();
         }
 
         public static Ray MouseScreenPointToRay()

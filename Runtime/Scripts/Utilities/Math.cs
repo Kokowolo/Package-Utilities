@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public static class MathUtils
+    public static class Math
     {
         /************************************************************/
         #region Fields
@@ -53,9 +53,7 @@ namespace Kokowolo.Utilities
             return Perturb(point, maxHorizontalNoiseDelta, maxVerticalNoiseDelta, perturbHorizontal, perturbVertical);
         }
 
-        public static Vector3 Perturb(
-            Vector3 point, float maxNoiseDelta,
-            bool perturbHorizontal = true, bool perturbVertical = true)
+        public static Vector3 Perturb(Vector3 point, float maxNoiseDelta,bool perturbHorizontal = true, bool perturbVertical = true)
         {
             return Perturb(point, maxNoiseDelta, maxNoiseDelta, perturbHorizontal, perturbVertical);
         }

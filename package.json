@@ -1,13 +1,15 @@
 {
   "name": "com.kokowolo.utilities",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "displayName": "Kokowolo Utilities",
   "description": "Utility Scripts seen throughout Kokowolo Projects",
   "unity": "2019.1",
   "unityRelease": "0b5",
   "changelogUrl": "https://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@github.com/Kokowolo/Package-Utilities/blob/main/CHANGELOG.md",
   "dependencies": {
-    "com.unity.inputsystem": "1.3.0"
+    "com.unity.cinemachine": "2.8.4",
+    "com.unity.inputsystem": "1.3.0",
+    "com.unity.textmeshpro": "3.0.6"
   },
   "keywords": [
     "General",

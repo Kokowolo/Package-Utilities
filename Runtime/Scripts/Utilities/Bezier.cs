@@ -37,7 +37,7 @@ namespace Kokowolo.Utilities
 		/// <param name="t">interpolator</param>
 		/// <param name="clamp">whether or not to clamp the interpolator</param>
 		/// <returns>a quadratic Bézier point</returns>
-		public static Vector3 GetPoint(Vector3 a, Vector3 b, Vector3 c, float t, bool clamp = false)
+		public static Vector3 GetQuadraticPoint(Vector3 a, Vector3 b, Vector3 c, float t, bool clamp = false)
 		{
 			// clamp the interpolator
 			if (clamp) t = Mathf.Clamp(t, 0f, 1f);
@@ -58,7 +58,7 @@ namespace Kokowolo.Utilities
 		/// <param name="t">interpolator</param>
 		/// <param name="clamp">whether or not to clamp the interpolator</param>
 		/// <returns>a quadratic Bézier derivative point</returns>
-		public static Vector3 GetDerivative(Vector3 a, Vector3 b, Vector3 c, float t, bool clamp = false)
+		public static Vector3 GetQuadraticDerivative(Vector3 a, Vector3 b, Vector3 c, float t, bool clamp = false)
 		{
 			// clamp the interpolator
 			if (clamp) t = Mathf.Clamp(t, 0f, 1f);

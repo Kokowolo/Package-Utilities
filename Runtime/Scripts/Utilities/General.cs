@@ -21,6 +21,12 @@ namespace Kokowolo.Utilities
 {
     public static class General
     {
+        public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, T component) where T : Component
+        {
+            if (!component) component = monoBehaviour.GetComponent<T>();
+            return component;
+        }
+
         #region Mouse Raytracing Functions
 
         public static bool IsMouseOverGUI()

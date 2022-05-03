@@ -34,8 +34,6 @@ public class #SCRIPTNAME# : MonoBehaviour
 	/************************************************************/
     #region Properties
 
-    public static #SCRIPTNAME# Singleton { get; private set; }
-
     #endregion
     /************************************************************/
     #region Functions

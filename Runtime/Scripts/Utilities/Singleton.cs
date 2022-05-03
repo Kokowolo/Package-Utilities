@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
             return instance;
         }
 
-        public static bool Set(T instance)
+        public static bool Set(T instance, bool dontDestroyOnLoad = true)
         {
             // NOTE: method does not need to be called; BUT if called, FindObjectOfType() is avoided during lazy init
             if (Singleton<T>.instance)
@@ -42,7 +42,7 @@ namespace Kokowolo.Utilities
             else
             {
                 Singleton<T>.instance = instance;
-                DontDestroyOnLoad(instance.gameObject);
+                if (dontDestroyOnLoad) DontDestroyOnLoad(instance.gameObject);
                 return true;
             }
         }

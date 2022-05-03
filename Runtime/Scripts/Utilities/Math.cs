@@ -29,8 +29,7 @@ namespace Kokowolo.Utilities
         #region Properties
 
         public static float noiseSampleScale { get; set; } = 0.2f;
-        public static float maxHorizontalNoiseDelta { get; set; } = 0.2f;
-        public static float maxVerticalNoiseDelta { get; set; } = 0.003f;
+        // public static float noiseSampleSpeed { get; set; } = 1f; TODO: refactor and add this to Perturb() w/ useTime
 
         public static Texture2D noiseSource
         {
@@ -46,35 +45,19 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        #region Noise & Randomness Functions
+        #region Randomness Functions
 
-        public static Vector3 Perturb(Vector3 point, bool perturbHorizontal = true, bool perturbVertical = true)
-        {
-            return Perturb(point, maxHorizontalNoiseDelta, maxVerticalNoiseDelta, perturbHorizontal, perturbVertical);
-        }
-
-        public static Vector3 Perturb(Vector3 point, float maxNoiseDelta,bool perturbHorizontal = true, bool perturbVertical = true)
-        {
-            return Perturb(point, maxNoiseDelta, maxNoiseDelta, perturbHorizontal, perturbVertical);
-        }
-
-        public static Vector3 Perturb(
-            Vector3 point,
-            float maxHorizontalNoiseDelta, float maxVerticalNoiseDelta, bool perturbHorizontal, bool perturbVertical)
+        public static Vector3 Perturb(Vector3 point, float noiseStrength, bool useTime = false)
         {
             // samples the noise source for randomness using a given point, yields a random value between 0 and 1
-            Vector4 sample = noiseSource.GetPixelBilinear(point.x * noiseSampleScale, point.z * noiseSampleScale);
+            Vector4 sample = (useTime) ? 
+                noiseSource.GetPixelBilinear(point.x * noiseSampleScale * Time.time, point.z * noiseSampleScale * Time.time) :
+                noiseSource.GetPixelBilinear(point.x * noiseSampleScale, point.z * noiseSampleScale);
 
             // convert the sample to a value between -1 and 1, then multiply it by it corresponding noise strength
-            if (perturbHorizontal)
-            {
-                point.x += (sample.x * 2f - 1f) * maxHorizontalNoiseDelta;
-                point.z += (sample.z * 2f - 1f) * maxHorizontalNoiseDelta;
-            }
-            if (perturbVertical)
-            {
-                point.y += (sample.y * 2f - 1f) * maxVerticalNoiseDelta;
-            }
+            point.x += (sample.x * 2f - 1f) * noiseStrength;
+            point.y += (sample.y * 2f - 1f) * noiseStrength;
+            point.z += (sample.z * 2f - 1f) * noiseStrength;
 
             return point;
         }

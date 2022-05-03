@@ -1,0 +1,53 @@
+/*
+ * File Name: #SCRIPTNAME#.cs
+ * Description: This script is for ...
+ * 
+ * Author(s): #COMPANYNAME#, Will Lacey
+ * Date Created: #DATE#
+ * 
+ * Additional Comments:
+ *		File Line Length: 120
+ */
+
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    /************************************************************/
+    #region Fields
+
+    [Tooltip("this is a float")]
+    [SerializeField, Range(0, 1)] float myFloat = 0f;
+
+    #endregion
+	/************************************************************/
+    #region Properties
+
+    #endregion
+    /************************************************************/
+    #region Functions
+
+    #region Unity Functions
+
+    private void Awake()
+    {
+        
+    }
+
+    private void Start()
+    {
+
+    }
+
+    private void Update()
+    {
+
+    }
+
+    #endregion
+
+    #endregion
+    /************************************************************/
+}

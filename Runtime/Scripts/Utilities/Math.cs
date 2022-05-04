@@ -1,6 +1,6 @@
 /**
  * File Name: MathUtils.cs
- * Description: Script that contains various mathematical utility functions
+ * Description: This script is a static class that contains various mathematical utility functions
  * 
  * Authors: Will Lacey
  * Date Created: January 15, 2022
@@ -29,7 +29,7 @@ namespace Kokowolo.Utilities
         #region Properties
 
         public static float noiseSampleScale { get; set; } = 0.2f;
-        // public static float noiseSampleSpeed { get; set; } = 1f; TODO: refactor and add this to Perturb() w/ useTime
+        // public static float noiseSampleSpeed { get; set; } = 1f; TODO: [BED-7] refactor and add this to Perturb() w/ useTime
 
         public static Texture2D noiseSource
         {

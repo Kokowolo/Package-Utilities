@@ -87,6 +87,8 @@ public class OrbitCamera : MonoBehaviour
 	
 	private void Awake()
 	{
+		Cursor.visible = false;
+		Cursor.lockState = CursorLockMode.Locked;
 		regularCamera = GetComponent<Camera>();
 		focusPoint = target.position;
 		transform.localRotation = orbitRotation = Quaternion.Euler(orbitAngles);
@@ -98,7 +100,7 @@ public class OrbitCamera : MonoBehaviour
 
 		UpdateFocusPoint();
 
-		if (ManualRotation() || AutomaticRotation())
+		if (ManualRotation() || ManualZoom() || AutomaticRotation())
 		{
 			ConstrainAngles();
 			orbitRotation = Quaternion.Euler(orbitAngles);
@@ -154,6 +156,7 @@ public class OrbitCamera : MonoBehaviour
 
 	private bool ManualRotation()
 	{
+		if (Input.GetMouseButton(1)) return false;
 		playerInput = Mouse.current.delta.ReadValue();
 		Vector2 input = new Vector2( playerInput.y, playerInput.x);
 		const float e = 0.001f;
@@ -164,6 +167,21 @@ public class OrbitCamera : MonoBehaviour
 			return true;
 		}
 		return false;
+	}
+
+	private bool ManualZoom()
+	{	
+		if (!Input.GetMouseButton(1)) return false;
+		playerInput = Mouse.current.delta.ReadValue();
+		Vector2 input = new Vector2( playerInput.y, playerInput.x);
+		const float e = 0.001f;
+		if (input.x < -e || input.x > e || input.y < -e || input.y > e)
+		{
+			distance += rotationSpeed * Time.unscaledDeltaTime * input.y;
+			return true;
+		}
+
+		return Input.GetMouseButtonDown(1);
 	}
 
 	private bool AutomaticRotation()

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.7] - 2022-5-9
+### Added
+* new WorldSpaceDisplay class with an associated display Prefab (see class for more info)
+* helper script OrbitCamera.cs which orbits the camera around a target Transform w/ user input
+* Orbit Camera prefab 
+### Changed
+* OrbitScript class to orbit around a target transform using a orbit distance and speed
+### Removed
+* OrbitScript orbiting function where relative rotation would be a factor of the orbiting
+
 ## [0.0.6] - 2022-5-3
 ### Added
 * new folder for scripts called Additional, which will include helper utility scripts

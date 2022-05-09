@@ -1,6 +1,6 @@
 {
   "name": "com.kokowolo.utilities",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "displayName": "Kokowolo Utilities",
   "description": "Utility Scripts seen throughout Kokowolo Projects",
   "unity": "2019.1",
@@ -13,6 +13,7 @@
   },
   "keywords": [
     "General",
+    "Math",
     "Utilities",
     "Utility",
     "Core",

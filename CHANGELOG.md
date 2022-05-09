@@ -7,8 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.7] - 2022-5-9
 ### Added
 * new WorldSpaceDisplay class with an associated display Prefab (see class for more info)
-* helper script OrbitCamera.cs which orbits the camera around a target Transform w/ user input
-* Orbit Camera prefab 
+* new input to OrbitCamera which allows for a user to change the distance of the orbit
+* functionality to hide mouse when using the OrbitCamera class/prefab
 ### Changed
 * OrbitScript class to orbit around a target transform using a orbit distance and speed
 ### Removed

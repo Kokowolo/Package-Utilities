@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.8] - 2022-5-11
+### Added
+* hexagons texture
+* temp function under Utilities.General
+* GraphicsSettingsManager Editor Script
+* Circle and Pixel default Sprites (might need to be moved into Images/Sprites folder in the future)
+* functionality for OrbitCamera to have no target transform (probably should cache this default value)
+### Fixed
+* odd hierarchy and default transform for OrbitCamera prefab
+* erroneous MonoBehaviour declaration within NewMonoBehaviour.cs
+
 ## [0.0.7] - 2022-5-9
 ### Added
 * new WorldSpaceDisplay class with an associated display Prefab (see class for more info)

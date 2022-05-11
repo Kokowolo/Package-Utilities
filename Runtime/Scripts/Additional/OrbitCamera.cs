@@ -74,6 +74,15 @@ public class OrbitCamera : MonoBehaviour
 		}
 	}
 
+	Vector3 TargetPosition 
+	{
+		get
+		{
+			if (target) return target.position;
+			return new Vector3();
+		}
+	}
+
     #endregion
     /************************************************************/
     #region Functions
@@ -90,7 +99,7 @@ public class OrbitCamera : MonoBehaviour
 		Cursor.visible = false;
 		Cursor.lockState = CursorLockMode.Locked;
 		regularCamera = GetComponent<Camera>();
-		focusPoint = target.position;
+		focusPoint = TargetPosition;
 		transform.localRotation = orbitRotation = Quaternion.Euler(orbitAngles);
 	}
 
@@ -112,7 +121,7 @@ public class OrbitCamera : MonoBehaviour
 
 		Vector3 rectOffset = lookDirection * regularCamera.nearClipPlane;
 		Vector3 rectPosition = lookPosition + rectOffset;
-		Vector3 castFrom = target.position;
+		Vector3 castFrom = TargetPosition;
 		Vector3 castLine = rectPosition - castFrom;
 		float castDistance = castLine.magnitude;
 		Vector3 castDirection = castLine / castDistance;
@@ -139,18 +148,17 @@ public class OrbitCamera : MonoBehaviour
 	private void UpdateFocusPoint()
 	{
 		previousFocusPoint = focusPoint;
-		Vector3 targetPoint = target.position;
 		if (focusRadius > 0f)
 		{
-			float distance = Vector3.Distance(targetPoint, focusPoint);
+			float distance = Vector3.Distance(TargetPosition, focusPoint);
 			float t = 1f;
 			if (distance > 0.01f && focusCentering > 0f) t = Mathf.Pow(1f - focusCentering, Time.unscaledDeltaTime);
 			if (distance > focusRadius) t = Mathf.Min(t, focusRadius / distance);
-			focusPoint = Vector3.Lerp(targetPoint, focusPoint, t);
+			focusPoint = Vector3.Lerp(TargetPosition, focusPoint, t);
 		}
 		else
 		{
-			focusPoint = targetPoint;
+			focusPoint = TargetPosition;
 		}
 	}
 

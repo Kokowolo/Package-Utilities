@@ -15,7 +15,7 @@ using UnityEditor;
 
 namespace Kokowolo.Utilities.Editor
 {
-    public class CreateNewMonoBehaviour : MonoBehaviour
+    public class CreateNewMonoBehaviour
     {
         /************************************************************/
         #region Fields

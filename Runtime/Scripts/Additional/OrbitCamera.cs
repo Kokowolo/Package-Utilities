@@ -25,7 +25,7 @@ public class OrbitCamera : MonoBehaviour
 	[Tooltip("transform to orbit around")]
 	[SerializeField] Transform target = default;
 	[Tooltip("default target position in the event that the target transform is not set")]
-	[SerializeField] Vector3 targetPosition = new Vector3();;
+	[SerializeField] Vector3 targetPosition = new Vector3();
 	[Tooltip("how far to orbit around the target")]
 	[SerializeField, Range(1f, 50f)] float distance = 5f;
 

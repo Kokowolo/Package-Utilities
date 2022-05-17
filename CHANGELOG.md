@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.9] - 2022-5-17
+### Added
+* default target position value for OrbitCamera in the event that the target transform is not set
+* GetPercentRoll function to check if a percent chance roll event occurs
+
 ## [0.0.8] - 2022-5-11
 ### Added
 * hexagons texture

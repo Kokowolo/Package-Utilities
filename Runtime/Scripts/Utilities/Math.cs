@@ -47,6 +47,11 @@ namespace Kokowolo.Utilities
 
         #region Randomness Functions
 
+        public static bool GetPercentRoll(float percent)
+        {
+            return Random.Range(0, 100) <= percent;
+        }
+
         public static Vector3 Perturb(Vector3 point, float noiseStrength, bool useTime = false)
         {
             // samples the noise source for randomness using a given point, yields a random value between 0 and 1

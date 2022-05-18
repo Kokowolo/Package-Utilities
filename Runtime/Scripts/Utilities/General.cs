@@ -39,6 +39,22 @@ namespace Kokowolo.Utilities
             return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
         }
 
+        /// <summary>
+        /// Recursively searches children/grandchildren to find a child by name n and return it
+        /// </summary>
+        /// <returns>The found child transform; Null if child with matching name isn't found</returns>
+        public static Transform RecursiveFind(this Transform transform, string n)
+        {
+            foreach (Transform child in transform)
+            {
+                Debug.Log(child);
+                if (child.name == n) return child;
+                Transform grandchild = child.RecursiveFind(n);
+                if (grandchild) return grandchild;
+            }
+            return null;
+        }
+
         public static string GetPersistentDataPath()
         {
             // https://github.com/Kokowolo/Project-Fort/blob/Version-2.1-Alpha/Assets/Scripts/UI/SaveLoadMenu.cs

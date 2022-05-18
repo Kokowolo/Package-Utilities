@@ -47,7 +47,6 @@ namespace Kokowolo.Utilities
         {
             foreach (Transform child in transform)
             {
-                Debug.Log(child);
                 if (child.name == n) return child;
                 Transform grandchild = child.RecursiveFind(n);
                 if (grandchild) return grandchild;

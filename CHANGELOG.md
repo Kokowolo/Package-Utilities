@@ -4,9 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.11] - 2022-5-19
+### Changed
+* CHANGELOG.md due to missed documentation of features added in v0.0.10
+### Removed
+* Debug.Log from General.RecursiveFind()
+### Fixed
+* incorrect GraphicsSettingsManager.cs file location to Editor folder
+
 ## [0.0.10] - 2022-5-17
 ### Added
 * General.RecursiveFind(string) function to recursively search for a grandchild by name n
+### Fixed
+* OrbitCamera syntax bug
 
 ## [0.0.9] - 2022-5-17
 ### Added

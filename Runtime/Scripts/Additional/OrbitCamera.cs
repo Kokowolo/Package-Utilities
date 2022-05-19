@@ -76,6 +76,18 @@ public class OrbitCamera : MonoBehaviour
 		}
 	}
 
+	public Transform Target
+	{
+		get => target;
+		set => target = value;
+	}
+
+	public float Distance
+	{
+		get => distance;
+		set => distance = value;
+	}
+
 	Vector3 TargetPosition 
 	{
 		get

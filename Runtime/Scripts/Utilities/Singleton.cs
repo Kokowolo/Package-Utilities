@@ -40,7 +40,7 @@ namespace Kokowolo.Utilities
             if (Singleton<T>.instance)
             {
                 Debug.LogWarning($"[Singleton] {instance.name} called Set<{typeof(T)}>() when singleton already exists");
-                DestroyImmediate(instance.gameObject);
+                if (!ReferenceEquals(Singleton<T>.instance, instance) DestroyImmediate(instance.gameObject);
                 return false;
             }
             else

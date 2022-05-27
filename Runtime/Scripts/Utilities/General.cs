@@ -1,5 +1,5 @@
 /**
- * File Name: GenUtils.cs
+ * File Name: General.cs
  * Description: Script that contains general utility functions
  * 
  * Authors: Will Lacey
@@ -14,29 +14,46 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.EventSystems;
-
+using System;
 using Diagnostics = System.Diagnostics;
 
 namespace Kokowolo.Utilities
 {
     public static class General
     {
-        public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, T component) where T : Component
-        {
-            if (!component) component = monoBehaviour.GetComponent<T>();
-            return component;
-        }
-
         #region Mouse Raytracing Functions
 
-        public static bool IsMouseOverGUI()
+        public static bool IsMouseOverUI()
         {
             return EventSystem.current.IsPointerOverGameObject();
         }
 
-        public static Ray MouseScreenPointToRay()
+        [Obsolete("MouseScreenPointToRay is deprecated, please use MouseScreenPointToRaycastHit instead.")]
+        public static Ray MouseScreenPointToRay(Camera camera = null)
         {
-            return Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+            if (!camera) camera = Camera.main;
+            return camera.ScreenPointToRay(Mouse.current.position.ReadValue());
+        }
+
+        public static bool MouseScreenPointToRaycastHit(out RaycastHit hit, LayerMask layerMask, 
+            float maxDistance = Mathf.Infinity, bool debugDrawLine = false)
+        {
+            // Get MouseScreenPointToRay
+            Ray ray = Camera.main.ScreenPointToRay(Mouse.current.position.ReadValue());
+
+            bool valid = Physics.Raycast(ray, out hit, maxDistance, layerMask);
+            if (debugDrawLine) Debug.DrawLine(ray.origin, hit.point, Color.white, 1f);
+            return valid;
+        }
+
+        #endregion
+
+        #region Other Funtions
+
+        public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component
+        {
+            if (!component) component = monoBehaviour.GetComponent<T>();
+            return component;
         }
 
         /// <summary>

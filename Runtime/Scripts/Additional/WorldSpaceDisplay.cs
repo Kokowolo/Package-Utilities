@@ -40,7 +40,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
-        LineRenderer LineRenderer => this.CacheGetComponent<LineRenderer>(_lineRenderer);
+        LineRenderer LineRenderer => this.CacheGetComponent<LineRenderer>(ref _lineRenderer);
 
         #endregion
         /************************************************************/

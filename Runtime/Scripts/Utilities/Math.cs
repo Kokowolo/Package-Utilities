@@ -28,14 +28,14 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
-        public static float noiseSampleScale { get; set; } = 0.2f;
-        // public static float noiseSampleSpeed { get; set; } = 1f; TODO: [BED-7] refactor and add this to Perturb() w/ useTime
+        public static float NoiseSampleScale { get; set; } = 0.2f;
+        // public static float NoiseSampleSpeed { get; set; } = 1f; TODO: [BED-7] refactor and add this to Perturb() w/ useTime
 
-        public static Texture2D noiseSource
+        public static Texture2D NoiseSource
         {
             get
             {
-                if (_noiseSource == null) _noiseSource = Resources.Load<Texture2D>("Noise Perlin");
+                if (!_noiseSource) _noiseSource = Resources.Load<Texture2D>("Noise Perlin");
                 return _noiseSource;
             }
             set => _noiseSource = value;
@@ -56,8 +56,8 @@ namespace Kokowolo.Utilities
         {
             // samples the noise source for randomness using a given point, yields a random value between 0 and 1
             Vector4 sample = (useTime) ? 
-                noiseSource.GetPixelBilinear(point.x * noiseSampleScale * Time.time, point.z * noiseSampleScale * Time.time) :
-                noiseSource.GetPixelBilinear(point.x * noiseSampleScale, point.z * noiseSampleScale);
+                NoiseSource.GetPixelBilinear(point.x * NoiseSampleScale * Time.time, point.z * NoiseSampleScale * Time.time) :
+                NoiseSource.GetPixelBilinear(point.x * NoiseSampleScale, point.z * NoiseSampleScale);
 
             // convert the sample to a value between -1 and 1, then multiply it by it corresponding noise strength
             point.x += (sample.x * 2f - 1f) * noiseStrength;

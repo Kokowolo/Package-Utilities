@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.12] - 2022-5-27
+### Added
+* OrbitCamera Distance and Target properties to edit class's fields
+* General.MouseScreenPointToRaycastHit()
+* warning logs to Singleton when dangerous functionality is run
+* RuntimeTests asmdef files
+### Changed
+* changelogUrl within package.json file
+* Math properties to adhere to current naming convention
+### Deprecated
+* General.MouseScreenPointToRay() in favor of General.MouseScreenPointToRaycastHit()
+### Removed
+* erroneous inclusion of removed textures (now in VFX package)
+### Fixed
+* asmdef files including Editor only files in build
+* General.CacheGetComponent bug where input parameter did not include ref keyword
+* typos within General.cs
+
 ## [0.0.11] - 2022-5-19
 ### Changed
 * CHANGELOG.md due to missed documentation of features added in v0.0.10

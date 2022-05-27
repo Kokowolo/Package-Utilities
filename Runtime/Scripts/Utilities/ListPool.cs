@@ -16,10 +16,6 @@ using System.Collections.Generic;
 
 namespace Kokowolo.Utilities
 {
-
-	/// <summary>
-	/// Static reusable pool containing a stack of lists
-	/// </summary>
 	public static class ListPool<T>
 	{
 		/************************************************************/

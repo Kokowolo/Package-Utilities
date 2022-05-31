@@ -19,7 +19,7 @@ public class Rotator : MonoBehaviour
     #region Fields
 
     [Tooltip("speed to rotate transform's euler angles")]
-    [SerializeField] Vector3 speed = new Vector3(0, 50, 0);
+    [SerializeField] public Vector3 speed = new Vector3(0, 50, 0);
 
     #endregion
     /************************************************************/

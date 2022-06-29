@@ -6,11 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.14] - 2022-6-29
 ### Added
-* Rotator class for rotating a transform
+* EnumUtils containing basic functionality for getting a string potentially associated to an Enum
 ### Changed
 * Rotator class's speed field from private to public
-### Fixed
-* Singleton class calling DestroyImmediate() on current instance multiple Set() occurred
+* ListPool.Add to ListPool.Release
 
 ## [0.0.13] - 2022-5-31
 ### Added

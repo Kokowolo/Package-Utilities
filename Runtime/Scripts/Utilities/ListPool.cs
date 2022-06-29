@@ -33,7 +33,7 @@ namespace Kokowolo.Utilities
 			else return stack.Pop();
 		}
 
-		public static void Add(List<T> list)
+		public static void Release(List<T> list)
 		{
 			list.Clear();
 			stack.Push(list);

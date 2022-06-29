@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 * Rotator class's speed field from private to public
 * ListPool.Add to ListPool.Release
+### Deprecated
+* Singleton.Release() as the singleton MonoBehaviour should be destroyed like any other GameObject
 
 ## [0.0.13] - 2022-5-31
 ### Added

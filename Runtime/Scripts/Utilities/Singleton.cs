@@ -10,6 +10,7 @@
  */
 
 using UnityEngine;
+using System;
 
 namespace Kokowolo.Utilities
 {
@@ -51,6 +52,7 @@ namespace Kokowolo.Utilities
             }
         }
 
+        [Obsolete("Release() is deprecated, just destroy the singleton MonoBehaviour like any other GameObject")]
         public static void Release()
         {
             if (!instance) return;

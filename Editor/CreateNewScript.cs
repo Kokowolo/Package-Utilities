@@ -13,7 +13,7 @@ using UnityEditor;
 
 namespace Kokowolo.Utilities.Editor
 {
-    public class CreateNewScript
+    public static class CreateNewScript
     {
         /************************************************************/
         #region Fields

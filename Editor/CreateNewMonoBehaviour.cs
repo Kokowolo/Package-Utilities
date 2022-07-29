@@ -10,12 +10,11 @@
  *		File Line Length: 120
  */
 
-using UnityEngine;
 using UnityEditor;
 
 namespace Kokowolo.Utilities.Editor
 {
-    public class CreateNewMonoBehaviour
+    public static class CreateNewMonoBehaviour
     {
         /************************************************************/
         #region Fields

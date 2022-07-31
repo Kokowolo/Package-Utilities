@@ -6,12 +6,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.15] - 2022-7-28
 ### Added
-* EnumUtils containing basic functionality for getting a string potentially associated to an Enum
+* CreateNewGameObjectDivider class for creating empty GameObject dividers in the Editor's Hierarchy
 ### Changed
-* Rotator class's speed field from private to public
-* ListPool.Add to ListPool.Release
-### Deprecated
-* Singleton.Release() as the singleton MonoBehaviour should be destroyed like any other GameObject
+* CreateNewScript and CreateNewMonoBehaviour are now static classes
 
 ## [0.0.14] - 2022-6-29
 ### Added

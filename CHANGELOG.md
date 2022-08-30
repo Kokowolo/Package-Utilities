@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.16] - 2022-8-29
+### Added
+* PrefabManager class to handle static serialization of any UnityEngine.Object prefabs
+* RuntimeTests PrefabManager scene
+### Changed
+* Math.GetPercentRoll to TryProbabilityOfSuccess where its parameter now is between 0 and 1
+* warning to regular log message in Singleton class for calling Get() before Set()
+
 ## [0.0.15] - 2022-7-28
 ### Added
 * CreateNewGameObjectDivider class for creating empty GameObject dividers in the Editor's Hierarchy

@@ -47,9 +47,15 @@ namespace Kokowolo.Utilities
 
         #region Randomness Functions
 
-        public static bool GetPercentRoll(float percent)
+        /// <summary>
+        /// Evaluates if the odds of success is successful
+        /// </summary>
+        /// <param name="oddsOfSuccess">value between 0 and 1</param>
+        /// <returns>whether success was achieved</returns>
+        public static bool TryProbabilityOfSuccess(float oddsOfSuccess)
         {
-            return Random.Range(0, 100) <= percent;
+            if (oddsOfSuccess > 1) Debug.LogWarning("[Math] TryProbabilityOfSuccess() only takes a value between 0 and 1"); 
+            return Random.Range(0, 1) <= oddsOfSuccess;
         }
 
         public static Vector3 Perturb(Vector3 point, float noiseStrength, bool useTime = false)

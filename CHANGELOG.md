@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * PrefabManager class to handle static serialization of any UnityEngine.Object prefabs
 * RuntimeTests PrefabManager scene
+* PrefabManager prefab
 ### Changed
 * Math.GetPercentRoll to TryProbabilityOfSuccess where its parameter now is between 0 and 1
 * warning to regular log message in Singleton class for calling Get() before Set()

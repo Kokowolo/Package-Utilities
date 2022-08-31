@@ -13,23 +13,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Rotator : MonoBehaviour
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Fields
-
-    [Tooltip("speed to rotate transform's euler angles")]
-    [SerializeField] public Vector3 speed = new Vector3(0, 50, 0);
-
-    #endregion
-    /************************************************************/
-    #region Functions
-
-    private void Update()
+    public class Rotator : MonoBehaviour
     {
-        transform.Rotate(speed * Time.deltaTime);
-    }
+        /************************************************************/
+        #region Fields
 
-    #endregion
-    /************************************************************/
+        [Tooltip("speed to rotate transform's euler angles")]
+        [SerializeField] public Vector3 speed = new Vector3(0, 50, 0);
+
+        #endregion
+        /************************************************************/
+        #region Functions
+
+        private void Update()
+        {
+            transform.Rotate(speed * Time.deltaTime);
+        }
+
+        #endregion
+        /************************************************************/
+    }
 }

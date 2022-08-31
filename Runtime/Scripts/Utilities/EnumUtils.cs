@@ -12,45 +12,54 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 using System;
 using System.Reflection;
 using System.ComponentModel;
 
-public static class EnumUtils
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-
-    public static string ToStringFromPascalCase(this Enum value)
+    public static class EnumUtils
     {
-        string str = "";
-        Type type = value.GetType();
-        string name = Enum.GetName(type, value);
-        for (int i = 1; i <= name.Length; i++)
+        /************************************************************/
+        #region Functions
+
+        public static IEnumerable<T> GetValues<T>() 
         {
-            str += name[i - 1];
-            if (i < name.Length && Char.IsUpper(name[i])) str += " ";   
+            return (T[])Enum.GetValues(typeof(T));
         }
-        return str;
-    }
 
-    public static string GetDescription(this Enum value)
-    {
-        Type type = value.GetType();
-        string name = Enum.GetName(type, value);
-        if (name != null)
+        public static string ToStringFromPascalCase(this Enum value)
         {
-            FieldInfo field = type.GetField(name);
-            if (field != null)
+            string str = "";
+            Type type = value.GetType();
+            string name = Enum.GetName(type, value);
+            for (int i = 1; i <= name.Length; i++)
             {
-                DescriptionAttribute attr = 
-                    Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-                if (attr != null) return attr.Description;
+                str += name[i - 1];
+                if (i < name.Length && Char.IsUpper(name[i])) str += " ";   
             }
+            return str;
         }
-        return value.ToString();
-    }
 
-    #endregion
-    /************************************************************/
+        public static string GetDescription(this Enum value)
+        {
+            Type type = value.GetType();
+            string name = Enum.GetName(type, value);
+            if (name != null)
+            {
+                FieldInfo field = type.GetField(name);
+                if (field != null)
+                {
+                    DescriptionAttribute attr = 
+                        Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
+                    if (attr != null) return attr.Description;
+                }
+            }
+            return value.ToString();
+        }
+
+        #endregion
+        /************************************************************/
+    }
 }

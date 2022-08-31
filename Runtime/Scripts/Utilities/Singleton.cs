@@ -25,11 +25,11 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static T Get()
+        public static T Get(bool dontDestroyOnLoad = true)
         {
             if (!instance) 
             {
-                Set(FindObjectOfType<T>());
+                Set(FindObjectOfType<T>(), dontDestroyOnLoad);
                 Debug.Log($"[Singleton] called Get<{typeof(T)}>() before instance was set");
             }
             return instance;

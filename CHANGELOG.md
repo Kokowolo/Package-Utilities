@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.17] - 2022-8-31
+### Added
+* default parameter to Singleton<T>.Get()
+* GetValues<T> to EnumUtils
+### Removed
+* erroneous code from within CameraFacer
+### Fixed
+* Kokowolo.Utilities namespace within OrbitCamera, OrbitScript, Rotator, and EnumUtils
+
 ## [0.0.16] - 2022-8-29
 ### Added
 * PrefabManager class to handle static serialization of any UnityEngine.Object prefabs

@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.18] - 2022-9-07
 ### Added
 * DefaultExecutionOrder attribute to PrefabManager with value of -100
+### Changed
+* log message in Singleton<T>.Get() and now has slightly more information
 
 ## [0.0.17] - 2022-8-31
 ### Added
@@ -101,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * new input to OrbitCamera which allows for a user to change the distance of the orbit
 * functionality to hide mouse when using the OrbitCamera class/prefab
 ### Changed
-* OrbitScript class to orbit around a target transform using a orbit distance and speed
+* OrbitScript class to orbit around a target transform using an orbit distance and speed
 ### Removed
 * OrbitScript orbiting function where relative rotation would be a factor of the orbiting
 

@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
             if (!instance) 
             {
                 Set(FindObjectOfType<T>(), dontDestroyOnLoad);
-                Debug.Log($"[Singleton] called Get<{typeof(T)}>() before instance was set");
+                Debug.Log($"[Singleton] called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}");
             }
             return instance;
         }

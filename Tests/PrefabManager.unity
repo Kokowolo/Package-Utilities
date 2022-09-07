@@ -461,13 +461,19 @@ PrefabInstance:
     - target: {fileID: 5031679819563259045, guid: a72ee6c4fdcaa4e77a08a4cce18020e8,
         type: 3}
       propertyPath: monoBehaviours.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5031679819563259045, guid: a72ee6c4fdcaa4e77a08a4cce18020e8,
         type: 3}
       propertyPath: monoBehaviours.Array.data[0]
       value: 
       objectReference: {fileID: 6083263376558125677, guid: ef81cda452a69433f9b061c066327219,
+        type: 3}
+    - target: {fileID: 5031679819563259045, guid: a72ee6c4fdcaa4e77a08a4cce18020e8,
+        type: 3}
+      propertyPath: monoBehaviours.Array.data[1]
+      value: 
+      objectReference: {fileID: 142570198927407850, guid: a51e0d63d6e6d4381920d2257439e674,
         type: 3}
     - target: {fileID: 5031679819563259045, guid: a72ee6c4fdcaa4e77a08a4cce18020e8,
         type: 3}

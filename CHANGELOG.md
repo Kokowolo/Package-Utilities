@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * DefaultExecutionOrder attribute to PrefabManager with value of -100
 ### Changed
 * log message in Singleton<T>.Get() and now has slightly more information
+### Removed
+* test PrefabManager scene
 
 ## [0.0.17] - 2022-8-31
 ### Added

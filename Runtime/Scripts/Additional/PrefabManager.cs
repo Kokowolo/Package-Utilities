@@ -17,6 +17,7 @@ using System;
 
 namespace Kokowolo.Utilities
 {
+    [DefaultExecutionOrder(-100)]
     public class PrefabManager : MonoBehaviour
     {
         /************************************************************/

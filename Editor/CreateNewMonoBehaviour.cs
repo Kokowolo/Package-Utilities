@@ -20,7 +20,6 @@ namespace Kokowolo.Utilities.Editor
         #region Fields
 
         const string PackageName = "com.kokowolo.utilities";
-        const string NewBehaviour = "NewBehaviour";
 
         #endregion
         /************************************************************/
@@ -30,14 +29,14 @@ namespace Kokowolo.Utilities.Editor
         [MenuItem(itemName: "Assets/Create/C# Script - Simple", isValidateFunction: false, priority: 50)]
         public static void CreateSimpleScript()
         {
-            CreateNewScript.CreateScriptAssetFromName(PackageName, $"{NewBehaviour}Simple");
+            CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourSimple.cs.txt");
         }
 
         [MenuItem(itemName: "Kokowolo/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
         [MenuItem(itemName: "Assets/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
         public static void CreateVerboseScript()
         {
-            CreateNewScript.CreateScriptAssetFromName(PackageName, $"{NewBehaviour}Verbose");
+            CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourVerbose.cs.txt");
         }
 
         #endregion

@@ -16,12 +16,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
+using Kokowolo.Utilities;
+
 public class #SCRIPTNAME# : MonoBehaviour
 {
     /************************************************************/
+    #region Events
+
+    public static event EventHandler OnSomeEvent;
+
+    public class #SCRIPTNAME#EventArgs : EventArgs
+    {
+        public bool myBool;
+    }
+
+    #endregion
+    /************************************************************/
     #region Enums
 
-    private enum MyEnum { Value1, Value2 }
+    private enum MyEnum { EnumA, EnumB }
 
     #endregion
     /************************************************************/
@@ -34,6 +48,8 @@ public class #SCRIPTNAME# : MonoBehaviour
 	/************************************************************/
     #region Properties
 
+    public static #SCRIPTNAME# Instance => Singleton<#SCRIPTNAME#>.Get();
+
     #endregion
     /************************************************************/
     #region Functions
@@ -42,6 +58,7 @@ public class #SCRIPTNAME# : MonoBehaviour
 
     private void Awake()
     {
+        Singleton<#SCRIPTNAME#>.Set(this);
         Subscribe();
     }
 
@@ -62,10 +79,6 @@ public class #SCRIPTNAME# : MonoBehaviour
 
     #endregion
 
-    #region Other Functions
-
-    #endregion
-
     #region Event Handler Functions
 
     private void Subscribe()
@@ -78,7 +91,7 @@ public class #SCRIPTNAME# : MonoBehaviour
 
     }
 
-    private void HandleOnEvent()
+    private void Handle_SomeClass_OnSomeOtherEvent(object sender, EventArgs e)
     {
 
     }
@@ -89,6 +102,11 @@ public class #SCRIPTNAME# : MonoBehaviour
     /************************************************************/
     #region Debug
     #if UNITY_EDITOR
+
+    private void OnValidate()
+    {
+
+    }
 
     #endif
     #endregion

@@ -29,8 +29,6 @@ public class #SCRIPTNAME# : MonoBehaviour
     /************************************************************/
     #region Functions
 
-    #region Unity Functions
-
     private void Awake()
     {
         
@@ -45,9 +43,7 @@ public class #SCRIPTNAME# : MonoBehaviour
     {
 
     }
-
-    #endregion
-
+    
     #endregion
     /************************************************************/
 }

@@ -4,7 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.18] - 2022-9-07
+## [0.0.19] - 2022-09-19
+### Added
+* two additional functions to Editor script CreateNewScript and removed confusing code to allow for creation of ScriptTemplate files
+* Extensions folder, creating several script Extension files for more core UnityEngine/C# functionality
+### Changed
+* .gitignore file, updated it to current Kokowolo standard
+* current ScriptTemplate files, updating to current Kokowolo standard
+* EnumUtils, separating its functionality between its Utils and Extension functions
+* location for Utilities script files, better organizing them
+### Removed
+* obsolete older file directories
+
+## [0.0.18] - 2022-09-07
 ### Added
 * DefaultExecutionOrder attribute to PrefabManager with value of -100
 ### Changed
@@ -12,7 +24,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Removed
 * test PrefabManager scene
 
-## [0.0.17] - 2022-8-31
+## [0.0.17] - 2022-08-31
 ### Added
 * default parameter to Singleton<T>.Get()
 * GetValues<T> to EnumUtils
@@ -21,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 * Kokowolo.Utilities namespace within OrbitCamera, OrbitScript, Rotator, and EnumUtils
 
-## [0.0.16] - 2022-8-29
+## [0.0.16] - 2022-08-29
 ### Added
 * PrefabManager class to handle static serialization of any UnityEngine.Object prefabs
 * RuntimeTests PrefabManager scene
@@ -30,13 +42,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Math.GetPercentRoll to TryProbabilityOfSuccess where its parameter now is between 0 and 1
 * warning to regular log message in Singleton class for calling Get() before Set()
 
-## [0.0.15] - 2022-7-28
+## [0.0.15] - 2022-07-28
 ### Added
 * CreateNewGameObjectDivider class for creating empty GameObject dividers in the Editor's Hierarchy
 ### Changed
 * CreateNewScript and CreateNewMonoBehaviour are now static classes
 
-## [0.0.14] - 2022-6-29
+## [0.0.14] - 2022-06-29
 ### Added
 * EnumUtils containing basic functionality for getting a string potentially associated to an Enum
 ### Changed
@@ -45,13 +57,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Deprecated
 * Singleton.Release() as the singleton MonoBehaviour should be destroyed like any other GameObject
 
-## [0.0.13] - 2022-5-31
+## [0.0.13] - 2022-05-31
 ### Added
 * Rotator class for rotating a transform
 ### Fixed
 * Singleton class calling DestroyImmediate() on current instance multiple Set() occurred
 
-## [0.0.12] - 2022-5-27
+## [0.0.12] - 2022-05-27
 ### Added
 * OrbitCamera Distance and Target properties to edit class's fields
 * General.MouseScreenPointToRaycastHit()
@@ -69,7 +81,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * General.CacheGetComponent bug where input parameter did not include ref keyword
 * typos within General.cs
 
-## [0.0.11] - 2022-5-19
+## [0.0.11] - 2022-05-19
 ### Changed
 * CHANGELOG.md due to missed documentation of features added in v0.0.10
 ### Removed
@@ -77,18 +89,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 * incorrect GraphicsSettingsManager.cs file location to Editor folder
 
-## [0.0.10] - 2022-5-17
+## [0.0.10] - 2022-05-17
 ### Added
 * General.RecursiveFind(string) function to recursively search for a grandchild by name n
 ### Fixed
 * OrbitCamera syntax bug
 
-## [0.0.9] - 2022-5-17
+## [0.0.9] - 2022-05-17
 ### Added
 * default target position value for OrbitCamera in the event that the target transform is not set
 * Math.GetPercentRoll(float) function to check if a percent chance roll event occurs
 
-## [0.0.8] - 2022-5-11
+## [0.0.8] - 2022-05-11
 ### Added
 * hexagons texture
 * temp function under Utilities.General
@@ -151,7 +163,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * Script Templates Folder
 * functionality to create new C# Scripts that adhere to Kokowolo Coding Conventions
 
-## [0.0.1] - 2022-4-25
+## [0.0.1] - 2022-04-25
 ### Added
 * initial commit of package
 

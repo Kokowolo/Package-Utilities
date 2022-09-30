@@ -7,15 +7,12 @@
  * 
  * Additional Comments:
  *		File Line Length: 120
+ *
+ *      Relates to EnumUtils.cs
  */
 
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 using System;
-using System.Reflection;
-using System.ComponentModel;
+using System.Collections.Generic;
 
 namespace Kokowolo.Utilities
 {
@@ -27,36 +24,6 @@ namespace Kokowolo.Utilities
         public static IEnumerable<T> GetValues<T>() 
         {
             return (T[])Enum.GetValues(typeof(T));
-        }
-
-        public static string ToStringFromPascalCase(this Enum value)
-        {
-            string str = "";
-            Type type = value.GetType();
-            string name = Enum.GetName(type, value);
-            for (int i = 1; i <= name.Length; i++)
-            {
-                str += name[i - 1];
-                if (i < name.Length && Char.IsUpper(name[i])) str += " ";   
-            }
-            return str;
-        }
-
-        public static string GetDescription(this Enum value)
-        {
-            Type type = value.GetType();
-            string name = Enum.GetName(type, value);
-            if (name != null)
-            {
-                FieldInfo field = type.GetField(name);
-                if (field != null)
-                {
-                    DescriptionAttribute attr = 
-                        Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-                    if (attr != null) return attr.Description;
-                }
-            }
-            return value.ToString();
         }
 
         #endregion

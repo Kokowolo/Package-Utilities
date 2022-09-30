@@ -10,36 +10,49 @@
  */
 
 using UnityEditor;
+using System.IO;
 
 namespace Kokowolo.Utilities.Editor
 {
     public static class CreateNewScript
     {
         /************************************************************/
-        #region Fields
-
-        const string PathToScriptTemplates = "Packages/{0}/Editor/ScriptTemplates";
-
-        const string cs = ".cs";
-        const string txt = ".txt";
-
-        #endregion
-        /************************************************************/
         #region Functions
 
-        public static void CreateScriptAssetFromName(string packageName, string name)
+        public static void CreateFileFromScriptTemplatesFileName(string scriptTemplatesFileName)
         {
-            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(GetPathName(packageName, name),GetScriptFileName(name));
+            string templateFilePath = Path.Combine(
+                Directory.GetCurrentDirectory(), 
+                $"Assets/Editor/ScriptTemplates/{scriptTemplatesFileName}"
+            );
+            CreateFileFromTemplateFilePath(templateFilePath);
         }
 
-        private static string GetPathName(string packageName, string name)
+        public static void CreateFileFromTemplateFilePath(string templateFilePath)
         {
-            return $"{string.Format(PathToScriptTemplates, packageName)}/{name}{cs}{txt}";
+            string templateFileName = System.IO.Path.GetFileName(templateFilePath);
+            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(
+                templateFilePath, 
+                RemoveTxtExtension(templateFileName)
+            );
         }
 
-        private static string GetScriptFileName(string name)
+        /// <summary>
+        /// creates a file from a template file located at Packages/{packageName}/Editor/ScriptTemplates
+        /// </summary>
+        /// <param name="packageName">name of the package calling this script, i.e. "com.kokowolo.utilities"</param>
+        /// <param name="scriptTemplatesFileName">script template file name (with all of its extensions)</param>
+        public static void CreateFileFromPackageTemplateFile(string packageName, string scriptTemplatesFileName)
         {
-            return $"{name}{cs}";
+            ProjectWindowUtil.CreateScriptAssetFromTemplateFile(
+                $"{string.Format("Packages/{0}/Editor/ScriptTemplates", packageName)}/{scriptTemplatesFileName}", 
+                RemoveTxtExtension(scriptTemplatesFileName)
+            );
+        }
+        
+        private static string RemoveTxtExtension(string fileName)
+        {
+            return fileName.Substring(0, fileName.Length - 4);
         }
 
         #endregion

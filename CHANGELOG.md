@@ -7,7 +7,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.20] - 2022-10-18
 ### Added
 * Raycasting.cs to hold all Raycast code
-* added function to Raycast from an origin to a destination
+* function to Raycast from an origin to a destination
 * InputManager script to serve as a base manager for all Input code/classes
 ### Removed
 * any Raycast code from General.cs

@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.20] - 2022-10-18
+### Added
+* Raycasting.cs to hold all Raycast code
+* added function to Raycast from an origin to a destination
+* InputManager script to serve as a base manager for all Input code/classes
+### Removed
+* any Raycast code from General.cs
+
 ## [0.0.19] - 2022-09-19
 ### Added
 * two additional functions to Editor script CreateNewScript and removed confusing code to allow for creation of ScriptTemplate files

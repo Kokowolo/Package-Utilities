@@ -17,6 +17,11 @@ namespace Kokowolo.Utilities
 {
     public static class General
     {
+        private static bool IsGameObjectInLayerMask(GameObject gameObject, LayerMask layerMask)
+        {
+            return (1 << gameObject.layer & layerMask) != 0;
+        }
+
         public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component
         {
             if (!component) component = monoBehaviour.GetComponent<T>();

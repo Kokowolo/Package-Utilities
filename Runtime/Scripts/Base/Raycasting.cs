@@ -20,7 +20,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static bool RaycastToWorldPosition(Vector3 origin, Vector3 destination, out RaycastHit hitInfo, 
+        public static bool RaycastToDestinationPoint(Vector3 origin, Vector3 destination, out RaycastHit hitInfo, 
             LayerMask layerMask)
         {
             Vector3 direction = (destination - origin).normalized;

@@ -7,8 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.20] - 2022-10-18
 ### Added
 * Raycasting.cs to hold all Raycast code
-* function to Raycast from an origin to a destination
+* function to Raycast from an origin to a destination; RaycastToDestinationPoint()
 * InputManager script to serve as a base manager for all Input code/classes
+* General.IsGameObjectInLayerMask() to check if a GameObject is within a given LayerMask
 ### Removed
 * any Raycast code from General.cs
 

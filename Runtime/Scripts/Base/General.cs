@@ -17,7 +17,7 @@ namespace Kokowolo.Utilities
 {
     public static class General
     {
-        private static bool IsGameObjectInLayerMask(GameObject gameObject, LayerMask layerMask)
+        public static bool IsGameObjectInLayerMask(GameObject gameObject, LayerMask layerMask)
         {
             return (1 << gameObject.layer & layerMask) != 0;
         }

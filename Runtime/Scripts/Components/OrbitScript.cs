@@ -25,7 +25,7 @@ namespace Kokowolo.Utilities
 
         [Header("Cached References")]
         [Tooltip("transform to orbit around")]
-        [SerializeField] Transform target = null;
+        [SerializeField] public Transform target = null;
 
         [Header("Settings")]
         [SerializeField, Min(0)] float radius = 1;

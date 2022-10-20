@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.21] - 2022-10-20
+### Added
+* public to OrbitCamera.target to expose the field
+### Changed
+* CameraFacer.mainCamera to camera and made the field public & in the event that field is not set, a warning is logged
+### Fixed
+* General.IsGameObjectInLayerMask function being private instead of public
+
 ## [0.0.20] - 2022-10-18
 ### Added
 * Raycasting.cs to hold all Raycast code
@@ -15,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.19] - 2022-09-19
 ### Added
-* two additional functions to Editor script CreateNewScript and removed confusing code to allow for creation of ScriptTemplate files
+* two additional functions CreateNewScript and removed confusing code to allow for creation of a ScriptTemplate files
 * Extensions folder, creating several script Extension files for more core UnityEngine/C# functionality
 ### Changed
 * .gitignore file, updated it to current Kokowolo standard

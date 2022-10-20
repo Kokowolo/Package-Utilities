@@ -22,15 +22,24 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
-        [SerializeField] Camera mainCamera = null;
+        [SerializeField] public Camera camera = null;
 
         #endregion
         /************************************************************/
         #region Functions
 
+        private void Start() 
+        {
+            if (!camera)
+            {
+                Debug.LogWarning("[CameraFacer] camera has not been set");   
+                camera = Camera.main; 
+            }
+        }
+
         private void FixedUpdate()
         {
-            transform.eulerAngles = mainCamera.transform.eulerAngles;
+            transform.eulerAngles = camera.transform.eulerAngles;
         }
 
         #endregion

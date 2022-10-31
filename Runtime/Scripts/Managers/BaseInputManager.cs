@@ -22,12 +22,12 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class InputManager : MonoBehaviour
+    public class BaseInputManager : MonoBehaviour
     {
         /************************************************************/
         #region Properties
 
-        protected static InputManager Instance => Singleton<InputManager>.Get();
+        protected static BaseInputManager Instance => Singleton<BaseInputManager>.Get();
 
         #endregion
         /************************************************************/
@@ -35,7 +35,7 @@ namespace Kokowolo.Utilities
 
         protected virtual void Awake()
         {
-            Singleton<InputManager>.Set(this);
+            Singleton<BaseInputManager>.Set(this);
         }
 
         public static bool IsMouseOverUI()

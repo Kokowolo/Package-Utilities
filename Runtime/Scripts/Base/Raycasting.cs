@@ -32,7 +32,7 @@ namespace Kokowolo.Utilities
             float maxDistance = Mathf.Infinity, Camera camera = null)
         {
             if (!camera) camera = Camera.main;
-            Ray ray = camera.ScreenPointToRay(InputManager.GetMouseScreenPoint());
+            Ray ray = camera.ScreenPointToRay(BaseInputManager.GetMouseScreenPoint());
             if (Physics.Raycast(ray, out hitInfo, maxDistance, layerMask))
             {
                 return true;

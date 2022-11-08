@@ -14,8 +14,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-#if ENABLE_INPUT_SYSTEM && ENABLE_INPUT_SYSTEM_PACKAGE
-#define USE_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
@@ -45,11 +44,11 @@ namespace Kokowolo.Utilities
 
         public static Vector2 GetMouseScreenPoint()
         {
-    #if USE_NEW_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
             return Mouse.current.position.ReadValue();
-    #else
+#else
             return Input.mousePosition;
-    #endif
+#endif
         }
 
         public static Vector3 GetMouseWorldPosition(LayerMask layerMask, 
@@ -62,11 +61,11 @@ namespace Kokowolo.Utilities
         public static bool WasClickPressedThisFrame() => Instance._WasClickPressedThisFrame();
         protected virtual bool _WasClickPressedThisFrame()
         {
-    #if USE_NEW_INPUT_SYSTEM
+#if ENABLE_INPUT_SYSTEM
             return Mouse.current.leftButton.wasPressedThisFrame;
-    #else
+#else
             return Input.GetMouseButtonDown(0);
-    #endif
+#endif
         }
         
         #endregion

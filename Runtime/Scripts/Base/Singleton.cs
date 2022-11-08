@@ -52,7 +52,7 @@ namespace Kokowolo.Utilities
             }
             else
             {
-                Debug.LogError($"[Singleton] called Set<{typeof(T)}>() but given instance is null");
+                Debug.LogError($"[Singleton] called Set<{typeof(T)}>() when given instance is null");
                 return false;
             }
         }

@@ -54,7 +54,7 @@ namespace Kokowolo.Utilities
         /// <returns>whether success was achieved</returns>
         public static bool TryProbabilityOfSuccess(float oddsOfSuccess)
         {
-            if (oddsOfSuccess > 1) Debug.LogWarning("[Math] TryProbabilityOfSuccess() only takes a value between 0 and 1"); 
+            if (oddsOfSuccess > 1) LogManager.LogWarning("TryProbabilityOfSuccess() only takes a value between 0 and 1"); 
             return Random.Range(0, 1) <= oddsOfSuccess;
         }
 

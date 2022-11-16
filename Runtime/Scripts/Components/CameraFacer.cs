@@ -32,7 +32,7 @@ namespace Kokowolo.Utilities
         {
             if (!camera)
             {
-                Debug.LogWarning("[CameraFacer] camera has not been set");   
+                LogManager.LogWarning("[CameraFacer] camera has not been set");   
                 camera = Camera.main; 
             }
         }

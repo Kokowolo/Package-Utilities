@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
             if (findObjectOfType && !instance) 
             {
                 Set(FindObjectOfType<T>(), dontDestroyOnLoad);
-                Debug.LogWarning($"[Singleton] called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
+                LogManager.LogWarning($"called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
             }
             return instance;
         }
@@ -40,7 +40,7 @@ namespace Kokowolo.Utilities
             // NOTE: method does not need to be called; BUT if called, FindObjectOfType() is avoided during lazy init
             if (Singleton<T>.instance)
             {
-                Debug.LogWarning($"[Singleton] {instance.name} called Set<{typeof(T)}>() when singleton already exists");
+                LogManager.LogWarning($"{instance.name} called Set<{typeof(T)}>() when singleton already exists");
                 if (!ReferenceEquals(Singleton<T>.instance, instance)) DestroyImmediate(instance.gameObject);
                 return false;
             }
@@ -52,7 +52,7 @@ namespace Kokowolo.Utilities
             }
             else
             {
-                Debug.LogError($"[Singleton] called Set<{typeof(T)}>() when given instance is null");
+                LogManager.LogError($"called Set<{typeof(T)}>() when given instance is null");
                 return false;
             }
         }

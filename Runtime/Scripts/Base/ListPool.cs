@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities
 		/************************************************************/
 		#region Fields
 
-		static Stack<List<T>> stack = new Stack<List<T>>();
+		private static Stack<List<T>> stack = new Stack<List<T>>();
 
 		#endregion
 		/************************************************************/

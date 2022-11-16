@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.24] - 2022-11-15
 ### Added
 * LogManager and foundational logging code to handle Kokowolo Diagnostics
+### Changed
+* Debug.Log calls to use LogManager instead
 
 ## [0.0.23] - 2022-11-08
 ### Changed

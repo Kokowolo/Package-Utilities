@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.25] - 2022-11-16
+### Added
+* ListExtensions to Extensions directory
+* extension method to List<T> to swap List<T> indices
+### Changed
+* BaseInputManager to have an exposed IsMouseOverUI() as well as handle when UnityEngine.InputSystem is over UI
+
 ## [0.0.24] - 2022-11-15
 ### Added
 * LogManager and foundational logging code to handle Kokowolo Diagnostics

@@ -24,6 +24,12 @@ namespace Kokowolo.Utilities
     public class BaseInputManager : MonoBehaviour
     {
         /************************************************************/
+        #region Fields
+
+        private bool isMouseOverUI = false;
+
+        #endregion
+        /************************************************************/
         #region Properties
 
         protected static BaseInputManager Instance => Singleton<BaseInputManager>.Get();
@@ -35,11 +41,27 @@ namespace Kokowolo.Utilities
         protected virtual void Awake()
         {
             Singleton<BaseInputManager>.Set(this);
+
+#if ENABLE_INPUT_SYSTEM
+            enabled = true;
+#else
+            enabled = false;
+#endif
         }
 
-        public static bool IsMouseOverUI()
+        protected virtual void Update()
         {
+            isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
+        }
+
+        public static bool IsMouseOverUI() => Instance._IsMouseOverUI();
+        public virtual bool _IsMouseOverUI()
+        {
+#if ENABLE_INPUT_SYSTEM
+            return isMouseOverUI;
+#else
             return EventSystem.current.IsPointerOverGameObject();
+#endif
         }
 
         public static Vector2 GetMouseScreenPoint()

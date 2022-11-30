@@ -28,11 +28,17 @@ namespace Kokowolo.Utilities
         [SerializeField] public Transform target = null;
 
         [Header("Settings")]
-        [SerializeField, Min(0)] float radius = 1;
-        [SerializeField, Range(0, 10)] float speed = 1;
-        [SerializeField] bool lockHeight = true;
+        [SerializeField, Min(0)] public float radius = 1;
+        [SerializeField, Range(0, 10)] public float speed = 1;
+        [SerializeField] private bool lockHeight = true;
 
-        float t = 0;
+        public float t = 0; // where the object is relative to 2π
+
+        #endregion
+        /************************************************************/
+        #region Properties
+
+        // public float Radius { get => _radius; set => _radius = value; }
 
         #endregion
         /************************************************************/
@@ -59,7 +65,7 @@ namespace Kokowolo.Utilities
             return new Vector2(radius * Mathf.Sin(radians), radius * Mathf.Cos(radians));
         }
 
-        // HACK: this does not work as intended
+        // NOTE: this does not work as intended
         // private void RotationalOrbit()
         // {
         //     Vector3 relativePos = (target.position + new Vector3(0, 0.5f, 0)) - transform.position;

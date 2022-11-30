@@ -24,6 +24,18 @@ public static class ListExtensions
         list[indexA] = list[indexB];
         list[indexB] = temp;
     }
+
+    public static string ToStringForElements<T>(this List<T> list)
+    {
+        string str = "[ ";
+        for (int i = 0; i < list.Count - 1; i++)
+        {
+            str += $"{list[i].ToString()}, ";
+        }
+        if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
+        else str += "]";
+        return str;
+    }
     
     #endregion
     /************************************************************/

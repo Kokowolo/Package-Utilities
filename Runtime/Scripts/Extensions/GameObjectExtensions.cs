@@ -1,9 +1,9 @@
 /*
- * File Name: TransformExtensions.cs
+ * File Name: GameObjectExtensions.cs
  * Description: This script is for ...
  * 
  * Author(s): Kokowolo, Will Lacey
- * Date Created: September 30, 2022
+ * Date Created: January 17, 2022
  * 
  * Additional Comments:
  *		File Line Length: 120
@@ -13,16 +13,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TransformExtensions
+public static class GameObjectExtensions
 {
     /************************************************************/
     #region Functions
 
-    public static Transform GetLastChild(this Transform transform)
+    public static bool IsPrefab(this GameObject gameObject)
     {
-        int childCount = transform.childCount;
-        if (childCount == 0) return null;
-        return transform.GetChild(childCount - 1);
+        return gameObject.scene.name == null;
     }
     
     #endregion

@@ -22,7 +22,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
-        [SerializeField] public Camera camera = null;
+        [SerializeField] public Camera mainCamera = null;
 
         #endregion
         /************************************************************/
@@ -30,16 +30,16 @@ namespace Kokowolo.Utilities
 
         private void Start() 
         {
-            if (!camera)
+            if (!mainCamera)
             {
-                LogManager.LogWarning("[CameraFacer] camera has not been set");   
-                camera = Camera.main; 
+                LogManager.LogWarning("[CameraFacer] mainCamera has not been set");   
+                mainCamera = Camera.main; 
             }
         }
 
         private void FixedUpdate()
         {
-            transform.eulerAngles = camera.transform.eulerAngles;
+            transform.eulerAngles = mainCamera.transform.eulerAngles;
         }
 
         #endregion

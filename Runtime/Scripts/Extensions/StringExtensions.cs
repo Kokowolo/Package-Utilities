@@ -13,16 +13,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class StringExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-    
-    // public static void MyFunction(this string value)
-    // {
+    public static class StringExtensions
+    {
+        /************************************************************/
+        #region Functions
         
-    // }
-    
-    #endregion
-    /************************************************************/
+        // public static void MyFunction(this string value)
+        // {
+            
+        // }
+        
+        #endregion
+        /************************************************************/
+    }
 }

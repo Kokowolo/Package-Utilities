@@ -13,30 +13,33 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class ListExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-    
-    public static void Swap<T>(this List<T> list, int indexA, int indexB)
+    public static class ListExtensions
     {
-        T temp = list[indexA];
-        list[indexA] = list[indexB];
-        list[indexB] = temp;
-    }
-
-    public static string ToStringForElements<T>(this List<T> list)
-    {
-        string str = "[ ";
-        for (int i = 0; i < list.Count - 1; i++)
+        /************************************************************/
+        #region Functions
+        
+        public static void Swap<T>(this List<T> list, int indexA, int indexB)
         {
-            str += $"{list[i].ToString()}, ";
+            T temp = list[indexA];
+            list[indexA] = list[indexB];
+            list[indexB] = temp;
         }
-        if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
-        else str += "]";
-        return str;
+
+        public static string ToStringForElements<T>(this List<T> list)
+        {
+            string str = "[ ";
+            for (int i = 0; i < list.Count - 1; i++)
+            {
+                str += $"{list[i].ToString()}, ";
+            }
+            if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
+            else str += "]";
+            return str;
+        }
+        
+        #endregion
+        /************************************************************/
     }
-    
-    #endregion
-    /************************************************************/
 }

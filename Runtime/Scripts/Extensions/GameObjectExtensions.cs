@@ -13,16 +13,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class GameObjectExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-
-    public static bool IsPrefab(this GameObject gameObject)
+    public static class GameObjectExtensions
     {
-        return gameObject.scene.name == null;
+        /************************************************************/
+        #region Functions
+
+        public static bool IsPrefab(this GameObject gameObject)
+        {
+            return gameObject.scene.name == null;
+        }
+        
+        #endregion
+        /************************************************************/
     }
-    
-    #endregion
-    /************************************************************/
 }

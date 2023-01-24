@@ -13,16 +13,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class FloatExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-    
-    // public static string ToStringDegrees(this float value)
-    // {
-    //     return $"{value.ToString()}°";
-    // }
-    
-    #endregion
-    /************************************************************/
+    public static class FloatExtensions
+    {
+        /************************************************************/
+        #region Functions
+        
+        // public static string ToStringDegrees(this float value)
+        // {
+        //     return $"{value.ToString()}°";
+        // }
+        
+        #endregion
+        /************************************************************/
+    }
 }

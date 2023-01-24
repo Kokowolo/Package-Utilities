@@ -13,18 +13,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class TransformExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-
-    public static Transform GetLastChild(this Transform transform)
+    public static class TransformExtensions
     {
-        int childCount = transform.childCount;
-        if (childCount == 0) return null;
-        return transform.GetChild(childCount - 1);
+        /************************************************************/
+        #region Functions
+
+        public static Transform GetLastChild(this Transform transform)
+        {
+            int childCount = transform.childCount;
+            if (childCount == 0) return null;
+            return transform.GetChild(childCount - 1);
+        }
+        
+        #endregion
+        /************************************************************/
     }
-    
-    #endregion
-    /************************************************************/
 }

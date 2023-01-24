@@ -31,6 +31,7 @@ namespace Kokowolo.Utilities.Editor
         {
             renameGameObject = new GameObject();
             renameGameObject.name = "------ new ------";
+            renameGameObject.tag = "EditorOnly";
             renameTime = EditorApplication.timeSinceStartup + 0.2d;
 
             EditorApplication.update += RenameGameObjectMode;

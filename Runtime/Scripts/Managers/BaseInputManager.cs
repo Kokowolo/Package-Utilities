@@ -26,13 +26,16 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
+        [Header("Singleton Settings")]
+        [SerializeField] protected bool dontDestroyOnLoad = false;
+
         private bool isMouseOverUI = false;
 
         #endregion
         /************************************************************/
         #region Properties
 
-        protected static BaseInputManager Instance => Singleton<BaseInputManager>.Get();
+        protected static BaseInputManager Instance => Singleton.Get<BaseInputManager>(findObjectOfType: false);
 
         #endregion
         /************************************************************/
@@ -40,7 +43,7 @@ namespace Kokowolo.Utilities
 
         protected virtual void Awake()
         {
-            Singleton<BaseInputManager>.Set(this);
+            if (!Singleton.TrySet(this, dontDestroyOnLoad)) return;
 
 #if ENABLE_INPUT_SYSTEM
             enabled = true;

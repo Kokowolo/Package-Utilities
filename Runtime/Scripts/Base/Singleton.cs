@@ -10,44 +10,41 @@
  */
 
 using UnityEngine;
-using System;
 
 namespace Kokowolo.Utilities
 {
-    public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
+    public static class Singleton
     {
-        /************************************************************/
-        #region Fields
-
-        private static T instance;
-
-        #endregion
         /************************************************************/
         #region Functions
 
-        public static T Get(bool findObjectOfType = true, bool dontDestroyOnLoad = true)
+        public static T Get<T>(bool findObjectOfType = true, bool dontDestroyOnLoad = false) where T : MonoBehaviour
         {
-            if (findObjectOfType && !instance) 
+            if (findObjectOfType && SingletonInstance<T>.instance == null) 
             {
-                Set(FindObjectOfType<T>(), dontDestroyOnLoad);
-                LogManager.LogWarning($"called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
+                TrySet(Object.FindObjectOfType<T>(), dontDestroyOnLoad);
+                LogManager.Log($"called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
             }
-            return instance;
+            return SingletonInstance<T>.instance;
         }
 
-        public static bool Set(T instance, bool dontDestroyOnLoad = true)
+        public static bool TrySet<T>(T instance, bool dontDestroyOnLoad = false) where T : MonoBehaviour
         {
             // NOTE: method does not need to be called; BUT if called, FindObjectOfType() is avoided during lazy init
-            if (Singleton<T>.instance)
+            if (SingletonInstance<T>.instance != null)
             {
-                LogManager.LogWarning($"{instance.name} called Set<{typeof(T)}>() when singleton already exists");
-                if (!ReferenceEquals(Singleton<T>.instance, instance)) DestroyImmediate(instance.gameObject);
+                LogManager.Log($"{instance.name} called Set<{typeof(T)}>() when singleton already exists");
+                if (!IsSingleton(instance)) 
+                {
+                    LogManager.Log($"there are two different singleton instances, calling Destroy for {instance.name}");
+                    Object.Destroy(instance.gameObject);
+                }
                 return false;
             }
-            else if (instance)
+            else if (instance != null)
             {
-                Singleton<T>.instance = instance;
-                if (dontDestroyOnLoad) DontDestroyOnLoad(instance.gameObject);
+                SingletonInstance<T>.instance = instance;
+                if (dontDestroyOnLoad) Object.DontDestroyOnLoad(instance.gameObject);
                 return true;
             }
             else
@@ -57,11 +54,18 @@ namespace Kokowolo.Utilities
             }
         }
 
-        [Obsolete("Release() is deprecated, just destroy the singleton MonoBehaviour like any other GameObject")]
-        public static void Release()
+        public static bool IsSingleton<T>(T instance) where T : MonoBehaviour
         {
-            if (!instance) return;
-            Destroy(instance.gameObject);
+            return ReferenceEquals(SingletonInstance<T>.instance, instance);
+        }
+
+        #endregion
+        /************************************************************/
+        #region Subclasses
+
+        private static class SingletonInstance<T> where T : MonoBehaviour
+        {
+            public static T instance;
         }
 
         #endregion

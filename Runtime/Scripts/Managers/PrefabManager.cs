@@ -23,21 +23,25 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
-        // [SerializeField] GameObject[] gameObjects = null;
-        [SerializeField] MonoBehaviour[] monoBehaviours = null;
-        [SerializeField] ScriptableObject[] scriptableObjects = null;
+        [Header("Singleton Settings")]
+        [SerializeField] private bool dontDestroyOnLoad = false;
+
+        [Header("Cached References")]
+        // [SerializeField] private GameObject[] gameObjects = null;
+        [SerializeField] private MonoBehaviour[] monoBehaviours = null;
+        [SerializeField] private ScriptableObject[] scriptableObjects = null;
 
         #endregion
         /************************************************************/
         #region Properties
 
-        private static PrefabManager Instance => Singleton<PrefabManager>.Get();
+        private static PrefabManager Instance => Singleton.Get<PrefabManager>(findObjectOfType: false);
 
         #endregion
         /************************************************************/
         #region Functions
 
-        private void Awake() => Singleton<PrefabManager>.Set(this);
+        private void Awake() => Singleton.TrySet(this, dontDestroyOnLoad);
 
         public static T Get<T>()
         {

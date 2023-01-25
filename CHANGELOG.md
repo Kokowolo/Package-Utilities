@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.29] - 2023-01-24
+### Added
+* a simple DontDestroyOnLoadScript to Components folder
+* BaseInputManager's and PrefabManager's Singleton settings and prevented them from calling FindObjectOfType
+* comment to ListExtensions containing useful code
+### Changed
+* Singleton<T> to static Singleton where it now uses a private subclass, SingletonInstance<T>, to handle instance data
+* Singleton's default parameters, switching dontDestroyOnLoad from `true` to `false`
+* Singleton's log messaging and severity
+* Singleton from calling DestroyImmediate to Destroy
+* BaseInputManager's and PrefabManager's scripts to handle to the new Singleton class structure
+
 ## [0.0.28] - 2023-01-23
 ### Added
 * ColorExtensions class to add HDR intensity to a color

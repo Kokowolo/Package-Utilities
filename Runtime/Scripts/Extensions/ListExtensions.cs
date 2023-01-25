@@ -38,6 +38,8 @@ namespace Kokowolo.Utilities
             else str += "]";
             return str;
         }
+
+        // someList.Sort((a, b) => a.SomeInteger.CompareTo(b.SomeInteger));
         
         #endregion
         /************************************************************/

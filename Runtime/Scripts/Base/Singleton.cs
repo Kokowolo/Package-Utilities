@@ -18,7 +18,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static T Get<T>(bool findObjectOfType = true, bool dontDestroyOnLoad = false) where T : MonoBehaviour
+        public static T Get<T>(bool findObjectOfType = false, bool dontDestroyOnLoad = false) where T : MonoBehaviour
         {
             if (findObjectOfType && SingletonInstance<T>.instance == null) 
             {

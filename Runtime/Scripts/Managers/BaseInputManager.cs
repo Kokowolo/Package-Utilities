@@ -35,7 +35,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
-        protected static BaseInputManager Instance => Singleton.Get<BaseInputManager>(findObjectOfType: false);
+        protected static BaseInputManager Instance => Singleton.Get<BaseInputManager>(findObjectOfType: true);
 
         #endregion
         /************************************************************/

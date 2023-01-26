@@ -35,7 +35,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
-        private static PrefabManager Instance => Singleton.Get<PrefabManager>(findObjectOfType: false);
+        private static PrefabManager Instance => Singleton.Get<PrefabManager>(findObjectOfType: true);
 
         #endregion
         /************************************************************/

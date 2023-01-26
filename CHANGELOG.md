@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.31] - 2023-01-26
+### Changed
+* Singleton.Get<T>'s defult parameter value from `true` to `false`
+* BaseInputManager's and PrefabManager's Singleton settings back to allow them to call FindObjectOfType `from Get<T>()`
+
 ## [0.0.30] - 2023-01-25
 ### Added
 * setting field to DontDestroyOnLoadScript to determine whether only one DontDestroyOnLoadScript GameObject can exist with its name

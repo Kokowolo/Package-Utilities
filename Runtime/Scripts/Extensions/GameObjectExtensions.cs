@@ -20,7 +20,7 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static bool IsPrefab(this GameObject gameObject)
+        public static bool IsGameObjectTheOriginalPrefab(this GameObject gameObject)
         {
             return gameObject.scene.name == null;
         }

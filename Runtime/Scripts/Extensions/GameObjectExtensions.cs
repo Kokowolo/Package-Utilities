@@ -22,6 +22,7 @@ namespace Kokowolo.Utilities
 
         public static bool IsGameObjectTheOriginalPrefab(this GameObject gameObject)
         {
+            // NOTE: UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()
             return gameObject.scene.name == null;
         }
         

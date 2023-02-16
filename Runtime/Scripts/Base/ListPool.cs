@@ -16,30 +16,55 @@ using System.Collections.Generic;
 
 namespace Kokowolo.Utilities
 {
-	public static class ListPool<T>
+	public static class ListPool
 	{
 		/************************************************************/
 		#region Fields
 
-		private static Stack<List<T>> stack = new Stack<List<T>>();
+		// private static Stack<List<T>> stack = new Stack<List<T>>();
 
 		#endregion
 		/************************************************************/
 		#region Functions
 
-		public static List<T> Get()
+		public static List<T> Get<T>()
 		{
-			if (stack.Count == 0) return new List<T>();
-			else return stack.Pop();
+			if (ListPoolStack<T>.stack.Count == 0) 
+            {
+                return new List<T>();
+            }
+			else 
+            {
+                return ListPoolStack<T>.stack.Pop();
+            }
 		}
 
-		public static void Release(List<T> list)
+        public static List<T> Get<T>(IEnumerable<T> collection)
+		{
+            List<T> list = Get<T>();
+            foreach (T element in collection)
+            {
+                list.Add(element);
+            }
+            return list;
+		}
+
+		public static void Release<T>(List<T> list)
 		{
 			list.Clear();
-			stack.Push(list);
+			ListPoolStack<T>.stack.Push(list);
 		}
 
 		#endregion
 		/************************************************************/
+        #region Subclasses
+
+        private static class ListPoolStack<T>
+        {
+            public static Stack<List<T>> stack = new Stack<List<T>>();
+        }
+
+        #endregion
+        /************************************************************/
 	}
 }

@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.33] - 2023-02-16
+### Added
+* CursorManager prefab and script to Utilities' Managers
+* MonoSingleton<T> which serves as an intermediate abstract class to handle Singleton code and redundancy 
+* comment to GameObjectExtensions that may be useful later in improving the method
+### Changed
+* ListPool<T> to ListPool adding an internal Subclass that handles the generic typing of the given lists
+### Fixed
+* naming convention within the Utilities.RuntimeTests asmdef file
+
 ## [0.0.32] - 2023-01-29
 ### Changed
 * `GameObjectExtensions.IsPrefab` to `IsGameObjectTheOriginalPrefab` to reduce confusion from `PrefabUtility` namespace

@@ -6,7 +6,7 @@
  * Date Created: February 16, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
@@ -27,24 +27,41 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
+        private T _Instance => this as T;
         public static T Instance => Singleton.Get<T>();
 
         #endregion
         /************************************************************/
         #region Functions
 
-        protected virtual bool Awake() 
+        protected virtual void MonoSingleton_Awake() {}
+        protected void Awake() 
         {
-            return Singleton.TrySet(this, dontDestroyOnLoad);
+            if (Singleton.TrySet(_Instance, dontDestroyOnLoad))
+            {
+                MonoSingleton_Awake();
+            }
         }
 
-        protected virtual bool OnDestroy()
+        protected virtual void MonoSingleton_OnDestroy() {}
+        protected void OnDestroy()
         {
-            return Singleton.IsSingleton(this);
+            if (Singleton.IsSingleton(_Instance))
+            {
+                MonoSingleton_OnDestroy();
+            }
+        }
+
+        protected virtual void MonoSingleton_OnDisable() {}
+        private void OnDisable() 
+        {
+            if (Singleton.IsSingleton(_Instance))
+            {
+                MonoSingleton_OnDisable();
+            }
         }
         
         #endregion
         /************************************************************/
     }
 }
-

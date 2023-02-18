@@ -92,9 +92,20 @@ namespace Kokowolo.Utilities
 
         #region Other Math Functions
 
-        public static float Normalize(float value, float min, float max)
+        public static int WrapClamp(int value, int minInclusive, int maxExclusive)
         {
-            return (value - min) / (max - min);
+            return (int) WrapClamp((float) value, (float) minInclusive, (float) maxExclusive);
+        }
+
+        public static float WrapClamp(float value, float minInclusive, float maxExclusive)
+        {
+            float range = maxExclusive - minInclusive;
+            return ((value - minInclusive) % range + range) % range + minInclusive;
+        }
+
+        public static float WrapClamp01(float value)
+        {
+            return WrapClamp(value, 0, 1);
         }
 
         public static int RoundUp(float value)
@@ -102,10 +113,28 @@ namespace Kokowolo.Utilities
             return (int)Mathf.Ceil(value);
         }
 
-        public static float Remap(float value, float fromRangeMin, float fromRangeMax, float toRangeMin, float toRangeMax)
+        public static float Remap(float value, float fromMin, float fromMax, float toMin, float toMax)
         {
-            value = Mathf.Clamp(value, fromRangeMin, fromRangeMax); // just in case the value is outside the bounds
-            return (value - fromRangeMin) / (fromRangeMax - fromRangeMin) * (toRangeMax - toRangeMin) + toRangeMin;
+            value = Mathf.Clamp(value, Mathf.Min(fromMin, fromMax), Mathf.Max(fromMin, fromMax));
+            return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
+        }
+
+        public static float Remap01(float value, float fromMin, float fromMax)
+        {
+            return Math.Remap(value, fromMin, fromMax, 0, 1);
+        }
+
+        public static Vector3 GetPointOnCircle(float radius, Vector3 normal, float t)
+        {
+            t = Math.Remap(t, 0, 1, 0, 2 * Mathf.PI);
+            float x = radius * Mathf.Cos(t);
+            float y = radius * Mathf.Sin(t);
+            float z = 0;
+
+            Vector3 circlePoint = new Vector3(x, y, z);
+            Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, normal);
+
+            return rotation * circlePoint;
         }
 
         /// <summary>

@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.34] - 2023-02-18
+### Added
+* Math.WrapClamp01, Math.WrapClamp(float, float, float), and Math.WrapClamp(int, int, int)
+* Math.GetPointOnCircle which gets a point on a circle of size `radius` in direction `normal` given a value `t`
+### Changed
+* changed package.json to have the preview tag
+* MonoSingleton<T> API to be a little more convenient and intuitive to use
+* Math.Normalize to Math.Remap01
+### Fixed
+* small bug within Math.Remap where the function assumed the min and max parameters
+
 ## [0.0.33] - 2023-02-16
 ### Added
 * CursorManager prefab and script to Utilities' Managers

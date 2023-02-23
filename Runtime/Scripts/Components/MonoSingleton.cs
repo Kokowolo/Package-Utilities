@@ -21,7 +21,10 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("Singleton Settings")]
+        [Tooltip("whether Object.DontDestroyOnLoad() is called on this")]
         [SerializeField] private bool dontDestroyOnLoad;
+        [Tooltip("whether this GameObject unparents itself")]
+        [SerializeField] private bool unparentGameObject;
 
         #endregion
         /************************************************************/
@@ -30,6 +33,8 @@ namespace Kokowolo.Utilities
         private T _Instance => this as T;
         public static T Instance => Singleton.Get<T>();
 
+        public static bool IsReady => Instance;
+
         #endregion
         /************************************************************/
         #region Functions
@@ -37,7 +42,7 @@ namespace Kokowolo.Utilities
         protected virtual void MonoSingleton_Awake() {}
         protected void Awake() 
         {
-            if (Singleton.TrySet(_Instance, dontDestroyOnLoad))
+            if (Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject))
             {
                 MonoSingleton_Awake();
             }

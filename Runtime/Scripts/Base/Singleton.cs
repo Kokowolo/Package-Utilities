@@ -18,7 +18,10 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static T Get<T>(bool findObjectOfType = false, bool dontDestroyOnLoad = false) where T : MonoBehaviour
+        public static T Get<T>(
+            bool findObjectOfType = false, 
+            bool dontDestroyOnLoad = false, 
+            bool unparentGameObject = false) where T : MonoBehaviour
         {
             if (findObjectOfType && SingletonInstance<T>.instance == null) 
             {
@@ -28,7 +31,10 @@ namespace Kokowolo.Utilities
             return SingletonInstance<T>.instance;
         }
 
-        public static bool TrySet<T>(T instance, bool dontDestroyOnLoad = false) where T : MonoBehaviour
+        public static bool TrySet<T>(
+            T instance, 
+            bool dontDestroyOnLoad = false, 
+            bool unparentGameObject = false) where T : MonoBehaviour
         {
             // NOTE: method does not need to be called; BUT if called, FindObjectOfType() is avoided during lazy init
             if (SingletonInstance<T>.instance != null)
@@ -36,14 +42,15 @@ namespace Kokowolo.Utilities
                 LogManager.Log($"{instance.name} called Set<{typeof(T)}>() when singleton already exists");
                 if (!IsSingleton(instance)) 
                 {
-                    LogManager.Log($"there are two different singleton instances, calling Destroy for {instance.name}");
-                    Object.Destroy(instance.gameObject);
+                    LogManager.Log($"there are two different singleton instances, calling DestroyImmediate for {instance.name}");
+                    Object.DestroyImmediate(instance.gameObject);
                 }
                 return false;
             }
             else if (instance != null)
             {
                 SingletonInstance<T>.instance = instance;
+                if (unparentGameObject) instance.transform.SetParent(null);
                 if (dontDestroyOnLoad) Object.DontDestroyOnLoad(instance.gameObject);
                 return true;
             }

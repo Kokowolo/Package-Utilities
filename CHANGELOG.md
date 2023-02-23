@@ -4,14 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.35] - 2023-02-23
+### Added
+* `IsReady` property to `MonoSingleton<T>`
+* unparenting code and optional parameter to `Singleton` and `MonoSingleton<T>`
+* unparenting code and optional parameter to `DontDestroyOnLoadScript`
+### Changed
+* `DontDestroyOnLoadScript`'s parameter names and uses
+* `Singleton`'s `Destroy()` call back to `DestroyImmediate()`
+* formatting of CHANGELOG's references to code
+### Fixed
+* bug where `DontDestroyOnLoadScript` was not removing singleton instance names after destruction
+
 ## [0.0.34] - 2023-02-18
 ### Added
-* Math.WrapClamp01, Math.WrapClamp(float, float, float), and Math.WrapClamp(int, int, int)
-* Math.GetPointOnCircle which gets a point on a circle of size `radius` in direction `normal` given a value `t`
+* `Math.WrapClamp01`, `Math.WrapClamp(float, float, float)`, and `Math.WrapClamp(int, int, int)`
+* `Math.GetPointOnCircle` which gets a point on a circle of size `radius` in direction `normal` given a value `t`
 ### Changed
 * changed package.json to have the preview tag
-* MonoSingleton<T> API to be a little more convenient and intuitive to use
-* Math.Normalize to Math.Remap01
+* `MonoSingleton<T>` API to be a little more convenient and intuitive to use
+* `Math.Normalize` to `Math.Remap01`
 ### Fixed
 * small bug within Math.Remap where the function assumed the min and max parameters
 
@@ -36,7 +48,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.30] - 2023-01-25
 ### Added
-* setting field to DontDestroyOnLoadScript to determine whether only one DontDestroyOnLoadScript GameObject can exist with its name
+* setting field to DontDestroyOnLoadScript to determine whether only one DontDestroyOnLoadScript GameObject can exist w/ its name
 ### Changed
 * DontDestroyOnLoadScript to track unique singleton instance DontDestroyOnLoadScript GameObjects
 

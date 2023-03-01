@@ -19,7 +19,7 @@ using System;
 using System.IO;
 using System.Globalization;
 
-namespace Kokowolo.Utilities
+namespace Kokowolo.Utilities//.Diagnostics
 {
     // [DefaultExecutionOrder(-2000)]
     public class LogManager// : MonoBehaviour

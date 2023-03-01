@@ -39,6 +39,11 @@ namespace Kokowolo.Utilities
             return str;
         }
 
+        public static List<TOut> Cast<TIn, TOut>(this List<TIn> list) where TOut : TIn
+        {
+            return list.ConvertAll(value => (TOut) value);
+        }
+
         // someList.Sort((a, b) => a.SomeInteger.CompareTo(b.SomeInteger));
         
         #endregion

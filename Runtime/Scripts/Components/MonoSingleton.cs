@@ -33,8 +33,6 @@ namespace Kokowolo.Utilities
         private T _Instance => this as T;
         public static T Instance => Singleton.Get<T>();
 
-        public static bool IsReady => Instance;
-
         #endregion
         /************************************************************/
         #region Functions

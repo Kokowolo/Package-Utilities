@@ -20,7 +20,12 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static bool IsGameObjectTheOriginalPrefab(this GameObject gameObject)
+        public static bool IsInLayerMask(this GameObject gameObject, LayerMask layerMask)
+        {
+            return (1 << gameObject.layer & layerMask) != 0;
+        }
+
+        public static bool IsTheOriginalPrefab(this GameObject gameObject)
         {
             // NOTE: UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()
             return gameObject.scene.name == null;

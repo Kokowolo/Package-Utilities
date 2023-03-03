@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.39] - 2023-03-03
+* `MonoSingleton_OnEnable` to `MonoSingleton` to remove confusion as to specifically specify what its API supports
+### Changed
+* `ListExtensions`.`ToStringForElements<T>` to `ToString<T>` to adhere to how most `ToString` implementations operate
+* `CursorManager` to a `MonoSingleton` and set its `DefaultExecutionOrder` to -100
+### Fixed
+* `MonoSingleton`'s `OnDisable` `private` declaration to `protected` so it'll thrown an error now when an extending class uses it
+
 ## [0.0.38] - 2023-03-02
 ### Changed
 * `General`.`IsGameObjectInLayerMask` to `GameObjectExtensions`.`IsInLayerMask`
@@ -17,7 +25,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.36] - 2023-02-28
 ### Added
-* `Cast<TIn, TOut>()` to`ListExtensions` to convert a List from one type to another
+* `Cast<TIn, TOut>()` to`ListExtensions` to convert a `List` from one type to another
 ### Removed
 * `IsReady` property from `Singleton<T>`
 
@@ -46,13 +54,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.33] - 2023-02-16
 ### Added
-* CursorManager prefab and script to Utilities' Managers
-* MonoSingleton<T> which serves as an intermediate abstract class to handle Singleton code and redundancy 
-* comment to GameObjectExtensions that may be useful later in improving the method
+* `CursorManager` prefab and script to Utilities' Managers
+* `MonoSingleton<T>` which serves as an intermediate abstract class to handle Singleton code and redundancy 
+* comment to `GameObjectExtensions` that may be useful later in improving the method
 ### Changed
-* ListPool<T> to ListPool adding an internal Subclass that handles the generic typing of the given lists
+* `ListPool<T>` to `ListPool` adding an internal Subclass that handles the generic typing of the given lists
 ### Fixed
-* naming convention within the Utilities.RuntimeTests asmdef file
+* naming convention within the `Utilities`.`RuntimeTests` asmdef file
 
 ## [0.0.32] - 2023-01-29
 ### Changed
@@ -60,8 +68,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.31] - 2023-01-26
 ### Changed
-* Singleton.Get<T>'s defult parameter value from `true` to `false`
-* BaseInputManager's and PrefabManager's Singleton settings back to allow them to call FindObjectOfType `from Get<T>()`
+* `Singleton`.`Get<T>'`s defult parameter value from `true` to `false`
+* `BaseInputManager`'s and `PrefabManager`'s `Singleton` settings back to allow them to call `FindObjectOfType` `from Get<T>()`
 
 ## [0.0.30] - 2023-01-25
 ### Added

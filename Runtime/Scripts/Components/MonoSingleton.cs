@@ -37,7 +37,6 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        protected virtual void MonoSingleton_Awake() {}
         protected void Awake() 
         {
             if (Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject))
@@ -45,8 +44,7 @@ namespace Kokowolo.Utilities
                 MonoSingleton_Awake();
             }
         }
-
-        protected virtual void MonoSingleton_OnDestroy() {}
+        
         protected void OnDestroy()
         {
             if (Singleton.IsSingleton(_Instance))
@@ -55,8 +53,15 @@ namespace Kokowolo.Utilities
             }
         }
 
-        protected virtual void MonoSingleton_OnDisable() {}
-        private void OnDisable() 
+        protected void OnEnable() 
+        {
+            if (Singleton.IsSingleton(_Instance))
+            {
+                MonoSingleton_OnEnable();
+            }
+        }
+        
+        protected void OnDisable() 
         {
             if (Singleton.IsSingleton(_Instance))
             {
@@ -64,6 +69,14 @@ namespace Kokowolo.Utilities
             }
         }
         
+        protected virtual void MonoSingleton_Awake() {}
+        
+        protected virtual void MonoSingleton_OnEnable() {}
+
+        protected virtual void MonoSingleton_OnDisable() {}
+
+        protected virtual void MonoSingleton_OnDestroy() {}
+
         #endregion
         /************************************************************/
     }

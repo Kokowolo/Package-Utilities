@@ -27,16 +27,23 @@ namespace Kokowolo.Utilities
             list[indexB] = temp;
         }
 
-        public static string ToStringForElements<T>(this List<T> list)
+        public static string ToString<T>(this List<T> list, bool formatElements)
         {
-            string str = "[ ";
-            for (int i = 0; i < list.Count - 1; i++)
+            if (formatElements)
             {
-                str += $"{list[i].ToString()}, ";
+                string str = "[ ";
+                for (int i = 0; i < list.Count - 1; i++)
+                {
+                    str += $"{list[i].ToString()}, ";
+                }
+                if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
+                else str += "]";
+                return str;
             }
-            if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
-            else str += "]";
-            return str;
+            else
+            {
+                return list.ToString();
+            }
         }
 
         public static List<TOut> Cast<TIn, TOut>(this List<TIn> list) where TOut : TIn

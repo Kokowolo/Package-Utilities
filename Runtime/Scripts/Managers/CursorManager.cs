@@ -15,13 +15,11 @@ using UnityEngine;
 
 using Kokowolo.Utilities;
 
-public class CursorManager : MonoBehaviour
+[DefaultExecutionOrder(-100)]
+public class CursorManager : MonoSingleton<CursorManager>
 {
     /************************************************************/
     #region Fields
-
-    [Header("Singleton Settings")]
-        [SerializeField] protected bool dontDestroyOnLoad = false;
 
     [Header("Cached References")]
     [SerializeField] private GameObject cursorVisual;
@@ -36,8 +34,6 @@ public class CursorManager : MonoBehaviour
     /************************************************************/
     #region Properties
 
-    private static CursorManager Instance => Singleton.Get<CursorManager>();
-
     public static LayerMask LayerMask 
     { 
         get => Instance.layerMask; 
@@ -51,11 +47,6 @@ public class CursorManager : MonoBehaviour
     #endregion
     /************************************************************/
     #region Functions
-
-    private void Awake() 
-    {
-        Singleton.TrySet(this, dontDestroyOnLoad: dontDestroyOnLoad);
-    }
 
     private void Update() 
     {

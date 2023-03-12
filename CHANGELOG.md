@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.40] - 2023-03-12
+### Added
+* `Math`.`GetRadiansOnUnitCircle` which converts a `Vector2` from x, y to a value `[0, 2π]` on the unit circle
+### Changed
+* `Math`.`GetPointOnCircle` to match the values on the unit circle
+* `Math`.`TryProbabilityOfSuccess` to `Math`.`TryChanceOfSuccess`
+### Fixed
+* `Math`.`TryChanceOfSuccess` always returning `true`
+* clamped `Bezier`.`GetQuadraticDerivative` returning an incorrect value
+
 ## [0.0.39] - 2023-03-03
 * `MonoSingleton_OnEnable` to `MonoSingleton` to remove confusion as to specifically specify what its API supports
 ### Changed

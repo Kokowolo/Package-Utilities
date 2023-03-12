@@ -48,14 +48,14 @@ namespace Kokowolo.Utilities
         #region Randomness Functions
 
         /// <summary>
-        /// Evaluates if the odds of success is successful
+        /// Evaluates if t, the chance of success, is successful
         /// </summary>
-        /// <param name="oddsOfSuccess">value between 0 and 1</param>
+        /// <param name="t">chance of success value between 0f and 1f</param>
         /// <returns>whether success was achieved</returns>
-        public static bool TryProbabilityOfSuccess(float oddsOfSuccess)
+        public static bool TryChanceOfSuccess(float t)
         {
-            if (oddsOfSuccess > 1) LogManager.LogWarning("TryProbabilityOfSuccess() only takes a value between 0 and 1"); 
-            return Random.Range(0, 1) <= oddsOfSuccess;
+            if (t > 1f) LogManager.LogWarning("TryChanceOfSuccess() only takes a value between 0f and 1f"); 
+            return Random.Range(0f, 1f) <= t;
         }
 
         public static Vector3 Perturb(Vector3 point, float noiseStrength, bool useTime = false)
@@ -128,13 +128,20 @@ namespace Kokowolo.Utilities
         {
             t = Math.Remap(t, 0, 1, 0, 2 * Mathf.PI);
             float x = radius * Mathf.Cos(t);
-            float y = radius * Mathf.Sin(t);
+            float y = radius * -Mathf.Sin(t);
             float z = 0;
 
             Vector3 circlePoint = new Vector3(x, y, z);
             Quaternion rotation = Quaternion.FromToRotation(Vector3.forward, normal);
 
             return rotation * circlePoint;
+        }
+
+        public static float GetRadiansOnUnitCircle(float x, float y)
+        {
+            float angle = Mathf.Atan2(y, x);
+            if (angle < 0f) return angle + 2f * Mathf.PI;
+            else return angle;
         }
 
         /// <summary>

@@ -61,7 +61,7 @@ namespace Kokowolo.Utilities
 		public static Vector3 GetQuadraticDerivative(Vector3 a, Vector3 b, Vector3 c, float t, bool clamp = false)
 		{
 			// clamp the interpolator
-			if (clamp) t = Mathf.Clamp(t, 0f, 1f);
+			if (clamp) t = Mathf.Clamp(t, 0f, 0.99999f);
 
 			// Bézier derivative formula
 			return 2f * ((1f - t) * (b - a) + t * (c - b));

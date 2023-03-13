@@ -26,6 +26,14 @@ namespace Kokowolo.Utilities
             if (childCount == 0) return null;
             return transform.GetChild(childCount - 1);
         }
+
+        public static void DestroyImmediateChildren(this Transform transform)
+        {
+            for (int i = transform.childCount - 1; i >= 0; i--)
+            {
+                Object.DestroyImmediate(transform.GetChild(i).gameObject);
+            }
+        }
         
         #endregion
         /************************************************************/

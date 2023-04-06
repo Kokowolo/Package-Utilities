@@ -58,7 +58,8 @@ namespace Kokowolo.Utilities
             return Random.Range(0f, 1f) <= t;
         }
 
-        public static Vector3 Perturb(Vector3 point, float noiseStrength, bool useTime = false)
+        public static Vector3 Perturb(Vector3 point, float noiseStrength,
+            bool useX = true, bool useY = true, bool useZ = true, bool useTime = false)
         {
             // samples the noise source for randomness using a given point, yields a random value between 0 and 1
             Vector4 sample = (useTime) ? 
@@ -66,9 +67,9 @@ namespace Kokowolo.Utilities
                 NoiseSource.GetPixelBilinear(point.x * NoiseSampleScale, point.z * NoiseSampleScale);
 
             // convert the sample to a value between -1 and 1, then multiply it by it corresponding noise strength
-            point.x += (sample.x * 2f - 1f) * noiseStrength;
-            point.y += (sample.y * 2f - 1f) * noiseStrength;
-            point.z += (sample.z * 2f - 1f) * noiseStrength;
+            point.x += useX ? (sample.x * 2f - 1f) * noiseStrength : 0f;
+            point.y += useY ? (sample.y * 2f - 1f) * noiseStrength : 0f;
+            point.z += useZ ? (sample.z * 2f - 1f) * noiseStrength : 0f;
 
             return point;
         }

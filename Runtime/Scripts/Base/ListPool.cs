@@ -53,6 +53,7 @@ namespace Kokowolo.Utilities
 		{
 			list.Clear();
 			ListPoolStack<T>.stack.Push(list);
+            //list = null; // NOTE: commented out because this only works if list is passed by ref
 		}
 
 		#endregion

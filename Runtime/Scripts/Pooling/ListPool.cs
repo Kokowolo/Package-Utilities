@@ -19,12 +19,6 @@ namespace Kokowolo.Utilities
 	public static class ListPool
 	{
 		/************************************************************/
-		#region Fields
-
-		// private static Stack<List<T>> stack = new Stack<List<T>>();
-
-		#endregion
-		/************************************************************/
 		#region Functions
 
 		public static List<T> Get<T>()
@@ -49,7 +43,7 @@ namespace Kokowolo.Utilities
             return list;
 		}
 
-		public static void Release<T>(List<T> list)
+		public static void Add<T>(List<T> list)
 		{
 			list.Clear();
 			ListPoolStack<T>.stack.Push(list);

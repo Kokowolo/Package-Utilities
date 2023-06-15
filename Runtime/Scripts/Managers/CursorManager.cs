@@ -48,7 +48,7 @@ public class CursorManager : MonoSingleton<CursorManager>
     /************************************************************/
     #region Functions
 
-    private void Update() 
+    private void LateUpdate() 
     {
         Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
         cursorVisual.transform.position = hitInfo.point;

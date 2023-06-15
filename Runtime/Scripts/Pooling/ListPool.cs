@@ -33,14 +33,26 @@ namespace Kokowolo.Utilities
             }
 		}
 
+        // public static List<T> Get<T>(int numberOfDefaultElements)
+		// {
+		// 	return Get<T>(new T[numberOfDefaultElements]);
+		// }
+
         public static List<T> Get<T>(IEnumerable<T> collection)
 		{
-            List<T> list = Get<T>();
-            foreach (T element in collection)
+            if (ListPoolStack<T>.stack.Count == 0) 
             {
-                list.Add(element);
+                return new List<T>(collection);
             }
-            return list;
+			else 
+            {
+                List<T> list = ListPoolStack<T>.stack.Pop();
+                foreach (T element in collection)
+                {
+                    list.Add(element);
+                }
+                return list;
+            }
 		}
 
 		public static void Add<T>(List<T> list)

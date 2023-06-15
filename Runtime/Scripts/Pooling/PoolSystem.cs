@@ -6,13 +6,14 @@
  * Date Created: April 11, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using System.Reflection;
 
 namespace Kokowolo.Utilities
@@ -29,7 +30,12 @@ namespace Kokowolo.Utilities
 
         public static void Add<T>(T poolable) where T : IPoolable<T>
         {
-            poolable.OnAddPoolable();
+            Add(poolable, null);
+        }
+
+        public static void Add<T>(T poolable, params object[] args) where T : IPoolable<T>
+        {
+            poolable.OnAddPoolable(args);
             PoolSystemStack<T>.stack.Push(poolable);
         }
 
@@ -40,7 +46,7 @@ namespace Kokowolo.Utilities
             {
                 poolable = CreateIPoolable<T>();
             }
-			else 
+            else 
             {
                 poolable = PoolSystemStack<T>.stack.Pop();
                 poolable.OnGetPoolable();

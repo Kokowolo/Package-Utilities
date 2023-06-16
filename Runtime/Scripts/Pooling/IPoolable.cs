@@ -23,11 +23,11 @@ namespace Kokowolo.Utilities
         #region Functions
 
         // NOTE: PoolSystem will call Create() if there are no IPoolable<T> in the stack
-        // public abstract static T Create();
+        // public abstract static T Create(params object[] args);
 
-        public abstract void OnAddPoolable(params object[] args);
+        public abstract void OnAddPoolable();
 
-        public abstract void OnGetPoolable();
+        public abstract void OnGetPoolable(params object[] args);
         
         #endregion
         /************************************************************/

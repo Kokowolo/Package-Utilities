@@ -6,7 +6,7 @@
  * Date Created: August 22, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
@@ -28,8 +28,8 @@ namespace Kokowolo.Utilities
 
         [Header("Cached References")]
         // [SerializeField] private GameObject[] gameObjects = null;
-        [SerializeField] private MonoBehaviour[] monoBehaviours = null;
-        [SerializeField] private ScriptableObject[] scriptableObjects = null;
+        [SerializeField] private MonoBehaviourContainer[] monoBehaviours = null;
+        [SerializeField] private ScriptableObjectContainer[] scriptableObjects = null;
 
         #endregion
         /************************************************************/
@@ -53,15 +53,15 @@ namespace Kokowolo.Utilities
         {
             if (typeof(T).IsSubclassOf(typeof(MonoBehaviour))) 
             {
-                InitMonoBehaviourPrefab<T>();
+                Instance.InitMonoBehaviourPrefab<T>();
             }
             else if (typeof(T).IsSubclassOf(typeof(ScriptableObject))) 
             {
-                InitScriptableObjectPrefab<T>();
+                Instance.InitScriptableObjectPrefab<T>();
             }
             // else if (typeof(T).IsSubclassOf(typeof(GameObject))) 
             // {
-            //     InitGameObjectPrefab<T>();
+            //     Instance.InitGameObjectPrefab<T>();
             // }
             else
             {
@@ -69,24 +69,30 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private static void InitMonoBehaviourPrefab<T>()
+        private void InitMonoBehaviourPrefab<T>()
         {
-            for (int i = 0; i < Instance.monoBehaviours.Length; i++)
+            foreach (MonoBehaviourContainer container in monoBehaviours)
             {
-                if (Instance.monoBehaviours[i].TryGetComponent<T>(out T monoBehaviour)) 
+                foreach (MonoBehaviour monoBehaviour in container.monoBehaviours)
                 {
-                    Prefab<T>.prefab = monoBehaviour;
+                    if (monoBehaviour.TryGetComponent<T>(out T prefab)) 
+                    {
+                        Prefab<T>.prefab = prefab;
+                    }
                 }
             }
         }
 
-        private static void InitScriptableObjectPrefab<T>()
+        private void InitScriptableObjectPrefab<T>()
         {
-            for (int i = 0; i < Instance.scriptableObjects.Length; i++)
+            foreach (ScriptableObjectContainer container in scriptableObjects)
             {
-                if (Instance.scriptableObjects[i].GetType() == typeof(T)) 
+                foreach (ScriptableObject scriptableObject in container.scriptableObjects)
                 {
-                    Prefab<T>.prefab = (T) Convert.ChangeType(Instance.scriptableObjects[i], typeof(T));
+                    if (scriptableObject.GetType() == typeof(T)) 
+                    {
+                        Prefab<T>.prefab = (T) Convert.ChangeType(scriptableObject, typeof(T));
+                    }
                 }
             }
         }
@@ -94,6 +100,20 @@ namespace Kokowolo.Utilities
         #endregion
         /************************************************************/
         #region Subclasses
+
+        [Serializable]
+        private class MonoBehaviourContainer
+        {
+            [SerializeField] public string description;
+            [SerializeField] public MonoBehaviour[] monoBehaviours;
+        }
+
+        [Serializable]
+        private class ScriptableObjectContainer
+        {
+            [SerializeField] public string description;
+            [SerializeField] public ScriptableObject[] scriptableObjects;
+        }
 
         private static class Prefab<T>
         {

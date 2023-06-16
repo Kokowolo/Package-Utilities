@@ -30,32 +30,27 @@ namespace Kokowolo.Utilities
 
         public static void Add<T>(T poolable) where T : IPoolable<T>
         {
-            Add(poolable, null);
-        }
-
-        public static void Add<T>(T poolable, params object[] args) where T : IPoolable<T>
-        {
-            poolable.OnAddPoolable(args);
+            poolable.OnAddPoolable();
             PoolSystemStack<T>.stack.Push(poolable);
         }
 
-        public static T Get<T>() where T : IPoolable<T>
+        public static T Get<T>(params object[] args) where T : IPoolable<T>
         {
             T poolable;
             if (GetCount<T>() == 0) 
             {
-                poolable = CreateIPoolable<T>();
+                poolable = CreateIPoolable<T>(args);
             }
             else 
             {
                 poolable = PoolSystemStack<T>.stack.Pop();
-                poolable.OnGetPoolable();
+                poolable.OnGetPoolable(args);
                 
             }
             return poolable;
         }
 
-        private static T CreateIPoolable<T>() where T : IPoolable<T>
+        private static T CreateIPoolable<T>(params object[] args) where T : IPoolable<T>
         {
             // NOTE: This is a hacky way to get around the fact that you can't call a static method on a generic type
             MethodInfo createMethod = typeof(T).GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
@@ -63,7 +58,7 @@ namespace Kokowolo.Utilities
             {
                 throw new System.Exception($"no static Create method found within type {nameof(T)}");
             }
-            return (T)createMethod.Invoke(null, null);
+            return (T)createMethod.Invoke(null, args);
         }
         
         #endregion

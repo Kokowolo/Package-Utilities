@@ -21,9 +21,20 @@ namespace Kokowolo.Utilities
     public class PoolSystem : MonoSingleton<PoolSystem>
     {
         /************************************************************/
+        #region Fields
+
+        private static object[] parameters = new object[1];
+
+        #endregion 
+        /************************************************************/
         #region Functions
 
-        public static int GetCount<T>()
+        public static bool HasIPoolable<T>() where T : IPoolable<T>
+        {
+            return GetCount<T>() != 0;
+        }
+        
+        public static int GetCount<T>() where T : IPoolable<T>
         {
             return PoolSystemStack<T>.stack.Count;
         }
@@ -58,7 +69,15 @@ namespace Kokowolo.Utilities
             {
                 throw new System.Exception($"no static Create method found within type {nameof(T)}");
             }
-            return (T)createMethod.Invoke(null, args);
+
+            // NOTE: args requires a object array wrapper
+            parameters[0] = args;
+            return (T) createMethod.Invoke(null, parameters);
+        }
+
+        private static void Clear()
+        {
+            // TODO: implement this function
         }
         
         #endregion

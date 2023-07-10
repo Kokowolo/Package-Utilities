@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.47] - 2023-07-10
+### Added
+* `HasIPoolable<T>` to `PoolSystem` to check if Poolable exists
+* `Has<T>` to `PrefabManager` to check if prefab exists
+* arguments option to `IPoolable`'s static `Create()` within the PoolSystem
+* null check within `ListPool`.`Add<T>`
+
 ## [0.0.46] - 2023-06-16
 ### Added
 * description containers to `PrefabManager` allowing for descriptive bundling of Prefabs

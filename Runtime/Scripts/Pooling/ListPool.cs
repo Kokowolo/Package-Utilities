@@ -57,6 +57,8 @@ namespace Kokowolo.Utilities
 
 		public static void Add<T>(List<T> list)
 		{
+            if (list == null) return;
+            
 			list.Clear();
 			ListPoolStack<T>.stack.Push(list);
             //list = null; // NOTE: commented out because this only works if list is passed by ref

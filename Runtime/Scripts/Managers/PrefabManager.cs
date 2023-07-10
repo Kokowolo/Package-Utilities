@@ -43,9 +43,14 @@ namespace Kokowolo.Utilities
 
         private void Awake() => Singleton.TrySet(this, dontDestroyOnLoad);
 
+        public static bool Has<T>()
+        {
+            return Prefab<T>.prefab != null;
+        }
+
         public static T Get<T>()
         {
-            if (Prefab<T>.prefab == null) InitPrefab<T>();
+            if (!Has<T>()) InitPrefab<T>();
             return Prefab<T>.prefab;
         }
 

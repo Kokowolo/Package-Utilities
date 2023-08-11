@@ -93,6 +93,12 @@ namespace Kokowolo.Utilities
 
         #region Other Math Functions
 
+        public static int Mod(int dividend, int divisor)
+        {
+            // NOTE: dividend % divisor yields an incorrect result when the dividend is negative; this func corrects that
+            return (dividend % divisor + divisor) % divisor;
+        }
+
         public static int WrapClamp(int value, int minInclusive, int maxExclusive)
         {
             return (int) WrapClamp((float) value, (float) minInclusive, (float) maxExclusive);

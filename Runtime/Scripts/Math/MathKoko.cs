@@ -17,7 +17,7 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public static class Math
+    public static class MathKoko
     {
         /************************************************************/
         #region Fields
@@ -128,12 +128,12 @@ namespace Kokowolo.Utilities
 
         public static float Remap01(float value, float fromMin, float fromMax)
         {
-            return Math.Remap(value, fromMin, fromMax, 0, 1);
+            return Remap(value, fromMin, fromMax, 0, 1);
         }
 
         public static Vector3 GetPointOnCircle(float radius, Vector3 normal, float t)
         {
-            t = Math.Remap(t, 0, 1, 0, 2 * Mathf.PI);
+            t = Remap(t, 0, 1, 0, 2 * Mathf.PI);
             float x = radius * Mathf.Cos(t);
             float y = radius * -Mathf.Sin(t);
             float z = 0;

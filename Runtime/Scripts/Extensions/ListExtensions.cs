@@ -6,7 +6,7 @@
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
@@ -27,7 +27,7 @@ namespace Kokowolo.Utilities
             list[indexB] = temp;
         }
 
-        public static string ToString<T>(this List<T> list, bool formatElements)
+        public static string ToString<T>(this List<T> list, bool formatElements, bool withNewlineCharacter = false)
         {
             if (formatElements)
             {
@@ -35,6 +35,7 @@ namespace Kokowolo.Utilities
                 for (int i = 0; i < list.Count - 1; i++)
                 {
                     str += $"{list[i].ToString()}, ";
+                    if (withNewlineCharacter) str += "\n";
                 }
                 if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
                 else str += "]";

@@ -37,11 +37,7 @@ namespace Kokowolo.Utilities
 
         public static void AddAsynchronousEvent(Action function, float time)
         {
-            if (time <= 0) 
-            {
-                function.Invoke();
-                return;
-            }
+            time = Mathf.Max(time, 0);
             Instance.StartCoroutine(Instance.InvokeFunctionAfterTime(function, time));
         }
 

@@ -31,9 +31,16 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
+        public static bool IsApplicationQuitting { get; private set; }
+
         #endregion
         /************************************************************/
         #region Functions
+
+        protected override void MonoSingleton_Awake()
+        {
+            Application.quitting += Handle_Application_Quitting;
+        }
 
         public static void AddAsynchronousEvent(Action function, float time)
         {
@@ -74,6 +81,11 @@ namespace Kokowolo.Utilities
                 synchronousCoroutineQueue.RemoveAt(0);
             }
             schedulerCoroutine = null;
+        }
+
+        private void Handle_Application_Quitting()
+        {
+            IsApplicationQuitting = true;
         }
         
         #endregion

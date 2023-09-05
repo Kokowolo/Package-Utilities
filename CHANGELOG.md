@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.54] - 2023-09-05
+### Added
+* `Runtime/Scripts/Analytics/LogLibrary.dll` which contains `LogManager` and the new `LogManagerProfile`
+* colorized logging options and the ability to log to various `LogHandler`s through the `LogManager`
+* commented-out code to `ColorUtils` and `ColorExtensions` to serve as a reminder to where some useful code lies
+* `Exception` logging to `LogManager` where the class can now log and throw `Exception`s given to it
+### Changed
+* `Runtime/Scripts/Diagnostics` to `Runtime/Scripts/Analytics`
+### Removed
+* `LogManager.cs` from the project since it is now included within the `Runtime/Scripts/Analytics/LogLibrary.dll`
+
 ## [0.0.53] - 2023-08-31
 ### Added
 * `SchedulingManager`.`IsApplicationQuitting` to detect if the game/app is quitting (might relocate property in the future)

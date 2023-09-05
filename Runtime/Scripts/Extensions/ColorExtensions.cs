@@ -29,6 +29,16 @@ namespace Kokowolo.Utilities
         {
             return new Color(color.r, color.g, color.b, alpha);
         }
+
+        // public static string ToHtmlStringRGB(this Color color)
+        // {
+        //     return ColorUtility.ToHtmlStringRGB(color);
+        // }
+
+        // public static string ToHtmlStringRGBA(this Color color)
+        // {
+        //     return ColorUtility.ToHtmlStringRGBA(color);
+        // }
         
         #endregion
         /************************************************************/

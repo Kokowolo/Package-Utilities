@@ -35,6 +35,12 @@ namespace Kokowolo.Utilities
         {
             return GetColorHDR(color.r, color.g, color.b, color.a, intensity);
         }
+
+        // public static Color TryParseHtmlString(string htmlString)
+        // {
+        //     ColorUtility.TryParseHtmlString(htmlString, out Color color);
+        //     return color;
+        // }
         
         #endregion
         /************************************************************/

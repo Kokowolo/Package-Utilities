@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.55] - 2023-09-06
+### Added
+* `LogManager`.`TryInitializeUnityLogger` to ensure that `unityLogger` is initialized before it is replaced
+### Changed
+* `LogManager`.`LogManagerProfileString` from `public` to `internal`
+* `LogManager`.`LogManagerProfile` from `private` to `public`
+* `LogManager`.`defaultLogger` to `unityLogger` and exposed it via `public` property `UnityLogger`
+* `LogManagerProfile`.`ThrowWhenLoggingException` default value to `false`
+### Fixed
+* error when setting `Debug`.`unityLogger` where the logger would not get set properly
+
 ## [0.0.54] - 2023-09-05
 ### Added
 * `Runtime/Scripts/Analytics/LogLibrary.dll` which contains `LogManager` and the new `LogManagerProfile`

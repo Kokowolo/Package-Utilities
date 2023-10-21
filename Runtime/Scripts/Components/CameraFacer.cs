@@ -6,9 +6,7 @@
  * Date Created: April 29, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
- *
- *      TODO: generalize this class to make it face a transform, i.e. TransformFacer or RotateTowardsTransform
+ *      File Line Length: 140
  */
 
 using System.Collections;
@@ -17,29 +15,27 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public class CameraFacer : MonoBehaviour
+    public class CameraFacer : TransformFacer
     {
-        /************************************************************/
-        #region Fields
-
-        [SerializeField] public Camera mainCamera = null;
-
-        #endregion
         /************************************************************/
         #region Functions
 
-        private void Start() 
+        private void OnValidate()
         {
-            if (!mainCamera)
+            if (Target && !Target.GetComponent<Camera>())
             {
-                LogManager.LogWarning("[CameraFacer] mainCamera has not been set");   
-                mainCamera = Camera.main; 
+                LogManager.LogWarning($"{nameof(Target)} must be of type {nameof(Camera)}");   
+                Target = null;
             }
         }
 
-        private void FixedUpdate()
+        protected override void Start() 
         {
-            transform.eulerAngles = mainCamera.transform.eulerAngles;
+            if (!Target)
+            {
+                LogManager.Log($"{nameof(Target)} has not been set, using Camera.main");   
+                Target = Camera.main.transform; 
+            }
         }
 
         #endregion

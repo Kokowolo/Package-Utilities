@@ -32,12 +32,12 @@ namespace Kokowolo.Utilities.Editor
             CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourSimple.cs.txt");
         }
 
-        [MenuItem(itemName: "Kokowolo/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
-        [MenuItem(itemName: "Assets/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
-        public static void CreateVerboseScript()
-        {
-            CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourVerbose.cs.txt");
-        }
+        // [MenuItem(itemName: "Kokowolo/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
+        // [MenuItem(itemName: "Assets/Create/C# Script - Verbose", isValidateFunction: false, priority: 51)]
+        // public static void CreateVerboseScript()
+        // {
+        //     CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourVerbose.cs.txt");
+        // }
 
         #endregion
         /************************************************************/

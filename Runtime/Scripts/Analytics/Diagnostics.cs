@@ -41,7 +41,7 @@ namespace Kokowolo.Utilities//.Analytics
         // NOTE: since Coroutine's don't have return types, this just logs the elapsed time
         public static void TimeCoroutineWithStopwatch(IEnumerator routine, int numberOfExecutions = 1)
         {
-            SchedulingManager.AddAsynchronousEvent(TimeFunctionWithStopwatchCoroutine(routine, numberOfExecutions));
+            ScheduledEventManager.StartEvent(TimeFunctionWithStopwatchCoroutine(routine, numberOfExecutions));
         }
 
         private static IEnumerator TimeFunctionWithStopwatchCoroutine(IEnumerator routine, int numberOfExecutions = 1)

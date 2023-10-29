@@ -9,7 +9,7 @@
  *		While this file has been updated to better fit this project, the original version can be found here:
  *		https://catlikecoding.com/unity/tutorials/hex-map/
  *
- *		File Line Length: 120
+ *		File Line Length: 140
  */
 
 using System.Collections;
@@ -22,6 +22,17 @@ using Kokowolo.Utilities;
 public class #SCRIPTNAME# : MonoBehaviour
 {
     /************************************************************/
+    #region Enums
+
+    private enum MyEnum 
+    { 
+        None = -1, 
+        EnumA, 
+        EnumB 
+    }
+
+    #endregion
+    /************************************************************/
     #region Events
 
     public static event EventHandler OnSomeEvent;
@@ -30,12 +41,6 @@ public class #SCRIPTNAME# : MonoBehaviour
     {
         public bool myBool;
     }
-
-    #endregion
-    /************************************************************/
-    #region Enums
-
-    private enum MyEnum { EnumA, EnumB }
 
     #endregion
     /************************************************************/

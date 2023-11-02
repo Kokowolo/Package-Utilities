@@ -6,7 +6,7 @@
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: 420
  */
 
 using System.Collections;
@@ -19,6 +19,15 @@ namespace Kokowolo.Utilities
     {
         /************************************************************/
         #region Functions
+
+        public static Transform GetGrandparent(this Transform transform)
+        {
+            while (transform.parent != null)
+            {
+                transform = transform.parent;
+            }
+            return transform;
+        }
 
         public static Transform GetLastChild(this Transform transform)
         {

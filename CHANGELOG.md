@@ -4,12 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.60] - 2023-11-01
+### Added
+* `LineRendererExtensions` to handle a list when calling `SetPositions`
+* groundwork within `LineRendererExtensions` for converting a line to Bezier as commented-out code, but it'll likely be removed
+* `GetGrandparent` to `TransformExtensions` to get the highest parent within the current hierarchy (which might be self)
+
 ## [0.0.59] - 2023-10-29
 ### Added
-* `ListPool.Release<T>(ref _)` to avoid mistakingly re-assigning a list in the future
-* `TransformFacer` and moved related `CameraFacer`'s code to the class
+* cancelable events to `SchedulingManager` (now `ScheduledEventManager`)
+* `Tween` script that uses the new `ScheduledEventManager` to Lerp and logarithmically Lerp any float
 ### Changed
-* `CameraFacer` to extend from `TransformFacer`
+* `ScriptTemplates`, updating their base outline
+* `SchedulingManager` to `ScheduledEventManager`
+### Removed
+* `CreateNewMonoBehaviour`'s Verbose script option within the Editor
 
 ## [0.0.58] - 2023-10-21
 ### Added

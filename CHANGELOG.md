@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.61] - 2023-11-11
+### Added 
+* `SetCursorPosition` to CursorManager to set the position of the cursor, and increased the complexity of the manager a little
+### Changed
+* `BaseInputManager` to use `Input.mousePosition` over `InputSystem` due to the bug in `Mouse.current.WarpCursorPosition(Vector2)`
+
 ## [0.0.60] - 2023-11-01
 ### Added
 * `LineRendererExtensions` to handle a list when calling `SetPositions`

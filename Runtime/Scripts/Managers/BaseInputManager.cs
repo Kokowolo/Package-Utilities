@@ -69,11 +69,11 @@ namespace Kokowolo.Utilities
 
         public static Vector2 GetMouseScreenPoint()
         {
-#if ENABLE_INPUT_SYSTEM
-            return Mouse.current.position.ReadValue();
-#else
+//#if ENABLE_INPUT_SYSTEM
+//            return Mouse.current.position.ReadValue();
+//#else
             return Input.mousePosition;
-#endif
+//#endif
         }
 
         public static Vector3 GetMouseWorldPosition(LayerMask layerMask, 

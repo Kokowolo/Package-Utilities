@@ -27,6 +27,10 @@ namespace Kokowolo.Utilities.Editor
 
         public static void OnWillCreateAsset(string path)
         {
+            if (!path.EndsWith(".cs.meta"))
+            {
+                return;
+            }
             path = path.Replace(".meta", "");
             int index = path.LastIndexOf(".");
             string file = path.Substring(index);

@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.62] - 2023-12-18
+### Fixed
+* error caused by updating Unity to `2022.3.15f1` found within `KeywordReplace.OnWillCreateAsset`
+
 ## [0.0.61] - 2023-11-11
 ### Added 
 * `SetCursorPosition` to CursorManager to set the position of the cursor, and increased the complexity of the manager a little

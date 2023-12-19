@@ -17,17 +17,40 @@ using System;
 
 namespace Kokowolo.Utilities
 {
-    public interface IPoolable<T> 
+    public interface IPoolable
+    {
+        /************************************************************/
+        #region Functions
+        
+        public IPoolable GenerateInstanceFrom(params object[] args);
+        
+        public void Release();
+        
+        #endregion
+        /************************************************************/
+    }
+    
+    public interface IPoolable<T> : IPoolable where T : IPoolable<T>
     {
         /************************************************************/
         #region Functions
 
-        // NOTE: PoolSystem will call Create() if there are no IPoolable<T> in the stack
-        // public abstract static T Create(params object[] args);
+        IPoolable IPoolable.GenerateInstanceFrom(params object[] args)
+        {
+            return PoolSystem.Get<T>(args);
+        }
+        
+        void IPoolable.Release()
+        {
+            PoolSystem.Add((T) this);
+        }
 
         public abstract void OnAddPoolable();
 
         public abstract void OnGetPoolable(params object[] args);
+
+        // NOTE: PoolSystem will call Create() if there are no IPoolable<T> in the stack
+        // public abstract static T Create(params object[] args);
         
         #endregion
         /************************************************************/

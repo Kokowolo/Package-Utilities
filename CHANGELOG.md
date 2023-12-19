@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.63] - 2023-12-19
+### Added
+* `IPoolable` base interface to `IPoolable<T>`
+* `IPoolable.GenerateInstanceFrom` which uses an instance to generate a new instance from `PoolSystem` unless overridden
+* `IPoolable.Release` which auto adds a `IPoolable` to `PoolSystem` unless overridden
+### Changed
+* `IPoolable<T>` to enforce that it inherits from `IPoolable` where `T` is `IPoolable<T>`
+
 ## [0.0.62] - 2023-12-18
 ### Fixed
 * error caused by updating Unity to `2022.3.15f1` found within `KeywordReplace.OnWillCreateAsset`

@@ -13,6 +13,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System;
 using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
@@ -20,7 +21,19 @@ using Kokowolo.Utilities;
 public class CursorManager : MonoSingleton<CursorManager>
 {
     /************************************************************/
+    #region Events
+
+    public static event EventHandler OnHitInfoTransformChanged;
+    // public class OnHitInfoChangedEventArgs
+    // {
+    //     public bool IsValid => HasValidHitInfo;
+    // }
+    
+    #endregion
+    /************************************************************/
     #region Fields
+
+    // private OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
 
     [Header("Cached References")]
     [SerializeField] private GameObject cursorVisual;
@@ -30,6 +43,7 @@ public class CursorManager : MonoSingleton<CursorManager>
     [SerializeField] private LayerMask layerMask;
 
     private RaycastHit hitInfo;
+    private Transform previousTransform;
 
     #endregion
     /************************************************************/
@@ -51,14 +65,24 @@ public class CursorManager : MonoSingleton<CursorManager>
     /************************************************************/
     #region Functions
 
-    private void LateUpdate() 
+    private void LateUpdate()
     {
-        if (doRaycast)
-        {
-            Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
-            cursorVisual.transform.position = hitInfo.point;
-        }
+        DoRaycast();
         doRaycast = true;
+    }
+
+    private void DoRaycast()
+    {
+        if (!doRaycast) return;
+        
+        Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
+        cursorVisual.transform.position = hitInfo.point;
+
+        if (hitInfo.transform != previousTransform)
+        {
+            OnHitInfoTransformChanged?.Invoke(this, EventArgs.Empty);
+            previousTransform = hitInfo.transform;
+        }
     }
 
     public static void SetActiveCursorVisual(bool value)

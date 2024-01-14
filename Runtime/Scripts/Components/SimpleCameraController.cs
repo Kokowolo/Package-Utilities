@@ -74,6 +74,9 @@ namespace UnityTemplateProjects
         [Tooltip("Whether or not to invert our Y axis for mouse input to rotation.")]
         public bool invertY = false;
 
+        [Header("Debug Settings")]
+        public bool canQuitApplication = false;
+
 #if ENABLE_INPUT_SYSTEM
         InputAction movementAction;
         InputAction verticalMovementAction;
@@ -163,29 +166,29 @@ namespace UnityTemplateProjects
         {
             // Exit Sample  
 
-            if (IsEscapePressed())
+            if (canQuitApplication && IsEscapePressed())
             {
                 Application.Quit();
-				#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false; 
-				#endif
+                #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false; 
+                #endif
             }
 
             // Hide and lock cursor when right mouse button pressed
-            if (IsRightMouseButtonDown())
+            if (Input.GetKey(KeyCode.LeftAlt) || IsRightMouseButtonDown())
             {
                 Cursor.lockState = CursorLockMode.Locked;
             }
 
             // Unlock and show cursor when right mouse button released
-            if (IsRightMouseButtonUp())
+            if (!Input.GetKey(KeyCode.LeftAlt) && IsRightMouseButtonUp())
             {
                 Cursor.visible = true;
                 Cursor.lockState = CursorLockMode.None;
             }
 
             // Rotation
-            if (IsCameraRotationAllowed())
+            if (Input.GetKey(KeyCode.LeftAlt) || IsCameraRotationAllowed())
             {
                 var mouseMovement = GetInputLookRotation() * Time.deltaTime * 5;
                 if (invertY)

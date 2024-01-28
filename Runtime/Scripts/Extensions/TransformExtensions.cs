@@ -20,6 +20,17 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static void SetLossyScale(this Transform transform, Vector3 scale)
+        {
+            transform.localScale = Vector3.one;
+            var m = transform.worldToLocalMatrix;
+            m.SetColumn(0, new Vector4(m.GetColumn(0).magnitude, 0f));
+            m.SetColumn(1, new Vector4(0f, m.GetColumn(1).magnitude));
+            m.SetColumn(2, new Vector4(0f, 0f, m.GetColumn(2).magnitude));
+            m.SetColumn(3, new Vector4(0f, 0f, 0f, 1f));
+            transform.localScale = m.MultiplyPoint(scale);
+        }
+
         public static Transform GetGrandparent(this Transform transform)
         {
             while (transform.parent != null)
@@ -42,6 +53,21 @@ namespace Kokowolo.Utilities
             {
                 Object.DestroyImmediate(transform.GetChild(i).gameObject);
             }
+        }
+
+        /// <summary>
+        /// Recursively searches children/grandchildren to find a child by name n and return it
+        /// </summary>
+        /// <returns>The found child transform; Null if child with matching name isn't found</returns>
+        public static Transform FindRecursively(this Transform transform, string n)
+        {
+            foreach (Transform child in transform)
+            {
+                if (child.name == n) return child;
+                Transform grandchild = child.FindRecursively(n);
+                if (grandchild) return grandchild;
+            }
+            return null;
         }
         
         #endregion

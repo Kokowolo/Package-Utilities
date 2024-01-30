@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.66] - 2024-01-29
+### Added
+* `TransformExtensions`.`TransformRotation` and `InverseTransformRotation` to convert a rotation from one transform to another
+
 ## [0.0.65] - 2024-01-28
 ### Added
 * `TransformExtensions`.`SetLossyScale` effectively adding a set method to `transform`.`lossyScale`

@@ -6,7 +6,7 @@
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *		File Line Length: 420
+ *      File Line Length: 420
  */
 
 using System.Collections;
@@ -68,6 +68,22 @@ namespace Kokowolo.Utilities
                 if (grandchild) return grandchild;
             }
             return null;
+        }
+
+        /// <summary>
+        /// Transforms a rotation from local space to world space.
+        /// </summary>
+        public static Quaternion TransformRotation(this Transform transform, Quaternion rotation)
+        {
+            return transform.rotation * rotation;
+        }
+
+        /// <summary>
+        /// Transforms a rotation from world space to local space. The opposite of Transform.TransformRotation.
+        /// </summary>
+        public static Quaternion InverseTransformRotation(this Transform transform, Quaternion rotation)
+        {
+            return Quaternion.Inverse(transform.rotation) * rotation;
         }
         
         #endregion

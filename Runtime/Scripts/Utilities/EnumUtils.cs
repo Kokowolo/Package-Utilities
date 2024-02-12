@@ -21,9 +21,20 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        public static IEnumerable<T> GetValues<T>() 
+        public static T[] GetValues<T>() 
         {
             return (T[])Enum.GetValues(typeof(T));
+        }
+
+        public static T GetLastValue<T>() 
+        {   
+            T[] values = GetValues<T>();
+            return values[values.Length - 1];
+        }
+
+        public static int GetCount<T>() 
+        {   
+            return GetValues<T>().Length;
         }
 
         #endregion

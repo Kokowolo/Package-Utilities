@@ -1,5 +1,5 @@
 /*
- * File Name: CursorManager.cs
+ * File Name: CursorWorldManager.cs
  * Description: This script is for ...
  * 
  * Author(s): Kokowolo, Will Lacey
@@ -18,7 +18,7 @@ using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
 [DefaultExecutionOrder(-100)]
-public class CursorManager : MonoSingleton<CursorManager>
+public class CursorWorldManager : MonoSingleton<CursorWorldManager>
 {
     /************************************************************/
     #region Events
@@ -36,7 +36,7 @@ public class CursorManager : MonoSingleton<CursorManager>
     // private OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
 
     [Header("Cached References")]
-    [SerializeField] private GameObject cursorVisual;
+    [SerializeField] private GameObject visual;
 
     [Header("Settings")]
     [Tooltip("layerMask the manager can interact with")]
@@ -76,7 +76,7 @@ public class CursorManager : MonoSingleton<CursorManager>
         if (!doRaycast) return;
         
         Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
-        cursorVisual.transform.position = hitInfo.point;
+        visual.transform.position = hitInfo.point;
 
         if (hitInfo.transform != previousTransform)
         {
@@ -85,9 +85,10 @@ public class CursorManager : MonoSingleton<CursorManager>
         }
     }
 
-    public static void SetActiveCursorVisual(bool value)
+    public static void SetVisual(bool isActive, bool hasCollider)
     {
-        Instance.cursorVisual.SetActive(value);
+        Instance.visual.SetActive(isActive);
+        Instance.visual.GetComponent<Collider>().enabled = hasCollider;
     }
 
     public static Vector3 GetWorldPosition()
@@ -101,7 +102,7 @@ public class CursorManager : MonoSingleton<CursorManager>
         Mouse.current.WarpCursorPosition(screenPoint);
 
         Instance.hitInfo.point = worldPosition;
-        Instance.cursorVisual.transform.position = worldPosition;
+        Instance.visual.transform.position = worldPosition;
         doRaycast = false;
     }
 

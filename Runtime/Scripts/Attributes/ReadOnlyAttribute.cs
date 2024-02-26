@@ -6,14 +6,14 @@
  * Date Created: January 23, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: 140
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Kokowolo.Utilities.Editor
+namespace Kokowolo.Utilities
 {
     public class ReadOnlyAttribute : PropertyAttribute
     {

@@ -22,7 +22,7 @@ public class #SCRIPTNAME# : MonoBehaviour
     [SerializeField, Range(0, 1)] float myFloat = 0f;
 
     #endregion
-	/************************************************************/
+    /************************************************************/
     #region Properties
 
     #endregion
@@ -43,7 +43,7 @@ public class #SCRIPTNAME# : MonoBehaviour
     {
 
     }
-    
+
     #endregion
     /************************************************************/
 }

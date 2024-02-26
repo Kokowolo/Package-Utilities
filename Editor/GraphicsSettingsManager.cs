@@ -23,37 +23,107 @@ namespace Kokowolo.Utilities.Editor
     public class GraphicsSettingsManager
     {
         /************************************************************/
-        #region Functions
+        #region Fields
 
-        [MenuItem(itemName: "Kokowolo/Graphics Settings/Built-In &#1", isValidateFunction: false, priority: 40)]
-        public static void SetGraphicsSettingsLow()
+        // Graphics Settings Names
+        // TODO: [BED-108] Read Quality Settings - read which setting is currently selected... unfortunately this would require creating 
+        //      some ScriptableObject names below and changing the Clear() method
+        private const string GraphicsLowName = "Built-In";
+        private const string GraphicsMediumName = "URP_Performant";
+        private const string GraphicsHighName = "URP_Balanced";
+        private const string GraphicsHighestName = "URP_HighFidelity";
+        
+        // Menu Names
+        private const string GraphicsLowMenuName = "Kokowolo/Graphics Settings/" + GraphicsLowName + " &#1";
+        private const string GraphicsMediumMenuName = "Kokowolo/Graphics Settings/" + GraphicsMediumName + " &#2";
+        private const string GraphicsHighMenuName = "Kokowolo/Graphics Settings/" + GraphicsHighName + " &#3";
+        private const string GraphicsHighestMenuName = "Kokowolo/Graphics Settings/" + GraphicsHighestName + " &#4";
+
+        // Menu Item params
+        private const bool isValidateFunction = false;
+        private const int priority = 40;
+
+        #endregion
+        /************************************************************/
+        #region Properties
+
+        private static int _SettingsIndex = -1;
+        private static int SettingsIndex
         {
-            SetGraphicsSettings(0);
+            // get => _SettingsIndex;
+            set
+            {
+                if (0 < _SettingsIndex && _SettingsIndex <= 4)
+                {
+                    Menu.SetChecked(GetMenuName(_SettingsIndex), false);
+                }
+                _SettingsIndex = value;
+                if (0 < _SettingsIndex && _SettingsIndex <= 4)
+                {
+                    Menu.SetChecked(GetMenuName(_SettingsIndex), true);
+                } 
+            }
         }
 
-        [MenuItem(itemName: "Kokowolo/Graphics Settings/URP-Performant &#2", isValidateFunction: false, priority: 40)]
-        public static void SetGraphicsSettingsMedium()
+        #endregion
+        /************************************************************/
+        #region Functions
+
+        [InitializeOnLoadMethod]
+        private static void Clear()
+        {
+            SettingsIndex = 0;
+            Menu.SetChecked(GetMenuName(1), false);
+            Menu.SetChecked(GetMenuName(2), false);
+            Menu.SetChecked(GetMenuName(3), false);
+            Menu.SetChecked(GetMenuName(4), false);
+        }
+
+        [MenuItem(itemName: GraphicsLowMenuName, isValidateFunction, priority + 1)]
+        public static void SetGraphicsSettingsLow()
         {
             SetGraphicsSettings(1);
         }
 
-        [MenuItem(itemName: "Kokowolo/Graphics Settings/URP-Balanced &#3", isValidateFunction: false, priority: 40)]
-        public static void SetGraphicsSettingsHigh()
+        [MenuItem(itemName: GraphicsMediumMenuName, isValidateFunction, priority + 2)]
+        public static void SetGraphicsSettingsMedium()
         {
             SetGraphicsSettings(2);
         }
 
-        [MenuItem(itemName: "Kokowolo/Graphics Settings/URP-HighFidelity &#4", isValidateFunction: false, priority: 40)]
-        public static void SetGraphicsSettingsHighest()
+        [MenuItem(itemName: GraphicsHighMenuName, isValidateFunction, priority + 3)]
+        public static void SetGraphicsSettingsHigh()
         {
             SetGraphicsSettings(3);
         }
 
-        private static void SetGraphicsSettings(int index)
+        [MenuItem(itemName: GraphicsHighestMenuName, isValidateFunction, priority + 4)]
+        public static void SetGraphicsSettingsHighest()
         {
-            QualitySettings.SetQualityLevel(index, applyExpensiveChanges: true);
+            SetGraphicsSettings(4);
+        }
+
+        private static void SetGraphicsSettings(int settingsIndex)
+        {
+            // set checked
+            SettingsIndex = settingsIndex;
+
+            // assign grapics settings
+            QualitySettings.SetQualityLevel(settingsIndex, applyExpensiveChanges: true);
             GraphicsSettings.defaultRenderPipeline = QualitySettings.renderPipeline;
             LogCurrentRenderPipeline();
+        }
+
+        private static string GetMenuName(int settingsIndex)
+        {
+            return settingsIndex switch
+            {
+                1 => GraphicsLowMenuName,
+                2 => GraphicsMediumMenuName,
+                3 => GraphicsHighMenuName,
+                4 => GraphicsHighestMenuName,
+                _ => throw new System.Exception("settings option not found"),
+            };
         }
 
         private static void LogCurrentRenderPipeline()

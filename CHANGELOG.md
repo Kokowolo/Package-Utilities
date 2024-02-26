@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.69] - 2024-02-26
+### Added
+* `GraphicsSettingsManager` toggle for the last graphics setting that was selected (cleared whenever there's a domain reload)
+### Fixed
+* `GraphicsSettingsManager`'s incorrect ordering of graphics options
+* `ReadOnlyAttribute` being in the wrong folder, moved from `Editor` to `Scripts/Attributes`
+### Removed
+* whitespace from `ScriptTemplates` files
+
 ## [0.0.68] - 2024-02-25
 ### Changed
 * naming conventions for existing assets to adhere to new Kokowolo naming

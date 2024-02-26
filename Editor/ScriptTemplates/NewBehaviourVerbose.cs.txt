@@ -50,7 +50,7 @@ public class #SCRIPTNAME# : MonoBehaviour
     [SerializeField, Range(0, 1)] float myFloat = 0f;
 
     #endregion
-	/************************************************************/
+    /************************************************************/
     #region Properties
 
     public static #SCRIPTNAME# Instance => Singleton<#SCRIPTNAME#>.Get();

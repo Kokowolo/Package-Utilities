@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.71] - 2024-03-18
+### Added
+* `VectorExtensions` class, including extension function `ToVector3Int()`
+* `VectorUtils` class from Project-HAT with a couple of utility functions
+### Deprecated
+* `General.CacheGetComponent<T>` as writing an encapsulated property is easier to read
+
 ## [0.0.70] - 2024-03-03
 ### Added
 * `LayerMaskExtensions` file for `LayerMask` convenience functions

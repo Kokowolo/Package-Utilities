@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.74] - 2024-03-26
+### Added
+* again the function `General.CacheGetComponent<T>`; changed decision on whether it should be deprecated
+
 ## [0.0.73] - 2024-03-21
 ### Added
 * `VectorExtensions.ToVector3(Vector2)` as a convenience casting method

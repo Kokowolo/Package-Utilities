@@ -6,7 +6,7 @@
  * Date Created: March 3, 2024
  * 
  * Additional Comments:
- *		File Line Length: 140
+ *      File Line Length: 140
  */
 
 using System.Collections;
@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities
         #region Functions
 
         /// <summary>
-        /// Gets `a`'s scalar component in direction `b`; as an aside, multiplying this scalar component by a normalized `b` would yield that 
+        /// Gets `a`'s scalar component in direction `b`; note multiplying this scalar component by a normalized `b` would yield that 
         /// scalar component as a vector 
         /// </summary>
         public static float GetVectorComponentInDirection(Vector3 a, Vector3 b)

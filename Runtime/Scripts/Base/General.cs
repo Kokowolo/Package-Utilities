@@ -17,10 +17,12 @@ namespace Kokowolo.Utilities
 {
     public static class General
     {
-        [System.Obsolete("please write an encapsulated property delcaration instead")]
         public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component
         {
-            if (!component) component = monoBehaviour.GetComponent<T>();
+            if (!component) 
+            {
+                component = monoBehaviour.GetComponent<T>();
+            }
             return component;
         }
 

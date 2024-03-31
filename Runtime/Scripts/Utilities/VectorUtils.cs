@@ -20,15 +20,25 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static Vector3 GetDirection(Vector3 from, Vector3 to)
+        {
+            return to - from;
+        }
+
+        public static Vector3 GetDirectionNormalized(Vector3 from, Vector3 to)
+        {
+            return GetDirection(from, to).normalized;
+        }
+
         /// <summary>
         /// Gets `a`'s scalar component in direction `b`; note multiplying this scalar component by a normalized `b` would yield that 
         /// scalar component as a vector 
         /// </summary>
-        public static float GetVectorComponentInDirection(Vector3 a, Vector3 b)
+        public static float GetComponentInDirection(Vector3 v, Vector3 direction)
         {
             // a * cosØ == a ⋅ b / |b|
-            float dot = Vector3.Dot(a, b);
-            float component = dot / b.magnitude;
+            float dot = Vector3.Dot(v, direction);
+            float component = dot / direction.magnitude;
             return component;
         }
 

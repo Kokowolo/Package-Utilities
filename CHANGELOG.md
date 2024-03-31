@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.75] - 2024-03-31
+### Added
+* `VectorUtils.GetDirection` & `GetDirectionNormalized` (because I never want to use my brain again)
+### Changed
+* `VectorUtils.GetVectorComponentInDirection` to VectorUtils.GetComponentInDirection & its parameter names
+
 ## [0.0.74] - 2024-03-26
 ### Added
 * again the function `General.CacheGetComponent<T>`; changed decision on whether it should be deprecated

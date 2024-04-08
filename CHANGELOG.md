@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.76] - 2024-04-08
+### Added 
+* `GizmosExtensions` to provide additional options for drawing `Gizmos`
+* `Editor/Scripts/Drawer` directory to store `PropertyDrawer`s
+* `LayerAttribute` & `LayerAttributeDrawer` to force a `LayerMask` to only have one `Layer` from the `Editor`
+### Changed
+* `Editor` scripts directory from `Editor/` to `Editor/Scripts`
+
 ## [0.0.75] - 2024-03-31
 ### Added
 * `VectorUtils.GetDirection` & `GetDirectionNormalized` (because I never want to use my brain again)

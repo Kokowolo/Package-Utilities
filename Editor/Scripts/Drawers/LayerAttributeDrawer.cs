@@ -21,19 +21,31 @@ namespace Kokowolo.Utilities.Editor
     public class LayerAttributeDrawer : PropertyDrawer
     {
         /************************************************************/
-        #region Fields
-
-        #endregion
-        /************************************************************/
-        #region Properties
-
-        #endregion
-        /************************************************************/
         #region Functions
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
-            property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+            if (property.propertyType != SerializedPropertyType.Integer && property.propertyType != SerializedPropertyType.LayerMask) 
+            {
+                EditorGUI.LabelField(position, "property must be an Integer or LayerMask");
+                return;
+            }
+
+            if (property.propertyType == SerializedPropertyType.Integer)
+            {
+                property.intValue = EditorGUI.LayerField(position, label, property.intValue);
+            }
+            else
+            {
+                if (LayerMaskUtils.ContainsMultipleLayers(property.intValue))
+                {
+                    property.intValue = 0;
+                }
+                
+                int layer = EditorGUI.LayerField(position, label, LayerMaskUtils.LayerMaskToLayer(property.intValue));
+                property.intValue = 1 << layer;
+            }
+            
         }
 
         #endregion

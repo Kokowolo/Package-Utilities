@@ -20,10 +20,10 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        [System.Obsolete("use `LayerMaskExtensions.Contains(GameObject)` instead")]
+        [System.Obsolete("use `LayerMaskExtensions.ContainsGameObject(GameObject)` instead")]
         public static bool IsInLayerMask(this GameObject gameObject, LayerMask layerMask)
         {
-            return layerMask.Contains(gameObject);
+            return layerMask.ContainsGameObject(gameObject);
         }
 
         public static bool IsTheOriginalPrefab(this GameObject gameObject)

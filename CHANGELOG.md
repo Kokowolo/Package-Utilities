@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.77] - 2024-04-09
+### Added
+* `LayerMaskExtensions.ContainsLayerMask` to remove ambiguity within the class's `Contains` functions
+* `LayerMaskExtensions.ToLayer` allowing for conversion from `LayerMask` to `Layer`
+* `LayerMaskUtils` to perform various `LayerMask` operations and conversions
+### Changed 
+* `LayerAttribute` to only work on an `Integer` and `LayerMask` `SerializedProperty`
+* `LayerMaskExtensions.Contains` to `ContainsLayer` and `ContainsGameObject` to remove ambiguity
+* `GameObjectExtensions` to match aforementioned changes
+### Fixed
+* missing namespace from `LayerMaskExtensions`
+
 ## [0.0.76] - 2024-04-08
 ### Added 
 * `GizmosExtensions` to provide additional options for drawing `Gizmos`

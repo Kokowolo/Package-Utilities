@@ -6,28 +6,42 @@
  * Date Created: March 3, 2024
  * 
  * Additional Comments:
- *		File Line Length: 140
+ *      File Line Length: 140
  */
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public static class LayerMaskExtensions
+namespace Kokowolo.Utilities
 {
-    /************************************************************/
-    #region Functions
-
-    public static bool Contains(this LayerMask layerMask, GameObject gameObject)
+    public static class LayerMaskExtensions
     {
-        return Contains(layerMask, gameObject.layer);
-    }
+        /************************************************************/
+        #region Functions
 
-    public static bool Contains(this LayerMask layerMaskA, LayerMask layerMaskB)
-    {
-        return (layerMaskA & (1 << layerMaskB)) != 0;
-    }
+        public static bool ContainsGameObject(this LayerMask layerMask, GameObject gameObject)
+        {
+            return ContainsLayer(layerMask, gameObject.layer);
+        }
 
-    #endregion
-    /************************************************************/
+        public static bool ContainsLayer(this LayerMask layerMask, int layer)
+        {
+            // NOTE: 1 is shifted `layer` times; 000000001 -> 000010000 for layer 4
+            return (layerMask & (1 << layer)) != 0;
+        }
+
+        public static bool ContainsLayerMask(this LayerMask layerMaskA, LayerMask layerMaskB)
+        {
+            return (layerMaskA & layerMaskB) == layerMaskB;
+        }
+
+        public static int ToLayer(this LayerMask layerMask)
+        {
+            return LayerMaskUtils.LayerMaskToLayer(layerMask);
+        }
+
+        #endregion
+        /************************************************************/
+    }
 }

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.78] - 2024-04-12
+### Added
+* `GizmosExtensions.DrawBoxCast`
+### Fixed
+* `GameObjectExtensions` being in the wrong namespace and assembly
+
 ## [0.0.77] - 2024-04-09
 ### Added
 * `LayerMaskExtensions.ContainsLayerMask` to remove ambiguity within the class's `Contains` functions

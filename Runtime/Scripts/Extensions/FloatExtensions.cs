@@ -24,6 +24,12 @@ namespace Kokowolo.Utilities
         // {
         //     return $"{value.ToString()}°";
         // }
+
+        // public static string ToStringDecimal(this float value, int decimalPlaces)
+        // {
+        //     // check out https://stackoverflow.com/a/58733847/11319808 for optional decimal places
+        //     return isOptional ? $"{value:G3}
+        // }
         
         #endregion
         /************************************************************/

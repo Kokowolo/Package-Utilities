@@ -1,4 +1,4 @@
-/**
+/*
  * File Name: General.cs
  * Description: Script that contains general utility functions
  * 
@@ -7,7 +7,7 @@
  * 
  * Additional Comments: 
  *      File Line Length: 120
- **/
+ */
 
 using System.Collections;
 using System.Collections.Generic;

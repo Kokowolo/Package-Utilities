@@ -4,9 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.80] - 2024-04-19
+### Added
+* `EditorOnly` `PropertyDrawer` to `ScenesInBuildManager`'s auto-generated class
+* SceneAttribute and SceneDrawer to draw strings within the Editor as Scenes
+### Changed
+* `ScenesInBuildManager` to work with `buildIndex`/`strings` as oppose to runtime `Scene` structs
+* `ScenesInBuildManager`'s code, cleaning up the class a bit
+
 ## [0.0.79] - 2024-04-18
 ### Added
-* `Kokowolo.Utilities.Editor.ScenesInBuildManager` which auto generates a script file for the `Build Index`
+* `Kokowolo.Utilities.Editor.ScenesInBuildManager` which auto-generates a script file for the `Build Index`
 * `Kokowolo.Utilities.Editor.ScenesInBuildManagerEditor` to draw a custom editor for `ScenesInBuildManager`
 * `Kokowolo.Utilities.Editor.General` with function `GetPackageInfo`
 * comment within `FloatExtensions` to indicate how to convert a `float` to a string

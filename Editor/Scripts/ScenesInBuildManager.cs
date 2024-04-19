@@ -53,6 +53,8 @@ namespace Kokowolo.Utilities
 
         bool HasClassNamespace => classNamespace.Length > 0;
 
+        string tab => whitespaceIndentation; // convenience property
+
         #endregion
         /************************************************************/
         #region Functions
@@ -77,10 +79,6 @@ namespace Kokowolo.Utilities
                 {
                     file.WriteLine(line);
                 }
-                file.WriteLine("");
-
-                // write includes
-                file.WriteLine("using UnityEngine.SceneManagement;");
                 file.WriteLine("");
 
                 // write namespace
@@ -112,10 +110,10 @@ namespace Kokowolo.Utilities
                 file.WriteLine($"{currentWhitespaceIndentation}{ClassEnumDeclarationLine}");
                 file.WriteLine($"{currentWhitespaceIndentation}{{");
                 UpdateIndentation(add: true);
+                // file.WriteLine($"{currentWhitespaceIndentation}None = -1,");
                 foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes)
                 {
                     if (!scene.enabled) continue;
-
                     string sceneName = Path.GetFileNameWithoutExtension(scene.path).Replace(" ", "_");
                     if (sceneNamesDict[sceneName] != -1)
                     {
@@ -136,19 +134,42 @@ namespace Kokowolo.Utilities
                 }
                 sceneNamesDict[className] = 0;
 
-                // write Scenes class's fields
+                // write class subclass
+                foreach (string line in ClassSubclassLines)
+                {
+                    file.WriteLine($"{currentWhitespaceIndentation}{line}");
+                }
+                file.WriteLine("");
+
+                // write class private data
+                file.WriteLine($"{currentWhitespaceIndentation}{ClassPrivateDataLine}");
+                file.WriteLine($"{currentWhitespaceIndentation}{{");
+                UpdateIndentation(add: true);
+                // file.WriteLine($"{currentWhitespaceIndentation}new SceneData(-1, \"invalid scene\"),");
                 int sceneCount = 0;
                 foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes)
                 {
                     if (!scene.enabled) continue;
+                    file.WriteLine(
+                        $"{currentWhitespaceIndentation}new SceneData({sceneCount++}, \"{scene.path}\"),"
+                    );
+                }
+                UpdateIndentation(add: false);
+                file.WriteLine($"{currentWhitespaceIndentation}}};");
+                file.WriteLine("");
 
+                // write Scenes class's fields
+                sceneCount = 0;
+                foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes)
+                {
+                    if (!scene.enabled) continue;
                     string sceneName = Path.GetFileNameWithoutExtension(scene.path).Replace(" ", "_");
                     if (sceneNamesDict[sceneName] != -1)
                     {
                         sceneName = $"{sceneName}_{sceneNamesDict[sceneName]++}";
                     }
 
-                    foreach (string line in GetScenesClassFieldLine(sceneName, sceneCount))
+                    foreach (string line in GetClassFieldLines(sceneName, sceneCount))
                     {
                         file.WriteLine($"{currentWhitespaceIndentation}{line}");
                     }
@@ -165,6 +186,17 @@ namespace Kokowolo.Utilities
                 {
                     file.WriteLine($"{currentWhitespaceIndentation}{line}");
                 }
+                file.WriteLine("");
+
+                // write class PropertyDrawer
+                file.WriteLine($"#if UNITY_EDITOR");
+                file.WriteLine("");
+                foreach (string line in ClassPropertyDrawerLines)
+                {
+                    file.WriteLine($"{currentWhitespaceIndentation}{line}");
+                }
+                file.WriteLine("");
+                file.WriteLine($"#endif");
 
                 // close
                 while (currentWhitespaceIndentation.Length > 0)
@@ -184,11 +216,11 @@ namespace Kokowolo.Utilities
         {
             if (add)
             {
-                currentWhitespaceIndentation += whitespaceIndentation;
+                currentWhitespaceIndentation += tab;
             }
             else
             {
-                currentWhitespaceIndentation = currentWhitespaceIndentation.Remove(0, whitespaceIndentation.Length);
+                currentWhitespaceIndentation = currentWhitespaceIndentation.Remove(0, tab.Length);
             }
         } 
 
@@ -200,44 +232,95 @@ namespace Kokowolo.Utilities
 
         private string[] CommentLines => new string[]
         { 
-            "//------------------------------------------------------------------------------", 
-            "// <auto-generated>", 
-           $"//     This code was auto-generated by {packageName}:{nameof(ScenesInBuildManager)}", 
-           $"//     version {Kokowolo.Utilities.Editor.General.GetPackageInfo(packageName).version}", 
-           $"//     from {UnityEditor.AssetDatabase.GetAssetPath(this)}",
-            "//",
-            "//     Changes to this file may cause incorrect behavior and will be lost if",
-            "//     the code is regenerated.",
-            "// </auto-generated>",
-            "//------------------------------------------------------------------------------"
+            $"//------------------------------------------------------------------------------", 
+            $"// <auto-generated>", 
+            $"//     This code was auto-generated by {packageName}:{nameof(ScenesInBuildManager)}", 
+            $"//     version {Kokowolo.Utilities.Editor.General.GetPackageInfo(packageName).version}", 
+            $"//     from {UnityEditor.AssetDatabase.GetAssetPath(this)}",
+            $"//",
+            $"//     Changes to this file may cause incorrect behavior and will be lost if",
+            $"//     the code is regenerated.",
+            $"// </auto-generated>",
+            $"//------------------------------------------------------------------------------"
         };
 
         private string ClassNamespaceLine => $"namespace {classNamespace}";
 
-        private string ClassDeclarationLine => $"public sealed class {className}";
+        private string ClassDeclarationLine => $"public static class {className}";
 
-        // private string ScenesClassDeclarationLine => $"public static class Scenes";
+        private string ClassEnumDeclarationLine => "public enum SceneEnum";
 
-        private string ClassEnumDeclarationLine => "public enum SceneEnum // NOTE: eases Scene serialization within UnityEditor";
+        private string[] ClassSubclassLines => new string[]
+        {
+            $"[System.Serializable]",
+            $"public class SceneData",
+            $"{{",
+            $"{tab}[UnityEngine.SerializeField] int _buildIndex = -1;",
+            $"{tab}public int buildIndex => _buildIndex;",
+            $"{tab}[UnityEngine.SerializeField] string _scenePath;",
+            $"{tab}public string scenePath => _scenePath;",
+            $"{tab}public string sceneName => System.IO.Path.GetFileNameWithoutExtension(scenePath);",
+            $"{tab}public SceneData(int buildIndex, string scenePath)",
+            $"{tab}{{",
+            $"{tab}{tab}this._buildIndex = buildIndex;",
+            $"{tab}{tab}this._scenePath = scenePath;",
+            $"{tab}}}",
+            $"{tab}public UnityEngine.SceneManagement.Scene GetScene() => UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex);",
+            $"{tab}public override string ToString() => $\"{{buildIndex}}: {{scenePath}}\";",
+            $"}}"
+        };
 
-        private string[] GetScenesClassFieldLine(string sceneName, int buildIndex)
+        private string ClassPrivateDataLine => "internal static SceneData[] sceneData = new SceneData[]";
+
+        private string[] GetClassFieldLines(string sceneName, int buildIndex)
         {
             return new string[]
             {
-                $"public static UnityEngine.SceneManagement.Scene {sceneName} = ",
-                $"{whitespaceIndentation}UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex({buildIndex});"
+                $"public static SceneData {sceneName} => sceneData[{buildIndex}];"
+                // $"public static UnityEngine.SceneManagement.Scene {sceneName} = ",
+                // $"{whitespaceIndentation}UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex({buildIndex});"
             };
         }
 
         private string[] ClassExtensionsLines => new string[]
         {
             $"public static class {className}Extensions",
-            "{",
-            $"{whitespaceIndentation}public static UnityEngine.SceneManagement.Scene ToScene(this {className}.SceneEnum sceneEnum)",
-            $"{whitespaceIndentation}{{",
-            $"{whitespaceIndentation}{whitespaceIndentation}return UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex((int) sceneEnum);",
-            $"{whitespaceIndentation}}}",
-            "}"
+            $"{{",
+            $"{tab}public static {className}.SceneData ToSceneData(this {className}.SceneEnum sceneEnum)",
+            $"{tab}{{",
+            $"{tab}{tab}return {className}.sceneData[(int) sceneEnum];",
+            $"{tab}}}",
+            $"}}"
+        };
+
+        private string[] ClassPropertyDrawerLines => new string[]
+        {
+            $"[UnityEditor.CustomPropertyDrawer(typeof({className}.SceneData))]",
+            $"public class {className}Drawer : UnityEditor.PropertyDrawer",
+            $"{{",
+            $"{tab}public override void OnGUI(UnityEngine.Rect position, UnityEditor.SerializedProperty property, UnityEngine.GUIContent label)",
+            $"{tab}{{",
+            $"{tab}{tab}{className}.SceneData sceneData = property.boxedValue as {className}.SceneData;",
+            $"{tab}{tab}{className}.SceneEnum prevSceneEnum = ({className}.SceneEnum) sceneData.buildIndex;",
+            $"{tab}{tab}{className}.SceneEnum nextSceneEnum = ({className}.SceneEnum) UnityEditor.EditorGUI.EnumPopup(position, property.name, prevSceneEnum);",
+            $"{tab}{tab}if (prevSceneEnum == nextSceneEnum) return;",
+            $"{tab}{tab}sceneData = GetSceneData(nextSceneEnum);",
+            $"{tab}{tab}if (sceneData == null)",
+            $"{tab}{tab}{{",
+            $"{tab}{tab}{tab}UnityEngine.Debug.LogWarning(\"scene must be in {className}.sceneData, you may need to auto-generate script again\");",
+            $"{tab}{tab}}}",
+            $"{tab}{tab}property.boxedValue = sceneData;",
+            $"{tab}}}",
+            $"",
+            $"{tab}private {className}.SceneData GetSceneData({className}.SceneEnum sceneEnum)",
+            $"{tab}{{",
+            $"{tab}{tab}foreach ({className}.SceneData data in {className}.sceneData)",
+            $"{tab}{tab}{{",
+            $"{tab}{tab}{tab}if (data.buildIndex == (int) sceneEnum) return data;",
+            $"{tab}{tab}}}",
+            $"{tab}{tab}return null;",
+            $"{tab}}}",
+            $"}}",
         };
 
         #endregion

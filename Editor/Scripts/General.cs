@@ -13,8 +13,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using UnityEditor;
 using System.Linq;
-using UnityEditor.PackageManager;
 
 namespace Kokowolo.Utilities.Editor
 {
@@ -27,14 +27,51 @@ namespace Kokowolo.Utilities.Editor
         /************************************************************/
         #region Functions
 
-        public static PackageInfo GetPackageInfo(string packageName)
+        public static UnityEditor.PackageManager.PackageInfo GetPackageInfo(string packageName)
         {
-            return UnityEditor.AssetDatabase.FindAssets("package")
-                .Select(UnityEditor.AssetDatabase.GUIDToAssetPath)
-                    .Where(x => UnityEditor.AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
-                .Select(PackageInfo.FindForAssetPath)
+            return AssetDatabase.FindAssets("package")
+                .Select(AssetDatabase.GUIDToAssetPath)
+                    .Where(x => AssetDatabase.LoadAssetAtPath<TextAsset>(x) != null)
+                .Select(UnityEditor.PackageManager.PackageInfo.FindForAssetPath)
                     .Where(x => x != null)
                 .First(x => x.name == packageName);
+        }
+
+        public static EditorBuildSettingsScene GetEditorBuildSettingsScene(int buildIndex, bool includeOnlyEnabled = true)
+        {
+            int index = -1;
+            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+            {
+                if (includeOnlyEnabled && !scene.enabled) continue;
+                index++;
+                if (index == buildIndex) return scene;
+            }
+            return null;
+        }
+        
+        public static int GetEditorBuildSettingsSceneBuildIndex(EditorBuildSettingsScene buildScene, bool includeOnlyEnabled = true)
+        {
+            int buildIndex = -1;
+            foreach (EditorBuildSettingsScene scene in EditorBuildSettings.scenes)
+            {
+                if (includeOnlyEnabled && !scene.enabled) continue;
+                buildIndex++;
+                if (scene.guid == buildScene.guid) return buildIndex;
+            }
+            return buildIndex;
+        }
+
+        public static int GetEditorBuildSettingsSceneBuildIndex(SceneAsset sceneAsset, bool includeOnlyEnabled = true)
+        {
+            int buildIndex = -1;
+            foreach (EditorBuildSettingsScene buildScene in EditorBuildSettings.scenes)
+            {
+                if (includeOnlyEnabled && !buildScene.enabled) continue;
+                buildIndex++;
+                SceneAsset scene = AssetDatabase.LoadAssetAtPath<SceneAsset>(buildScene.path);
+                if (scene.GetInstanceID() == sceneAsset.GetInstanceID()) return buildIndex;
+            }
+            return buildIndex;
         }
 
         #endregion

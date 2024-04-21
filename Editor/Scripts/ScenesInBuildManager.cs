@@ -137,25 +137,58 @@ namespace Kokowolo.Utilities
                 }
                 WriteNewLine();
 
-                // write class private data
-                WriteLine(ClassPrivateDataLine);
+                // write class pointer
+                UnityEditor.EditorBuildSettingsScene firstBuildScene = null;
+                foreach (UnityEditor.EditorBuildSettingsScene buildScene in UnityEditor.EditorBuildSettings.scenes)
+                {
+                    if (!buildScene.enabled) continue;
+                    firstBuildScene = buildScene;
+                    break;
+                }
+                if (firstBuildScene == null)
+                {
+                    Debug.LogWarning($"No Scene in BuildSettings, but compiling {classFileName} anyway");
+                }
+                int firstSceneGUID = firstBuildScene == null? 0 : GetGuid(firstBuildScene);
+                foreach (string line in GetClassPointerLines(firstSceneGUID))
+                {
+                    WriteLine(line);
+                }
+                WriteNewLine();
+
+                // write class private data 1
+                WriteLine(ClassPrivateDataLine1);
                 UpdateIndentation(add: true);
                 int sceneCount = 0;
-                foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes)
+                foreach (UnityEditor.EditorBuildSettingsScene buildScene in UnityEditor.EditorBuildSettings.scenes)
                 {
-                    if (!scene.enabled) continue;
-                    WriteLine($"new SceneData({sceneCount++}, \"{scene.path}\"),");
+                    if (!buildScene.enabled) continue;
+                    WriteLine($"{{ {sceneCount++}, {GetGuid(buildScene)} }},");
                 }
                 UpdateIndentation(add: false, writeLine: false);
                 WriteLine("};");
                 WriteNewLine();
 
-                // write Scenes class's fields
+                // write class private data 2
+                WriteLine(ClassPrivateDataLine2);
+                UpdateIndentation(add: true);
                 sceneCount = 0;
-                foreach (UnityEditor.EditorBuildSettingsScene scene in UnityEditor.EditorBuildSettings.scenes)
+                foreach (UnityEditor.EditorBuildSettingsScene buildScene in UnityEditor.EditorBuildSettings.scenes)
                 {
-                    if (!scene.enabled) continue;
-                    string sceneName = Path.GetFileNameWithoutExtension(scene.path).Replace(" ", "_");
+                    if (!buildScene.enabled) continue;
+                    WriteLine($"{{ {GetGuid(buildScene)}, new SceneData({sceneCount++}, \"{buildScene.path}\") }},");
+                }
+                UpdateIndentation(add: false, writeLine: false);
+                WriteLine("};");
+                WriteNewLine();
+
+                // write class fields
+                WriteLine($"public static int Count => {sceneCount};");
+                sceneCount = 0;
+                foreach (UnityEditor.EditorBuildSettingsScene buildScene in UnityEditor.EditorBuildSettings.scenes)
+                {
+                    if (!buildScene.enabled) continue;
+                    string sceneName = Path.GetFileNameWithoutExtension(buildScene.path).Replace(" ", "_");
                     if (sceneNamesDict[sceneName] != -1)
                     {
                         sceneName = $"{sceneName}_{sceneNamesDict[sceneName]++}";
@@ -167,6 +200,14 @@ namespace Kokowolo.Utilities
                     }
                     sceneCount++;
                 }
+                WriteNewLine();
+
+                // write class functions
+                foreach (string line in ClassFunctionLines)
+                {
+                    WriteLine(line);
+                }
+                // WriteNewLine();
 
                 // close class
                 UpdateIndentation(add: false);
@@ -196,6 +237,11 @@ namespace Kokowolo.Utilities
             Debug.Log("Closing File");
             UnityEditor.Compilation.CompilationPipeline.RequestScriptCompilation();
             isGenerating = false;
+        }
+
+        private int GetGuid(UnityEditor.EditorBuildSettingsScene buildScene)
+        {
+            return UnityEditor.AssetDatabase.GUIDFromAssetPath(buildScene.path).GetHashCode();
         }
 
         private void WriteLine(string line)
@@ -231,7 +277,7 @@ namespace Kokowolo.Utilities
 
         #endregion
         /************************************************************/
-        #region Auto-Generated Script Text
+        #region Auto-Generated Script
 
         private string packageName = "com.kokowolo.utilities";
 
@@ -257,41 +303,46 @@ namespace Kokowolo.Utilities
 
         private string[] ClassSubclassLines => new string[]
         {
-            $"[System.Serializable]",
             $"public class SceneData",
             $"{{",
-            $"#if UNITY_EDITOR",
-            $"{tab}[UnityEngine.SerializeField] public UnityEditor.SceneAsset sceneAsset;",
-            $"#endif",
-            $"{tab}[UnityEngine.SerializeField] int _buildIndex = -1;",
-            $"{tab}public int buildIndex => _buildIndex;",
-            $"{tab}[UnityEngine.SerializeField] string _scenePath;",
-            $"{tab}public string scenePath => _scenePath;",
+            $"{tab}public SceneEnum sceneEnum => (SceneEnum) buildIndex;",
+            $"{tab}public int buildIndex {{ get; }}",
+            $"{tab}public string scenePath {{ get; }}",
             $"{tab}public string sceneName => System.IO.Path.GetFileNameWithoutExtension(scenePath);",
-            $"{tab}public SceneData(int buildIndex, string scenePath)",
+            $"{tab}public UnityEngine.SceneManagement.Scene Scene => UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex);",
+            $"{tab}internal SceneData(int buildIndex, string scenePath)",
             $"{tab}{{",
-            $"{tab}{tab}this._buildIndex = buildIndex;",
-            $"{tab}{tab}this._scenePath = scenePath;",
-            $"#if UNITY_EDITOR",
-            $"{tab}this.sceneAsset = UnityEditor.AssetDatabase.LoadAssetAtPath<UnityEditor.SceneAsset>(_scenePath);",
-            $"#endif",
+            $"{tab}{tab}this.buildIndex = buildIndex;",
+            $"{tab}{tab}this.scenePath = scenePath;",
             $"{tab}}}",
-            $"{tab}public UnityEngine.SceneManagement.Scene GetScene() => UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex(buildIndex);",
             $"{tab}public override string ToString() => $\"{{buildIndex}}: {{scenePath}}\";",
             $"}}"
         };
 
-        private string ClassPrivateDataLine => "internal static SceneData[] sceneData = new SceneData[]";
-
-        private string[] GetClassFieldLines(string sceneName, int buildIndex)
+        private string[] GetClassPointerLines(int guid) => new string[]
         {
-            return new string[]
-            {
-                $"public static SceneData {sceneName} => sceneData[{buildIndex}];"
-                // $"public static UnityEngine.SceneManagement.Scene {sceneName} = ",
-                // $"{whitespaceIndentation}UnityEngine.SceneManagement.SceneManager.GetSceneByBuildIndex({buildIndex});"
-            };
-        }
+            $"[System.Serializable]",
+            $"public class SceneDataPointer",
+            $"{{",
+            $"{tab}[UnityEngine.SerializeField] internal int value = {guid};",
+            $"{tab}public SceneData SceneData => sceneDataDict[value];",
+            $"}}"
+        };
+
+        private string ClassPrivateDataLine1 => "private static System.Collections.Generic.Dictionary<int, int> sceneDataOrderingDict = new()";
+        private string ClassPrivateDataLine2 => "private static System.Collections.Generic.Dictionary<int, SceneData> sceneDataDict = new()";
+
+        private string[] GetClassFieldLines(string sceneName, int buildIndex) => new string[]
+        {
+            $"public static SceneData {sceneName} => GetSceneData({buildIndex});"
+        };
+
+        private string[] ClassFunctionLines => new string[]
+        {
+            $"internal static SceneData GetSceneData(int index) => sceneDataDict[sceneDataOrderingDict[index]];",
+            $"internal static SceneDataPointer GetSceneDataPointer(SceneEnum sceneEnum) =>",
+            $"{tab}new SceneDataPointer {{ value = sceneDataOrderingDict[(int) sceneEnum] }};",
+        };
 
         private string[] ClassExtensionsLines => new string[]
         {
@@ -299,7 +350,7 @@ namespace Kokowolo.Utilities
             $"{{",
             $"{tab}public static {className}.SceneData ToSceneData(this {className}.SceneEnum sceneEnum)",
             $"{tab}{{",
-            $"{tab}{tab}return {className}.sceneData[(int) sceneEnum];",
+            $"{tab}{tab}return {className}.GetSceneData((int) sceneEnum);",
             $"{tab}}}",
             $"}}"
         };
@@ -308,62 +359,31 @@ namespace Kokowolo.Utilities
         {
             $"#if UNITY_EDITOR",
             $"",
-            $"[UnityEditor.CustomPropertyDrawer(typeof({className}.SceneData))]",
+            $"[UnityEditor.CustomPropertyDrawer(typeof({className}.SceneDataPointer))]",
             $"public class {className}Drawer : UnityEditor.PropertyDrawer",
             $"{{",
             $"{tab}public override void OnGUI(UnityEngine.Rect position, UnityEditor.SerializedProperty property, UnityEngine.GUIContent label)",
             $"{tab}{{",
-            $"{tab}{tab}if ({className}.sceneData.Length == 0)",
+            $"{tab}{tab}if ({className}.Count == 0)",
             $"{tab}{tab}{{",
             $"{tab}{tab}{tab}UnityEditor.EditorGUI.LabelField(position, label.text, \"No Scene in BuildSettings\");",
             $"{tab}{tab}{tab}return;",
             $"{tab}{tab}}}",
-            $"{tab}{tab}bool reserialize = false;",
+            $"{tab}{tab}{className}.SceneDataPointer pointer = ({className}.SceneDataPointer) property.boxedValue;",
             $"{tab}{tab}{className}.SceneEnum prevSceneEnum;",
-            $"{tab}{tab}{className}.SceneData sceneData = property.boxedValue as {className}.SceneData;",
-            $"{tab}{tab}if (sceneData.sceneAsset == null)",
+            $"{tab}{tab}try",
             $"{tab}{tab}{{",
-            $"{tab}{tab}{tab}sceneData = GetSceneData(({className}.SceneEnum) sceneData.buildIndex);",
-            $"{tab}{tab}{tab}reserialize = true;",
+            $"{tab}{tab}{tab}prevSceneEnum = ({className}.SceneEnum) pointer.SceneData.buildIndex;",
             $"{tab}{tab}}}",
-            $"{tab}{tab}else",
+            $"{tab}{tab}catch (System.Exception)",
             $"{tab}{tab}{{",
-            $"{tab}{tab}{tab}UnityEditor.SceneAsset sceneAsset = sceneData.sceneAsset;",
-            $"{tab}{tab}{tab}int buildIndex = Kokowolo.Utilities.Editor.General.GetEditorBuildSettingsSceneBuildIndex(sceneAsset);",
-            $"{tab}{tab}{tab}prevSceneEnum = ({className}.SceneEnum) buildIndex;",
-            $"{tab}{tab}{tab}if (buildIndex != sceneData.buildIndex || UnityEditor.AssetDatabase.GetAssetPath(sceneAsset) != sceneData.scenePath)",
-            $"{tab}{tab}{tab}{{",
-            $"{tab}{tab}{tab}{tab}if (!System.Enum.IsDefined(typeof({className}.SceneEnum), prevSceneEnum))",
-            $"{tab}{tab}{tab}{tab}{{",
-            $"{tab}{tab}{tab}{tab}{tab}UnityEngine.Debug.LogError($\"scene {{sceneAsset.name}} is no longer found within build settings\");",
-            $"{tab}{tab}{tab}{tab}{tab}prevSceneEnum = 0;",
-            $"{tab}{tab}{tab}{tab}}}",
-            $"{tab}{tab}{tab}{tab}sceneData = GetSceneData(prevSceneEnum);",
-            $"{tab}{tab}{tab}{tab}reserialize = true;",
-            $"{tab}{tab}{tab}{tab}if (sceneAsset != sceneData.sceneAsset || UnityEditor.AssetDatabase.GetAssetPath(sceneData.sceneAsset) != sceneData.scenePath)",
-            $"{tab}{tab}{tab}{tab}{{",
-            $"{tab}{tab}{tab}{tab}{tab}UnityEditor.EditorGUI.LabelField(position, label.text, \"{className} needs regeneration\");",
-            $"{tab}{tab}{tab}{tab}{tab}return;",
-            $"{tab}{tab}{tab}{tab}}}",
-            $"{tab}{tab}{tab}}}",
+            $"{tab}{tab}{tab}UnityEngine.Debug.LogError(\"GUID not found in {className}'s dictionary, resetting {className}.SceneDataPointer\");",
+            $"{tab}{tab}{tab}property.boxedValue = {className}.GetSceneDataPointer(0);",
+            $"{tab}{tab}{tab}return;",
             $"{tab}{tab}}}",
-            $"{tab}{tab}prevSceneEnum = ({className}.SceneEnum) sceneData.buildIndex;",
             $"{tab}{tab}{className}.SceneEnum nextSceneEnum = ({className}.SceneEnum) UnityEditor.EditorGUI.EnumPopup(position, property.name, prevSceneEnum);",
-            $"{tab}{tab}if (prevSceneEnum != nextSceneEnum)",
-            $"{tab}{tab}{{",
-            $"{tab}{tab}{tab}sceneData = GetSceneData(nextSceneEnum);",
-            $"{tab}{tab}{tab}reserialize = true;",
-            $"{tab}{tab}}}",
-            $"{tab}{tab}if (reserialize) property.boxedValue = sceneData;",
-            $"{tab}}}",
-            $"",
-            $"{tab}private {className}.SceneData GetSceneData({className}.SceneEnum sceneEnum)",
-            $"{tab}{{",
-            $"{tab}{tab}foreach ({className}.SceneData data in {className}.sceneData)",
-            $"{tab}{tab}{{",
-            $"{tab}{tab}{tab}if (data.buildIndex == (int) sceneEnum) return data;",
-            $"{tab}{tab}}}",
-            $"{tab}{tab}throw new System.Exception();",
+            $"{tab}{tab}if (prevSceneEnum == nextSceneEnum) return;",
+            $"{tab}{tab}property.boxedValue = {className}.GetSceneDataPointer(nextSceneEnum);",
             $"{tab}}}",
             $"}}",
             $"",

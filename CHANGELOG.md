@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.82] - 2024-04-21
+### Added
+* `IListExtensions` to expand accessibility of `ListExtensions`
+* *Fisher-Yates* `Shuffle` method to `ListExtensions`/`IListExtensions`
+### Changed
+* `ScenesInBuild` auto-generated file to use a struct pointer to better serialize Scene data
+* `ScenesInBuild` auto-generated file to use a build scene's GUID as its underlying serialization
+### Fixed
+* `ScenesInBuild` auto-generated file invalid `Kokowolo.Utilities.Editor` reference
+
 ## [0.0.81] - 2024-04-20
 ### Added
 * some `EditorBuildSettingsScene` functions to `Utilities.Editor.General`

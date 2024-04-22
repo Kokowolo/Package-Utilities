@@ -352,6 +352,11 @@ namespace Kokowolo.Utilities
             $"{tab}{{",
             $"{tab}{tab}return {className}.GetSceneData((int) sceneEnum);",
             $"{tab}}}",
+            $"",
+            $"{tab}public static ScenesInBuild.SceneEnum ToSceneEnum(this UnityEngine.SceneManagement.Scene scene)",
+            $"{tab}{{",
+            $"{tab}{tab}return (ScenesInBuild.SceneEnum) scene.buildIndex;",
+            $"{tab}}}",
             $"}}"
         };
 

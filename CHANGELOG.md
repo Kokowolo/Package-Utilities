@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.82] - 2024-04-21
 ### Added
+* `ToSceneEnum` extension function to `ScenesInBuildManager`'s auto-generated class
+
+## [0.0.82] - 2024-04-21
+### Added
 * `IListExtensions` to expand accessibility of `ListExtensions`
 * *Fisher-Yates* `Shuffle` method to `ListExtensions`/`IListExtensions`
 ### Changed

@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.82] - 2024-04-21
+## [0.0.84] - 2024-04-27
+### Added
+* `BitmaskUtils` to handle bitmask operations; probably should add `LayerMaskUtils`/`Extensions` code at some point
+* `EditorUtils` to handle various `CustomEditor` utilities
+* `ReflectionUtils` to handle various `Reflection` utilities and also as an index on how to use `Reflection`
+
+## [0.0.83] - 2024-04-21
 ### Added
 * `ToSceneEnum` extension function to `ScenesInBuildManager`'s auto-generated class
 

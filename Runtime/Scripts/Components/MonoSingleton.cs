@@ -1,12 +1,12 @@
 /*
  * File Name: MonoSingleton.cs
- * Description: This script is for ...
+ * Description: This script is specifically for the implementation of MonoBehaviour Singletons through abstraction
  * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: February 16, 2023
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: 140
  */
 
 using System.Collections;
@@ -76,6 +76,8 @@ namespace Kokowolo.Utilities
         protected virtual void MonoSingleton_OnDisable() {}
 
         protected virtual void MonoSingleton_OnDestroy() {}
+
+        public static T FindInstance() => Singleton.Get<T>(findObjectOfType: true);
 
         #endregion
         /************************************************************/

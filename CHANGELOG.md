@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.85] - 2024-04-27
+### Added
+* `FindInstance()` to `MonoSingleton`
+* static readonly field `orange` to `ColorUtils`
+### Changed
+* `BaseInputManager` and `PrefabManager` to extend from `MonoSingleton`
+
 ## [0.0.84] - 2024-04-27
 ### Added
 * `BitmaskUtils` to handle bitmask operations; probably should add `LayerMaskUtils`/`Extensions` code at some point

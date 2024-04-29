@@ -6,7 +6,7 @@
  * Date Created: January 23, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 140
  */
 
 using System.Collections;
@@ -17,6 +17,12 @@ namespace Kokowolo.Utilities
 {
     public static class ColorUtils
     {
+        /************************************************************/
+        #region Fields
+
+        public static readonly Color orange = new Color(1, 0.75f, 0);
+
+        #endregion
         /************************************************************/
         #region Functions
 

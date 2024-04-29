@@ -18,13 +18,10 @@ using System;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class PrefabManager : MonoBehaviour
+    public class PrefabManager : MonoSingleton<PrefabManager>
     {
         /************************************************************/
         #region Fields
-
-        [Header("Singleton Settings")]
-        [SerializeField] private bool dontDestroyOnLoad = false;
 
         [Header("Cached References")]
         // [SerializeField] private GameObject[] gameObjects = null;
@@ -35,13 +32,11 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
-        private static PrefabManager Instance => Singleton.Get<PrefabManager>(findObjectOfType: true);
+        public static new PrefabManager Instance => FindInstance();
 
         #endregion
         /************************************************************/
         #region Functions
-
-        private void Awake() => Singleton.TrySet(this, dontDestroyOnLoad);
 
         public static bool Has<T>()
         {

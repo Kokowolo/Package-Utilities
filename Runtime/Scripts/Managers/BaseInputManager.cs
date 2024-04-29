@@ -21,30 +21,19 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class BaseInputManager : MonoBehaviour
+    public class BaseInputManager : MonoSingleton<BaseInputManager>
     {
         /************************************************************/
         #region Fields
-
-        [Header("Singleton Settings")]
-        [SerializeField] protected bool dontDestroyOnLoad = false;
 
         private bool isMouseOverUI = false;
 
         #endregion
         /************************************************************/
-        #region Properties
-
-        protected static BaseInputManager Instance => Singleton.Get<BaseInputManager>(findObjectOfType: true);
-
-        #endregion
-        /************************************************************/
         #region Functions
 
-        protected virtual void Awake()
+        protected override void MonoSingleton_Awake()
         {
-            if (!Singleton.TrySet(this, dontDestroyOnLoad)) return;
-
 #if ENABLE_INPUT_SYSTEM
             enabled = true;
 #else

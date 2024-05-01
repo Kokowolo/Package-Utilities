@@ -20,7 +20,9 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Fields
 
-        public static readonly Color orange = new Color(1, 0.75f, 0);
+        public static readonly Color lime = new Color(0.75f, 1, 0, 1);
+        public static readonly Color orange = new Color(1, 0.75f, 0, 1);
+        public static readonly Color pink = new Color(1, 0.75f, 0.75f, 1);
 
         #endregion
         /************************************************************/

@@ -25,7 +25,7 @@ namespace Kokowolo.Utilities
         {
             if (findObjectOfType && SingletonInstance<T>.instance == null) 
             {
-                TrySet(Object.FindObjectOfType<T>(), dontDestroyOnLoad);
+                TrySet(Object.FindObjectOfType<T>(), dontDestroyOnLoad, unparentGameObject);
                 LogManager.Log($"called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
             }
             return SingletonInstance<T>.instance;

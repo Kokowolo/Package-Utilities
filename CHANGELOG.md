@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.86] - 2024-05-01
+### Added
+* `lime` and `pink` to `ColorUtils`
+### Fixed
+* mistakenly left out parameter within `Singleton.Get<T>`
+
 ## [0.0.85] - 2024-04-27
 ### Added
 * `FindInstance()` to `MonoSingleton`

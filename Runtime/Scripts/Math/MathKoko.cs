@@ -120,20 +120,41 @@ namespace Kokowolo.Utilities
             return (int)Mathf.Ceil(value);
         }
 
-        public static float Remap(float value, float fromMin, float fromMax, float toMin, float toMax)
+        public static float Remap(float value, Vector2 from, Vector2 to)
         {
-            value = Mathf.Clamp(value, Mathf.Min(fromMin, fromMax), Mathf.Max(fromMin, fromMax));
-            return (value - fromMin) / (fromMax - fromMin) * (toMax - toMin) + toMin;
+            return Remap(value, from.x, from.y, to.x, to.y);
         }
 
-        public static float Remap01(float value, float fromMin, float fromMax)
+        public static float Remap(float value, float from1, float from2, float to1, float to2)
         {
-            return Remap(value, fromMin, fromMax, 0, 1);
+            // value = Mathf.Clamp(value, Mathf.Min(from1, from2), Mathf.Max(from1, from2));
+            // return to1 + (value - from1) * (to2 - to1) / Mathf.Max((from2 - from1), Mathf.Epsilon);
+            return Mathf.Lerp(to1, to2, Mathf.InverseLerp(from1, from2, value));
+        }
+
+        public static float RemapTo01(float value, float from1, float from2)
+        {
+            return Remap(value, from1, from2, 0, 1);
+        }
+
+        public static float RemapTo01(float value, Vector2 from)
+        {
+            return Remap(value, from.x, from.y, 0, 1);
+        }
+
+        public static float RemapFrom01(float value, float to1, float to2)
+        {
+            return Remap(value, 0, 1, to1, to2);
+        }
+
+        public static float RemapFrom01(float value, Vector2 to)
+        {
+            return Remap(value, 0, 1, to.x, to.y);
         }
 
         public static Vector3 GetPointOnCircle(float radius, Vector3 normal, float t)
         {
-            t = Remap(t, 0, 1, 0, 2 * Mathf.PI);
+            t = RemapFrom01(t, 0, 2 * Mathf.PI);
             float x = radius * Mathf.Cos(t);
             float y = radius * -Mathf.Sin(t);
             float z = 0;

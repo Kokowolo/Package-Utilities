@@ -19,6 +19,36 @@ namespace Kokowolo.Utilities
     {
         /************************************************************/
         #region Functions
+
+        public static float Remap(this float value, Vector2 from, Vector2 to)
+        {
+            return MathKoko.Remap(value, from, to);
+        }
+
+        public static float Remap(this float value, float from1, float from2, float to1, float to2)
+        {
+            return MathKoko.Remap(value, from1, from2, to1, to2);
+        }
+
+        public static float RemapFrom01(this float value, Vector2 to)
+        {
+            return MathKoko.RemapFrom01(value, to);
+        }
+
+        public static float RemapFrom01(this float value, float to1, float to2)
+        {
+            return MathKoko.RemapFrom01(value, to1, to2);
+        }
+
+        public static float RemapTo01(this float value, Vector2 from)
+        {
+            return MathKoko.RemapTo01(value, from);
+        }
+
+        public static float RemapTo01(this float value, float from1, float from2)
+        {
+            return MathKoko.RemapFrom01(value, from1, from2);
+        }
         
         // public static string ToStringDegrees(this float value)
         // {

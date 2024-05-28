@@ -6,7 +6,7 @@
  * Date Created: October 26, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
@@ -37,7 +37,7 @@ namespace Kokowolo.Utilities
 
         private static IEnumerator LoglerpRoutine(float value, float a, float b, float speed, Action<float> setFunction)
         {
-            float t = MathKoko.Remap01(value, a, b);
+            float t = MathKoko.RemapTo01(value, a, b);
             while (t < 1)
             {
                 value = Mathf.Lerp(value, b, t);
@@ -55,7 +55,7 @@ namespace Kokowolo.Utilities
 
         private static IEnumerator LerpRoutine(float value, float a, float b, float speed, Action<float> setFunction)
         {
-            float t = MathKoko.Remap01(value, a, b);
+            float t = MathKoko.RemapTo01(value, a, b);
             while (t < 1)
             {
                 value = Mathf.Lerp(a, b, t);

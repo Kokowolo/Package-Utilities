@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.87] - 2024-05-28
+### Added
+* `MathKoko.RemapFrom01`
+* overloaded `MathKoko` `Remap` functions to allow for `Vector2` ranges
+* extension `Remap` functions to `FloatExtensions`
+* `ScreenUtils` for `Screen` utility functions
+* `RectTransformExtensions` for `RectTransform` extensions
+### Changed
+* `MathKoko.Remap01` to `MathKoko.RemapTo01` and changed additional references (`Tween.cs`)
+### Fixed
+* error within `MathKoko.Remap` where it was not allowing negative range remapping
+
 ## [0.0.86] - 2024-05-01
 ### Added
 * `lime` and `pink` to `ColorUtils`

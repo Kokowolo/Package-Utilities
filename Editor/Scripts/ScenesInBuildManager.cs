@@ -18,7 +18,7 @@ using UnityEngine;
 using System.IO;
 using UnityEngine.SceneManagement;
 
-namespace Kokowolo.Utilities
+namespace Kokowolo.Utilities.Editor
 {
     [CreateAssetMenu(menuName = "Kokowolo/Utilities/ScenesInBuildManager Asset", fileName = nameof(ScenesInBuildManager))]
     public sealed class ScenesInBuildManager : ScriptableObject

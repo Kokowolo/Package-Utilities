@@ -20,6 +20,16 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
+        {
+            return WorldToScreenPoint(Camera.main, worldPosition);
+        }
+        
+        public static Vector2 WorldToScreenPoint(Camera camera, Vector3 worldPosition)
+        {
+            return RectTransformUtility.WorldToScreenPoint(camera, worldPosition);
+        }
+
         public static Vector2 GetMouseScreenPoint01()
         {
             return ToScreenPoint01(BaseInputManager.GetMouseScreenPoint());

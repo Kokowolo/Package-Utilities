@@ -6,7 +6,7 @@
  * Date Created: January 23, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: 120
  */
 
 using System.Collections;
@@ -28,6 +28,13 @@ namespace Kokowolo.Utilities
         public static Color WithAlpha(this Color color, float alpha)
         {
             return new Color(color.r, color.g, color.b, alpha);
+        }
+
+        public static Color ToNegative(this Color color)
+        {
+            Color.RGBToHSV(color, out float H, out float S, out float V);
+            float negativeH = (H + 0.5f) % 1f;
+            return Color.HSVToRGB(negativeH, S, V);
         }
 
         // public static string ToHtmlStringRGB(this Color color)

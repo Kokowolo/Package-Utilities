@@ -57,6 +57,7 @@ namespace Kokowolo.Utilities.Editor
             if (EditorGUI.EndChangeCheck())
             {
                 property.serializedObject.ApplyModifiedProperties();
+                EditorUtility.SetDirty(property.serializedObject.targetObject);
             }
         }
 
@@ -78,6 +79,7 @@ namespace Kokowolo.Utilities.Editor
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
+                EditorUtility.SetDirty(serializedObject.targetObject);
             }
         }
 

@@ -20,6 +20,22 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        /// <summary>
+        /// returns world position of mouse where Z coord will be 0
+        /// </summary>
+        public static Vector2 GetMouseWorldPoint()
+        {
+            return GetMouseWorldPoint(Camera.main);
+        }
+
+        /// <summary>
+        /// returns world position of mouse where Z coord will be 0
+        /// </summary>
+        public static Vector2 GetMouseWorldPoint(Camera camera)
+        {
+            return camera.ScreenToWorldPoint(Input.mousePosition);
+        }
+
         public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
         {
             return WorldToScreenPoint(Camera.main, worldPosition);

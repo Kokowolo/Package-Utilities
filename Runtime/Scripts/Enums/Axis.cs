@@ -32,4 +32,29 @@ namespace Kokowolo.Utilities
         Y = 12,
         Z = 48,
     }
+
+    public static class AxisExtensions
+    {
+        public static Axis Positive(this Axis axis)
+        {
+            return axis switch
+            {
+                Axis.X => Axis.XPos,
+                Axis.Y => Axis.YPos,
+                Axis.Z => Axis.ZPos,
+                _ => throw new NotImplementedException()
+            };
+        }
+
+        public static Axis Negative(this Axis axis)
+        {
+            return axis switch
+            {
+                Axis.X => Axis.XNeg,
+                Axis.Y => Axis.YNeg,
+                Axis.Z => Axis.ZNeg,
+                _ => throw new NotImplementedException()
+            };
+        }
+    }
 }

@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.90] - 2024-06-18
+### Added
+* `AxisExtensions` to `Axis.cs` to get the `Positive` and `Negative` `enum` from a defined `Axis`
+* `GetAxisValue`, `SetAxisValue`, and `AddAxisValue` to `VectorExtensions`
+### Changed
+* `VectorUtils` and `VectorExtensions` to be broken up into respective `Vector3`, `Vector2`, `Vector3Int` classes
+
 ## [0.0.89] - 2024-06-17
 ### Added
 * `GetMouseWorldPoint` to `ScreenUtils`

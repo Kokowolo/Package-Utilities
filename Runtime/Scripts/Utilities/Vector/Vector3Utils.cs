@@ -1,5 +1,5 @@
 /*
- * File Name: VectorUtils.cs
+ * File Name: Vector3Utils.cs
  * Description: This script is for ...
  * 
  * Author(s): Kokowolo, Will Lacey
@@ -15,7 +15,7 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public static class VectorUtils
+    public static class Vector3Utils
     {
         /************************************************************/
         #region Functions

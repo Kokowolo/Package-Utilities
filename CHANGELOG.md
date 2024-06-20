@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.91] - 2024-06-20
+### Added
+* `ToVector3` and `ToVector3Int` to `Axis`
+### Changed
+* `AxisExtensions` methods to always return a value
+
 ## [0.0.90] - 2024-06-18
 ### Added
 * `AxisExtensions` to `Axis.cs` to get the `Positive` and `Negative` `enum` from a defined `Axis`

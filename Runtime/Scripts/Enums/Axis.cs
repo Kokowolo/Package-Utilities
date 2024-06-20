@@ -40,9 +40,12 @@ namespace Kokowolo.Utilities
             return axis switch
             {
                 Axis.X => Axis.XPos,
+                Axis.XNeg => Axis.XPos,
                 Axis.Y => Axis.YPos,
+                Axis.YNeg => Axis.YPos,
                 Axis.Z => Axis.ZPos,
-                _ => throw new NotImplementedException()
+                Axis.ZNeg => Axis.ZPos,
+                _ => axis
             };
         }
 
@@ -51,9 +54,40 @@ namespace Kokowolo.Utilities
             return axis switch
             {
                 Axis.X => Axis.XNeg,
+                Axis.XPos => Axis.XNeg,
                 Axis.Y => Axis.YNeg,
+                Axis.YPos => Axis.YNeg,
                 Axis.Z => Axis.ZNeg,
-                _ => throw new NotImplementedException()
+                Axis.ZPos => Axis.ZNeg,
+                _ => axis
+            };
+        }
+
+        public static Vector3 ToVector3(this Axis axis)
+        {
+            return axis switch
+            {
+                Axis.XPos => Vector3.right,
+                Axis.XNeg => Vector3.left,
+                Axis.YPos => Vector3.up,
+                Axis.YNeg => Vector3.down,
+                Axis.ZPos => Vector3.forward,
+                Axis.ZNeg => Vector3.back,
+                _ => Vector3.zero
+            };
+        }
+
+        public static Vector3Int ToVector3Int(this Axis axis)
+        {
+            return axis switch
+            {
+                Axis.XPos => Vector3Int.right,
+                Axis.XNeg => Vector3Int.left,
+                Axis.YPos => Vector3Int.up,
+                Axis.YNeg => Vector3Int.down,
+                Axis.ZPos => Vector3Int.forward,
+                Axis.ZNeg => Vector3Int.back,
+                _ => Vector3Int.zero
             };
         }
     }

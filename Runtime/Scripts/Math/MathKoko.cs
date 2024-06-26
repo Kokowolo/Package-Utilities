@@ -172,6 +172,16 @@ namespace Kokowolo.Utilities
             else return angle;
         }
 
+        public static float DotInt(Vector3 a, Vector3 b)
+        {
+            return Vector3.Dot(a.normalized, b.normalized) switch
+            {
+                > 0.5f => 1,
+                < -0.5f => -1, // TODO: this could be Math.Round() right?
+                _ => 0
+            };
+        }
+
         /// <summary>
         /// Gets the relative Euler angles between two quaternions across X, Y, and Z dimensions
         /// </summary>

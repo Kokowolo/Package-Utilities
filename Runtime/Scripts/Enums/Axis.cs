@@ -63,6 +63,20 @@ namespace Kokowolo.Utilities
             };
         }
 
+        public static Axis Opposite(this Axis axis)
+        {
+            return axis switch
+            {
+                Axis.XPos => Axis.XNeg,
+                Axis.XNeg => Axis.XPos,
+                Axis.YPos => Axis.YNeg,
+                Axis.YNeg => Axis.YPos,
+                Axis.ZPos => Axis.ZNeg,
+                Axis.ZNeg => Axis.ZPos,
+                _ => axis
+            };
+        }
+
         public static Vector3 ToVector3(this Axis axis)
         {
             return axis switch

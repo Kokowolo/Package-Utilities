@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.93] - 2024-06-28
+### Added
+* `Axis.Opposite` which gets the oppose axis
+### Removed
+* `Tween.cs` from packge in favor of `DG.DoTween`
+
 ## [0.0.92] - 2024-06-26
 ### Added
 * `DotInt` to `MathKoko` to get a dot product between vectors as an `int`

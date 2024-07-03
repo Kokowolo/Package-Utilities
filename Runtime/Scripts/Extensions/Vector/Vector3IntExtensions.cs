@@ -22,6 +22,11 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static Vector3 ToVector3(this Vector3Int vector)
+        {
+            return new Vector3(vector.x, vector.y, vector.z);
+        }
+
         public static int GetAxisValue(this Vector3Int vector, Axis axis)
         {
             return axis switch

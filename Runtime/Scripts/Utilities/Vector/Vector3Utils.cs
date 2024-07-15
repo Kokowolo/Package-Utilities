@@ -32,7 +32,12 @@ namespace Kokowolo.Utilities
 
         public static Vector3 SetComponentInDirection(Vector3 vector, Vector3 direction, float value)
         {
-            return vector + (value - GetComponentInDirection(vector, direction)) * direction;
+            return SetComponentInNormalizedDirection(vector, direction.normalized, value);
+        }
+
+        public static Vector3 SetComponentInNormalizedDirection(Vector3 vector, Vector3 direction, float value)
+        {
+            return vector + (value - GetComponentInNormalizedDirection(vector, direction)) * direction;
         }
 
         /// <summary>
@@ -41,10 +46,19 @@ namespace Kokowolo.Utilities
         /// </summary>
         public static float GetComponentInDirection(Vector3 vector, Vector3 direction)
         {
+            return GetComponentInNormalizedDirection(vector, direction.normalized);
+        }
+
+        /// <summary>
+        /// Gets `a`'s scalar component in direction `b`; NOTE: multiplying this scalar component by a normalized `b` would yield that 
+        /// scalar component as a vector 
+        /// </summary>
+        public static float GetComponentInNormalizedDirection(Vector3 vector, Vector3 direction)
+        {
             // a * cosØ == a ⋅ b / |b|
             float dot = Vector3.Dot(vector, direction);
-            float component = dot / direction.magnitude;
-            return component;
+            // float component = dot / direction.magnitude;
+            return dot;
         }
 
         /// <summary>

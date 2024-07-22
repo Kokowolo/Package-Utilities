@@ -20,13 +20,6 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        // // convert the screen position to the local anchored position
-        // public static Vector2 ToAnchoredPoint(this RectTransform rectTransform, Vector3 worldPositon)
-        // {
-        //     ScreenUtils.WorldToScreenPoint(Camera.main, worldPosition);
-        //     Vector2 anchoredPosition = transform.InverseTransformPoint(screenPoint); 
-        // }
-
         // public static float GetWidth(this RectTransform rectTransform)
         // {
         //     return rectTransform.rect.width;
@@ -42,9 +35,14 @@ namespace Kokowolo.Utilities
         //     return rectTransform.position;
         // }
 
-        public static Vector2 ToScreenPoint01(this RectTransform rectTransform)
+        // public static Vector2 ToAnchoredPosition(this RectTransform rectTransform, Vector2 screenPoint)
+        // {
+        //     return rectTransform.InverseTransformPoint(screenPoint); 
+        // }
+
+        public static Vector2 GetScreenPointNormalized(this RectTransform rectTransform)
         {
-            return ScreenUtils.ToScreenPoint01(rectTransform.position);
+            return ScreenUtils.ToScreenPointNormalized(rectTransform.position);
         }
 
         #endregion

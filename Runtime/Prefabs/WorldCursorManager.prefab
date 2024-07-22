@@ -116,7 +116,7 @@ GameObject:
   - component: {fileID: 2100269881470654409}
   - component: {fileID: 2100269881470654408}
   m_Layer: 0
-  m_Name: CursorWorldManager
+  m_Name: WorldCursorManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -1,5 +1,5 @@
 /*
- * File Name: CursorWorldManager.cs
+ * File Name: WorldCursorManager.cs
  * Description: This script is for ...
  * 
  * Author(s): Kokowolo, Will Lacey
@@ -18,7 +18,7 @@ using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
 [DefaultExecutionOrder(-100)]
-public class CursorWorldManager : MonoSingleton<CursorWorldManager>
+public class WorldCursorManager : MonoSingleton<WorldCursorManager>
 {
     /************************************************************/
     #region Events
@@ -96,14 +96,26 @@ public class CursorWorldManager : MonoSingleton<CursorWorldManager>
         return Instance.hitInfo.point;
     }
 
-    public static void SetCursorPosition(Vector3 worldPosition)
+    public static void SetCursorWorldPosition(Vector3 worldPosition)
     {
-        Vector3 screenPoint = Camera.main.WorldToScreenPoint(worldPosition);
-        Mouse.current.WarpCursorPosition(screenPoint);
+        InputManager.SetCursorWorldPosition(worldPosition);
 
         Instance.hitInfo.point = worldPosition;
         Instance.visual.transform.position = worldPosition;
         doRaycast = false;
+    }
+
+    public static Vector3 GetMouseWorldPosition(LayerMask layerMask, float maxDistance = Mathf.Infinity, Camera camera = null)
+    {
+        GetMouseWorldPosition(out RaycastHit hitInfo, layerMask, maxDistance, camera);
+        return hitInfo.point;
+    }
+
+    public static Vector3 GetMouseWorldPosition(out RaycastHit hitInfo, LayerMask layerMask, 
+        float maxDistance = Mathf.Infinity, Camera camera = null)
+    {
+        Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask, maxDistance, camera);
+        return hitInfo.point;
     }
 
     #endregion

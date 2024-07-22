@@ -33,7 +33,7 @@ namespace Kokowolo.Utilities
         /// </summary>
         public static Vector2 GetMouseWorldPoint(Camera camera)
         {
-            return camera.ScreenToWorldPoint(Input.mousePosition);
+            return camera.ScreenToWorldPoint(InputManager.GetMouseScreenPoint());
         }
 
         public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
@@ -46,17 +46,41 @@ namespace Kokowolo.Utilities
             return RectTransformUtility.WorldToScreenPoint(camera, worldPosition);
         }
 
-        public static Vector2 GetMouseScreenPoint01()
+        public static Vector2 ScreenPointToWorld(Vector3 screenPoint)
         {
-            return ToScreenPoint01(BaseInputManager.GetMouseScreenPoint());
+            return Camera.main.ScreenToWorldPoint(screenPoint);
         }
 
-        public static Vector2 ToScreenPoint01(Vector2 screenPoint)
+        public static Vector2 ScreenPointToWorld(Camera camera, Vector3 screenPoint)
+        {
+            return camera.ScreenToWorldPoint(screenPoint);
+        }
+
+        public static Vector2 GetMouseScreenPoint()
+        {
+            return InputManager.GetMouseScreenPoint();
+        }
+
+        public static Vector2 GetMouseScreenPointNormalized()
+        {
+            return ToScreenPointNormalized(InputManager.GetMouseScreenPoint());
+        }
+
+        public static Vector2 ToScreenPointNormalized(Vector2 screenPoint)
         {
             return new Vector2()
             {
                 x = Mathf.Clamp(screenPoint.x, 0, Screen.width) / Screen.width,
                 y = Mathf.Clamp(screenPoint.y, 0, Screen.height) / Screen.height
+            };
+        }
+
+        public static Vector2 ToScreenPoint(Vector2 screenPointNormalized)
+        {
+            return new Vector2()
+            {
+                x = Mathf.Clamp01(screenPointNormalized.x) * Screen.width,
+                y = Mathf.Clamp01(screenPointNormalized.y) * Screen.height
             };
         }
 

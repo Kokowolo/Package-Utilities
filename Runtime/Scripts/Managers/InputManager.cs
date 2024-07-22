@@ -21,7 +21,7 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class BaseInputManager : MonoSingleton<BaseInputManager>
+    public class InputManager : MonoSingleton<InputManager>
     {
         /************************************************************/
         #region Fields
@@ -46,8 +46,8 @@ namespace Kokowolo.Utilities
             isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
         }
 
-        public static bool IsMouseOverUI() => Instance._IsMouseOverUI();
-        public virtual bool _IsMouseOverUI()
+        public static bool IsMouseOverUI() => Instance.InputManager_IsMouseOverUI();
+        protected virtual bool InputManager_IsMouseOverUI()
         {
 #if ENABLE_INPUT_SYSTEM
             return isMouseOverUI;
@@ -61,24 +61,27 @@ namespace Kokowolo.Utilities
 //#if ENABLE_INPUT_SYSTEM
 //            return Mouse.current.position.ReadValue();
 //#else
-            return Input.mousePosition;
+            // NOTE: using UnityEngine.Input over InputSystem due to bug within `Mouse.current.WarpCursorPosition(Vector2)`
+            return Input.mousePosition; 
 //#endif
         }
 
-        public static Vector3 GetMouseWorldPosition(LayerMask layerMask, 
-            float maxDistance = Mathf.Infinity, Camera camera = null)
-        {
-            Raycasting.RaycastFromMouseScreenPoint(out RaycastHit raycastHit, layerMask, maxDistance, camera);
-            return raycastHit.point;
-        }
-
-        public static bool WasClickPressedThisFrame() => Instance._WasClickPressedThisFrame();
-        protected virtual bool _WasClickPressedThisFrame()
+        public static void SetCursorWorldPosition(Vector3 worldPosition)
         {
 #if ENABLE_INPUT_SYSTEM
-            return Mouse.current.leftButton.wasPressedThisFrame;
+            Vector2 screenPoint = Camera.main.WorldToScreenPoint(worldPosition);
+            SetCursorScreenPosition(screenPoint);
 #else
-            return Input.GetMouseButtonDown(0);
+            throw new System.NotImplementedException();
+#endif
+        }
+
+        public static void SetCursorScreenPosition(Vector2 screenPoint)
+        {
+#if ENABLE_INPUT_SYSTEM
+            Mouse.current.WarpCursorPosition(screenPoint);
+#else
+            throw new System.NotImplementedException();
 #endif
         }
         

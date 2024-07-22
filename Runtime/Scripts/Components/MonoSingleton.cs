@@ -22,9 +22,9 @@ namespace Kokowolo.Utilities
 
         [Header("Singleton Settings")]
         [Tooltip("whether Object.DontDestroyOnLoad() is called on this")]
-        [SerializeField] private bool dontDestroyOnLoad;
+        [SerializeField] protected bool dontDestroyOnLoad;
         [Tooltip("whether this GameObject unparents itself")]
-        [SerializeField] private bool unparentGameObject;
+        [SerializeField] protected bool unparentGameObject;
 
         #endregion
         /************************************************************/

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2100269881470654409}
   - component: {fileID: -7534839271998537126}
   m_Layer: 0
-  m_Name: SchedulingEventManager
+  m_Name: ScheduledEventManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

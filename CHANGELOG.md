@@ -4,6 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.96] - 2024-07-22
+### Added
+* `PropertyAttribute` `HeaderLine` to draw horizontal line dividers in the `Editor`
+* `enum` `ColorEnum` to have a compile-time constant representation of `Color`
+* `SetCursorWorldPosition` and `SetCursorScreenPosition` to `InputManager`
+* basic outline for `VirtualCursor`
+* convenience function `GetMouseScreenPoint` to `ScreenUtils` and also `ScreenPoint01ToScreenPoint`
+* `ScreenUtils.ScreenPointToWorld`
+* some convenience methods to `FloatExtensions`
+### Changed
+* `BaseInputManager` to `InputManager` and slightly refactored its class
+* references to `ScreenPoint01` to `ScreenPointNormalized`
+* `CursorWorldManager` to `WorldCursorManager` updating its script and prefab
+* `WorldCursorManager.SetCursorPosition` to `SetCursorWorldPosition` and now uses `InputManager`
+* `BaseInputManager.GetMouseWorldPosition` to `WorldCursorManager.GetMouseWorldPosition`
+* `MonoSingleton`'s fields from `private` to `protected`
+### Fixed
+* incorrect naming for `ScheduledEventManager`'s prefab
+* bug within `FloatExtensions.RemapTo01`
+
 ## [0.0.95] - 2024-07-14
 ### Added
 * `SetComponentInNormalizedDirection` and `GetComponentInNormalizedDirection` to `Vector3Utils`

@@ -20,6 +20,26 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static float Clamp01(this float value)
+        {
+            return Mathf.Clamp01(value);
+        }
+
+        public static float Clamp(this float value, float min, float max)
+        {
+            return Mathf.Clamp(value, min, max);
+        }
+
+        public static float Round(this float value)
+        {
+            return Mathf.Round(value);
+        }
+        
+        public static int RoundToInt(this float value)
+        {
+            return Mathf.RoundToInt(value);
+        }
+
         public static float Remap(this float value, Vector2 from, Vector2 to)
         {
             return MathKoko.Remap(value, from, to);
@@ -47,7 +67,7 @@ namespace Kokowolo.Utilities
 
         public static float RemapTo01(this float value, float from1, float from2)
         {
-            return MathKoko.RemapFrom01(value, from1, from2);
+            return MathKoko.RemapTo01(value, from1, from2);
         }
         
         // public static string ToStringDegrees(this float value)

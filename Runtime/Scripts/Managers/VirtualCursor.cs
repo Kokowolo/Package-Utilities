@@ -41,12 +41,6 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Properties
 
-        public Sprite Sprite
-        {
-            get => image.sprite;
-            set => image.sprite = value;
-        }
-
         public bool VisibleCursor
         {
             get => Cursor.visible;
@@ -123,6 +117,18 @@ namespace Kokowolo.Utilities
         public Vector3 WorldPosition
         {
             get => ScreenUtils.ScreenPointToWorld(ScreenPoint);
+        }
+
+        public Sprite Sprite
+        {
+            get => image.sprite;
+            set => image.sprite = value;
+        }
+
+        public Color Color
+        {
+            get => image.color;
+            set => image.color = value;
         }
 
         #endregion

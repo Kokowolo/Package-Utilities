@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.97] - 2024-07-23
+### Added
+* `Color` property to `VirtualCursor`
+
 ## [0.0.96] - 2024-07-22
 ### Added
 * `PropertyAttribute` `HeaderLine` to draw horizontal line dividers in the `Editor`

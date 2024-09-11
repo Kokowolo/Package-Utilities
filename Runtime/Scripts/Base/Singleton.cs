@@ -56,7 +56,7 @@ namespace Kokowolo.Utilities
             }
             else
             {
-                LogManager.LogError($"called Set<{typeof(T)}>() when given instance is null");
+                LogManager.LogWarning($"called Set<{typeof(T)}>() when given instance is null");
                 return false;
             }
         }

@@ -39,7 +39,8 @@ namespace Kokowolo.Utilities
 
         protected void Awake() 
         {
-            if (Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject))
+            Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject);
+            if (Singleton.IsSingleton(_Instance))
             {
                 MonoSingleton_Awake();
             }

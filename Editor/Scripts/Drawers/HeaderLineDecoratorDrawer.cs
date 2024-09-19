@@ -42,7 +42,7 @@ public class HeaderLineDecoratorDrawer : DecoratorDrawer
 
     public override float GetHeight()
     {
-        return EditorGUIUtility.singleLineHeight + Attribute.Height;
+        return 0.5f * (EditorGUIUtility.singleLineHeight + Attribute.Height);
     }
 
     #endregion

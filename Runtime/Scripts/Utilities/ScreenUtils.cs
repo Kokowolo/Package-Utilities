@@ -20,22 +20,6 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
-        /// <summary>
-        /// returns world position of mouse where Z coord will be 0
-        /// </summary>
-        public static Vector2 GetMouseWorldPoint()
-        {
-            return GetMouseWorldPoint(Camera.main);
-        }
-
-        /// <summary>
-        /// returns world position of mouse where Z coord will be 0
-        /// </summary>
-        public static Vector2 GetMouseWorldPoint(Camera camera)
-        {
-            return camera.ScreenToWorldPoint(InputManager.GetMouseScreenPoint());
-        }
-
         public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
         {
             return WorldToScreenPoint(Camera.main, worldPosition);
@@ -46,16 +30,38 @@ namespace Kokowolo.Utilities
             return RectTransformUtility.WorldToScreenPoint(camera, worldPosition);
         }
 
-        public static Vector2 ScreenPointToWorld(Vector3 screenPoint)
+        public static Vector3 ScreenPointToWorld(Vector3 screenPoint)
         {
-            return Camera.main.ScreenToWorldPoint(screenPoint);
+            return ScreenPointToWorld(Camera.main, screenPoint);
         }
 
-        public static Vector2 ScreenPointToWorld(Camera camera, Vector3 screenPoint)
+        public static Vector3 ScreenPointToWorld(Camera camera, Vector3 screenPoint)
         {
             return camera.ScreenToWorldPoint(screenPoint);
         }
 
+        public static Vector2 GetMouseWorldPoint(Camera camera, float depth)
+        {
+            Vector3 screenPoint = InputManager.GetMouseScreenPoint();
+            screenPoint.z = depth;
+            return ScreenPointToWorld(camera, screenPoint);
+        }
+
+        public static Vector2 GetMouseWorldPoint(Camera camera)
+        {
+            return GetMouseWorldPoint(camera, camera.nearClipPlane);
+        }
+
+        public static Vector2 GetMouseWorldPoint(float depth)
+        {
+            return GetMouseWorldPoint(Camera.main, depth);
+        }
+
+        public static Vector2 GetMouseWorldPoint()
+        {
+            return GetMouseWorldPoint(Camera.main);
+        }
+        
         public static Vector2 GetMouseScreenPoint()
         {
             return InputManager.GetMouseScreenPoint();

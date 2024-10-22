@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 /*
  * File Name: Something.cs
  * Description: This script is for ...
@@ -300,7 +301,70 @@ namespace Kokowolo.Utilities
             Gizmos.color = gizmosColor;
         }
 
+        public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ)
+        {
+            Vector3 center = new Vector3((xMin + sizeX) * 0.5f, (yMin + sizeY) * 0.5f, (zMin + sizeZ) * 0.5f);
+            Vector3 size = new Vector3(sizeX, sizeY, sizeZ);
+            Bounds bounds = new Bounds(center, size);
+            DrawBounds(bounds);
+        }
+        
+        public static void DrawBounds(Bounds bounds)
+        {
+            Vector3 origin, start, end;
+
+            // front 
+            origin = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
+            start = origin;
+            end = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = origin;
+            Gizmos.DrawLine(start, end);
+
+            // back 
+            origin = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
+            start = origin;
+            end = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = end;
+            end = origin;
+            Gizmos.DrawLine(start, end);
+
+            // connection 
+            start = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
+            end = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
+            end = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
+            end = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+            start = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+            end = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
+            Gizmos.DrawLine(start, end);
+        }
+
+        public static void DrawBounds(BoundsInt bounds)
+        {
+            DrawBounds(new Bounds(bounds.center, bounds.size));
+        }
+
         #endregion
         /************************************************************/
     }
 }
+#endif

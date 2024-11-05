@@ -30,10 +30,12 @@ namespace Kokowolo.Utilities
 
         public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ, Color color, float duration)
         {
-            Vector3 center = new Vector3((xMin + sizeX) * 0.5f, (yMin + sizeY) * 0.5f, (zMin + sizeZ) * 0.5f);
-            Vector3 size = new Vector3(sizeX, sizeY, sizeZ);
-            Bounds bounds = new Bounds(center, size);
-            DrawBounds(bounds, color, duration);
+            DrawBounds(BoundsUtils.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ), color, duration);
+        }
+
+        public static void DrawBounds(Vector3 minPosition, Vector3 size, Color color, float duration)
+        {
+            DrawBounds(BoundsUtils.CreateBounds(minPosition, size), color, duration);
         }
         
         public static void DrawBounds(Bounds bounds, Color color, float duration)

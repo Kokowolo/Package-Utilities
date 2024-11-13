@@ -152,6 +152,16 @@ namespace Kokowolo.Utilities
             return Remap(value, 0, 1, to.x, to.y);
         }
 
+        public static int GetGreatestCommonFactor(int a, int b)
+        {
+            while (a != 0 && b != 0)
+            {
+                if (a > b) a %= b;
+                else b %= a;
+            }
+            return a | b;
+        }
+
         public static Vector3 GetPointOnCircle(float radius, Vector3 normal, float t)
         {
             t = RemapFrom01(t, 0, 2 * Mathf.PI);

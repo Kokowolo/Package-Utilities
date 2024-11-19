@@ -40,24 +40,24 @@ namespace Kokowolo.Utilities
             return camera.ScreenToWorldPoint(screenPoint);
         }
 
-        public static Vector2 GetMouseWorldPoint(Camera camera, float depth)
+        public static Vector3 GetMouseWorldPoint(Camera camera, float depth)
         {
             Vector3 screenPoint = InputManager.GetMouseScreenPoint();
             screenPoint.z = depth;
             return ScreenPointToWorld(camera, screenPoint);
         }
 
-        public static Vector2 GetMouseWorldPoint(Camera camera)
+        public static Vector3 GetMouseWorldPoint(Camera camera)
         {
             return GetMouseWorldPoint(camera, camera.nearClipPlane);
         }
 
-        public static Vector2 GetMouseWorldPoint(float depth)
+        public static Vector3 GetMouseWorldPoint(float depth)
         {
             return GetMouseWorldPoint(Camera.main, depth);
         }
 
-        public static Vector2 GetMouseWorldPoint()
+        public static Vector3 GetMouseWorldPoint()
         {
             return GetMouseWorldPoint(Camera.main);
         }

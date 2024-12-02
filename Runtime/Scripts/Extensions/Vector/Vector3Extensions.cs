@@ -69,6 +69,15 @@ namespace Kokowolo.Utilities
             vector.SetAxisValue(axis, vector.GetAxisValue(axis) + value);
         }
 
+        /// <summary>
+        /// reduces `vector` by an opposite direction vector of magnitude `magnitude`; returns Vector3.zero if the magnitude is greater
+        /// </summary>
+        public static void ReduceBy(this ref Vector3 vector, float magnitude)
+        {
+            Vector3 newVector = vector + -vector.normalized * magnitude;
+            vector = Vector3.Dot(vector, newVector) < 0 ? Vector3.zero : newVector;
+        }
+
         #endregion
         /************************************************************/
     }

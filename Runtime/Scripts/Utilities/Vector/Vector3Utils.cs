@@ -77,6 +77,15 @@ namespace Kokowolo.Utilities
             //       length. It divides the result by the squared length of the normal, which is always 1, so it's not needed.
         }
 
+        /// <summary>
+        /// reduces `vector` by an opposite direction vector of magnitude `magnitude`; returns Vector3.zero if the magnitude is greater
+        /// </summary>
+        public static Vector3 ReduceBy(Vector3 vector, float magnitude)
+        {
+            Vector3Extensions.ReduceBy(ref vector, magnitude);
+            return vector;
+        }
+
         #endregion
         /************************************************************/
     }

@@ -28,6 +28,43 @@ namespace Kokowolo.Utilities
         /************************************************************/
         #region Functions
 
+        public static void DrawWireBox(Vector3 center, Vector3 halfExtents, Quaternion rotation, Color color, float duration)
+        {
+            // create matrix
+            Matrix4x4 m = new Matrix4x4();
+            m.SetTRS(center, rotation, halfExtents*2);
+
+            var point1 = m.MultiplyPoint(new Vector3(-0.5f, -0.5f, 0.5f));
+            var point2 = m.MultiplyPoint(new Vector3(0.5f, -0.5f, 0.5f));
+            var point3 = m.MultiplyPoint(new Vector3(0.5f, -0.5f, -0.5f));
+            var point4 = m.MultiplyPoint(new Vector3(-0.5f, -0.5f, -0.5f));
+
+            var point5 = m.MultiplyPoint(new Vector3(-0.5f, 0.5f, 0.5f));
+            var point6 = m.MultiplyPoint(new Vector3(0.5f, 0.5f, 0.5f));
+            var point7 = m.MultiplyPoint(new Vector3(0.5f, 0.5f, -0.5f));
+            var point8 = m.MultiplyPoint(new Vector3(-0.5f, 0.5f, -0.5f));
+            
+            Debug.DrawLine(point1, point2, color, duration);
+            Debug.DrawLine(point2, point3, color, duration);
+            Debug.DrawLine(point3, point4, color, duration);
+            Debug.DrawLine(point4, point1, color, duration);
+
+            Debug.DrawLine(point5, point6, color, duration);
+            Debug.DrawLine(point6, point7, color, duration);
+            Debug.DrawLine(point7, point8, color, duration);
+            Debug.DrawLine(point8, point5, color, duration);
+
+            Debug.DrawLine(point1, point5, color, duration);
+            Debug.DrawLine(point2, point6, color, duration);
+            Debug.DrawLine(point3, point7, color, duration);
+            Debug.DrawLine(point4, point8, color, duration);
+
+            // optional axis display
+            // Debug.DrawRay(m.GetPosition(), m.GetForward(), Color.magenta);
+            // Debug.DrawRay(m.GetPosition(), m.GetUp(), Color.yellow);
+            // Debug.DrawRay(m.GetPosition(), m.GetRight(), Color.red);
+        }
+
         public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ, Color color, float duration)
         {
             DrawBounds(BoundsUtils.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ), color, duration);

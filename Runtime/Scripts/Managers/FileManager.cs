@@ -1,12 +1,9 @@
 /*
- * File Name: FileManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: July 13, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,17 +16,13 @@ namespace Kokowolo.Utilities
 {
     public static class FileManager
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         const string Extension = "bytes";
 
         #endregion
-        /************************************************************/
-        #region Properties
-
-        #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static List<string> GetFilePaths(string path, string extension = null)
@@ -74,6 +67,6 @@ namespace Kokowolo.Utilities
         // }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

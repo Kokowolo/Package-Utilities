@@ -1,12 +1,9 @@
-/*
- * File Name: ReadOnlyDrawer.cs
- * Description: This script is for ...
- * 
+/* 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: January 23, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -20,7 +17,7 @@ namespace Kokowolo.Utilities.Editor
     [CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
     public class ReadOnlyDrawer : PropertyDrawer
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -36,6 +33,6 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

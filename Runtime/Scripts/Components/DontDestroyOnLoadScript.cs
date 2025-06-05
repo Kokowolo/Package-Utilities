@@ -1,12 +1,9 @@
 /*
- * File Name: DontDestroyOnLoadScript.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: January 24, 2023
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  * 
  *      NOTE: DontDestroyOnLoadScript requires the MonoBehaviour's GameObject to have a unique name
  */
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities
 {
     public class DontDestroyOnLoadScript : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Tooltip("whether only one DontDestroyOnLoadScript GameObject can exist with this name")]
@@ -32,7 +29,7 @@ namespace Kokowolo.Utilities
         private static List<string> singletonInstanceNames = new List<string>();
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void Awake()
@@ -69,6 +66,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

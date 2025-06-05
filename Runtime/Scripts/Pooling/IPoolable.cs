@@ -1,12 +1,9 @@
 /*
- * File Name: IPoolable.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 9, 2023
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities
 {
     public interface IPoolable
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
         
         public IPoolable GenerateInstanceFrom(params object[] args);
@@ -27,12 +24,12 @@ namespace Kokowolo.Utilities
         public void Release();
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
     
     public interface IPoolable<T> : IPoolable where T : IPoolable<T>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         IPoolable IPoolable.GenerateInstanceFrom(params object[] args)
@@ -53,6 +50,6 @@ namespace Kokowolo.Utilities
         // public abstract static T Create(params object[] args);
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

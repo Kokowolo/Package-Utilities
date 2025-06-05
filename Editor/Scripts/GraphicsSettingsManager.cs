@@ -1,12 +1,9 @@
 /*
- * File Name: GraphicsSettingsManager.cs
- * Description: This script is for managing the current Graphics Settings for the project
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: May 11, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  *
  *      Shortcut -> alt + shift + index
  */
@@ -20,9 +17,12 @@ using System.IO;
 
 namespace Kokowolo.Utilities.Editor
 {
+    /// <summary>
+    /// Manages the current Graphics Settings for the project
+    /// </summary>
     public class GraphicsSettingsManager
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         // Graphics Settings Names
@@ -44,7 +44,7 @@ namespace Kokowolo.Utilities.Editor
         private const int priority = 40;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         private static int _SettingsIndex = -1;
@@ -66,7 +66,7 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         [InitializeOnLoadMethod]
@@ -166,6 +166,6 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

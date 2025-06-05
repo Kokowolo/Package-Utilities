@@ -1,21 +1,21 @@
 /*
- * File Name: Singleton.cs
- * Description: This script is for generalizing the implementation of MonoBehaviour Singletons
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 28, 2022
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Class to generalize the implementation of MonoBehaviour singletons
+    /// </summary>
     public static class Singleton
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static T Get<T>(
@@ -67,7 +67,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Subclasses
 
         private static class SingletonInstance<T> where T : MonoBehaviour
@@ -76,6 +76,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

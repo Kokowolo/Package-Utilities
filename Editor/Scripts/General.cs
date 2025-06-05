@@ -1,12 +1,9 @@
 /*
- * File Name: General.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 18, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -20,11 +17,7 @@ namespace Kokowolo.Utilities.Editor
 {
     public static class General
     {
-        /************************************************************/
-        #region Properties
-
-        #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static UnityEditor.PackageManager.PackageInfo GetPackageInfo(string packageName)
@@ -75,6 +68,6 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

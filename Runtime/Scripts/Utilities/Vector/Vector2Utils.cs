@@ -1,12 +1,9 @@
 /*
- * File Name: Vector2Utils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: June 18, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class Vector2Utils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Vector3 GetDirection(Vector3 from, Vector3 to)
@@ -26,6 +23,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

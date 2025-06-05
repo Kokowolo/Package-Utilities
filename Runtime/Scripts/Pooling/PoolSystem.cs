@@ -1,12 +1,9 @@
 /*
- * File Name: PoolSystem.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 11, 2023
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,15 +15,15 @@ using System.Reflection;
 
 namespace Kokowolo.Utilities
 {
-    public class PoolSystem : MonoSingleton<PoolSystem>
+    public class PoolSystem : MonoBehaviourSingleton<PoolSystem>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        private static object[] parameters = new object[1];
+        static object[] parameters = new object[1];
 
         #endregion 
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static bool HasIPoolable<T>() where T : IPoolable<T>
@@ -61,7 +58,7 @@ namespace Kokowolo.Utilities
             return poolable;
         }
 
-        private static T CreateIPoolable<T>(params object[] args) where T : IPoolable<T>
+        static T CreateIPoolable<T>(params object[] args) where T : IPoolable<T>
         {
             // NOTE: This is a hacky way to get around the fact that you can't call a static method on a generic type
             MethodInfo createMethod = typeof(T).GetMethod("Create", BindingFlags.Public | BindingFlags.Static);
@@ -75,21 +72,21 @@ namespace Kokowolo.Utilities
             return (T) createMethod.Invoke(null, parameters);
         }
 
-        private static void Clear()
+        static void Clear()
         {
             // TODO: implement this function
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Subclasses
 
-        private static class PoolSystemStack<T>
+        static class PoolSystemStack<T>
         {
             public static Stack<T> stack = new Stack<T>();
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

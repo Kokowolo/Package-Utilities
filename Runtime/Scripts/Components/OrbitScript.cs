@@ -1,7 +1,4 @@
 /*
- * File Name: OrbitScript.cs
- * Description: This script is for orbiting a GameObject around a target transform
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: May 3, 2022
  * 
@@ -9,7 +6,7 @@
  *      While this file has been updated to better fit this project, the original version can be found here:
  *		https://youtu.be/hd1QzLf4ZH8
  *
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,12 +15,15 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Orbits a GameObject around a target transform
+    /// </summary>
     public class OrbitScript : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [Header("Cached References")]
+        [Header("References")]
         [Tooltip("transform to orbit around")]
         [SerializeField] public Transform target = null;
 
@@ -35,13 +35,13 @@ namespace Kokowolo.Utilities
         public float t = 0; // where the object is relative to 2π
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         // public float Radius { get => _radius; set => _radius = value; }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void LateUpdate()
@@ -78,9 +78,9 @@ namespace Kokowolo.Utilities
         // }
 
         #endregion
-        /************************************************************/
-        #region Debug
-        #if UNITY_EDITOR
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
+#if UNITY_EDITOR
 
         private void OnDrawGizmosSelected() 
         {
@@ -89,8 +89,8 @@ namespace Kokowolo.Utilities
             Gizmos.DrawWireSphere(target.position, radius);
         }
 
-        #endif
+#endif
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

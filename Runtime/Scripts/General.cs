@@ -1,12 +1,9 @@
 /*
- * File Name: General.cs
- * Description: Script that contains general utility functions
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 14, 2020
  * 
  * Additional Comments: 
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,6 +12,9 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Class containing general utility functions
+    /// </summary>
     public static class General
     {
         public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component

@@ -1,7 +1,4 @@
 ﻿/**
-* File Name: ListPool.cs
-* Description: This script is for a static reusable pool containing a stack of lists of generic type
-* 
 * Authors: Catlike Coding, Will Lacey
 * Date Created: September 24, 2020
 * 
@@ -9,16 +6,19 @@
 *      The original version of this file can be found here: https://catlikecoding.com/unity/tutorials/hex-map/ within 
 *       Catlike Coding's tutorial series: Hex Map; this file has been updated it to better fit this repository
 *
-*       File Line Length: 120
+*       File Line Length: ~140
 **/
 
 using System.Collections.Generic;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// A static reusable pool containing a stack of lists of generic type
+    /// </summary>
     public static class ListPool
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static List<T> Get<T>()
@@ -70,15 +70,15 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Subclasses
 
-        private static class ListPoolStack<T>
+        static class ListPoolStack<T>
         {
             public static Stack<List<T>> stack = new Stack<List<T>>();
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

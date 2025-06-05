@@ -1,12 +1,9 @@
 /*
- * File Name: ScenesInBuildManagerEditor.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 17, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -20,13 +17,13 @@ namespace Kokowolo.Utilities.Editor
     [CustomEditor(typeof(ScenesInBuildManager))]
     public class ScenesInBuildManagerEditor : UnityEditor.Editor
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         private ScenesInBuildManager Target => target as ScenesInBuildManager;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public override void OnInspectorGUI()
@@ -53,6 +50,6 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

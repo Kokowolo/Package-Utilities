@@ -1,12 +1,9 @@
-/*
- * File Name: CameraFacer.cs
- * Description: This script is for forcing a GameObject (particularly UI) to face the Camera
- * 
+/* 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 29, 2022
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,9 +12,12 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Forces a GameObject (particularly UI) to face the Camera
+    /// </summary>
     public class CameraFacer : TransformFacer
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void OnValidate()
@@ -39,6 +39,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

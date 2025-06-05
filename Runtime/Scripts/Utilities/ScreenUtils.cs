@@ -1,12 +1,9 @@
 /*
- * File Name: ScreenUtils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: May 28, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class ScreenUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
@@ -91,6 +88,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

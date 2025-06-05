@@ -1,12 +1,9 @@
 /*
- * File Name: Vector3Utils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: March 3, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class Vector3Utils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Vector3 Abs(Vector3 vector)
@@ -87,6 +84,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

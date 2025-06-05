@@ -1,14 +1,11 @@
 /*
- * File Name: EnumUtils.cs
- * Description: This script is for basic utility functionality regarding Enums
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: June 27, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: ~140
  *
- *      Relates to EnumUtils.cs
+ *      Relates to EnumExtensions.cs
  */
 
 using System;
@@ -16,9 +13,12 @@ using System.Collections.Generic;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Basic utility functionality regarding Enums
+    /// </summary>
     public static class EnumUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static T[] GetValues<T>() 
@@ -38,6 +38,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

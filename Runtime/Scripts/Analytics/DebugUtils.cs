@@ -1,12 +1,9 @@
 /*
- * File Name: DebugUtils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 17, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,15 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class DebugUtils
     {
-        /************************************************************/
-        #region Fields
-
-        #endregion
-        /************************************************************/
-        #region Properties
-
-        #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static void DrawWireBox(Vector3 center, Vector3 halfExtents, Quaternion rotation, Color color, float duration)
@@ -130,6 +119,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

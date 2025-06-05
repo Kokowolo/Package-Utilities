@@ -1,12 +1,9 @@
 /*
- * File Name: TransformFacer.cs
- * Description: This script is for forcing a GameObject to face a Transform
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: September 19, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,10 +12,13 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Forces a GameObject to face a Transform
+    /// </summary>
     [DisallowMultipleComponent]
     public class TransformFacer : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Enums
 
         protected enum FaceDirection
@@ -29,10 +29,10 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [Header("Cached References")]
+        [Header("References")]
         [SerializeField] private Transform _Target = null;
         
         [Header("Settings")]
@@ -43,7 +43,7 @@ namespace Kokowolo.Utilities
         Vector3 eulerAngles;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public Transform Target 
@@ -61,7 +61,7 @@ namespace Kokowolo.Utilities
         public Vector3 TargetEulerAngles => Target.transform.eulerAngles;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         protected virtual void Start() 
@@ -110,6 +110,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

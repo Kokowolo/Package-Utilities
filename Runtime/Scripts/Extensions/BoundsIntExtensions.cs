@@ -1,12 +1,9 @@
 /*
- * File Name: BoundsIntExtensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 16, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,11 +12,11 @@ using UnityEngine;
 
 public static class BoundsIntExtensions
 {
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Properties
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Functions
 
     /// <summary>
@@ -44,5 +41,5 @@ public static class BoundsIntExtensions
     }
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
 }

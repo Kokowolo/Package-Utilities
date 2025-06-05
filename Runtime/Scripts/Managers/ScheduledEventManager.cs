@@ -1,34 +1,28 @@
 /*
- * File Name: /*
- * File Name: ScheduledEventManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: June 12, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-using System;
-using Kokowolo.Utilities;
-
 namespace Kokowolo.Utilities
 {
-    public class ScheduledEventManager : MonoSingleton<ScheduledEventManager>
+    public class ScheduledEventManager : MonoBehaviourSingleton<ScheduledEventManager>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        private List<ScheduledEvent> queuedEvents = new List<ScheduledEvent>();
-        private List<ScheduledEvent> activeEvents = new List<ScheduledEvent>();
+        List<ScheduledEvent> queuedEvents = new List<ScheduledEvent>();
+        List<ScheduledEvent> activeEvents = new List<ScheduledEvent>();
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public static bool IsApplicationQuitting { get; private set; }
@@ -36,15 +30,15 @@ namespace Kokowolo.Utilities
         public static bool IsRunning => Instance.activeEvents.Count > 0;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected override void MonoSingleton_Awake()
+        protected override void Singleton_Awake()
         {
             Application.quitting += Handle_Application_Quitting;
         }
 
-        protected override void MonoSingleton_OnDestroy()
+        protected override void Singleton_OnDestroy()
         {
             Application.quitting -= Handle_Application_Quitting;
         }
@@ -87,7 +81,7 @@ namespace Kokowolo.Utilities
             return scheduledEvent;
         }
 
-        private static void StartEvent(ScheduledEvent scheduledEvent)
+        static void StartEvent(ScheduledEvent scheduledEvent)
         {
             Instance.queuedEvents.Remove(scheduledEvent);
             Instance.activeEvents.Add(scheduledEvent);
@@ -109,7 +103,7 @@ namespace Kokowolo.Utilities
             return scheduledEvent;
         }
 
-        private static void ScheduleEvent(ScheduledEvent scheduledEvent)
+        static void ScheduleEvent(ScheduledEvent scheduledEvent)
         {
             (scheduledEvent as IScheduledEvent).IsScheduled = true;
             Instance.queuedEvents.Add(scheduledEvent);
@@ -125,7 +119,7 @@ namespace Kokowolo.Utilities
             StartEvent(Instance.queuedEvents[0]);
         }
         
-        private void Handle_ScheduledEvent_OnStopped(object sender, EventArgs e)
+        void Handle_ScheduledEvent_OnStopped(object sender, EventArgs e)
         {
             ScheduledEvent scheduledEvent = sender as ScheduledEvent;
             scheduledEvent.OnStopped -= Handle_ScheduledEvent_OnStopped;
@@ -138,12 +132,12 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void Handle_Application_Quitting()
+        void Handle_Application_Quitting()
         {
             IsApplicationQuitting = true;
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

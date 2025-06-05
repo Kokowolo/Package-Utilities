@@ -1,12 +1,9 @@
 /*
- * File Name: WorldSpaceDisplay.cs
- * Description: This script is for handling a Text Display Prefab in world space
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 30, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,13 +14,16 @@ using TMPro;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Handles a Text Display Prefab in world space
+    /// </summary>
     [RequireComponent(typeof(LineRenderer))]
     public class WorldSpaceDisplay : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [Header("Cached References")]
+        [Header("References")]
         [SerializeField] TMP_Text text = null;
         [SerializeField] Transform lineRendererEnd = null;
 
@@ -37,13 +37,13 @@ namespace Kokowolo.Utilities
         LineRenderer _lineRenderer;
 
         #endregion
-        /************************************************************/
-        #region Fields
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
 
         LineRenderer LineRenderer => this.CacheGetComponent<LineRenderer>(ref _lineRenderer);
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void Awake()
@@ -80,9 +80,9 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
-        #region Debug
-        #if UNITY_EDITOR
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
+#if UNITY_EDITOR
 
         private void OnDrawGizmosSelected() 
         {
@@ -91,9 +91,9 @@ namespace Kokowolo.Utilities
             Gizmos.DrawWireSphere(target.position, radius);
         }
 
-        #endif
+#endif
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }
 

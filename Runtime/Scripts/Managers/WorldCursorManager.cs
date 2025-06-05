@@ -1,12 +1,9 @@
 /*
- * File Name: WorldCursorManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: August 22, 2022
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,9 +15,9 @@ using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
 [DefaultExecutionOrder(-100)]
-public class WorldCursorManager : MonoSingleton<WorldCursorManager>
+public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
 {
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Events
 
     public static event EventHandler OnHitInfoTransformChanged;
@@ -30,7 +27,7 @@ public class WorldCursorManager : MonoSingleton<WorldCursorManager>
     // }
     
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Fields
 
     // private OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
@@ -46,7 +43,7 @@ public class WorldCursorManager : MonoSingleton<WorldCursorManager>
     private Transform previousTransform;
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Properties
 
     public static LayerMask LayerMask 
@@ -62,16 +59,16 @@ public class WorldCursorManager : MonoSingleton<WorldCursorManager>
     static bool doRaycast = true;
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Functions
 
-    private void LateUpdate()
+    void LateUpdate()
     {
         DoRaycast();
         doRaycast = true;
     }
 
-    private void DoRaycast()
+    void DoRaycast()
     {
         if (!doRaycast) return;
         
@@ -119,5 +116,5 @@ public class WorldCursorManager : MonoSingleton<WorldCursorManager>
     }
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
 }

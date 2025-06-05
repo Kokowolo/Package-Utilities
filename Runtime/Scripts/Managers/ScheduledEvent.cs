@@ -1,13 +1,9 @@
 /*
- * File Name: /*
- * File Name: ScheduledEvent.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 28, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -29,26 +25,26 @@ namespace Kokowolo.Utilities
 
     public class ScheduledEvent : IEquatable<ScheduledEvent>, IScheduledEvent//, IPoolable<ScheduledEvent>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Events
 
         public event EventHandler OnStopped;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        private static int idCount = 0;
+        static int idCount = 0;
 
-        private int id;
-        private IEnumerator routine;
-        private Coroutine coroutine;
+        int id;
+        IEnumerator routine;
+        Coroutine coroutine;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
             
-        private bool HasStarted { get; set; } = false;
+        bool HasStarted { get; set; } = false;
         public bool HasStopped { get; private set; } = false;
 
         public bool IsAlive => HasStarted && coroutine != null;
@@ -56,7 +52,7 @@ namespace Kokowolo.Utilities
         bool IScheduledEvent.IsScheduled { get; set; }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public ScheduledEvent(IEnumerator routine)
@@ -97,7 +93,7 @@ namespace Kokowolo.Utilities
         //     ScheduledEventManager.StopEvent(this);
         // }
 
-        private IEnumerator Run()
+        IEnumerator Run()
         {
             HasStarted = true;
             yield return routine;
@@ -105,12 +101,13 @@ namespace Kokowolo.Utilities
             (this as IScheduledEvent).Stop();
         }
 
-        private IEnumerator InvokeFunctionAfterTime(Action function, float time)
+        IEnumerator InvokeFunctionAfterTime(Action function, float time)
         {
             yield return new WaitForSeconds(time);
             function.Invoke();
         }
 
+        /*——————————————————————————————————————————————————————————*/
         #region Interface Functions
 
         // public static ScheduledEvent Create(params object[] args)
@@ -165,8 +162,8 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-
+        /*——————————————————————————————————————————————————————————*/
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

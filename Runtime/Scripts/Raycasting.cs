@@ -1,12 +1,9 @@
-/*
- * File Name: Raycasting.cs
- * Description: This script is for ...
- * 
+/* 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 18, 2022
- * 
+ *
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class Raycasting
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static bool RaycastToDestinationPoint(Vector3 origin, Vector3 destination, out RaycastHit hitInfo, LayerMask layerMask)
@@ -44,6 +41,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

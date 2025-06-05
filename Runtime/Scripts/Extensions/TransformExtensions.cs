@@ -1,12 +1,9 @@
 /*
- * File Name: TransformExtensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *      File Line Length: 420
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class TransformExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static void SetLossyScale(this Transform transform, Vector3 scale)
@@ -31,7 +28,29 @@ namespace Kokowolo.Utilities
             transform.localScale = m.MultiplyPoint(scale);
         }
 
-        public static Transform GetGrandparent(this Transform transform)
+        // public static void SetLossyScale(this Transform transform, Vector3 lossyScale)
+        // {
+        //     Transform parent = transform.parent;
+        //     transform.SetParent(null);
+        //     transform.localScale = lossyScale;
+        //     transform.SetParent(parent);
+        // }
+
+        /// <summary>
+        /// Gets first Component of the matching type in hierarchy, otherwise null if no Component is found.
+        /// </summary>
+        public static T GetComponentInHierarchy<T>(this Transform transform) where T : Component
+        {
+            T component = null;
+            while (!component && transform.parent != null)
+            {
+                transform = transform.parent;
+                component = transform.GetComponent<T>();
+            }
+            return component;
+        }
+
+        public static Transform GetHierarchyRoot(this Transform transform)
         {
             while (transform.parent != null)
             {
@@ -87,6 +106,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

@@ -1,12 +1,9 @@
 /*
- * File Name: Diagnostics.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: March 1, 2023
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities//.Analytics
 {
     public static class Diagnostics
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static double TimeFunctionWithStopwatch(Action function, int numberOfExecutions = 1, bool logElapsedTime = true)
@@ -70,6 +67,6 @@ namespace Kokowolo.Utilities//.Analytics
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

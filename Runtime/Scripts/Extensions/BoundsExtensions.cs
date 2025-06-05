@@ -1,12 +1,9 @@
 /*
- * File Name: BoundsExtensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 23, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,11 +14,11 @@ namespace Kokowolo.Utilities
 {
     public static class BoundsExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static BoundsInt ToBoundsInt(this Bounds bounds, float resolution = 1)
@@ -42,6 +39,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

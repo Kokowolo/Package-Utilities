@@ -1,15 +1,12 @@
 /**
- * File Name: OrbitCamera.cs
- * Description: This script is for orbiting around a transform with a Camera
- * 
- * Authors: Catlike Coding, Will Lacey
+ * Authors: Catlike Coding, Kokowolo, Will Lacey
  * Date Created: May 3, 2022
  * 
  * Additional Comments: 
  *		While this file has been updated to better fit this project, the original version can be found here:
  *		https://catlikecoding.com/unity/tutorials/movement/
  * 
- *		File Line Length: 120
+ *		File Line Length: ~140
  * 
  *		TODO: Generalize this script into a TransformOrbiter class
  **/
@@ -19,9 +16,12 @@ using UnityEngine.InputSystem;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Orbits around a transform with a Camera TODO: not camera, transform, see above
+    /// </summary>
     public class OrbitCamera : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Tooltip("transform to orbit around")]
@@ -63,7 +63,7 @@ namespace Kokowolo.Utilities
         Vector2 playerInput;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         Vector3 CameraHalfExtends
@@ -100,7 +100,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         #region Unity Functions
@@ -262,6 +262,6 @@ namespace Kokowolo.Utilities
         #endregion
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

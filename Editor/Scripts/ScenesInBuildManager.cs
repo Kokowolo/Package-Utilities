@@ -1,12 +1,9 @@
 /*
- * File Name: ScenesInBuildManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 17, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
  #if UNITY_EDITOR
@@ -23,7 +20,7 @@ namespace Kokowolo.Utilities.Editor
     [CreateAssetMenu(menuName = "Kokowolo/Utilities/ScenesInBuildManager Asset", fileName = nameof(ScenesInBuildManager))]
     public sealed class ScenesInBuildManager : ScriptableObject
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Header("Class Settings")]
@@ -44,7 +41,7 @@ namespace Kokowolo.Utilities.Editor
         StreamWriter file;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public string EditorButtonText => isGenerating ? "Regenerating..." : "Regenerate Class";
@@ -58,7 +55,7 @@ namespace Kokowolo.Utilities.Editor
         string tab => whitespaceIndentation; // convenience property
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         // public void OnValidate()
@@ -276,7 +273,7 @@ namespace Kokowolo.Utilities.Editor
         } 
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Auto-Generated Script
 
         private string packageName = "com.kokowolo.utilities";
@@ -396,7 +393,7 @@ namespace Kokowolo.Utilities.Editor
         };
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 
 }

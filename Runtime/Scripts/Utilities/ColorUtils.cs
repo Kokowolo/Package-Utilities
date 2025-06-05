@@ -1,12 +1,9 @@
 /*
- * File Name: ColorUtils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: January 23, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class ColorUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         public static readonly Color forestGreen = new Color(0.003921569f, 0.2666667f, 0.1294118f, 1f);
@@ -26,7 +23,7 @@ namespace Kokowolo.Utilities
         public static readonly Color pink = new Color(1, 0.75f, 0.75f, 1);
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Color GetColorHDR(float r, float g, float b, float intensity)
@@ -52,6 +49,6 @@ namespace Kokowolo.Utilities
         // }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

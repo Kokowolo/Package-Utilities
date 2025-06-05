@@ -1,12 +1,9 @@
 /*
- * File Name: EditorUtilities.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 24, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -23,7 +20,7 @@ namespace Kokowolo.Utilities.Editor
 {
     public static class EditorUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Texture2D RenderStaticPreview(Sprite sprite, int width, int height)
@@ -140,6 +137,6 @@ namespace Kokowolo.Utilities.Editor
         // }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

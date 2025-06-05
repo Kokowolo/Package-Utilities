@@ -1,12 +1,9 @@
 /*
- * File Name: CreateNewScript.cs
- * Description: This script is a helper script for creating new scripts within Kokowolo Projects
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 25, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using UnityEditor;
@@ -14,9 +11,12 @@ using System.IO;
 
 namespace Kokowolo.Utilities.Editor
 {
+    /// <summary>
+    /// A helper class for creating new scripts within Kokowolo Projects
+    /// </summary>
     public static class CreateNewScript
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static void CreateFileFromScriptTemplatesFileName(string scriptTemplatesFileName)
@@ -56,6 +56,6 @@ namespace Kokowolo.Utilities.Editor
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

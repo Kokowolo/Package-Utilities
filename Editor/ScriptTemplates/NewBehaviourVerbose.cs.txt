@@ -1,7 +1,4 @@
-/*
- * File Name: #SCRIPTNAME#.cs
- * Description: This script is for ...
- * 
+/* 
  * Author(s): #COMPANYNAME#, Will Lacey
  * Date Created: #DATE#
  * 
@@ -9,30 +6,18 @@
  *      While this file has been updated to better fit this project, the original version can be found here:
  *      https://catlikecoding.com/unity/tutorials/hex-map/
  *
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using System;
 using Kokowolo.Utilities;
 
 public class #SCRIPTNAME# : MonoBehaviour
 {
-    /************************************************************/
-    #region Enums
-
-    private enum MyEnum 
-    { 
-        None = -1, 
-        EnumA, 
-        EnumB 
-    }
-
-    #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Events
 
     public static event EventHandler OnSomeEvent;
@@ -43,77 +28,92 @@ public class #SCRIPTNAME# : MonoBehaviour
     }
 
     #endregion
-    /************************************************************/
-    #region Fields
+    /*██████████████████████████████████████████████████████████*/
+    #region Enums
 
-    [Tooltip("this is a float")]
-    [SerializeField, Range(0, 1)] float myFloat = 0f;
+    enum MyEnum 
+    { 
+        None = -1, 
+        EnumA, 
+        EnumB 
+    }
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
+    #region Fields
+
+    ["Header("References")"]
+    [Tooltip("this is a float")]
+    [SerializeField, Range(0, 1)] float myFloat1 = 0f;
+
+    ["Header("Settings")"]
+    [Tooltip("this is a float")]
+    [SerializeField, Range(0, 1)] float myFloat2 = 0f;
+
+    #endregion
+    /*██████████████████████████████████████████████████████████*/
     #region Properties
 
     public static #SCRIPTNAME# Instance => Singleton<#SCRIPTNAME#>.Get();
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Functions
 
-    #region Unity Functions
-
-    private void Awake()
+    void Awake()
     {
         Singleton<#SCRIPTNAME#>.Set(this);
         Subscribe();
     }
 
-    private void Start()
+    void OnDestroy()
     {
 
     }
 
-    private void Update()
+    void Start()
     {
 
     }
 
-    private void OnDestroy()
-    {
-        Unsubscribe();
-    }
-
-    #endregion
-
-    #region Event Handler Functions
-
-    private void Subscribe()
+    void Update()
     {
 
     }
 
-    private void Unsubscribe()
-    {
+    /*——————————————————————————————————————————————————————————*/
+    #region Server
 
-    }
-
-    private void Handle_SomeClass_OnSomeOtherEvent(object sender, EventArgs e)
+    [Server]
+    void OnStartServer()
     {
 
     }
 
     #endregion
+    /*——————————————————————————————————————————————————————————*/
+    #region Client
+
+    [Client]
+    void Handle_SomeClass_OnSomeOtherEvent(object sender, EventArgs e)
+    {
+
+    }
 
     #endregion
-    /************************************************************/
-    #region Debug
+    /*——————————————————————————————————————————————————————————*/
+    #endregion
+    /*██████████████████████████████████████████████████████████*/
+    #region Editor
 #if UNITY_EDITOR
 
-    private void OnValidate()
+    void OnValidate()
     {
 
     }
 
 #endif
+
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
 }

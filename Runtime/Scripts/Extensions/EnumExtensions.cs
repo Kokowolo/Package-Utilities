@@ -1,12 +1,9 @@
 /*
- * File Name: EnumExtensions.cs
- * Description: This script is for extension functionality regarding Enums
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *      File Line Length: ~140
  *
  *      Relates to EnumUtils.cs
  */
@@ -17,9 +14,12 @@ using System.ComponentModel;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Class is for extension functionality regarding Enums
+    /// </summary>
     public static class EnumExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static string ToStringFromPascalCase(this Enum value)
@@ -53,6 +53,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.110] - 2025-06-05
+### Added 
+* `ScriptableObjectSingleton` which uses `PrefabManager`
+* `KokoRandom` to handle all functions relating to random
+* shuffle parameter option to `IListExtensions.Shuffle`
+* `TransformExtensions.GetComponentInHierarchy` to search for a component upwards in the hierarchy
+* `Bezier.ConstructQuadraticPath`
+### Changed
+* directory for `General`, `Raycasting`, and `Singleton` scripts
+* `MonoSingleton` to `MonoBehaviourSingleton` and updated all references
+* `MathKoko` to `KokoMath`
+* some of former `MathKoko`'s functions to now reside in new script `KokoRandom`
+* `NewBehaviourSimple` and `NewBehaviourVerbose` ScriptTemplates to use new designs and dividers
+* all script dividers to use new standard
+* `IListExtensions.ToString` to not erroneously call `ToString` within its function
+* `TransformExtensions`'s `GetGrandparent` to `GetHierarchyRoot`
+
 ## [0.0.109] - 2024-12-04
 ### Added
 * `DebugUtils.DrawWireBox`

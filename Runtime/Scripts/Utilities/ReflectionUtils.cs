@@ -1,12 +1,9 @@
 /*
- * File Name: ReflectionUtils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 27, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,13 +16,13 @@ namespace Kokowolo.Utilities
 {
     public static class ReflectionUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public static BindingFlags AllFlags => BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static FieldInfo GetField<TTarget>(string name)
@@ -74,6 +71,6 @@ namespace Kokowolo.Utilities
         // }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

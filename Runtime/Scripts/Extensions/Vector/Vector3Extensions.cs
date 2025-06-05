@@ -1,12 +1,9 @@
 /*
- * File Name: Vector3Extensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: March 18, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities
 {
     public static class Vector3Extensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Vector3Int ToVector3Int(this Vector3 vector)
@@ -79,6 +76,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

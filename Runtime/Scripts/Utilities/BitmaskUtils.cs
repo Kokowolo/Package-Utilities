@@ -1,12 +1,9 @@
 /*
- * File Name: BitmaskUtilities.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 27, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,11 +14,11 @@ namespace Kokowolo.Utilities
 {
     public static class BitmaskUtils
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static uint RotateLeft(uint value, int rotations)
@@ -46,6 +43,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

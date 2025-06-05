@@ -1,28 +1,27 @@
 /*
- * File Name: CreateNewMonoBehaviour.cs
- * Description: This script is for creating new MonoBehaviour Scripts within Kokowolo Projects; for more info, see 
- *              CreateNewScript.cs
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 26, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using UnityEditor;
 
 namespace Kokowolo.Utilities.Editor
 {
+    /// <summary>
+    /// Creates new MonoBehaviour Scripts within Kokowolo Projects; for more info, see CreateNewScript.cs
+    /// </summary>
     public static class CreateNewMonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         const string PackageName = "com.kokowolo.utilities";
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Menu Item Functions
 
         [MenuItem(itemName: "Kokowolo/Create/C# Script - Simple", isValidateFunction: false, priority: 50)]
@@ -40,6 +39,6 @@ namespace Kokowolo.Utilities.Editor
         // }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

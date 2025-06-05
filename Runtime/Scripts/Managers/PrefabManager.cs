@@ -1,12 +1,9 @@
 /*
- * File Name: PrefabManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: August 22, 2022
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,24 +15,24 @@ using System;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class PrefabManager : MonoSingleton<PrefabManager>
+    public class PrefabManager : MonoBehaviourSingleton<PrefabManager>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [Header("Cached References")]
+        [Header("References")]
         // [SerializeField] private GameObject[] gameObjects = null;
-        [SerializeField] private MonoBehaviourContainer[] monoBehaviours = null;
-        [SerializeField] private ScriptableObjectContainer[] scriptableObjects = null;
+        [SerializeField] MonoBehaviourContainer[] monoBehaviours = null;
+        [SerializeField] ScriptableObjectContainer[] scriptableObjects = null;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public static new PrefabManager Instance => FindInstance();
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static bool Has<T>()
@@ -69,7 +66,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void InitMonoBehaviourPrefab<T>()
+        void InitMonoBehaviourPrefab<T>()
         {
             foreach (MonoBehaviourContainer container in monoBehaviours)
             {
@@ -83,7 +80,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void InitScriptableObjectPrefab<T>()
+        void InitScriptableObjectPrefab<T>()
         {
             foreach (ScriptableObjectContainer container in scriptableObjects)
             {
@@ -98,30 +95,30 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Subclasses
 
         [Serializable]
-        private class MonoBehaviourContainer
+        class MonoBehaviourContainer
         {
             [SerializeField] public string description;
             [SerializeField] public MonoBehaviour[] monoBehaviours;
         }
 
         [Serializable]
-        private class ScriptableObjectContainer
+        class ScriptableObjectContainer
         {
             [SerializeField] public string description;
             [SerializeField] public ScriptableObject[] scriptableObjects;
         }
 
-        private static class Prefab<T>
+        static class Prefab<T>
         {
             public static T prefab;
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }
 

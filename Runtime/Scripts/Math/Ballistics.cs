@@ -1,12 +1,9 @@
 /*
- * File Name: Ballistics.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 27, 2023
  * 
  * Additional Comments:
- *		File Line Length: 140
+ *		File Line Length: ~140
  *
  *      TODO: all references to `speed` should be replaced with `velocity` as a Vector3
  */
@@ -19,13 +16,13 @@ namespace Kokowolo.Utilities
 {
     public static class Ballistics
     {
-        /************************************************************/
-        #region Properties
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
 
-        private const bool GetLowerTrajectory = true;
+        const bool GetLowerTrajectory = true;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public static float Epsilon { get; set; } = 0.1f;
@@ -33,7 +30,7 @@ namespace Kokowolo.Utilities
         // TODO: this should be a vector
         public static float GravityY { get; set; } = Physics.gravity.y;
 
-        private static Vector2 _MinMaxAngleRange = new Vector2(-20, 15);
+        static Vector2 _MinMaxAngleRange = new Vector2(-20, 15);
         public static Vector2 MinMaxAngleRange
         {
             get => _MinMaxAngleRange;
@@ -44,14 +41,14 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private static float _TimeStepInterval = 0.05f;
+        static float _TimeStepInterval = 0.05f;
         public static float TimeStepInterval
         {
             get => _TimeStepInterval;
             set => _TimeStepInterval = Mathf.Max(value, Epsilon);
         }
 
-        private static float _MaxFlightDurationTime = 5f;
+        static float _MaxFlightDurationTime = 5f;
         public static float MaxFlightDurationTime 
         {
             get => _MaxFlightDurationTime;
@@ -61,7 +58,7 @@ namespace Kokowolo.Utilities
         public static LayerMask LayerMask { get; set; }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static bool RaycastWithProjectileMotionTrajectoryPrediction(
@@ -150,7 +147,7 @@ namespace Kokowolo.Utilities
             );
         }
 
-        private static List<Vector3> GetProjectileMotionTrajectoryPrediction(
+        static List<Vector3> GetProjectileMotionTrajectoryPrediction(
             Vector3 origin, 
             Vector3 directionXZ,
             float angle, 
@@ -207,6 +204,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

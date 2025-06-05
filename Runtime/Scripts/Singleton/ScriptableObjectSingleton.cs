@@ -1,6 +1,6 @@
-/*
+/* 
  * Author(s): Kokowolo, Will Lacey
- * Date Created: December 29, 2023
+ * Date Created: June 5, 2025
  * 
  * Additional Comments:
  *      File Line Length: ~140
@@ -12,22 +12,24 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public static class QuaternionExtensions
+    public class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject
     {
         /*██████████████████████████████████████████████████████████*/
-        #region Functions
+        #region Properties
 
-        public static Vector3 ToDirectionVector(this Quaternion rotation)
+        static T _Instance;
+        public static T Instance
         {
-            return ToDirectionVector(rotation, Vector3.up);
+            get
+            {
+                if (!_Instance)
+                {
+                    _Instance = PrefabManager.Get<T>();
+                }
+                return _Instance;
+            }
         }
-        
-        public static Vector3 ToDirectionVector(this Quaternion rotation, Vector3 axis)
-        {
-            // taken from https://discussions.unity.com/t/how-can-i-convert-a-quaternion-to-a-direction-vector/80376
-            return rotation * axis;
-        }
-        
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

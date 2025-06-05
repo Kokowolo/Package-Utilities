@@ -1,12 +1,9 @@
 /*
- * File Name: InputManager.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 7, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -21,18 +18,18 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class InputManager : MonoSingleton<InputManager>
+    public class InputManager : MonoBehaviourSingleton<InputManager>
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        private bool isMouseOverUI = false;
+        bool isPointerOverUI = false;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected override void MonoSingleton_Awake()
+        protected override void Singleton_Awake()
         {
 #if ENABLE_INPUT_SYSTEM
             enabled = true;
@@ -43,14 +40,14 @@ namespace Kokowolo.Utilities
 
         protected virtual void Update()
         {
-            isMouseOverUI = EventSystem.current.IsPointerOverGameObject();
+            isPointerOverUI = EventSystem.current.IsPointerOverGameObject();
         }
 
-        public static bool IsMouseOverUI() => Instance.InputManager_IsMouseOverUI();
-        protected virtual bool InputManager_IsMouseOverUI()
+        public static bool IsPointerOverUI() => Instance.InputManager_IsPointerOverUI();
+        protected virtual bool InputManager_IsPointerOverUI()
         {
 #if ENABLE_INPUT_SYSTEM
-            return isMouseOverUI;
+            return isPointerOverUI;
 #else
             return EventSystem.current.IsPointerOverGameObject();
 #endif
@@ -86,6 +83,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

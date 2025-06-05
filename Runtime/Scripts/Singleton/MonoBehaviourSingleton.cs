@@ -1,12 +1,9 @@
-/*
- * File Name: MonoSingleton.cs
- * Description: This script is specifically for the implementation of MonoBehaviour Singletons through abstraction
- * 
+/* 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: February 16, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,9 +12,12 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    /// <summary>
+    /// Class specifically for the implementation of MonoBehaviour Singletons through abstraction
+    /// </summary>
+    public abstract class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Header("Singleton Settings")]
@@ -27,14 +27,14 @@ namespace Kokowolo.Utilities
         [SerializeField] protected bool unparentGameObject;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         private T _Instance => this as T;
         public static T Instance => Singleton.Get<T>();
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         protected void Awake() 
@@ -42,7 +42,7 @@ namespace Kokowolo.Utilities
             Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject);
             if (Singleton.IsSingleton(_Instance))
             {
-                MonoSingleton_Awake();
+                Singleton_Awake();
             }
         }
         
@@ -50,7 +50,7 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                MonoSingleton_OnDestroy();
+                Singleton_OnDestroy();
             }
         }
 
@@ -58,7 +58,7 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                MonoSingleton_OnEnable();
+                Singleton_OnEnable();
             }
         }
         
@@ -66,21 +66,21 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                MonoSingleton_OnDisable();
+                Singleton_OnDisable();
             }
         }
         
-        protected virtual void MonoSingleton_Awake() {}
+        protected virtual void Singleton_Awake() {}
         
-        protected virtual void MonoSingleton_OnEnable() {}
+        protected virtual void Singleton_OnEnable() {}
 
-        protected virtual void MonoSingleton_OnDisable() {}
+        protected virtual void Singleton_OnDisable() {}
 
-        protected virtual void MonoSingleton_OnDestroy() {}
+        protected virtual void Singleton_OnDestroy() {}
 
         public static T FindInstance() => Singleton.Get<T>(findObjectOfType: true);
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

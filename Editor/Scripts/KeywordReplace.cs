@@ -1,8 +1,4 @@
 /*
- * File Name: CreateNewMonoBehaviour.cs
- * Description: This script is for creating new MonoBehaviour Scripts within Kokowolo Projects; for more info, see 
- *              CreateNewScript.cs
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 26, 2022
  * 
@@ -10,7 +6,7 @@
  *		While this file has been updated to better fit this project, the original version can be found here:
  *		https://forum.unity.com/threads/c-script-template-how-to-make-custom-changes.273191/ thanks to hpjohn
  *
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using UnityEngine;
@@ -20,9 +16,12 @@ using System;
 
 namespace Kokowolo.Utilities.Editor
 {
+    /// <summary>
+    /// Creates new MonoBehaviour Scripts within Kokowolo Projects; for more info, see CreateNewScript.cs
+    /// </summary>
     public class KeywordReplace : UnityEditor.AssetModificationProcessor
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static void OnWillCreateAsset(string path)
@@ -51,6 +50,6 @@ namespace Kokowolo.Utilities.Editor
             AssetDatabase.Refresh();
         }
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

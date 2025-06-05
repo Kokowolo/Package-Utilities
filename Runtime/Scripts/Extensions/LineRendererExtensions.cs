@@ -1,12 +1,9 @@
 /*
- * File Name: LineRendererExtensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 13, 2023
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,7 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class LineRendererExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static void SetPositions(this LineRenderer lineRenderer, List<Vector3> positions)
@@ -76,6 +73,6 @@ namespace Kokowolo.Utilities
         // }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

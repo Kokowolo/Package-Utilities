@@ -1,12 +1,9 @@
 /*
- * File Name: HeaderLineDecoratorDrawer.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: July 19, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,17 +15,13 @@ using UnityEditor;
 [CustomPropertyDrawer(typeof(HeaderLineAttribute))]
 public class HeaderLineDecoratorDrawer : DecoratorDrawer
 {
-    /************************************************************/
-    #region Fields
-
-    #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Properties
 
     HeaderLineAttribute Attribute => (HeaderLineAttribute) attribute;
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Functions
 
     public override void OnGUI(Rect position)
@@ -46,5 +39,5 @@ public class HeaderLineDecoratorDrawer : DecoratorDrawer
     }
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
 }

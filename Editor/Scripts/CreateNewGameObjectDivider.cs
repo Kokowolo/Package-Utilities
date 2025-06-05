@@ -1,12 +1,9 @@
 /*
- * File Name: CreateNewGameObject.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: July 27, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using UnityEngine;
@@ -16,14 +13,14 @@ namespace Kokowolo.Utilities.Editor
 {
     public static class CreateNewGameObjectDivider
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         static GameObject renameGameObject;
         static double renameTime;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         [ MenuItem("GameObject/Create Empty Divider", isValidateFunction: false, priority: 0)]
@@ -50,6 +47,6 @@ namespace Kokowolo.Utilities.Editor
         }
     
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

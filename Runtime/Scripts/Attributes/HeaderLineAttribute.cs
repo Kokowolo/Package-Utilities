@@ -1,12 +1,9 @@
 /*
- * File Name: HeaderLineAttribute.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: July 19, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,20 +15,20 @@ using System;
 [AttributeUsage(AttributeTargets.Field, Inherited = true, AllowMultiple = true)]
 public class HeaderLineAttribute : PropertyAttribute
 {
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Fields
 
     public const float DefaultHeight = 2.0f;
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Properties
 
     public float Height { get; private set; }
     public Color Color { get; private set; }
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
     #region Functions
 
     private HeaderLineAttribute(float height, Color color)
@@ -53,5 +50,5 @@ public class HeaderLineAttribute : PropertyAttribute
     public HeaderLineAttribute(float height, float r, float g, float b) : this(height, new Color(r, b, g)) {}
 
     #endregion
-    /************************************************************/
+    /*██████████████████████████████████████████████████████████*/
 }

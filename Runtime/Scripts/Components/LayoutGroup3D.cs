@@ -1,12 +1,9 @@
 /*
- * File Name: LayoutGroup3D.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 23, 2023
  * 
  * Additional Comments:
- *		File Line Length: 140
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -18,7 +15,7 @@ namespace Kokowolo.Utilities
     // [ExecuteInEditMode]
     public class LayoutGroup3D : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Enums
 
         private enum LayoutType
@@ -36,7 +33,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Header("Settings")]
@@ -58,7 +55,7 @@ namespace Kokowolo.Utilities
         [SerializeField, Range(0, 360)] private float adaptiveAngle = 360f;
 
         #endregion
-    	/************************************************************/
+    	/*██████████████████████████████████████████████████████████*/
         #region Properties
 
         private List<Vector3> _LocalPositions;
@@ -88,7 +85,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void OnDestroy()
@@ -207,8 +204,8 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
-        #region Editor Only
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
 #if UNITY_EDITOR
 
         private void OnValidate()
@@ -224,12 +221,6 @@ namespace Kokowolo.Utilities
             
             RefreshLayoutGroup(refreshTransforms: true);
         }
-
-#endif
-        #endregion
-        /************************************************************/
-        #region Debug
-#if UNITY_EDITOR
 
         // HACK: compiles, but doesn't work :(
 

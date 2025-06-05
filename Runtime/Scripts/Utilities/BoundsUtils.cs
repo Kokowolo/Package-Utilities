@@ -1,12 +1,9 @@
 /*
- * File Name: BoundsUtils.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: November 5, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -17,11 +14,7 @@ namespace Kokowolo.Utilities
 {
     public static class BoundsUtils
     {
-        /************************************************************/
-        #region Properties
-
-        #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Bounds CreateBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ)
@@ -40,6 +33,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

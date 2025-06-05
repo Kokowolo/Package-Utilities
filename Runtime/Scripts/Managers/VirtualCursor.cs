@@ -1,12 +1,9 @@
 /*
- * File Name: VirtualCursor.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: May 28, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities
 {
     public class VirtualCursor : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Header("Cached References")]
@@ -38,7 +35,7 @@ namespace Kokowolo.Utilities
         [SerializeField, ReadOnly] Vector2 _TargetScreenPoint;
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public bool VisibleCursor
@@ -132,7 +129,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         protected void Awake()
@@ -161,8 +158,8 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
-        #region Editor Only
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
 #if UNITY_EDITOR
 
         private void OnValidate()
@@ -172,6 +169,6 @@ namespace Kokowolo.Utilities
 
 #endif
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

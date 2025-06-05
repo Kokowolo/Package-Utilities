@@ -1,13 +1,10 @@
 #if UNITY_EDITOR
 /*
- * File Name: Something.cs
- * Description: This script is for ...
- * 
  * Author(s): code-beans (Marvin), Kokowolo, Will Lacey
  * Date Created: April 8, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  *
  *      The original version of the file can be found within this repo, https://github.com/code-beans/GizmoExtensions
  */
@@ -22,7 +19,7 @@ namespace Kokowolo.Utilities
 {
     public static class GizmosExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         /// <summary>
@@ -366,7 +363,7 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }
 #endif

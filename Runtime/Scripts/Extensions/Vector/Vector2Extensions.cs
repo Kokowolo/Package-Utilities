@@ -1,12 +1,9 @@
 /*
- * File Name: Vector2Extensions.cs
- * Description: This script is for ...
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: June 18, 2024
  * 
  * Additional Comments:
- *      File Line Length: 140
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,7 +16,7 @@ namespace Kokowolo.Utilities
 {
     public static class Vector2Extensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static Vector3 ToVector3(this Vector2 vector)
@@ -69,6 +66,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

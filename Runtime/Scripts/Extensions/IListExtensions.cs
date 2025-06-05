@@ -1,12 +1,9 @@
 /*
- * File Name: IListExtensions.cs
- * Description: This script is for extension functionality regarding IList
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: September 30, 2022
  * 
  * Additional Comments:
- *      File Line Length: 120
+ *      File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,39 +12,62 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Class is for extension functionality regarding IList
+    /// </summary>
     public static class IListExtensions
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
+        #region Enums
+
+        public enum ShuffleMethod
+        {
+            Naive,
+            Fisher_Yates
+        }
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         private static System.Random rng = new System.Random();
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         /// <summary>
-        /// randomizes IList with a Fisher-Yates shuffle; https://stackoverflow.com/a/1262619/11319808
+        /// Randomizes IList with a Fisher-Yates shuffle; https://stackoverflow.com/a/1262619/11319808
         /// </summary>
         public static void Shuffle<T>(this IList<T> list)  
         {  
-            Shuffle(list, rng);
+            list.Shuffle(ShuffleMethod.Fisher_Yates);
         }
 
-        /// <summary>
-        /// randomizes IList with a Fisher-Yates shuffle; https://stackoverflow.com/a/1262619/11319808
-        /// </summary>
-        public static void Shuffle<T>(this IList<T> list, System.Random rng)  
+        public static void Shuffle<T>(this IList<T> list, ShuffleMethod shuffleMethod)  
         {  
-            int n = list.Count;  
-            while (n > 1) 
-            {  
-                n--;  
-                int k = rng.Next(n + 1);
-                T value = list[k];  
-                list[k] = list[n];  
-                list[n] = value;  
-            }  
+            if (shuffleMethod == ShuffleMethod.Naive)
+            {
+                for (int i = 0; i < list.Count; i++)
+                {
+                    int k = UnityEngine.Random.Range(0, list.Count);
+                    T value = list[k];  
+                    list[k] = list[i];  
+                    list[i] = value;  
+                }
+            }
+            else
+            {
+                int n = list.Count;  
+                while (n > 1) 
+                {  
+                    n--;  
+                    int k = UnityEngine.Random.Range(0, n + 1);
+                    T value = list[k];  
+                    list[k] = list[n];  
+                    list[n] = value;  
+                }  
+            }
         }
         
         public static void Swap<T>(this IList<T> list, int indexA, int indexB)
@@ -64,10 +84,10 @@ namespace Kokowolo.Utilities
                 string str = "[ ";
                 for (int i = 0; i < list.Count - 1; i++)
                 {
-                    str += $"{list[i].ToString()}, ";
+                    str += $"{list[i]}, ";
                     if (withNewlineCharacter) str += "\n";
                 }
-                if (list.Count != 0) str += $"{list[list.Count - 1].ToString()} ]";
+                if (list.Count != 0) str += $"{list[list.Count - 1]} ]";
                 else str += "]";
                 return str;
             }
@@ -78,6 +98,6 @@ namespace Kokowolo.Utilities
         }
         
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

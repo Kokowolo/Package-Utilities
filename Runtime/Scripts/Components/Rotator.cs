@@ -1,12 +1,9 @@
 /*
- * File Name: Rotator.cs
- * Description: This script is for rotating a transform
- * 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: May 13, 2022
  * 
  * Additional Comments:
- *		File Line Length: 120
+ *		File Line Length: ~140
  */
 
 using System.Collections;
@@ -15,16 +12,19 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    /// <summary>
+    /// Rotates a GameObject
+    /// </summary>
     public class Rotator : MonoBehaviour
     {
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         [Tooltip("speed to rotate transform's euler angles")]
         [SerializeField] public Vector3 speed = new Vector3(0, 50, 0);
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         private void Update()
@@ -33,6 +33,6 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-        /************************************************************/
+        /*██████████████████████████████████████████████████████████*/
     }
 }

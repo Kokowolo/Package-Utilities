@@ -27,7 +27,7 @@ namespace Kokowolo.Utilities.Editor
         public static void CreateEmptyDivider()
         {
             renameGameObject = new GameObject();
-            renameGameObject.name = "------ new ------";
+            renameGameObject.name = "———— new ————";
             renameGameObject.tag = "EditorOnly";
             renameTime = EditorApplication.timeSinceStartup + 0.2d;
 

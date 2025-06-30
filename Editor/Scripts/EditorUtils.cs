@@ -69,6 +69,18 @@ namespace Kokowolo.Utilities.Editor
                 .ToArray();
         }
 
+        public static void DrawSerializeFields<T>(Rect position, SerializedProperty property, GUIContent label)
+        {
+            property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, label);
+            if (property.isExpanded)
+            {
+                EditorGUI.indentLevel++;
+                DrawSerializeFields<T>(property);
+                EditorGUI.indentLevel--;
+            }
+        }
+
+        public static void DrawSerializeFields<T>(SerializedProperty property) => DrawSerializeFields((T) property.boxedValue, property);
         public static void DrawSerializeFields<T>(T target, SerializedProperty property)
         {
             FieldInfo[] serializeFields = GetSerializeFields(target);

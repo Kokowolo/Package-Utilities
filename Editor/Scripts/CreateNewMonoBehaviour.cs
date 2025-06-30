@@ -20,12 +20,14 @@ namespace Kokowolo.Utilities.Editor
 
         const string PackageName = "com.kokowolo.utilities";
 
+        const int priority = -500;
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Menu Item Functions
 
-        [MenuItem(itemName: "Kokowolo/Create/C# Script - Simple", isValidateFunction: false, priority: -400)]
-        [MenuItem(itemName: "Assets/Create/C# Script - Simple", isValidateFunction: false, priority: -400)]
+        [MenuItem(itemName: "Kokowolo/Create/C# Script - Simple", isValidateFunction: false, General.MenuItemPriority)]
+        [MenuItem(itemName: "Assets/Create/C# Script - Simple", isValidateFunction: false, General.MenuItemPriority)]
         public static void CreateSimpleScript()
         {
             CreateNewScript.CreateFileFromPackageTemplateFile(PackageName, $"NewBehaviourSimple.cs.txt");

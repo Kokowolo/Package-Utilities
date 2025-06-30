@@ -18,6 +18,12 @@ namespace Kokowolo.Utilities.Editor
     public static class General
     {
         /*██████████████████████████████████████████████████████████*/
+        #region Fields
+
+        public const int MenuItemPriority = -500;
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         public static UnityEditor.PackageManager.PackageInfo GetPackageInfo(string packageName)

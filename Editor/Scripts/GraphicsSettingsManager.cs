@@ -41,7 +41,6 @@ namespace Kokowolo.Utilities.Editor
 
         // Menu Item params
         private const bool isValidateFunction = false;
-        private const int priority = 40;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -79,25 +78,25 @@ namespace Kokowolo.Utilities.Editor
             Menu.SetChecked(GetMenuName(4), false);
         }
 
-        [MenuItem(itemName: GraphicsLowMenuName, isValidateFunction, priority + 1)]
+        [MenuItem(itemName: GraphicsLowMenuName, isValidateFunction, General.MenuItemPriority + 1)]
         public static void SetGraphicsSettingsLow()
         {
             SetGraphicsSettings(1);
         }
 
-        [MenuItem(itemName: GraphicsMediumMenuName, isValidateFunction, priority + 2)]
+        [MenuItem(itemName: GraphicsMediumMenuName, isValidateFunction, General.MenuItemPriority + 2)]
         public static void SetGraphicsSettingsMedium()
         {
             SetGraphicsSettings(2);
         }
 
-        [MenuItem(itemName: GraphicsHighMenuName, isValidateFunction, priority + 3)]
+        [MenuItem(itemName: GraphicsHighMenuName, isValidateFunction, General.MenuItemPriority + 3)]
         public static void SetGraphicsSettingsHigh()
         {
             SetGraphicsSettings(3);
         }
 
-        [MenuItem(itemName: GraphicsHighestMenuName, isValidateFunction, priority + 4)]
+        [MenuItem(itemName: GraphicsHighestMenuName, isValidateFunction, General.MenuItemPriority + 4)]
         public static void SetGraphicsSettingsHighest()
         {
             SetGraphicsSettings(4);

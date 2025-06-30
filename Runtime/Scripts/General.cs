@@ -17,6 +17,9 @@ namespace Kokowolo.Utilities
     /// </summary>
     public static class General
     {
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
+
         public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component
         {
             if (!component) 
@@ -43,5 +46,8 @@ namespace Kokowolo.Utilities
             
             return Application.persistentDataPath;
         }
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
     }
 }

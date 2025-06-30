@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.113] - 2025-06-30
+### Added
+* public `Editor.General.MenuItemPriority` constant field and updated any reference
+* overloaded functions for `EditorUtils.DrawSerializeFields<T>`
+
 ## [0.0.112] - 2025-06-25
 ### Added
 * `GetRandomElement` to `IListExtensions`

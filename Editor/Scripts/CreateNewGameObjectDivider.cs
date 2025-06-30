@@ -23,7 +23,7 @@ namespace Kokowolo.Utilities.Editor
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        [ MenuItem("GameObject/Create Empty Divider", isValidateFunction: false, priority: 0)]
+        [MenuItem("GameObject/Create Empty Divider", isValidateFunction: false, priority: 0)]
         public static void CreateEmptyDivider()
         {
             renameGameObject = new GameObject();

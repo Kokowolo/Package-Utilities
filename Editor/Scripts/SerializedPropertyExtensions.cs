@@ -20,6 +20,34 @@ namespace Kokowolo.Utilities.Editor
 {
     public static class SerializedPropertyExtensions
     {
+        // NOTE: made by AI, not sure if this works in every case, but it works now
+        public static Type GetPropertyType(this SerializedProperty property)
+        {
+            Type parentType = property.serializedObject.targetObject.GetType();
+            string[] pathParts = property.propertyPath.Replace(".Array.data[", "[").Split('.');
+
+            Type currentType = parentType;
+
+            foreach (string part in pathParts)
+            {
+                if (part.Contains("["))
+                {
+                    // Handle array element
+                    string fieldName = part.Substring(0, part.IndexOf("["));
+                    FieldInfo arrayField = currentType.GetField(fieldName, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    if (arrayField == null) return null;
+                    currentType = arrayField.FieldType.GetElementType() ?? arrayField.FieldType.GetGenericArguments()[0];
+                }
+                else
+                {
+                    FieldInfo field = currentType.GetField(part, BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance);
+                    if (field == null) return null;
+                    currentType = field.FieldType;
+                }
+            }
+            return currentType;
+        }
+
         /// <summary>
         /// Get the object the serialized property holds by using reflection
         /// </summary>

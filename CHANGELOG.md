@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.116] - 2025-07-07
+### Changed
+* `PrefabManager` to log an error if it cannot find a prefab
+### Removed
+* `Has<T>` function from `PrefabManager` since it was only checking if the reference existed
+
 ## [0.0.115] - 2025-07-04
 ### Added
 * `AnimatorExtensions` along with its extension function `Play([...], bool prewarm)`

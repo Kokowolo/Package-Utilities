@@ -35,14 +35,13 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static bool Has<T>()
-        {
-            return Prefab<T>.prefab != null;
-        }
-
         public static T Get<T>()
         {
-            if (!Has<T>()) InitPrefab<T>();
+            if ((Prefab<T>.prefab == null)) InitPrefab<T>();
+            if (Prefab<T>.prefab == null) 
+            {
+                Debug.LogError($"[{nameof(PrefabManager)}] No prefab of type, {typeof(T)}, found");
+            }
             return Prefab<T>.prefab;
         }
 
@@ -62,7 +61,7 @@ namespace Kokowolo.Utilities
             // }
             else
             {
-                throw new Exception($"[PrefabManager] Type {typeof(T)} must extend from UnityEngine.Object");
+                throw new Exception($"[{nameof(PrefabManager)}] Type {typeof(T)} must extend from UnityEngine.Object");
             }
         }
 

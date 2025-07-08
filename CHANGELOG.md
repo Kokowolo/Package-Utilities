@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.117] - 2025-07-08
+### Added
+* `LoggerExtensions` to `LogManager` system
+* overloaded methods to `LogManager`
+* public setter for `LogManager.Profile`
+* `DOTweenExtensions` to `Extensions` directory, which checks if `DOTween` is active in the project
+* `ROOTNAMESPACEBEGIN` keyword to `ScriptTemplates`
+### Changed
+* `LogManager` and `LogManagerProfile` to adhere to modern Kokowolo scripting conventions
+* `Kokowolo.Utilities.Analytics.dll`
+* `WorldCursorManager` to check if its `visual` `GameObject` exists before setting its position
+* some scripts, adhering to new scripting conventions (changed function orders, use of keyword `private`)
+
 ## [0.0.116] - 2025-07-07
 ### Changed
 * `PrefabManager` to log an error if it cannot find a prefab

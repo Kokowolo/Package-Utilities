@@ -46,26 +46,26 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void Awake()
+        void Awake()
         {
             position = transform.position;
             LineRenderer.positionCount = 2;
             Refresh();
         }
 
-        private void Update()
+        void Update()
         {
             Refresh();
             SetPosition();
         }
 
-        private void Refresh()
+        void Refresh()
         {
             LineRenderer.SetPosition(0, target.position);
             LineRenderer.SetPosition(1, lineRendererEnd.position);
         }
 
-        private void SetPosition()
+        void SetPosition()
         {
             position = (position - target.position).normalized * radius;
             position += target.position;
@@ -84,7 +84,7 @@ namespace Kokowolo.Utilities
         #region Editor
 #if UNITY_EDITOR
 
-        private void OnDrawGizmosSelected() 
+        void OnDrawGizmosSelected() 
         {
             if (!target) return;
             Gizmos.color = Color.cyan;

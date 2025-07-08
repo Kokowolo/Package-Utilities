@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("References")]
-        // [SerializeField] private GameObject[] gameObjects = null;
+        // [SerializeField] GameObject[] gameObjects = null;
         [SerializeField] MonoBehaviourContainer[] monoBehaviours = null;
         [SerializeField] ScriptableObjectContainer[] scriptableObjects = null;
 
@@ -37,11 +37,8 @@ namespace Kokowolo.Utilities
 
         public static T Get<T>()
         {
-            if ((Prefab<T>.prefab == null)) InitPrefab<T>();
-            if (Prefab<T>.prefab == null) 
-            {
-                Debug.LogError($"[{nameof(PrefabManager)}] No prefab of type, {typeof(T)}, found");
-            }
+            if (Prefab<T>.prefab == null) InitPrefab<T>();
+            if (Prefab<T>.prefab == null) Debug.LogError($"[{nameof(PrefabManager)}] No prefab of type, {typeof(T)}, found");
             return Prefab<T>.prefab;
         }
 

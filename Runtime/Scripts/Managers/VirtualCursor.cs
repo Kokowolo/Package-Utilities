@@ -139,7 +139,7 @@ namespace Kokowolo.Utilities
             Size = _Size;
         }
 
-        private void Update()
+        void Update()
         {
             if (FollowCursor)
             {
@@ -147,7 +147,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void LateUpdate()
+        void LateUpdate()
         {
             ScreenPoint = Vector2.Lerp(ScreenPoint, TargetScreenPoint, Interpolator);
         }
@@ -162,7 +162,7 @@ namespace Kokowolo.Utilities
         #region Editor
 #if UNITY_EDITOR
 
-        private void OnValidate()
+        void OnValidate()
         {
             Awake();
         }

@@ -30,12 +30,20 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        private T _Instance => this as T;
+        T _Instance => this as T;
         public static T Instance => Singleton.Get<T>();
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
+
+        protected void OnDestroy()
+        {
+            if (Singleton.IsSingleton(_Instance))
+            {
+                Singleton_OnDestroy();
+            }
+        }
 
         protected void Awake() 
         {
@@ -45,12 +53,12 @@ namespace Kokowolo.Utilities
                 Singleton_Awake();
             }
         }
-        
-        protected void OnDestroy()
+
+        protected void OnDisable() 
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                Singleton_OnDestroy();
+                Singleton_OnDisable();
             }
         }
 
@@ -62,21 +70,11 @@ namespace Kokowolo.Utilities
             }
         }
         
-        protected void OnDisable() 
-        {
-            if (Singleton.IsSingleton(_Instance))
-            {
-                Singleton_OnDisable();
-            }
-        }
-        
+        protected virtual void Singleton_OnDestroy() {}
         protected virtual void Singleton_Awake() {}
         
-        protected virtual void Singleton_OnEnable() {}
-
         protected virtual void Singleton_OnDisable() {}
-
-        protected virtual void Singleton_OnDestroy() {}
+        protected virtual void Singleton_OnEnable() {}
 
         public static T FindInstance() => Singleton.Get<T>(findObjectOfType: true);
 

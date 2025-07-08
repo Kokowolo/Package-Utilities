@@ -10,34 +10,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class #SCRIPTNAME# : MonoBehaviour
-{
-    /*██████████████████████████████████████████████████████████*/
-    #region Fields
-
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Properties
-
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Functions
-
-    void Awake()
+#ROOTNAMESPACEBEGIN#
+    public class #SCRIPTNAME# : MonoBehaviour
     {
-        
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
+
+        void OnDestroy()
+        {
+
+        }
+
+        void Awake()
+        {
+            
+        }
+
+        void Start()
+        {
+
+        }
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
     }
-
-    void OnDestroy()
-    {
-
-    }
-
-    void Start()
-    {
-
-    }
-
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-}
+#ROOTNAMESPACEEND#

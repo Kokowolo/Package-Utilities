@@ -20,15 +20,6 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void OnValidate()
-        {
-            if (Target && !Target.GetComponent<Camera>())
-            {
-                LogManager.LogWarning($"{nameof(Target)} must be of type {nameof(Camera)}");   
-                Target = null;
-            }
-        }
-
         protected override void Start() 
         {
             if (!Target)
@@ -38,6 +29,21 @@ namespace Kokowolo.Utilities
             }
         }
 
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
+#if UNITY_EDITOR
+
+        void OnValidate()
+        {
+            if (Target && !Target.GetComponent<Camera>())
+            {
+                LogManager.LogWarning($"{nameof(Target)} must be of type {nameof(Camera)}");   
+                Target = null;
+            }
+        }
+
+#endif
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

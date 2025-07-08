@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
         [Header("Settings")]
         [SerializeField, Min(0)] public float radius = 1;
         [SerializeField, Range(0, 10)] public float speed = 1;
-        [SerializeField] private bool lockHeight = true;
+        [SerializeField] bool lockHeight = true;
 
         public float t = 0; // where the object is relative to 2π
 
@@ -44,12 +44,12 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void LateUpdate()
+        void LateUpdate()
         {
             PositionalOrbit();
         }
 
-        private void PositionalOrbit()
+        void PositionalOrbit()
         {
             t += Time.deltaTime * speed;
             if (t > 24 * Mathf.PI) t -= 24 * Mathf.PI;
@@ -60,13 +60,13 @@ namespace Kokowolo.Utilities
             transform.position = position;
         }
 
-        private Vector2 GetPoint(float radians)
+        Vector2 GetPoint(float radians)
         {
             return new Vector2(radius * Mathf.Sin(radians), radius * Mathf.Cos(radians));
         }
 
         // NOTE: this does not work as intended
-        // private void RotationalOrbit()
+        // void RotationalOrbit()
         // {
         //     Vector3 relativePos = (target.position + new Vector3(0, 0.5f, 0)) - transform.position;
         //     Quaternion rotation = Quaternion.LookRotation(relativePos);
@@ -82,7 +82,7 @@ namespace Kokowolo.Utilities
         #region Editor
 #if UNITY_EDITOR
 
-        private void OnDrawGizmosSelected() 
+        void OnDrawGizmosSelected() 
         {
             if (!target) return;
             Gizmos.color = Color.cyan;

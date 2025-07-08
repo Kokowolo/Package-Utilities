@@ -19,28 +19,20 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Fields
 
+        static List<string> singletonInstanceNames = new List<string>();
+
         [Tooltip("whether only one DontDestroyOnLoadScript GameObject can exist with this name")]
         [SerializeField] private bool willHaveSingletonInstance = true;
         [Tooltip("whether this GameObject unparents itself")]
         [SerializeField] private bool unparentGameObject;
 
-        private bool isSingletonInstance = false;
-
-        private static List<string> singletonInstanceNames = new List<string>();
+        bool isSingletonInstance = false;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void Awake()
-        {
-            if (willHaveSingletonInstance && HasSingletonInstanceWithName(name)) 
-            {
-                Destroy(gameObject);
-            }
-        }
-
-        private void OnDestroy()
+        void OnDestroy()
         {
             if (isSingletonInstance) 
             {
@@ -48,7 +40,15 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void Start()
+        void Awake()
+        {
+            if (willHaveSingletonInstance && HasSingletonInstanceWithName(name)) 
+            {
+                Destroy(gameObject);
+            }
+        }
+
+        void Start()
         {
             if (unparentGameObject) transform.SetParent(null);
             DontDestroyOnLoad(this);
@@ -60,7 +60,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private static bool HasSingletonInstanceWithName(string name)
+        static bool HasSingletonInstanceWithName(string name)
         {
             return singletonInstanceNames.Contains(name);
         }

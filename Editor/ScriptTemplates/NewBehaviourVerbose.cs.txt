@@ -15,105 +15,127 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kokowolo.Utilities;
 
-public class #SCRIPTNAME# : MonoBehaviour
-{
-    /*██████████████████████████████████████████████████████████*/
-    #region Events
-
-    public static event EventHandler OnSomeEvent;
-
-    public class #SCRIPTNAME#EventArgs : EventArgs
+#ROOTNAMESPACEBEGIN#
+    public class #SCRIPTNAME# : MonoBehaviour
     {
-        public bool myBool;
-    }
+        /*██████████████████████████████████████████████████████████*/
+        #region Events
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Enums
+        public static event EventHandler OnSomeEvent;
 
-    enum MyEnum 
-    { 
-        None = -1, 
-        EnumA, 
-        EnumB 
-    }
+        public class #SCRIPTNAME#EventArgs : EventArgs
+        {
+            public bool myBool;
+        }
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Fields
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Enums
 
-    ["Header("References")"]
-    [Tooltip("this is a float")]
-    [SerializeField, Range(0, 1)] float myFloat1 = 0f;
+        enum MyEnum 
+        { 
+            None = -1, 
+            EnumA, 
+            EnumB 
+        }
 
-    ["Header("Settings")"]
-    [Tooltip("this is a float")]
-    [SerializeField, Range(0, 1)] float myFloat2 = 0f;
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Properties
+        ["Header("References")"]
+        [Tooltip("this is a float")]
+        [SerializeField, Range(0, 1)] float myFloat1 = 0f;
 
-    public static #SCRIPTNAME# Instance => Singleton<#SCRIPTNAME#>.Get();
+        ["Header("Settings")"]
+        [Tooltip("this is a float")]
+        [SerializeField, Range(0, 1)] float myFloat2 = 0f;
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Functions
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
 
-    void Awake()
-    {
-        Singleton<#SCRIPTNAME#>.Set(this);
-        Subscribe();
-    }
+        public static #SCRIPTNAME# Instance => Singleton<#SCRIPTNAME#>.Get();
 
-    void OnDestroy()
-    {
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
 
-    }
+        void OnDestroy()
+        {
 
-    void Start()
-    {
+        }
 
-    }
+        void Awake()
+        {
+            Singleton<#SCRIPTNAME#>.Set(this);
+            Subscribe();
+        }
 
-    void Update()
-    {
+        void Start()
+        {
 
-    }
+        }
 
-    /*——————————————————————————————————————————————————————————*/
-    #region Server
+        void Update()
+        {
 
-    [Server]
-    void OnStartServer()
-    {
+        }
 
-    }
+        public void Input_SomeAction_Pressed()
+        {
 
-    #endregion
-    /*——————————————————————————————————————————————————————————*/
-    #region Client
+        }
 
-    [Client]
-    void Handle_SomeClass_OnSomeOtherEvent(object sender, EventArgs e)
-    {
+        public void UnityUI_SomeButton_OnClick()
+        {
 
-    }
+        }
 
-    #endregion
-    /*——————————————————————————————————————————————————————————*/
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Editor
+        void SomeFunction()
+        {
+
+        }
+
+        void Handle_SomeClass_OnSomeEvent(object sender, EventArgs e)
+        {
+
+        }
+
+        /*——————————————————————————————————————————————————————————*/
+        #region Server
+
+        [Server]
+        void OnStartServer()
+        {
+
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Client
+
+        [Client]
+        void Handle_SomeClass_OnSomeOtherEvent(object sender, EventArgs e)
+        {
+
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
 #if UNITY_EDITOR
 
-    void OnValidate()
-    {
+        void OnValidate()
+        {
 
-    }
+        }
 
 #endif
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-}
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+    }
+#ROOTNAMESPACEEND#

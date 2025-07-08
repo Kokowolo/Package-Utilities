@@ -18,13 +18,13 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Enums
 
-        private enum LayoutType
+        enum LayoutType
         {
             Radial,
             // Square
         }
 
-        private enum ChildAlignment
+        enum ChildAlignment
         {
             Left,
             Right,
@@ -37,28 +37,28 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("Settings")]
-        [SerializeField] private LayoutType layoutType;
-        [SerializeField] private ChildAlignment childAlignment;
-        [SerializeField] private float radiusA = 1.0f;
-        [SerializeField] private float radiusB = 1.0f;
-        [SerializeField, Range(0, 360)] private float spacingAngle = 10.0f;
-        [SerializeField, Range(0, 360)] private float offsetAngle = 10.0f;
+        [SerializeField] LayoutType layoutType;
+        [SerializeField] ChildAlignment childAlignment;
+        [SerializeField] float radiusA = 1.0f;
+        [SerializeField] float radiusB = 1.0f;
+        [SerializeField, Range(0, 360)] float spacingAngle = 10.0f;
+        [SerializeField, Range(0, 360)] float offsetAngle = 10.0f;
 
         [Header("Additional Settings")]
-        [SerializeField] private bool includeInactive = false;
-        [SerializeField] private bool useEvenDistribution = true;
-        [SerializeField] private bool useAdaptiveDistribution = true;
+        [SerializeField] bool includeInactive = false;
+        [SerializeField] bool useEvenDistribution = true;
+        [SerializeField] bool useAdaptiveDistribution = true;
 
         [Header("Conditional Settings")]
-        [SerializeField] private bool doubleIncludeLastIndex = false;
-        [SerializeField, Range(0, 360)] private float arcAngleRange = 360f;
-        [SerializeField, Range(0, 360)] private float adaptiveAngle = 360f;
+        [SerializeField] bool doubleIncludeLastIndex = false;
+        [SerializeField, Range(0, 360)] float arcAngleRange = 360f;
+        [SerializeField, Range(0, 360)] float adaptiveAngle = 360f;
 
         #endregion
     	/*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        private List<Vector3> _LocalPositions;
+        List<Vector3> _LocalPositions;
         public List<Vector3> LocalPositions
         {
             get
@@ -71,8 +71,8 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private List<Transform> _Children;
-        private List<Transform> Children 
+        List<Transform> _Children;
+        List<Transform> Children 
         {
             get
             {
@@ -88,18 +88,18 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void OnDestroy()
+        void OnDestroy()
         {
             ListPool.Add(_LocalPositions);
             ListPool.Add(_Children);
         }
 
-        private void Start()
+        void Start()
         {
             RefreshLayoutGroup(refreshTransforms: true);
         }
 
-        private void RefreshChildrenList()
+        void RefreshChildrenList()
         {
             Children.Clear();
             Transform child;
@@ -113,7 +113,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void RefreshLayoutGroupSpacingAngle()
+        void RefreshLayoutGroupSpacingAngle()
         {
             RefreshChildrenList();
             int count = Children.Count - (doubleIncludeLastIndex ? 1 : 0);
@@ -129,7 +129,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private void RefreshLayoutGroupPositions()
+        void RefreshLayoutGroupPositions()
         {
             LocalPositions.Clear();
             if (transform.childCount == 0) return;
@@ -140,7 +140,7 @@ namespace Kokowolo.Utilities
             ListPool.Release(ref positions);
         }
 
-        private List<Vector3> GetLayoutGroupPositions(int numberOfPositions)
+        List<Vector3> GetLayoutGroupPositions(int numberOfPositions)
         {
             List<Vector3> positions = ListPool.Get<Vector3>();
             for (int i = 0; i < numberOfPositions; i++)
@@ -181,7 +181,7 @@ namespace Kokowolo.Utilities
             return positions;
         }
 
-        private void RefreshLayoutGroupTransforms()
+        void RefreshLayoutGroupTransforms()
         {
             if (transform.childCount == 0) return;
             
@@ -208,7 +208,7 @@ namespace Kokowolo.Utilities
         #region Editor
 #if UNITY_EDITOR
 
-        private void OnValidate()
+        void OnValidate()
         {
             if (useAdaptiveDistribution)
             {
@@ -228,7 +228,7 @@ namespace Kokowolo.Utilities
         // [SerializeField, Min(0)] float gizmosRadius = 0.15f;
         // [SerializeField, Min(0)] int numberOfDebugLayoutPositions = 3;
 
-        // private void OnDrawGizmosSelected()
+        // void OnDrawGizmosSelected()
         // {
         //     Gizmos.color = Color.cyan;
         //     List<Vector3> positions = GetLayoutGroupPositions(numberOfDebugLayoutPositions);

@@ -33,7 +33,7 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("References")]
-        [SerializeField] private Transform _Target = null;
+        [SerializeField] Transform _Target = null;
         
         [Header("Settings")]
         [SerializeField] protected FaceDirection faceDirection = FaceDirection.Y;

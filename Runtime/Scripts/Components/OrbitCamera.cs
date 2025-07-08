@@ -105,12 +105,12 @@ namespace Kokowolo.Utilities
 
         #region Unity Functions
 
-        private void OnValidate()
+        void OnValidate()
         {
             if (maxVerticalAngle < minVerticalAngle) maxVerticalAngle = minVerticalAngle;
         }
         
-        private void Awake()
+        void Awake()
         {
             Cursor.visible = false;
             Cursor.lockState = CursorLockMode.Locked;
@@ -119,7 +119,7 @@ namespace Kokowolo.Utilities
             transform.localRotation = orbitRotation = Quaternion.Euler(orbitAngles);
         }
 
-        private void LateUpdate()
+        void LateUpdate()
         {
             UpdateGravityAlignment();
 
@@ -156,12 +156,12 @@ namespace Kokowolo.Utilities
 
         #region Other Functions
 
-        private void SetPositionAndRotation(Vector3 position, Quaternion rotation)
+        void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
             transform.SetPositionAndRotation(position, rotation);
         }
 
-        private void UpdateFocusPoint()
+        void UpdateFocusPoint()
         {
             previousFocusPoint = focusPoint;
             if (focusRadius > 0f)
@@ -178,7 +178,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        private bool ManualRotation()
+        bool ManualRotation()
         {
             if (Input.GetMouseButton(1)) return false;
             playerInput = Mouse.current.delta.ReadValue();
@@ -193,7 +193,7 @@ namespace Kokowolo.Utilities
             return false;
         }
 
-        private bool ManualZoom()
+        bool ManualZoom()
         {	
             if (!Input.GetMouseButton(1)) return false;
             playerInput = Mouse.current.delta.ReadValue();
@@ -208,7 +208,7 @@ namespace Kokowolo.Utilities
             return Input.GetMouseButtonDown(1);
         }
 
-        private bool AutomaticRotation()
+        bool AutomaticRotation()
         {
             if (Time.unscaledTime - lastManualRotationTime < alignDelay) return false;
 
@@ -230,7 +230,7 @@ namespace Kokowolo.Utilities
             return true;
         }
 
-        private void ConstrainAngles()
+        void ConstrainAngles()
         {
             orbitAngles.x = Mathf.Clamp(orbitAngles.x, minVerticalAngle, maxVerticalAngle);
 
@@ -238,7 +238,7 @@ namespace Kokowolo.Utilities
             else if (orbitAngles.y >= 360f) orbitAngles.y -= 360f;
         }
 
-        private void UpdateGravityAlignment()
+        void UpdateGravityAlignment()
         {
             Vector3 fromUp = gravityAlignment * Vector3.up;
             Vector3 toUp = Vector3.up;//CustomGravity.GetUpAxis(focusPoint);

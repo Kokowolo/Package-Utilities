@@ -30,17 +30,17 @@ public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
     /*██████████████████████████████████████████████████████████*/
     #region Fields
 
-    // private OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
+    // OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
 
     [Header("Cached References")]
-    [SerializeField] private GameObject visual;
+    [SerializeField] GameObject visual;
 
     [Header("Settings")]
     [Tooltip("layerMask the manager can interact with")]
-    [SerializeField] private LayerMask layerMask;
+    [SerializeField] LayerMask layerMask;
 
-    private RaycastHit hitInfo;
-    private Transform previousTransform;
+    RaycastHit hitInfo;
+    Transform previousTransform;
 
     #endregion
     /*██████████████████████████████████████████████████████████*/
@@ -73,7 +73,10 @@ public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
         if (!doRaycast) return;
         
         Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
-        visual.transform.position = hitInfo.point;
+        if (visual)
+        {
+            visual.transform.position = hitInfo.point;
+        }
 
         if (hitInfo.transform != previousTransform)
         {
@@ -98,7 +101,10 @@ public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
         InputManager.SetCursorWorldPosition(worldPosition);
 
         Instance.hitInfo.point = worldPosition;
-        Instance.visual.transform.position = worldPosition;
+        if (Instance.visual)
+        {
+            Instance.visual.transform.position = worldPosition;
+        }
         doRaycast = false;
     }
 

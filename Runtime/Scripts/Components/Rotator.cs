@@ -27,7 +27,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        private void Update()
+        void Update()
         {
             transform.Rotate(speed * Time.deltaTime);
         }

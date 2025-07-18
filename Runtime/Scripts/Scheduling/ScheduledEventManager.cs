@@ -13,6 +13,7 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
+    [Obsolete("ScheduledEventManager has been marked as Obsolete, please use new Scheduling.Job framework instead")]
     public class ScheduledEventManager : MonoBehaviourSingleton<ScheduledEventManager>
     {
         /*██████████████████████████████████████████████████████████*/

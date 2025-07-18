@@ -30,6 +30,20 @@ namespace Kokowolo.Utilities
             }
         }
 
+//             // TODO: move this to ScriptableObjectSingleton?
+//         public static T Instance 
+//         {
+//             get
+//             {
+// #if UNITY_EDITOR
+//                 // TODO: move to EditorOnlyUtils within Kokowolo.Utilities and surround with UNITY_EDITOR compiler directive
+//                 Kokowolo.Utilities.EditorOnly.EditorUtils.FindFirstAssetByType<T>()
+// #else
+//                 return PrefabManager.Get<Struggle>();
+// #endif
+//             }
+//         }
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

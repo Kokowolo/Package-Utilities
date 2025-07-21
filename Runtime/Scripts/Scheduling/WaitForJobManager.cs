@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public override bool keepWaiting => !JobManager.Instance.IsFree;
+        public override bool keepWaiting => !JobManager.IsFree;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

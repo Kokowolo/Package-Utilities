@@ -300,7 +300,7 @@ namespace Scheduling
             p2.OnComplete(() => Debug.Assert(value == 1));
             yield return new WaitForJob(s0);
             Debug.Assert(value == 4);
-            Debug.Assert(JobManager.Instance.IsFree);
+            Debug.Assert(JobManager.IsFree);
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
             // Evaluate GC
@@ -345,7 +345,7 @@ namespace Scheduling
             // Demo check
             yield return new WaitForJobManager();
             Debug.Assert(value == 12);
-            Debug.Assert(JobManager.Instance.IsFree);
+            Debug.Assert(JobManager.IsFree);
             Debug.Assert(p0.IsDisposed);
 
             // Evaluate GC
@@ -392,7 +392,7 @@ namespace Scheduling
             Debug.Assert(value == 12);
             yield return new WaitForJobManager();
             Debug.Assert(value == 1012);
-            Debug.Assert(JobManager.Instance.IsFree);
+            Debug.Assert(JobManager.IsFree);
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p2.IsDisposed && p4.IsDisposed);
 
             // Evaluate GC

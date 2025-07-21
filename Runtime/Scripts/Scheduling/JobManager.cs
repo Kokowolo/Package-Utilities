@@ -27,7 +27,7 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public bool IsFree => pendingJobs.Count == 0 && scheduledJobs.Count == 0 && !IsRunning;
+        public static bool IsFree => Instance.pendingJobs.Count == 0 && Instance.scheduledJobs.Count == 0 && !Instance.IsRunning;
         bool IsRunning => activeJobs.Count != 0;
 
         #endregion

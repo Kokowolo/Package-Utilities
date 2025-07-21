@@ -5,6 +5,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [0.0.118] - 2025-07-18
+### Changed
+* `JobManager`'s `IsFree` property to be static and updated all references
+
+## [0.0.118] - 2025-07-18
 ### Added
 * `EditorOnlyUtils` to Runtime Scripts
 * replacement to `ScheduledEventManager`, i.e. the `Scheduling` namespace framework with most notibly `Scheduling.Job.Schedule(params)`

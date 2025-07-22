@@ -20,6 +20,11 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        public static float Abs(this float value)
+        {
+            return Mathf.Abs(value);
+        }
+
         public static float Clamp01(this float value)
         {
             return Mathf.Clamp01(value);

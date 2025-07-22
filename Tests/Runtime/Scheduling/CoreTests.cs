@@ -20,7 +20,7 @@ using Kokowolo.Utilities.Scheduling;
 
 namespace Scheduling
 {
-    public class AdditionalTests
+    public class CoreTests
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -40,7 +40,7 @@ namespace Scheduling
         [UnityTest]
         public IEnumerator _00()
         {
-            Debug.Assert(Config.Instance);
+            Debug.Assert(TestController.Instance);
             Debug.Assert(JobManager.Instance);
             yield return null; // Wait for instance to set... for some reason this cant run in a normal Test
         }
@@ -50,9 +50,9 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            Job p0 = Job.Get(Function1, Config.Time);
-            Job p1 = Job.Get(Function1, Config.Time);
-            Job p2 = Job.Get(Function1, Config.Time);
+            Job p0 = Job.Get(Function1, TestController.Time);
+            Job p1 = Job.Get(Function1, TestController.Time);
+            Job p2 = Job.Get(Function1, TestController.Time);
 
             // Declare local function
             void Function1()
@@ -68,7 +68,7 @@ namespace Scheduling
 
             // Demo check
             Debug.Assert(value == 0);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 3);
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -92,7 +92,7 @@ namespace Scheduling
             // Declare local function
             IEnumerator Function1(int i)
             {
-                yield return new WaitForSeconds(Config.Time);
+                yield return new WaitForSeconds(TestController.Time);
                 value += i;
             }
 
@@ -104,7 +104,7 @@ namespace Scheduling
 
             // Demo check
             Debug.Assert(value == 0, $"v1:{value}");
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 6, $"v1:{value}");
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -120,9 +120,9 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            Job p0 = Job.Schedule(Function1, Config.Time);
-            Job p1 = Job.Schedule(Function1, Config.Time);
-            Job p2 = Job.Schedule(Function1, Config.Time);
+            Job p0 = Job.Schedule(Function1, TestController.Time);
+            Job p1 = Job.Schedule(Function1, TestController.Time);
+            Job p2 = Job.Schedule(Function1, TestController.Time);
 
             // Declare local function
             void Function1()
@@ -139,7 +139,7 @@ namespace Scheduling
             // Demo check
             Debug.Assert(value == 0);
             p1.OnComplete(() => Debug.Assert(value == 2));
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 3);
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -163,7 +163,7 @@ namespace Scheduling
             // Declare local function
             IEnumerator Function1(int i)
             {
-                yield return new WaitForSeconds(Config.Time);
+                yield return new WaitForSeconds(TestController.Time);
                 value += i;
             }
 
@@ -177,7 +177,7 @@ namespace Scheduling
             Debug.Assert(value == 0);
             yield return new WaitForJob(p1);
             Debug.Assert(value == 3, $"value:{value}");
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 6, $"value:{value}");
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -194,9 +194,9 @@ namespace Scheduling
             // Demo main
             int value = 0;
             JobSequence s0 = JobSequence.Get();
-            Job p1 = s0.Append(Function1, Config.Time);
-            s0.Append(Function1, Config.Time);
-            Job p2 = s0.Append(Function1, Config.Time);
+            Job p1 = s0.Append(Function1, TestController.Time);
+            s0.Append(Function1, TestController.Time);
+            Job p2 = s0.Append(Function1, TestController.Time);
 
             // Declare local function
             void Function1()
@@ -213,7 +213,7 @@ namespace Scheduling
             // Demo check
             Debug.Assert(value == 0);
             p1.OnComplete(() => Debug.Assert(value == 1));
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 3);
             yield return new WaitForJob(p2);
             Debug.Assert(value == 3);
@@ -236,9 +236,9 @@ namespace Scheduling
             // Demo main
             int value = 0;
             JobSequence s0 = JobSequence.Get();
-            Job p1 = s0.Append(Function1(1, Config.Time * 3));
-            Job p2 = s0.Append(Function1(3, Config.Time));
-            s0.Append(Function1(2, Config.Time));
+            Job p1 = s0.Append(Function1(1, TestController.Time * 3));
+            Job p2 = s0.Append(Function1(3, TestController.Time));
+            s0.Append(Function1(2, TestController.Time));
             
             // Declare local function
             IEnumerator Function1(int i, float time)
@@ -257,7 +257,7 @@ namespace Scheduling
             Debug.Assert(value == 0);
             p1.OnComplete(() => Debug.Assert(value == 1));
             p2.OnComplete(() => Debug.Assert(value == 4));
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 6);
             yield return new WaitForJob(s0);
             Debug.Assert(value == 6);
@@ -300,7 +300,7 @@ namespace Scheduling
             p2.OnComplete(() => Debug.Assert(value == 1));
             yield return new WaitForJob(s0);
             Debug.Assert(value == 4);
-            Debug.Assert(JobManager.IsFree);
+            Debug.Assert(JobScheduler.Main.IsFree);
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
             // Evaluate GC
@@ -343,9 +343,9 @@ namespace Scheduling
             Debug.Assert(r0.IsAlive);
 
             // Demo check
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 12);
-            Debug.Assert(JobManager.IsFree);
+            Debug.Assert(JobScheduler.Main.IsFree);
             Debug.Assert(p0.IsDisposed);
 
             // Evaluate GC
@@ -390,9 +390,9 @@ namespace Scheduling
             // Demo check
             yield return new WaitForJob(s0);
             Debug.Assert(value == 12);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 1012);
-            Debug.Assert(JobManager.IsFree);
+            Debug.Assert(JobScheduler.Main.IsFree);
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p2.IsDisposed && p4.IsDisposed);
 
             // Evaluate GC
@@ -428,7 +428,7 @@ namespace Scheduling
             Debug.Assert(r0.IsAlive && r1.IsAlive && r2.IsAlive);
 
             // Demo check
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 12, $"value:{value}");
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -474,7 +474,7 @@ namespace Scheduling
             Debug.Assert(r0.IsAlive && r1.IsAlive);
 
             // Demo check
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
             Debug.Assert(value == 3, $"value:{value}");
             Debug.Assert(s0.IsDisposed && p1.IsDisposed && p3 == null);
 
@@ -485,6 +485,147 @@ namespace Scheduling
             yield return null;
             GC.Collect();
             Debug.Assert(!r0.IsAlive && !r1.IsAlive && !r3.IsAlive);
+        }
+
+        [UnityTest]
+        public IEnumerator _08_0()
+        {
+            TestController.Value = true;
+            Job p0 = Job.WaitWhile(Function);
+
+            // Declare local function
+            bool Function() => TestController.Value;
+
+            // Prepare GC check
+            WeakReference r0 = new WeakReference(p0);
+            Debug.Assert(r0.IsAlive);
+            
+            // Demo check
+            Debug.Assert(!p0.IsDisposed);
+
+            if (TestController.UseUserInput)
+            {
+                yield return p0.WaitForCompletion();
+            }
+            else
+            {
+                if (TestController.Time > 0)
+                {
+                    yield return new WaitForSeconds(TestController.Time);
+                    Debug.Assert(!p0.IsDisposed);
+                }
+                TestController.Value = false;
+                yield return null;
+                yield return null;
+            }
+            Debug.Assert(p0.IsDisposed);
+
+            // Evaluate GC
+            p0 = null;
+            yield return null;
+            GC.Collect();
+            Debug.Assert(!r0.IsAlive);
+        }
+
+        [UnityTest]
+        public IEnumerator _08_1()
+        {
+            TestController.Value = true;
+            Job p0 = Job.ScheduleWaitWhile(Function);
+            Job p1 = Job.ScheduleWaitWhile(Function);
+            p0.OnComplete(() => TestController.Value = true);
+
+            // Declare local function
+            bool Function() => TestController.Value;
+
+            // Prepare GC check
+            WeakReference r0 = new WeakReference(p0);
+            WeakReference r1 = new WeakReference(p1);
+            Debug.Assert(r0.IsAlive && r1.IsAlive);
+            
+            // Demo check
+            Debug.Assert(!p0.IsDisposed && !p1.IsDisposed);
+
+            if (TestController.UseUserInput)
+            {
+                yield return p0.WaitForCompletion();
+                Debug.Assert(p0.IsDisposed);
+                yield return p1.WaitForCompletion();
+                Debug.Assert(p1.IsDisposed);
+            }
+            else
+            {
+                // First wait
+                if (TestController.Time > 0)
+                {
+                    yield return new WaitForSeconds(TestController.Time);
+                    Debug.Assert(!p0.IsDisposed);
+                }
+                TestController.Value = false;
+                yield return null;
+                yield return null;
+                Debug.Assert(p0.IsDisposed);
+
+                // second wait
+                if (TestController.Time > 0)
+                {
+                    yield return new WaitForSeconds(TestController.Time);
+                    Debug.Assert(!p1.IsDisposed);
+                }
+                TestController.Value = false;
+                yield return null;
+                yield return null;
+                Debug.Assert(p1.IsDisposed);
+            }
+
+            // Evaluate GC
+            p0 = null;
+            p1 = null;
+            yield return null;
+            GC.Collect();
+            Debug.Assert(!r0.IsAlive && !r1.IsAlive);
+        }
+
+        [UnityTest]
+        public IEnumerator _08_2()
+        {
+            TestController.Value = false;
+            JobSequence s0 = JobSequence.Get();
+            Job p1 = s0.Append(Function2);
+            s0.AppendWaitWhile(Function1);
+            s0.Append(Function2);
+
+            // Declare local function
+            bool Function1() => TestController.Value;
+            void Function2() => TestController.Value = true;
+
+            // Prepare GC check
+            WeakReference r0 = new WeakReference(s0);
+            WeakReference r1 = new WeakReference(p1);
+            Debug.Assert(r0.IsAlive && r1.IsAlive);
+            
+            // Demo check
+            Debug.Assert(!s0.IsDisposed);
+            if (TestController.UseUserInput)
+            {
+                yield return s0.WaitForCompletion();
+                Debug.Assert(s0.IsDisposed);
+            }
+            else
+            {
+                yield return p1.WaitForCompletion();
+                TestController.Value = false;
+                yield return s0.WaitForCompletion();
+                Debug.Assert(s0.IsDisposed);
+            }
+
+            Debug.Assert(TestController.Value);
+
+            // Evaluate GC
+            s0 = null;
+            yield return null;
+            GC.Collect();
+            Debug.Assert(!r0.IsAlive);
         }
 
         #endregion

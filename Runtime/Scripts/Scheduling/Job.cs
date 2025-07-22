@@ -14,7 +14,7 @@ using Kokowolo.Utilities;
 
 namespace Kokowolo.Utilities.Scheduling
 {
-    public class Job : IEquatable<Job>, IDisposable
+    public partial class Job : IEquatable<Job>, IDisposable
     {
         /*██████████████████████████████████████████████████████████*/
         #region Events
@@ -39,7 +39,7 @@ namespace Kokowolo.Utilities.Scheduling
         #region Properties
 
         public bool IsDisposed => disposed;
-        public bool IsRunning { get; private set; }
+        internal bool IsRunning { get; private set; }
 
         internal bool IsPending { get; set; } // marks for pending job removal
         internal bool IsScheduled { get; set; }
@@ -81,6 +81,9 @@ namespace Kokowolo.Utilities.Scheduling
             OnCompleteInternal = null;
         }
 
+        public static Job WaitWhile(Func<bool> predicate) => Get(Utils.WaitWhile(predicate));
+        public static Job ScheduleWaitWhile(Func<bool> predicate) => Schedule(Utils.WaitWhile(predicate));
+
         public static Job Get(Action function) => Get(function, -1);
         public static Job Get(Action function, float time) => new Job(function, time, isScheduled: false);
         public static Job Get(IEnumerator routine) => new Job(routine, isScheduled: false);
@@ -91,7 +94,7 @@ namespace Kokowolo.Utilities.Scheduling
         Job(IEnumerator routine, bool isScheduled) : this(routine)
         {
             this.IsScheduled = isScheduled;
-            JobManager.Instance.PendJob(this);
+            JobScheduler.Main.PendJob(this);
         }
 
         // called by JobSequence specifically and pend constructor
@@ -148,6 +151,14 @@ namespace Kokowolo.Utilities.Scheduling
             }
             OnCompleteInternal += callback;
             return this;
+        }
+
+        /// <summary>
+        /// Creates a CustomYieldInstruction that waits until the job is disposed or complete
+        /// </summary>
+        public WaitForJob WaitForCompletion()
+        {
+            return new WaitForJob(this);
         }
 
         public bool Equals(Job other) => this == other;

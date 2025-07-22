@@ -14,6 +14,7 @@ using System;
 
 namespace Kokowolo.Utilities
 {
+    [Obsolete("IScheduledEvent has been marked as Obsolete, please use new Scheduling.Job framework instead")]
     public interface IScheduledEvent
     {
         public bool IsScheduled { get; set; }
@@ -23,6 +24,7 @@ namespace Kokowolo.Utilities
         public void Stop();
     }
 
+    [Obsolete("ScheduledEvent has been marked as Obsolete, please use new Scheduling.Job framework instead")]
     public class ScheduledEvent : IEquatable<ScheduledEvent>, IScheduledEvent//, IPoolable<ScheduledEvent>
     {
         /*██████████████████████████████████████████████████████████*/
@@ -71,8 +73,9 @@ namespace Kokowolo.Utilities
         void IScheduledEvent.Start()
         {
             if (HasStarted || HasStopped) return;
-            
+#pragma warning disable 0618
             coroutine = ScheduledEventManager.Instance.StartCoroutine(Run());
+#pragma warning restore 0618
         }
 
         void IScheduledEvent.Stop()
@@ -82,7 +85,9 @@ namespace Kokowolo.Utilities
             
             if (coroutine != null)
             {
+#pragma warning disable 0618
                 ScheduledEventManager.Instance.StopCoroutine(coroutine);
+#pragma warning restore 0618
                 routine = null;
             }
             OnStopped?.Invoke(this, EventArgs.Empty);

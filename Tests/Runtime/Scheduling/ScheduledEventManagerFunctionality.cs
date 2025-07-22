@@ -45,7 +45,7 @@ namespace Scheduling
             Job.Get(Function1, time);
             Job.Get(Function1, time);
             Job.Get(Function1, time);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 3);
 
@@ -61,7 +61,7 @@ namespace Scheduling
             Job.Schedule(Function1, time);
             Job.Schedule(Function1, time);
             Job.Schedule(Function1, time);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 3);
 
@@ -77,7 +77,7 @@ namespace Scheduling
             Job.Get(Function1, time);
             Job.Get(Function2, time * 3);
             Job.Get(Function3, time);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 16);
 
@@ -95,7 +95,7 @@ namespace Scheduling
             Job.Schedule(Function1, time);
             Job.Schedule(Function2, time * 3);
             Job.Schedule(Function1, time);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 12);
 
@@ -115,7 +115,7 @@ namespace Scheduling
             Job.Get(Function1, time * 1.5f);
             Job.Get(Function1, time * 1.5f);
             Job.Get(Function1, time * 1.5f);
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 48);
 
@@ -132,7 +132,7 @@ namespace Scheduling
             Job p = Job.Schedule(Function1, time * 100);
             Job.Schedule(Function1, time);
             p.Dispose();
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 4);
 
@@ -150,7 +150,7 @@ namespace Scheduling
             Job.Schedule(Function1, time);
             p.Dispose();
             yield return null;
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 8);
 
@@ -167,7 +167,7 @@ namespace Scheduling
             Job.Get(Function1, time);
             Job.Get(Function1, time);
             p.Dispose();
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 8);
 
@@ -184,7 +184,7 @@ namespace Scheduling
             Job.Schedule(Function1, time);
             Job p = Job.Schedule(Function2, time);
             p.Dispose();
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 8);
 
@@ -205,7 +205,7 @@ namespace Scheduling
             Job.Get(Function1, time);
             Job p = Job.Get(Function2, time);
             p.Dispose();
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 20);
 
@@ -224,7 +224,7 @@ namespace Scheduling
             Job.Schedule(Function1, time);
             Job job = Job.Schedule(Function2, time);
             job.Dispose();
-            yield return new WaitForJobManager();
+            yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 12);
 

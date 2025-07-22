@@ -1,6 +1,6 @@
 /* 
  * Author(s): Kokowolo, Will Lacey
- * Date Created: July 17, 2025
+ * Date Created: July 15, 2025
  * 
  * Additional Comments:
  *      File Line Length: ~140
@@ -10,38 +10,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Scheduling
+namespace Kokowolo.Utilities.Scheduling
 {
-    [CreateAssetMenu(menuName = "Kokowolo/Utilities/Tests/Scheduling/Config", fileName = "Config")]
-    public class Config : ScriptableObject
+    public class WaitForJobScheduler : CustomYieldInstruction
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [SerializeField, Min(-0.01f)] float time;
+        JobScheduler scheduler;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        static Config _Instance;
-        public static Config Instance 
-        {
-            get
-            {
-                if (!_Instance)
-                {
-                    _Instance = Kokowolo.Utilities.Editor.EditorOnlyUtils.FindFirstAssetByType<Config>();
-                }
-                return _Instance;
-            }
-        }
-
-        public static float Time => Instance.time;
+        public override bool keepWaiting => !scheduler.IsFree;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
+
+        public WaitForJobScheduler() : this(JobScheduler.Main) {}
+        public WaitForJobScheduler(JobScheduler scheduler)
+        {
+            this.scheduler = scheduler;
+        }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

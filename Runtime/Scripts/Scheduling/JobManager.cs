@@ -17,18 +17,9 @@ namespace Kokowolo.Utilities.Scheduling
     public class JobManager : MonoBehaviourSingleton<JobManager>
     {
         /*██████████████████████████████████████████████████████████*/
-        #region Fields
-
-        Queue<Job> pendingJobs;
-        Queue<Job> scheduledJobs;
-        List<Job> activeJobs;
-        
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public static bool IsFree => Instance.pendingJobs.Count == 0 && Instance.scheduledJobs.Count == 0 && !Instance.IsRunning;
-        bool IsRunning => activeJobs.Count != 0;
+        internal List<JobScheduler> JobSchedulers;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -36,102 +27,62 @@ namespace Kokowolo.Utilities.Scheduling
 
         protected override void Singleton_OnDestroy()
         {
-            pendingJobs = null;
-            scheduledJobs = null;
-            ListPool.Release(ref activeJobs);
+            for (int i = JobSchedulers.Count - 1; i >= 0 ; i--)
+            {
+                JobSchedulers[i].Dispose();
+            }
         }
 
         protected override void Singleton_Awake()
         {
-            pendingJobs = new Queue<Job>();
-            scheduledJobs = new Queue<Job>();
-            activeJobs = ListPool.Get<Job>();
+            JobSchedulers = new List<JobScheduler>();
+            JobScheduler.Create();
+        }
+
+        internal void RemoveScheduler(JobScheduler scheduler)
+        {
+            if (JobSchedulers.IndexOf(scheduler) == -1)
+            {
+                LogManager.LogException($"attempting to remove {nameof(JobScheduler)} that does not exist in {nameof(JobManager)}");
+                return;
+            }
+
+            JobSchedulers.Remove(scheduler);
+            scheduler.OnEnable -= Handle_JobScheduler_OnEnable;
+        }
+
+        internal void AddScheduler(JobScheduler scheduler)
+        {
+            if (JobSchedulers.IndexOf(scheduler) != -1)
+            {
+                LogManager.LogException($"attempting to add {nameof(JobScheduler)} that already exists in {nameof(JobManager)}");
+                return;
+            }
+
+            JobSchedulers.Add(scheduler);
+            scheduler.OnEnable += Handle_JobScheduler_OnEnable;
+            scheduler.OnDispose += Handle_JobScheduler_OnDispose;
         }
 
         void LateUpdate()
         {
-            // End LateUpdate refresh
             enabled = false;
-
-            // Prevent newly created jobs from intefering with this update
-            // var pendingJobs = new Queue<Job>();
-            // foreach (var i in this.pendingJobs)
-            // {
-            //     pendingJobs.Enqueue(i);
-            // }
-            // this.pendingJobs.Clear();
-
-            // Handle/start pending jobs
-            while (pendingJobs.Count > 0)
+            for (int i = 0; i < JobSchedulers.Count; i++)
             {
-                Job job = pendingJobs.Dequeue();
-                if (job.IsPending) 
-                {
-                    job.IsPending = false;
-                    if (job.IsScheduled)
-                    {
-                        Schedule(job);
-                    }
-                    else
-                    {
-                        StartJob(job);
-                    }
-                }
+                JobSchedulers[i].Update();
             }
         }
 
-        internal void PendJob(Job job)
+        void Handle_JobScheduler_OnEnable(object sender, EventArgs e)
         {
-            job.IsPending = true;
-            pendingJobs.Enqueue(job);
             enabled = true;
         }
-        
-        void StartJob(Job job)
+
+        void Handle_JobScheduler_OnDispose(object sender, EventArgs e)
         {
-            // job.IsScheduled = false;
-            job.OnDispose += Handle_Job_OnDispose;
-            activeJobs.Add(job);
-            job.Start();
+            RemoveScheduler(sender as JobScheduler);
         }
 
-        void Schedule(Job job)
-        {   
-            scheduledJobs.Enqueue(job);
-            job = scheduledJobs.Peek();
-            if (!job.IsRunning)
-            {
-                StartJob(job);
-            }
-        }
-
-        void Handle_Job_OnDispose(Job job)
-        {
-            // Handle if active job
-            if (!activeJobs.Remove(job)) throw new Exception("impossible state reached");
-
-            // Handle if running scheduled job
-            if (!job.IsScheduled) return;
-
-            // Handle next scheduled job
-            if (scheduledJobs.Count == 0) throw new Exception("impossible state reached");
-            scheduledJobs.Dequeue();
-            if (scheduledJobs.Count == 0) return;
-            StartJob(scheduledJobs.Peek());
-        }
-
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
-        #region Editor
-#if UNITY_EDITOR
-
-        void OnValidate()
-        {
-            if (Application.isPlaying) return;
-            enabled = false;
-        }
-
-#endif
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

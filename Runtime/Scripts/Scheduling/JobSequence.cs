@@ -13,7 +13,7 @@ using UnityEngine;
 using DG.Tweening;
 namespace Kokowolo.Utilities.Scheduling
 {
-    public class JobSequence : Job
+    public partial class JobSequence : Job
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields
@@ -39,7 +39,7 @@ namespace Kokowolo.Utilities.Scheduling
             jobs = Utilities.ListPool.Get<Job>();
             routine = Routine();
             this.IsScheduled = isScheduled;
-            JobManager.Instance.PendJob(this);
+            JobScheduler.Main.PendJob(this);
         }
         
         IEnumerator Routine()
@@ -60,6 +60,7 @@ namespace Kokowolo.Utilities.Scheduling
             return false;
         }
 
+        public Job PrependWaitWhile(Func<bool> predicate) => Prepend(Utils.WaitWhile(predicate));
         public Job Prepend(Action function) => Prepend(function, -1);
         public Job Prepend(Action function, float time) => ValidateSequence() ? Prepend(new Job(function, time)) : null;
         public Job Prepend(IEnumerator routine) => ValidateSequence() ? Prepend(new Job(routine)) : null;
@@ -70,6 +71,7 @@ namespace Kokowolo.Utilities.Scheduling
             return job;
         }
 
+        public Job AppendWaitWhile(Func<bool> predicate) => Append(Utils.WaitWhile(predicate));
         public Job Append(Action function) => Append(function, -1);
         public Job Append(Action function, float time) => ValidateSequence() ? Append(new Job(function, time)) : null;
         public Job Append(IEnumerator routine) => ValidateSequence() ? Append(new Job(routine)) : null;

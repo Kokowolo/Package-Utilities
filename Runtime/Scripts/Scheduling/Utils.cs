@@ -31,6 +31,11 @@ namespace Kokowolo.Utilities.Scheduling
             }
             function.Invoke();
         }
+
+        public static IEnumerator WaitWhile(Func<bool> predicate)
+        {
+            yield return new WaitWhile(predicate);
+        }
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

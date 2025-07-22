@@ -4,7 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.118] - 2025-07-18
+## [0.0.120] - 2025-07-22
+### Added
+* `JobScheduler` to replace `JobManager`'s code, allowing for `JobManager` to run concurrent `Job` lanes
+* convenience function `Job.WaitForCompletion` which returns a `WaitForJob` `CustomYieldInstruction`
+* `Scheduling.Utils.WaitWhile` to return an `IEnumerator` from a `WaitWhile`
+* `Job.WaitWhile` to halt completion of a job until a `Func<bool>` parameter is false
+* `DOTweenJob` script for `Job` and `JobSequence` `DOTween` `WaitWhile` functionality
+* new tests to evaluate new `Job` system functionality and `DOTween` compatitbility
+* `Abs(this float value)` extension to `FloatExtensions`
+### Changed
+* `JobManager` to run multiple `JobScheduler`s and listen to their `OnEnable`/`OnDispose` events
+* `WaitForJobManager` to `WaitForJobScheduler`
+* `JobSystem.IsFree` to `JobScheduler.Main.IsFree`
+* `Job` and `JobSequence` to partial classes to allow for `DOTween` add ons to the classes
+* `Scheduling.AdditionalTests` to `Scheduling.CoreTests`
+* `Scheduling.Config` to be `Scheduling.TestController` and be a `MonoBehaviour` in the test scene
+* `Analytics/Diagnostics` to use `Scheduling.Job` system
+* `ScheduledEventManager` abd `ScheduledEvent` directory to be within `Scripts/Scheduling/Obsolete`
+
+## [0.0.119] - 2025-07-18
 ### Changed
 * `JobManager`'s `IsFree` property to be static and updated all references
 

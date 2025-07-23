@@ -23,13 +23,13 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public override bool keepWaiting => !scheduler.IsFree;
+        public override bool keepWaiting => scheduler != null && !scheduler.IsDisposed && !scheduler.IsFree;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public WaitForJobScheduler() : this(JobScheduler.Main) {}
+        public WaitForJobScheduler() : this(JobSystem.GetScheduler()) {}
         public WaitForJobScheduler(JobScheduler scheduler)
         {
             this.scheduler = scheduler;

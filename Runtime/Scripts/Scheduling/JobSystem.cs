@@ -17,6 +17,18 @@ namespace Kokowolo.Utilities.Scheduling
     public static class JobSystem
     {
         /*██████████████████████████████████████████████████████████*/
+        #region Events
+
+        // public static event Action OnFree; // TODO: hook this up to scheduler's free event, fire when IsFree
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+        
+        static JobScheduler scheduler;
+        
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         public static bool IsInitialized => JobManager.IsInitialized;
@@ -25,6 +37,7 @@ namespace Kokowolo.Utilities.Scheduling
         {
             get
             {
+                if (!JobManager.IsInitialized) return true;
                 bool isFree = true;
                 for (int i = 0; isFree && i < JobManager.Instance.JobSchedulers.Count; i++)
                 {
@@ -34,11 +47,43 @@ namespace Kokowolo.Utilities.Scheduling
             }
         }
 
-        public static int SchedulersCount => JobManager.Instance.JobSchedulers.Count;
+        public static int SchedulerCount => JobManager.IsInitialized ? JobManager.Instance.JobSchedulers.Count : 0;
+        
+        /// <summary>
+        /// Total number of active jobs; a job is considered active if it's not disposed
+        /// </summary>
+        public static int ActiveJobCount
+        {
+            get 
+            {
+                if (!JobManager.IsInitialized) return 0;
+                int count = 0;
+                for (int i = 0; i < JobManager.Instance.JobSchedulers.Count; i++)
+                {
+                    count += JobManager.Instance.JobSchedulers[i].ActiveJobCount;
+                }
+                return count;
+            }
+        }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
+
+        public static JobScheduler GetScheduler() // NOTE: this is not a property because this way we prevent auto serialization 
+        {
+            if (scheduler == null)
+            {
+                if (JobManager.Instance.JobSchedulers.Count == 0) JobScheduler.Create();
+                scheduler = JobManager.Instance.JobSchedulers[0];
+            }
+            return scheduler;
+        }
+
+        public static void SetScheduler(JobScheduler scheduler)
+        {
+            JobSystem.scheduler = scheduler;
+        }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

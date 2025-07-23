@@ -13,13 +13,15 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities.Scheduling
 {
-    public class JobScheduler : IDisposable
+    public class JobScheduler : IEquatable<JobScheduler>, IDisposable
     {
         /*██████████████████████████████████████████████████████████*/
         #region Events
 
         internal event EventHandler OnEnable;
         internal event EventHandler OnDispose;
+
+        public event Action OnFree;
         
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -35,7 +37,8 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public static JobScheduler Main => JobManager.Instance.JobSchedulers.Count > 0 ? JobManager.Instance.JobSchedulers[0] : null;
+        static int id = 0;
+        internal int instanceId;
 
         bool _Enabled = false;
         public bool Enabled 
@@ -53,7 +56,13 @@ namespace Kokowolo.Utilities.Scheduling
         }
 
         public bool IsFree => pendingJobs.Count == 0 && scheduledJobs.Count == 0 && !IsRunning;
+        internal bool IsDisposed => disposed;
         bool IsRunning => activeJobs.Count != 0;
+
+        /// <summary>
+        /// Total number of active jobs; a job is considered active if it's not disposed
+        /// </summary>
+        public int ActiveJobCount => pendingJobs.Count + scheduledJobs.Count + activeJobs.Count;
         
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -66,15 +75,19 @@ namespace Kokowolo.Utilities.Scheduling
             if (disposed) return;
             disposed = true;
 
+            StopAllJobs();
+
+            bool isJobSystemScheduler = JobSystem.GetScheduler() == this;
             OnDispose?.Invoke(this, EventArgs.Empty);
-            // StopAllCoroutines(); // TODO: 
 
             OnEnable = null;
             OnDispose = null;
+            OnFree = null;
 
             pendingJobs = null;
             scheduledJobs = null;
             ListPool.Release(ref activeJobs);
+            if (isJobSystemScheduler) JobSystem.SetScheduler(null);
         }
 
         public static JobScheduler Create()
@@ -84,8 +97,9 @@ namespace Kokowolo.Utilities.Scheduling
             return jobScheduler;
         }
         
-        internal JobScheduler()
+        JobScheduler()
         {
+            instanceId = id++;
             pendingJobs = new Queue<Job>();
             scheduledJobs = new Queue<Job>();
             activeJobs = ListPool.Get<Job>();
@@ -123,6 +137,23 @@ namespace Kokowolo.Utilities.Scheduling
             }
         }
 
+        public void StopAllJobs()
+        {
+            for (int i = pendingJobs.Count - 1; i >= 0 ; i--)
+            {
+                pendingJobs.Dequeue().Dispose();
+            }
+            for (int i = scheduledJobs.Count - 1; i >= 0 ; i--)
+            {
+                scheduledJobs.Dequeue().Dispose();
+            }
+            for (int i = activeJobs.Count - 1; i >= 0 ; i--)
+            {
+                activeJobs[i].OnDispose -= Handle_Job_OnDispose;
+                activeJobs[i].Dispose();
+            }
+        }
+
         internal void PendJob(Job job)
         {
             job.IsPending = true;
@@ -154,13 +185,38 @@ namespace Kokowolo.Utilities.Scheduling
             if (!activeJobs.Remove(job)) throw new Exception("impossible state reached");
 
             // Handle if running scheduled job
-            if (!job.IsScheduled) return;
+            if (job.IsScheduled)
+            {
+                // Handle next scheduled job
+                if (scheduledJobs.Count == 0) throw new Exception("impossible state reached");
+                scheduledJobs.Dequeue();
+                if (scheduledJobs.Count != 0)
+                {
+                    StartJob(scheduledJobs.Peek());
+                }
+            }
+            if (IsFree) OnFree?.Invoke();
+        }
 
-            // Handle next scheduled job
-            if (scheduledJobs.Count == 0) throw new Exception("impossible state reached");
-            scheduledJobs.Dequeue();
-            if (scheduledJobs.Count == 0) return;
-            StartJob(scheduledJobs.Peek());
+        public bool Equals(JobScheduler other) => this == other;
+        public override bool Equals(object obj) => Equals(obj as Job);
+        public static bool operator !=(JobScheduler a, JobScheduler b) => !(a == b);
+        public static bool operator ==(JobScheduler a, JobScheduler b)
+        {
+            if (ReferenceEquals(a, b)) return true;
+            if (a is null) return false;
+            if (b is null) return false;
+            return a.instanceId == b.instanceId;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(instanceId);
+        }
+
+        public override string ToString()
+        {
+            return $"{nameof(JobScheduler)}:{instanceId}";
         }
 
         #endregion

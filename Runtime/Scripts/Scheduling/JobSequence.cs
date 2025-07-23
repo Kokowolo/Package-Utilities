@@ -39,7 +39,7 @@ namespace Kokowolo.Utilities.Scheduling
             jobs = Utilities.ListPool.Get<Job>();
             routine = Routine();
             this.IsScheduled = isScheduled;
-            JobScheduler.Main.PendJob(this);
+            JobSystem.GetScheduler().PendJob(this);
         }
         
         IEnumerator Routine()

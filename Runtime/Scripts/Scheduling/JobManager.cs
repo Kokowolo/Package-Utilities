@@ -20,10 +20,9 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        internal static bool IsInitialized => instance;
-
+        internal static bool IsInitialized => instance; // used to check if Instance exists without lazy init
         static JobManager instance;
-        internal static JobManager Instance 
+        internal static JobManager Instance
         {
             get
             {
@@ -62,7 +61,6 @@ namespace Kokowolo.Utilities.Scheduling
             instance = this;
             DontDestroyOnLoad(this);
             JobSchedulers = new List<JobScheduler>();
-            AddScheduler(new JobScheduler());
         }
 
         internal void RemoveScheduler(JobScheduler scheduler)

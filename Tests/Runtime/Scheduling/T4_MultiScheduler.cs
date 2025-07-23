@@ -29,7 +29,17 @@ namespace Scheduling
         [OneTimeSetUp] 
         public virtual void OneTimeSetUp()
         {
+            TestUtils.DestroyImmediateAll();
             TestUtils.LoadTestScene(TestController.ScenePath);
+        }
+
+        [TearDown]
+        public virtual void TearDown()
+        {
+            while (JobSystem.SchedulerCount > 0)
+            {
+                JobSystem.GetScheduler().Dispose();
+            }
         }
 
         #endregion
@@ -39,37 +49,39 @@ namespace Scheduling
         [UnityTest]
         public IEnumerator _00()
         {
+            Debug.Assert(!JobSystem.IsInitialized);
             JobScheduler scheduler = JobScheduler.Create();
-            Debug.Assert(scheduler != JobScheduler.Main);
+            Debug.Assert(JobSystem.GetScheduler() == scheduler);
             scheduler.Dispose();
-            Debug.Assert(JobSystem.SchedulersCount == 1);
+            Debug.Assert(JobSystem.IsInitialized);
+            Debug.Assert(JobSystem.SchedulerCount == 0);
             yield return null;
         }
 
         [UnityTest]
         public IEnumerator _01()
         {
-            // JobScheduler scheduler = JobScheduler.Create();
-            // Debug.Assert(scheduler != JobScheduler.Main);
-            
+            T2_Core t2_Core = new T2_Core();
+            Job p0 = Job.Get(t2_Core._00());
+            JobSystem.SetScheduler(JobScheduler.Create());
+            Job p1 = Job.Get(t2_Core._01());
+            yield return new WaitForJobScheduler();
+            Debug.Assert(JobSystem.SchedulerCount == 2);
+        }
+
+        [UnityTest]
+        public IEnumerator _02()
+        {
             T2_Core t2_Core = new T2_Core();
             Job p0 = Job.Get(t2_Core._00());
             Job p1 = Job.Get(t2_Core._01());
-            yield return new WaitForJobScheduler();
-
-            // // Prepare GC check
-            // WeakReference r0 = new WeakReference(p0);
-            // WeakReference r1 = new WeakReference(p1);
-            
-            // // Demo check
-            
-            // Debug.Assert(p0.IsDisposed && p1.IsDisposed);
-
-            // // Evaluate GC
-            // p0 = p1 = p2 = null;
-            // yield return null;
-            // GC.Collect();
-            // Debug.Assert(!r0.IsAlive && !r1.IsAlive);
+            JobScheduler scheduler = JobSystem.GetScheduler();
+            Debug.Assert(JobSystem.SchedulerCount == 1);
+            scheduler.Dispose();
+            yield return new WaitForJob(p0);
+            yield return new WaitForJob(p1);
+            yield return new WaitForJobScheduler(scheduler);
+            Debug.Assert(JobSystem.SchedulerCount == 0);
         }
 
         #endregion

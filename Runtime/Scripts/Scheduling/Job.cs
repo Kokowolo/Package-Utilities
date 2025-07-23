@@ -94,7 +94,7 @@ namespace Kokowolo.Utilities.Scheduling
         Job(IEnumerator routine, bool isScheduled) : this(routine)
         {
             this.IsScheduled = isScheduled;
-            JobScheduler.Main.PendJob(this);
+            JobSystem.GetScheduler().PendJob(this);
         }
 
         // called by JobSequence specifically and pend constructor

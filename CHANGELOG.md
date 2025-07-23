@@ -4,12 +4,26 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.122] - 2025-07-23
+### Added 
+* `OnFree` event to `JobScheduler`
+* unique ids to `JobScheduler`, a ToString() method, and `IEquatable` interface with its methods 
+* properties within `JobScheduler` and `JobSystem` to get the number of active `Job`s
+* `StopAllJobs` to `JobScheduler`
+* additional unit tests to verify `Scheduling` framework functionality 
+### Fixed
+* behavior within `JobManager` where a `JobScheduler` would be half-lazy-init (now fully lazy-init)
+* bug within `WaitForJobScheduler` where a `JobScheduler` could be killed without `WaitForJobScheduler` handling 
+### Removed
+* `JobScheduler.Main` in favor of `JobSystem.GetScheduler()`
+* `EventSystem` from `Scheduling`'s test scene
+
 ## [0.0.121] - 2025-07-23
 ### Added
 * `Kokowolo.Utilities.Tests.Utils`
 * `JobSystem` to replace JobManager as the core script controlling all things `Scheduling`
 * `IsFree` to `JobSystem` which checks to see if all its `JobScheduler`s are free
-* `SchedulersCount` to `JobSystem` to get the number of Schedulers
+* `SchedulersCount` to `JobSystem` to get the number of `JobScheduler`s
 * lazy init to `JobManager`
 * unit tests for multiple schedulers and lazy init
 ### Changed

@@ -53,7 +53,7 @@ namespace Scheduling
             Debug.Assert(TestController.Instance);
             Debug.Assert(!JobSystem.IsInitialized);
             Debug.Assert(JobSystem.IsFree);
-            Debug.Assert(JobSystem.IsInitialized);
+            Debug.Assert(!JobSystem.IsInitialized);
             yield return null; // Wait for instance to set... for some reason this cant run in a normal Test
         }
 
@@ -62,7 +62,7 @@ namespace Scheduling
         {
             Debug.Assert(TestController.Instance);
             Debug.Assert(!JobSystem.IsInitialized);
-            Debug.Assert(JobScheduler.Main.IsFree);
+            Debug.Assert(JobSystem.GetScheduler().IsFree);
             Debug.Assert(JobSystem.IsInitialized);
             yield return null; // Wait for instance to set... for some reason this cant run in a normal Test
         }

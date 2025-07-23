@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.121] - 2025-07-23
+### Added
+* `Kokowolo.Utilities.Tests.Utils`
+* `JobSystem` to replace JobManager as the core script controlling all things `Scheduling`
+* `IsFree` to `JobSystem` which checks to see if all its `JobScheduler`s are free
+* `SchedulersCount` to `JobSystem` to get the number of Schedulers
+* lazy init to `JobManager`
+* unit tests for multiple schedulers and lazy init
+### Changed
+* `JobManager` to be an internal class and hidden from the add component menu
+* `MonoBehaviourSingleton` to have a `NOTE:` comment and a better `Header` for its Editor drawing
+* `ScheduledEventManager`, `ScheduledEvent`, and prefab to be within `Runtime/Obsolete`
+* `JobScheduler`'s constructor to be internal so `JobScheduler.Main` can never be a scheduler that is not `JobManager`'s
+* unit test naming convention
+* unit test function calling in `SetUp`, `TearDown`, etc.
+### Removed
+* `JobManager` prefab from package since `JobManager` now lazy inits
+* `Utils` class within `Scheduling` test namespace in favor of its `TestController` and `Kokowolo.Utilities.Tests.Utils`
+
 ## [0.0.120] - 2025-07-22
 ### Added
 * `JobScheduler` to replace `JobManager`'s code, allowing for `JobManager` to run concurrent `Job` lanes
@@ -21,7 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Scheduling.AdditionalTests` to `Scheduling.CoreTests`
 * `Scheduling.Config` to be `Scheduling.TestController` and be a `MonoBehaviour` in the test scene
 * `Analytics/Diagnostics` to use `Scheduling.Job` system
-* `ScheduledEventManager` abd `ScheduledEvent` directory to be within `Scripts/Scheduling/Obsolete`
+* `ScheduledEventManager` and `ScheduledEvent` directory to be within `Scripts/Scheduling/Obsolete`
 
 ## [0.0.119] - 2025-07-18
 ### Changed

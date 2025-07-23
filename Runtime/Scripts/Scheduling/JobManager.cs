@@ -14,10 +14,26 @@ using Kokowolo.Utilities;
 
 namespace Kokowolo.Utilities.Scheduling
 {
-    public class JobManager : MonoBehaviourSingleton<JobManager>
+    [AddComponentMenu("")] // Hide in menu
+    internal class JobManager : MonoBehaviour
     {
         /*██████████████████████████████████████████████████████████*/
         #region Properties
+
+        internal static bool IsInitialized => instance;
+
+        static JobManager instance;
+        internal static JobManager Instance 
+        {
+            get
+            {
+                if (!instance)
+                {
+                    new GameObject($"[Kokowolo.Utilities {nameof(JobManager)}]").AddComponent<JobManager>();
+                }
+                return instance;
+            }
+        }
 
         internal List<JobScheduler> JobSchedulers;
 
@@ -25,18 +41,28 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected override void Singleton_OnDestroy()
+        void OnDestroy()
         {
+            if (instance != this) return;
+
             for (int i = JobSchedulers.Count - 1; i >= 0 ; i--)
             {
                 JobSchedulers[i].Dispose();
             }
         }
 
-        protected override void Singleton_Awake()
+        void Awake()
         {
+            if (instance)
+            {
+                LogManager.LogError("instance already exists, destroying GameObject");
+                DestroyImmediate(gameObject);
+                return;
+            }
+            instance = this;
+            DontDestroyOnLoad(this);
             JobSchedulers = new List<JobScheduler>();
-            JobScheduler.Create();
+            AddScheduler(new JobScheduler());
         }
 
         internal void RemoveScheduler(JobScheduler scheduler)

@@ -33,6 +33,8 @@ namespace Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
+        public const string ScenePath = "Packages/com.kokowolo.utilities/Tests/Runtime/Scheduling/Scene.unity";
+
         UnityEngine.UI.Text Text => transform.GetChild(0).GetComponent<UnityEngine.UI.Text>();
 
         public static bool UseUserInput => Instance.useUserInput;

@@ -13,14 +13,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
+using TestUtils = Kokowolo.Utilities.Tests.Utils;
 
 using Kokowolo.Utilities.Scheduling;
 
 namespace Scheduling
 {
-    public class ScheduledEventManagerFunctionality
+    public class T0_OldScheduledEventManagerFunctionality
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -30,7 +29,7 @@ namespace Scheduling
         [OneTimeSetUp] 
         public virtual void OneTimeSetUp()
         {
-            Utils.EnsureTestSceneIsLoaded();
+            TestUtils.LoadTestScene(TestController.ScenePath);
         }
 
         #endregion

@@ -35,8 +35,7 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public static JobScheduler Main => 
-            JobManager.Instance && JobManager.Instance.JobSchedulers.Count > 0 ? JobManager.Instance.JobSchedulers[0] : null;
+        public static JobScheduler Main => JobManager.Instance.JobSchedulers.Count > 0 ? JobManager.Instance.JobSchedulers[0] : null;
 
         bool _Enabled = false;
         public bool Enabled 
@@ -80,16 +79,16 @@ namespace Kokowolo.Utilities.Scheduling
 
         public static JobScheduler Create()
         {
-            return new JobScheduler();
+            JobScheduler jobScheduler = new JobScheduler();
+            JobManager.Instance.AddScheduler(jobScheduler);
+            return jobScheduler;
         }
         
-        JobScheduler()
+        internal JobScheduler()
         {
             pendingJobs = new Queue<Job>();
             scheduledJobs = new Queue<Job>();
             activeJobs = ListPool.Get<Job>();
-
-            JobManager.Instance.AddScheduler(this);
         }
 
         internal void Update()

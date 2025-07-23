@@ -20,7 +20,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Fields
 
-        [Header("Singleton Settings")]
+        [Header("Settings: Singleton")]
         [Tooltip("whether Object.DontDestroyOnLoad() is called on this")]
         [SerializeField] protected bool dontDestroyOnLoad;
         [Tooltip("whether this GameObject unparents itself")]
@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        T _Instance => this as T;
+        T _Instance => this as T; // NOTE: needed because `this` is MonoBehaviourSingleton<T> where `T` is a different type
         public static T Instance => Singleton.Get<T>();
 
         #endregion

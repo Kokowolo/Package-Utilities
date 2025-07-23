@@ -13,14 +13,13 @@ using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-using UnityEditor.SceneManagement;
-using UnityEngine.SceneManagement;
+using TestUtils = Kokowolo.Utilities.Tests.Utils;
 
 using Kokowolo.Utilities.Scheduling;
 
 namespace Scheduling
 {
-    public class CoreTests
+    public class T2_Core
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -30,7 +29,7 @@ namespace Scheduling
         [OneTimeSetUp] 
         public virtual void OneTimeSetUp()
         {
-            Utils.EnsureTestSceneIsLoaded();
+            TestUtils.LoadTestScene(TestController.ScenePath);
         }
 
         #endregion
@@ -39,14 +38,6 @@ namespace Scheduling
 
         [UnityTest]
         public IEnumerator _00()
-        {
-            Debug.Assert(TestController.Instance);
-            Debug.Assert(JobManager.Instance);
-            yield return null; // Wait for instance to set... for some reason this cant run in a normal Test
-        }
-
-        [UnityTest]
-        public IEnumerator _01_0()
         {
             // Demo main
             int value = 0;
@@ -68,7 +59,9 @@ namespace Scheduling
 
             // Demo check
             Debug.Assert(value == 0);
-            yield return new WaitForJobScheduler();
+            yield return new WaitForJob(p0);
+            yield return new WaitForJob(p1);
+            yield return new WaitForJob(p2);
             Debug.Assert(value == 3);
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 
@@ -80,7 +73,7 @@ namespace Scheduling
         }
 
         [UnityTest]
-        public IEnumerator _01_1()
+        public IEnumerator _01()
         {
             // Demo main
             int value = 0;
@@ -104,7 +97,9 @@ namespace Scheduling
 
             // Demo check
             Debug.Assert(value == 0, $"v1:{value}");
-            yield return new WaitForJobScheduler();
+            yield return new WaitForJob(p0);
+            yield return new WaitForJob(p1);
+            yield return new WaitForJob(p2);
             Debug.Assert(value == 6, $"v1:{value}");
             Debug.Assert(p0.IsDisposed && p1.IsDisposed && p2.IsDisposed);
 

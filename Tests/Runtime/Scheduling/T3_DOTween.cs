@@ -19,11 +19,13 @@ using DG.Tweening;
 using UnityEditor.SceneManagement;
 using UnityEngine.SceneManagement;
 
+using TestUtils = Kokowolo.Utilities.Tests.Utils;
+
 using Kokowolo.Utilities.Scheduling;
 
 namespace Scheduling
 {
-    public class DOTweenScheduling
+    public class T3_DOTween
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields
@@ -39,7 +41,7 @@ namespace Scheduling
         [OneTimeSetUp] 
         public virtual void OneTimeSetUp()
         {
-            Utils.EnsureTestSceneIsLoaded();
+            TestUtils.LoadTestScene(TestController.ScenePath);
         }
 
         #endregion

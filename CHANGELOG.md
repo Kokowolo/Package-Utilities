@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.123] - 2025-07-25
+### Added 
+* static `TryGetComponent` to `WorldCursorManager`
+* static `GetComponent` to `WorldCursorManager`
+* EditorOnly initialization to `ScriptableObjectSingleton<T>` if `PrefabManager.Get<T>` fails
+* `IntExtensions` for some mathematical extension functions
+* `ClampIndex` and `ContainsIndex` to `IListExtensions`
+### Changed
+* `HasValidHitInfo` to `ValidHitInfo` in `WorldCursorManager`
+* `PrefabManager` methods to assert that `T` is of type `UnityEngine.Object`
+### Removed
+* `DefaultExecutionOrder` from `WorldCursorManager`
+### Fixed
+* null reference bug within `PrefabManager.Get<T>`
+
 ## [0.0.122] - 2025-07-23
 ### Added 
 * `OnFree` event to `JobScheduler`

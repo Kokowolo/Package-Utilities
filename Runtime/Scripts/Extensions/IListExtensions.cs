@@ -82,6 +82,17 @@ namespace Kokowolo.Utilities
             list[indexB] = temp;
         }
 
+        public static bool ContainsIndex<T>(this IList<T> list, int index)
+        {
+            if (list.Count == 0) return false;
+            return -1 < index && index < list.Count;
+        }
+
+        public static int ClampIndex<T>(this IList<T> list, int index)
+        {
+            return index.Clamp(0, list.Count - 1);
+        }
+
         public static string ToString<T>(this IList<T> list, bool formatElements, bool withNewlineCharacter = false)
         {
             if (formatElements)

@@ -21,7 +21,8 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("References")]
-        // [SerializeField] GameObject[] gameObjects = null;
+        // TODO: [BED-121] UnityEngine.Object PrefabManager: switch everything to UnityEngine.Object
+        // [SerializeField] UnityEngine.Object[] objects = null;
         [SerializeField] MonoBehaviourContainer[] monoBehaviours = null;
         [SerializeField] ScriptableObjectContainer[] scriptableObjects = null;
 
@@ -35,14 +36,15 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static T Get<T>()
+        public static T Get<T>() where T : UnityEngine.Object
         {
+            if (Instance == null) return null;
             if (Prefab<T>.prefab == null) InitPrefab<T>();
             if (Prefab<T>.prefab == null) Debug.LogError($"[{nameof(PrefabManager)}] No prefab of type, {typeof(T)}, found");
             return Prefab<T>.prefab;
         }
 
-        public static void InitPrefab<T>()
+        public static void InitPrefab<T>() where T : UnityEngine.Object
         {
             if (typeof(T).IsSubclassOf(typeof(MonoBehaviour))) 
             {
@@ -62,7 +64,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        void InitMonoBehaviourPrefab<T>()
+        void InitMonoBehaviourPrefab<T>() where T : UnityEngine.Object
         {
             foreach (MonoBehaviourContainer container in monoBehaviours)
             {
@@ -76,7 +78,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        void InitScriptableObjectPrefab<T>()
+        void InitScriptableObjectPrefab<T>() where T : UnityEngine.Object
         {
             foreach (ScriptableObjectContainer container in scriptableObjects)
             {
@@ -108,7 +110,7 @@ namespace Kokowolo.Utilities
             [SerializeField] public ScriptableObject[] scriptableObjects;
         }
 
-        static class Prefab<T>
+        static class Prefab<T> where T : UnityEngine.Object
         {
             public static T prefab;
         }

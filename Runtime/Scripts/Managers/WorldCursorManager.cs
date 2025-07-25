@@ -14,7 +14,6 @@ using System;
 using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
-[DefaultExecutionOrder(-100)]
 public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
 {
     /*██████████████████████████████████████████████████████████*/
@@ -52,9 +51,8 @@ public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
         set => Instance.layerMask = value; 
     }
 
+    public static bool ValidHitInfo => HitInfo.transform != null;
     public static RaycastHit HitInfo => Instance.hitInfo;
-
-    public static bool HasValidHitInfo => HitInfo.transform != null;
 
     static bool doRaycast = true;
 
@@ -119,6 +117,19 @@ public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
     {
         Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask, maxDistance, camera);
         return hitInfo.point;
+    }
+
+    public static new bool TryGetComponent<T>(out T component) where T : Component
+    {
+        if (ValidHitInfo) return HitInfo.transform.TryGetComponent(out component);
+        component = null;
+        return false;
+    }
+
+    public static new T GetComponent<T>() where T : Component
+    {
+        if (ValidHitInfo) return HitInfo.transform.GetComponent<T>();
+        return null;
     }
 
     #endregion

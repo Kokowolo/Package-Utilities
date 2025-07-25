@@ -15,6 +15,15 @@ namespace Kokowolo.Utilities
     public class ScriptableObjectSingleton<T> : ScriptableObject where T : ScriptableObject
     {
         /*██████████████████████████████████████████████████████████*/
+        #region Settings
+
+#if UNITY_EDITOR
+        [Header("Editor Settings: Singleton")]
+        [SerializeField] bool findFirstAssetByTypeWhileInEditor;
+#endif
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Properties
 
         static T _Instance;
@@ -26,23 +35,20 @@ namespace Kokowolo.Utilities
                 {
                     _Instance = PrefabManager.Get<T>();
                 }
+#if UNITY_EDITOR
+                if (!Application.isPlaying)
+                {
+                    if (!_Instance)
+                    {
+                        T asset = Editor.EditorOnlyUtils.FindFirstAssetByType<T>();
+                        ScriptableObjectSingleton<T> singleton = asset as ScriptableObjectSingleton<T>;
+                        if (singleton.findFirstAssetByTypeWhileInEditor) _Instance = asset;
+                    }
+                }
+#endif
                 return _Instance;
             }
         }
-
-//             // TODO: move this to ScriptableObjectSingleton?
-//         public static T Instance 
-//         {
-//             get
-//             {
-// #if UNITY_EDITOR
-//                 // TODO: move to EditorOnlyUtils within Kokowolo.Utilities and surround with UNITY_EDITOR compiler directive
-//                 Kokowolo.Utilities.EditorOnly.EditorUtils.FindFirstAssetByType<T>()
-// #else
-//                 return PrefabManager.Get<Struggle>();
-// #endif
-//             }
-//         }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

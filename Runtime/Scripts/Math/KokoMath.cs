@@ -25,7 +25,7 @@ namespace Kokowolo.Utilities
 
         public static int Mod(int dividend, int divisor)
         {
-            // NOTE: dividend % divisor yields an incorrect result when the dividend is negative; this func corrects that
+            // NOTE: dividend % divisor yields an incorrect result when the dividend is negative; this method corrects that
             return (dividend % divisor + divisor) % divisor;
         }
 

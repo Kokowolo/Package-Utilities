@@ -40,16 +40,6 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        void OnDestroy()
-        {
-            if (instance != this) return;
-
-            for (int i = JobSchedulers.Count - 1; i >= 0 ; i--)
-            {
-                JobSchedulers[i].Dispose();
-            }
-        }
-
         void Awake()
         {
             if (instance)
@@ -61,6 +51,16 @@ namespace Kokowolo.Utilities.Scheduling
             instance = this;
             DontDestroyOnLoad(this);
             JobSchedulers = new List<JobScheduler>();
+        }
+
+        void OnDestroy()
+        {
+            if (instance != this) return;
+
+            for (int i = JobSchedulers.Count - 1; i >= 0 ; i--)
+            {
+                JobSchedulers[i].Dispose();
+            }
         }
 
         internal void RemoveScheduler(JobScheduler scheduler)

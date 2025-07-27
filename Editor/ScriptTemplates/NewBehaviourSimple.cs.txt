@@ -10,7 +10,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-#ROOTNAMESPACEBEGIN#
+namespace Kokowolo.
+{
     public class #SCRIPTNAME# : MonoBehaviour
     {
         /*██████████████████████████████████████████████████████████*/
@@ -24,14 +25,14 @@ using UnityEngine;
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        void OnDestroy()
-        {
-
-        }
-
         void Awake()
         {
             
+        }
+
+        void OnDestroy()
+        {
+
         }
 
         void Start()
@@ -42,4 +43,4 @@ using UnityEngine;
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }
-#ROOTNAMESPACEEND#
+}

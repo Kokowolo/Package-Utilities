@@ -32,19 +32,19 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        void OnDestroy()
-        {
-            if (isSingletonInstance) 
-            {
-                singletonInstanceNames.Remove(name);
-            }
-        }
-
         void Awake()
         {
             if (willHaveSingletonInstance && HasSingletonInstanceWithName(name)) 
             {
                 Destroy(gameObject);
+            }
+        }
+
+        void OnDestroy()
+        {
+            if (isSingletonInstance) 
+            {
+                singletonInstanceNames.Remove(name);
             }
         }
 

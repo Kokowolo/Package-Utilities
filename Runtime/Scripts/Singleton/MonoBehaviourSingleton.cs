@@ -37,14 +37,6 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected void OnDestroy()
-        {
-            if (Singleton.IsSingleton(_Instance))
-            {
-                Singleton_OnDestroy();
-            }
-        }
-
         protected void Awake() 
         {
             Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject);
@@ -54,11 +46,11 @@ namespace Kokowolo.Utilities
             }
         }
 
-        protected void OnDisable() 
+        protected void OnDestroy()
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                Singleton_OnDisable();
+                Singleton_OnDestroy();
             }
         }
 
@@ -69,12 +61,20 @@ namespace Kokowolo.Utilities
                 Singleton_OnEnable();
             }
         }
+
+        protected void OnDisable() 
+        {
+            if (Singleton.IsSingleton(_Instance))
+            {
+                Singleton_OnDisable();
+            }
+        }
         
-        protected virtual void Singleton_OnDestroy() {}
         protected virtual void Singleton_Awake() {}
+        protected virtual void Singleton_OnDestroy() {}
         
-        protected virtual void Singleton_OnDisable() {}
         protected virtual void Singleton_OnEnable() {}
+        protected virtual void Singleton_OnDisable() {}
 
         public static T FindInstance() => Singleton.Get<T>(findObjectOfType: true);
 

@@ -102,13 +102,6 @@ namespace Kokowolo.Utilities
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
-
-        #region Unity Functions
-
-        void OnValidate()
-        {
-            if (maxVerticalAngle < minVerticalAngle) maxVerticalAngle = minVerticalAngle;
-        }
         
         void Awake()
         {
@@ -151,10 +144,6 @@ namespace Kokowolo.Utilities
 
             SetPositionAndRotation(lookPosition, lookRotation);
         }
-
-        #endregion
-
-        #region Other Functions
 
         void SetPositionAndRotation(Vector3 position, Quaternion rotation)
         {
@@ -260,7 +249,16 @@ namespace Kokowolo.Utilities
         }
 
         #endregion
-
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
+#if UNITY_EDITOR
+        
+        void OnValidate()
+        {
+            if (maxVerticalAngle < minVerticalAngle) maxVerticalAngle = minVerticalAngle;
+        }
+        
+#endif
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

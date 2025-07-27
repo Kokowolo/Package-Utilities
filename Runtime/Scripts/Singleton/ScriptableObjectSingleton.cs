@@ -31,10 +31,6 @@ namespace Kokowolo.Utilities
         {
             get
             {
-                if (!_Instance)
-                {
-                    _Instance = PrefabManager.Get<T>();
-                }
 #if UNITY_EDITOR
                 if (!Application.isPlaying)
                 {
@@ -42,10 +38,18 @@ namespace Kokowolo.Utilities
                     {
                         T asset = Editor.EditorOnlyUtils.FindFirstAssetByType<T>();
                         ScriptableObjectSingleton<T> singleton = asset as ScriptableObjectSingleton<T>;
-                        if (singleton.findFirstAssetByTypeWhileInEditor) _Instance = asset;
+                        if (singleton.findFirstAssetByTypeWhileInEditor) 
+                        {
+                            LogManager.Log($"{typeof(T)} instance set");
+                            _Instance = asset;
+                        }
                     }
                 }
 #endif
+                if (!_Instance)
+                {
+                    _Instance = PrefabManager.Get<T>();
+                }
                 return _Instance;
             }
         }

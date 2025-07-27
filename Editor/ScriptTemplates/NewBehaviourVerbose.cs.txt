@@ -15,7 +15,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Kokowolo.Utilities;
 
-#ROOTNAMESPACEBEGIN#
+namespace Kokowolo.
+{
     public class #SCRIPTNAME# : MonoBehaviour
     {
         /*██████████████████████████████████████████████████████████*/
@@ -61,15 +62,15 @@ using Kokowolo.Utilities;
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        void OnDestroy()
-        {
-
-        }
-
         void Awake()
         {
             Singleton<#SCRIPTNAME#>.Set(this);
             Subscribe();
+        }
+
+        void OnDestroy()
+        {
+
         }
 
         void Start()
@@ -87,12 +88,12 @@ using Kokowolo.Utilities;
 
         }
 
-        public void UnityUI_SomeButton_OnClick()
+        void SomeFunction()
         {
 
         }
 
-        void SomeFunction()
+        public void UnityUI_SomeButton_OnClick()
         {
 
         }
@@ -134,8 +135,7 @@ using Kokowolo.Utilities;
         }
 
 #endif
-
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }
-#ROOTNAMESPACEEND#
+}

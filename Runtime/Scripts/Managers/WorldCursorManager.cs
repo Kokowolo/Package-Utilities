@@ -14,6 +14,7 @@ using System;
 using UnityEngine.InputSystem;
 using Kokowolo.Utilities;
 
+[Obsolete("WorldCursorManager has been marked as Obsolete, please use new WorldCursor instance instead")]
 public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
 {
     /*██████████████████████████████████████████████████████████*/

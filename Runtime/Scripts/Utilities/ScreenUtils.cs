@@ -37,6 +37,10 @@ namespace Kokowolo.Utilities
             return camera.ScreenToWorldPoint(screenPoint);
         }
 
+        /// <summary>
+        /// Gets world position of mouse via depth from camera; use `Raycasting.RaycastFromMouseScreenPoint` if collision detection is
+        /// needed
+        /// </summary>
         public static Vector3 GetMouseWorldPoint(Camera camera, float depth)
         {
             Vector3 screenPoint = InputManager.GetMouseScreenPoint();
@@ -44,16 +48,28 @@ namespace Kokowolo.Utilities
             return ScreenPointToWorld(camera, screenPoint);
         }
 
+        /// <summary>
+        /// Gets world position of mouse via the `nearClipPlane` of `camera`; use `Raycasting.RaycastFromMouseScreenPoint` if collision 
+        /// detection is needed
+        /// </summary>
         public static Vector3 GetMouseWorldPoint(Camera camera)
         {
             return GetMouseWorldPoint(camera, camera.nearClipPlane);
         }
 
+        /// <summary>
+        /// Gets world position of mouse via `depth` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if collision detection 
+        /// is needed
+        /// </summary>
         public static Vector3 GetMouseWorldPoint(float depth)
         {
             return GetMouseWorldPoint(Camera.main, depth);
         }
 
+        /// <summary>
+        /// Gets world position of mouse via the `nearClipPlane` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if 
+        /// collision detection is needed
+        /// </summary>
         public static Vector3 GetMouseWorldPoint()
         {
             return GetMouseWorldPoint(Camera.main);

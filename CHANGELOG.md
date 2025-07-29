@@ -4,7 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.123] - 2025-07-27
+## [0.0.125] - 2025-07-29
+### Added
+* `WorldCursor`, an instance focused evolution of `WorldCursorManager`
+* additional information to `ScreenUtils` functions, better documenting the API
+### Deprecated
+* `WorldCursorManager` in favor of needing multiple `WorldCursors`
+
+## [0.0.124] - 2025-07-27
 ### Added
 * `AsyncOperationExtensions` to `Extensions`
 ### Changed 

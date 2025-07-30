@@ -1,4 +1,3 @@
-#if UNITY_EDITOR
 /* 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: July 17, 2025
@@ -7,6 +6,10 @@
  *      File Line Length: ~140
  */
 
+#if UNITY_EDITOR
+
+using System;
+using System.Reflection;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -27,11 +30,36 @@ namespace Kokowolo.Utilities.Editor
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static T FindFirstAssetByType<T>() where T : Object
+        public static T FindFirstAssetByType<T>() where T : UnityEngine.Object => (T) FindFirstAssetByType(typeof(T));
+        public static object FindFirstAssetByType(Type type)
         {
-            var guid = AssetDatabase.FindAssets($"t:{typeof(T).Name}")[0];
+            if (!type.IsSubclassOf(typeof(UnityEngine.Object)))
+            {
+                LogManager.LogError($"type {type} is not a UnityEngine.Object");
+                return null;
+            }
+            var guid = AssetDatabase.FindAssets($"t:{type.Name}")[0];
             string path = AssetDatabase.GUIDToAssetPath(guid);
-            return AssetDatabase.LoadAssetAtPath<T>(path);
+            return AssetDatabase.LoadAssetAtPath(path, type);
+        }
+
+        public static Type GetType(string typeName)
+        {
+            var type = Type.GetType(typeName);
+            if (type != null) return type;
+
+            var currentAssembly = Assembly.GetExecutingAssembly();
+            var referencedAssemblies = currentAssembly.GetReferencedAssemblies();
+            foreach (var assemblyName in referencedAssemblies)
+            {
+                var assembly = Assembly.Load(assemblyName);
+                if (assembly != null)
+                {
+                    type = assembly.GetType(typeName);
+                    if (type != null) return type;
+                }
+            }
+            return null;
         }
 
         #endregion

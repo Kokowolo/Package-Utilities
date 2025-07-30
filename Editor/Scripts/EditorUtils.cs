@@ -14,7 +14,7 @@ using System;
 using System.Reflection;
 using System.Linq;
 using UnityEditor;
-using Kokowolo.Utilities;
+// using Kokowolo.Utilities;
 
 namespace Kokowolo.Utilities.Editor
 {
@@ -27,7 +27,7 @@ namespace Kokowolo.Utilities.Editor
         {
             if (sprite == null) return null;
 
-            Type type = GetType("UnityEditor.SpriteUtility");
+            Type type = EditorOnlyUtils.GetType("UnityEditor.SpriteUtility");
             if (type == null) return null;
             
             MethodInfo method = type.GetMethod("RenderStaticPreview", new[] { typeof(Sprite), typeof(Color), typeof(int), typeof(int) });
@@ -35,25 +35,6 @@ namespace Kokowolo.Utilities.Editor
             
             Texture2D texture = method.Invoke("RenderStaticPreview", new object[] { sprite, Color.white, width, height }) as Texture2D;
             return texture;
-        }
-
-        public static Type GetType(string typeName)
-        {
-            var type = Type.GetType(typeName);
-            if (type != null) return type;
-
-            var currentAssembly = Assembly.GetExecutingAssembly();
-            var referencedAssemblies = currentAssembly.GetReferencedAssemblies();
-            foreach (var assemblyName in referencedAssemblies)
-            {
-                var assembly = Assembly.Load(assemblyName);
-                if (assembly != null)
-                {
-                    type = assembly.GetType(typeName);
-                    if (type != null) return type;
-                }
-            }
-            return null;
         }
 
         /// <summary>

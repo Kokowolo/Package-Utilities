@@ -23,7 +23,19 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /// <summary>
+        /// dividend % divisor
+        /// </summary>
         public static int Mod(int dividend, int divisor)
+        {
+            // NOTE: dividend % divisor yields an incorrect result when the dividend is negative; this method corrects that
+            return (dividend % divisor + divisor) % divisor;
+        }
+
+        /// <summary>
+        /// dividend % divisor
+        /// </summary>
+        public static float Mod(float dividend, float divisor)
         {
             // NOTE: dividend % divisor yields an incorrect result when the dividend is negative; this method corrects that
             return (dividend % divisor + divisor) % divisor;

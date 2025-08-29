@@ -17,6 +17,12 @@ namespace Kokowolo.Utilities
     public class Randomizer : ISerializationCallbackReceiver
     {
         /*██████████████████████████████████████████████████████████*/
+        #region Events
+
+        public event System.Action OnSeedSet;
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Fields
 
         static Random.State cachedState;
@@ -152,6 +158,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /// <summary>
+        /// Called whenever the Seed property is set or on the Randomizer's first Activate() call
+        /// </summary>
         void TryInit()
         {
             // Check if already init
@@ -172,6 +181,7 @@ namespace Kokowolo.Utilities
             Random.InitState(seed);
             State = Random.state;
             Deactivate();
+            OnSeedSet?.Invoke();
         }
 
         public void Deactivate()

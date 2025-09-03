@@ -158,6 +158,12 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        public Randomizer() {}
+        public Randomizer(int seed)
+        {
+            Seed = seed;
+        }
+
         /// <summary>
         /// Called whenever the Seed property is set or on the Randomizer's first Activate() call
         /// </summary>

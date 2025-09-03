@@ -41,9 +41,9 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            Job p0 = Job.Get(Function1, TestController.Time);
-            Job p1 = Job.Get(Function1, TestController.Time);
-            Job p2 = Job.Get(Function1, TestController.Time);
+            Job p0 = Job.Add(Function1, TestController.Time);
+            Job p1 = Job.Add(Function1, TestController.Time);
+            Job p2 = Job.Add(Function1, TestController.Time);
 
             // Declare local function
             void Function1()
@@ -78,9 +78,9 @@ namespace Scheduling
             // Demo main
             int value = 0;
             int increment = 1;
-            Job p0 = Job.Get(Function1(increment++));
-            Job p1 = Job.Get(Function1(increment++));
-            Job p2 = Job.Get(Function1(increment++));
+            Job p0 = Job.Add(Function1(increment++));
+            Job p1 = Job.Add(Function1(increment++));
+            Job p2 = Job.Add(Function1(increment++));
 
             // Declare local function
             IEnumerator Function1(int i)
@@ -188,7 +188,7 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            JobSequence s0 = JobSequence.Get();
+            JobSequence s0 = JobSequence.Add();
             Job p1 = s0.Append(Function1, TestController.Time);
             s0.Append(Function1, TestController.Time);
             Job p2 = s0.Append(Function1, TestController.Time);
@@ -230,7 +230,7 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            JobSequence s0 = JobSequence.Get();
+            JobSequence s0 = JobSequence.Add();
             Job p1 = s0.Append(Function1(1, TestController.Time * 3));
             Job p2 = s0.Append(Function1(3, TestController.Time));
             s0.Append(Function1(2, TestController.Time));
@@ -272,11 +272,11 @@ namespace Scheduling
         {
             // Demo main
             int value = 0;
-            JobSequence s0 = JobSequence.Get();
+            JobSequence s0 = JobSequence.Add();
             s0.Append(Function1, .3f);
             Job p1 = s0.Append(Function1);
             s0.Append(Function1);
-            Job p2 = Job.Get(Function1);
+            Job p2 = Job.Add(Function1);
 
             // Declare local function
             void Function1()
@@ -313,11 +313,11 @@ namespace Scheduling
             // Demo main
             float time = -1;
             int value = 0; // v_f = 2 + 5 * 2
-            Job p0 = Job.Get(Add(5))
+            Job p0 = Job.Add(Add(5))
                 .OnComplete(
-                    () => Job.Get(Mult(2))
+                    () => Job.Add(Mult(2))
                         .OnComplete(
-                            () => Job.Get(Add(2))
+                            () => Job.Add(Add(2))
                         )
                 );
 
@@ -486,7 +486,7 @@ namespace Scheduling
         public IEnumerator _08_0()
         {
             TestController.Value = true;
-            Job p0 = Job.WaitWhile(Function);
+            Job p0 = Job.AddWaitWhile(Function);
 
             // Declare local function
             bool Function() => TestController.Value;
@@ -585,7 +585,7 @@ namespace Scheduling
         public IEnumerator _08_2()
         {
             TestController.Value = false;
-            JobSequence s0 = JobSequence.Get();
+            JobSequence s0 = JobSequence.Add();
             Job p1 = s0.Append(Function2);
             s0.AppendWaitWhile(Function1);
             s0.Append(Function2);

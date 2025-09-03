@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static Job WaitWhile(Tween tween) => Get(Utils.WaitWhile(tween.IsActive));
+        public static Job WaitWhile(Tween tween) => Add(Utils.WaitWhile(tween.IsActive));
         public static Job ScheduleWaitWhile(Tween tween) => Schedule(Utils.WaitWhile(tween.IsActive));
 
         #endregion

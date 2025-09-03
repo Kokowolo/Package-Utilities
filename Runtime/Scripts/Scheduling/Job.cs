@@ -81,20 +81,27 @@ namespace Kokowolo.Utilities.Scheduling
             OnCompleteInternal = null;
         }
 
-        public static Job WaitWhile(Func<bool> predicate) => Get(Utils.WaitWhile(predicate));
-        public static Job ScheduleWaitWhile(Func<bool> predicate) => Schedule(Utils.WaitWhile(predicate));
+        public static Job AddWaitWhile(Func<bool> predicate) => AddWaitWhile(JobSystem.GetScheduler(), predicate);
+        public static Job AddWaitWhile(JobScheduler toJobScheduler, Func<bool> predicate) => Add(toJobScheduler, Utils.WaitWhile(predicate));
+        public static Job ScheduleWaitWhile(Func<bool> predicate) => ScheduleWaitWhile(JobSystem.GetScheduler(), predicate);
+        public static Job ScheduleWaitWhile(JobScheduler toJobScheduler, Func<bool> predicate) => Schedule(toJobScheduler, Utils.WaitWhile(predicate));
 
-        public static Job Get(Action function) => Get(function, -1);
-        public static Job Get(Action function, float time) => new Job(function, time, isScheduled: false);
-        public static Job Get(IEnumerator routine) => new Job(routine, isScheduled: false);
+        public static Job Add(Action function) => Add(function, -1);
+        public static Job Add(Action function, float time) => Add(JobSystem.GetScheduler(), function, time);
+        public static Job Add(JobScheduler toJobScheduler, Action function, float time) => new Job(toJobScheduler, function, time, isScheduled: false);
+        public static Job Add(IEnumerator routine) => Add(JobSystem.GetScheduler(), routine);
+        public static Job Add(JobScheduler toJobScheduler, IEnumerator routine) => new Job(toJobScheduler, routine, isScheduled: false);
         public static Job Schedule(Action function) => Schedule(function, -1);
-        public static Job Schedule(Action function, float time) => new Job(function, time, isScheduled: true);
-        public static Job Schedule(IEnumerator routine) => new Job(routine, isScheduled: true);
-        Job(Action function, float time, bool isScheduled) : this(Utils.InvokeFunctionAfterTime(function, time), isScheduled) {}
-        Job(IEnumerator routine, bool isScheduled) : this(routine)
+        public static Job Schedule(Action function, float time) => Schedule(JobSystem.GetScheduler(), function, time);
+        public static Job Schedule(JobScheduler toJobScheduler, Action function, float time) => new Job(toJobScheduler, function, time, isScheduled: true);
+        public static Job Schedule(IEnumerator routine) => Schedule(JobSystem.GetScheduler(), routine);
+        public static Job Schedule(JobScheduler toJobScheduler, IEnumerator routine) => new Job(toJobScheduler, routine, isScheduled: true);
+        Job(JobScheduler jobScheduler, Action function, float time, bool isScheduled) : this(jobScheduler, Utils.InvokeFunctionAfterTime(function, time), isScheduled) {}
+        Job(JobScheduler jobScheduler, IEnumerator routine, bool isScheduled) : this(routine)
         {
             this.IsScheduled = isScheduled;
-            JobSystem.GetScheduler().PendJob(this);
+            // JobSystem.GetScheduler().PendJob(this);
+            jobScheduler.PendJob(this);
         }
 
         // called by JobSequence specifically and pend constructor

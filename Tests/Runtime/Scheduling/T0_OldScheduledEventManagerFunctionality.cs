@@ -41,9 +41,9 @@ namespace Scheduling
         {
             float time = 0.1f;
             int value = 0;
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
             yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 3);
@@ -73,9 +73,9 @@ namespace Scheduling
         {
             float time = 0.1f;
             int value = 0;
-            Job.Get(Function1, time);
-            Job.Get(Function2, time * 3);
-            Job.Get(Function3, time);
+            Job.Add(Function1, time);
+            Job.Add(Function2, time * 3);
+            Job.Add(Function3, time);
             yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 16);
@@ -111,9 +111,9 @@ namespace Scheduling
             Job.Schedule(Function2, time);
             Job.Schedule(Function2, time);
             Job.Schedule(Function2, time);
-            Job.Get(Function1, time * 1.5f);
-            Job.Get(Function1, time * 1.5f);
-            Job.Get(Function1, time * 1.5f);
+            Job.Add(Function1, time * 1.5f);
+            Job.Add(Function1, time * 1.5f);
+            Job.Add(Function1, time * 1.5f);
             yield return new WaitForJobScheduler();
 
             Debug.Assert(value == 48);
@@ -162,9 +162,9 @@ namespace Scheduling
         {
             float time = 0.1f;
             int value = 0;
-            Job p = Job.Get(Function1, time * 100);
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
+            Job p = Job.Add(Function1, time * 100);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
             p.Dispose();
             yield return new WaitForJobScheduler();
 
@@ -197,12 +197,12 @@ namespace Scheduling
         {
             float time =0.1f;
             int value = 0;
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
-            Job.Get(Function1, time);
-            Job p = Job.Get(Function2, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
+            Job.Add(Function1, time);
+            Job p = Job.Add(Function2, time);
             p.Dispose();
             yield return new WaitForJobScheduler();
 

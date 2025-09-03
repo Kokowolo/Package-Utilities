@@ -32,14 +32,16 @@ namespace Kokowolo.Utilities.Scheduling
             Utilities.ListPool.Release(ref jobs);
         }
 
-        public static JobSequence Get() => new JobSequence(isScheduled: false);
-        public static JobSequence Schedule() => new JobSequence(isScheduled: true);
-        protected JobSequence(bool isScheduled) : base(null) // can't provide Routine() in header
+        public static JobSequence Add() => Add(JobSystem.GetScheduler());
+        public static JobSequence Add(JobScheduler toJobScheduler) => new JobSequence(toJobScheduler, isScheduled: false);
+        public static JobSequence Schedule() => Schedule(JobSystem.GetScheduler());
+        public static JobSequence Schedule(JobScheduler toJobScheduler) => new JobSequence(toJobScheduler, isScheduled: true);
+        protected JobSequence(JobScheduler jobScheduler, bool isScheduled) : base(null) // can't provide Routine() in header
         {
             jobs = Utilities.ListPool.Get<Job>();
             routine = Routine();
             this.IsScheduled = isScheduled;
-            JobSystem.GetScheduler().PendJob(this);
+            jobScheduler.PendJob(this);
         }
         
         IEnumerator Routine()

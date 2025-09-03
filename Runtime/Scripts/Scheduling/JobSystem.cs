@@ -70,6 +70,9 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /// <summary>
+        /// Gets the default JobScheduler that is used by the JobSystem when a JobScheduler is not specified
+        /// </summary>
         public static JobScheduler GetScheduler() // NOTE: this is not a property because this way we prevent auto serialization 
         {
             if (scheduler == null)
@@ -80,6 +83,9 @@ namespace Kokowolo.Utilities.Scheduling
             return scheduler;
         }
 
+        /// <summary>
+        /// Sets the default JobScheduler that is used by the JobSystem when a JobScheduler is not specified
+        /// </summary>
         public static void SetScheduler(JobScheduler scheduler)
         {
             JobSystem.scheduler = scheduler;

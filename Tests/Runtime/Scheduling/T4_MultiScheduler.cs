@@ -62,9 +62,9 @@ namespace Scheduling
         public IEnumerator _01()
         {
             T2_Core t2_Core = new T2_Core();
-            Job p0 = Job.Get(t2_Core._00());
+            Job p0 = Job.Add(t2_Core._00());
             JobSystem.SetScheduler(JobScheduler.Create());
-            Job p1 = Job.Get(t2_Core._01());
+            Job p1 = Job.Add(t2_Core._01());
             yield return new WaitForJobScheduler();
             Debug.Assert(JobSystem.SchedulerCount == 2);
         }
@@ -73,8 +73,8 @@ namespace Scheduling
         public IEnumerator _02()
         {
             T2_Core t2_Core = new T2_Core();
-            Job p0 = Job.Get(t2_Core._00());
-            Job p1 = Job.Get(t2_Core._01());
+            Job p0 = Job.Add(t2_Core._00());
+            Job p1 = Job.Add(t2_Core._01());
             JobScheduler scheduler = JobSystem.GetScheduler();
             Debug.Assert(JobSystem.SchedulerCount == 1);
             scheduler.Dispose();

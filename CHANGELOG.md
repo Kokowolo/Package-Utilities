@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.129] - 2025-09-03
+### Added
+* overloaded option to set the `JobScheduler` when adding/scheduling a new `Job` or `JobSequence`
+* overloaded constructor for `Randomizer` to set its seed on init
+* comment `JobSystem`'s get/set `JobScheduler` methods
+### Changed
+* `JobSystem`'s `Get()` to `Add()`
+* `JobSystem`'s `WaitWhile()` to `AddWaitWhile()`
+
 ## [0.0.128] - 2025-08-29
 ### Added
 * event `OnSeedSet` to `Randomizer`

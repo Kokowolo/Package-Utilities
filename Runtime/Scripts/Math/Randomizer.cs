@@ -14,7 +14,11 @@ using UnityEngine;
 namespace Kokowolo.Utilities
 {
     [System.Serializable]
+#if UNITY_EDITOR
     public class Randomizer : ISerializationCallbackReceiver
+#else
+    public class Randomizer
+#endif
     {
         /*██████████████████████████████████████████████████████████*/
         #region Events

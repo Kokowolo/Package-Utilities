@@ -75,6 +75,11 @@ namespace Kokowolo.Utilities
             return list == null || list.Count == 0 ? default : list[Random.Range(0, list.Count)];
         }
         
+        public static int GetRandomIndex<T>(this IList<T> list)
+        {
+            return list == null || list.Count == 0 ? -1 : Random.Range(0, list.Count);
+        }
+        
         public static void Swap<T>(this IList<T> list, int indexA, int indexB)
         {
             T temp = list[indexA];

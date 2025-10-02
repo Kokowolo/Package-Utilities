@@ -37,11 +37,6 @@ namespace Kokowolo.Utilities.Editor
             return texture;
         }
 
-        /// <summary>
-        /// Returns custom fields for this RuleTile
-        /// </summary>
-        /// <param name="isOverrideInstance">Whether override fields are returned</param>
-        /// <returns>Custom fields for this RuleTile</returns>
         public static FieldInfo[] GetSerializeFields<T>(T target/*bool isOverrideInstance*/)
         {
             return target.GetType().GetFields(ReflectionUtils.AllFlags)
@@ -65,7 +60,8 @@ namespace Kokowolo.Utilities.Editor
         public static void DrawSerializeFields<T>(T target, SerializedProperty property)
         {
             FieldInfo[] serializeFields = GetSerializeFields(target);
-            property.serializedObject.Update();
+            // property.serializedObject.Update();
+            property.serializedObject.UpdateIfRequiredOrScript();
             EditorGUI.BeginChangeCheck();
 
             foreach (FieldInfo field in serializeFields)
@@ -84,10 +80,12 @@ namespace Kokowolo.Utilities.Editor
             }
         }
 
+        public static void DrawSerializeFields(UnityEditor.Editor editor) => DrawSerializeFields(editor.target, editor.serializedObject);
         public static void DrawSerializeFields<T>(T target, SerializedObject serializedObject)
         {
             FieldInfo[] serializeFields = GetSerializeFields(target);
-            serializedObject.Update();
+            // serializedObject.Update();
+            serializedObject.UpdateIfRequiredOrScript();
             EditorGUI.BeginChangeCheck();
 
             foreach (FieldInfo field in serializeFields)
@@ -106,28 +104,50 @@ namespace Kokowolo.Utilities.Editor
             }
         }
 
-        // public static bool DrawCustomFields(SerializedProperty property, SerializedObject serializedObject)
-        // {
-        //     var customFields = GetSerializeFields(property);
+        /* // from UnityEditor.Editor.cs
+        public bool DoDrawDefaultInspector()
+        {
+            bool result;
+            using (new LocalizationGroup(target))
+            {
+                result = DoDrawDefaultInspector(serializedObject);
+                MonoBehaviour monoBehaviour = target as MonoBehaviour;
+                if (monoBehaviour == null )//|| !AudioUtil.HasAudioCallback(monoBehaviour) || AudioUtil.GetCustomFilterChannelCount(monoBehaviour) <= 0)
+                {
+                    return result;
+                }
 
-        //     serializedObject.Update();
-        //     EditorGUI.BeginChangeCheck();
-        //     foreach (var field in customFields)
-        //     {
-        //         var property = serializedObject.FindProperty(field.Name);
-        //         if (property != null)
-        //         {
-        //             EditorGUILayout.PropertyField(property, true);
-        //         }
-        //     }
+                // if (m_AudioFilterGUI == null)
+                // {
+                //     m_AudioFilterGUI = new AudioFilterGUI();
+                // }
 
-        //     if (EditorGUI.EndChangeCheck())
-        //     {
-        //         serializedObject.ApplyModifiedProperties();
-        //         return true;
-        //     }
-        //     return false;
-        // }
+                // m_AudioFilterGUI.DrawAudioFilterGUI(monoBehaviour);
+            }
+
+            return result;
+        }
+
+        public static bool DoDrawDefaultInspector(SerializedObject obj)
+        {
+            EditorGUI.BeginChangeCheck();
+            obj.UpdateIfRequiredOrScript();
+            SerializedProperty iterator = obj.GetIterator();
+            bool enterChildren = true;
+            while (iterator.NextVisible(enterChildren))
+            {
+                using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath))
+                {
+                    EditorGUILayout.PropertyField(iterator, true);
+                }
+
+                enterChildren = false;
+            }
+
+            obj.ApplyModifiedProperties();
+            return EditorGUI.EndChangeCheck();
+        }
+        // */
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

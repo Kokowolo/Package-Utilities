@@ -10,6 +10,11 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 using Kokowolo.Utilities;
 
 namespace Kokowolo.Utilities.Scheduling
@@ -17,6 +22,10 @@ namespace Kokowolo.Utilities.Scheduling
     [AddComponentMenu("")] // Hide in menu
     internal class JobManager : MonoBehaviour
     {
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+
+        #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
@@ -110,4 +119,51 @@ namespace Kokowolo.Utilities.Scheduling
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }
+
+#if UNITY_EDITOR
+    [CustomEditor(typeof(JobManager))]
+    public class JobManagerEditor : UnityEditor.Editor
+    {
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
+
+        JobManager Target => target as JobManager;
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
+
+        public override void OnInspectorGUI()
+        {
+            base.OnInspectorGUI();
+            int pendingJobsCount = 0;
+            int scheduledJobsCount = 0;
+            int activeJobsCount = 0;
+            for (int i = 0; i < Target.JobSchedulers.Count; i++)
+            {
+                var pendingJobs = Target.JobSchedulers[i].GetType().GetField($"pendingJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
+                pendingJobsCount += pendingJobs.Count;
+                var scheduledJobs = Target.JobSchedulers[i].GetType().GetField("scheduledJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
+                scheduledJobsCount += scheduledJobs.Count;
+                var activeJobs = Target.JobSchedulers[i].GetType().GetField("activeJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as List<Job>;
+                activeJobsCount += activeJobs.Count;
+            }
+            GUILayout.Label($"Total Number of Pending Jobs: {pendingJobsCount}");
+            GUILayout.Label($"Total Number of Scheduled Jobs: {scheduledJobsCount}");
+            GUILayout.Label($"Total Number of Active Jobs: {activeJobsCount}");
+        }
+
+        public override bool RequiresConstantRepaint()
+        {
+            return true;
+        }
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+    }
 }
+#endif

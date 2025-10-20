@@ -68,6 +68,21 @@ namespace Kokowolo.Utilities.Scheduling
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        public static JobScheduler Create()
+        {
+            JobScheduler jobScheduler = new JobScheduler();
+            JobManager.Instance.AddScheduler(jobScheduler);
+            return jobScheduler;
+        }
+        
+        JobScheduler()
+        {
+            instanceId = id++;
+            pendingJobs = new Queue<Job>();
+            scheduledJobs = new Queue<Job>();
+            activeJobs = ListPool.Get<Job>();
+        }
+
         bool disposed;
         ~JobScheduler() => Dispose();
         public void Dispose()
@@ -90,22 +105,7 @@ namespace Kokowolo.Utilities.Scheduling
             if (isJobSystemScheduler) JobSystem.SetScheduler(null);
         }
 
-        public static JobScheduler Create()
-        {
-            JobScheduler jobScheduler = new JobScheduler();
-            JobManager.Instance.AddScheduler(jobScheduler);
-            return jobScheduler;
-        }
-        
-        JobScheduler()
-        {
-            instanceId = id++;
-            pendingJobs = new Queue<Job>();
-            scheduledJobs = new Queue<Job>();
-            activeJobs = ListPool.Get<Job>();
-        }
-
-        internal void Update()
+        internal void Update() // NOTE: called from JobSystem, not via MonoBehaviour
         {
             if (!Enabled) return;
             Enabled = false;

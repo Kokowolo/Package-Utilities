@@ -63,6 +63,12 @@ namespace Kokowolo.Utilities.Scheduling
         /// Total number of active jobs; a job is considered active if it's not disposed
         /// </summary>
         public int ActiveJobCount => pendingJobs.Count + scheduledJobs.Count + activeJobs.Count;
+
+#if UNITY_EDITOR
+        public bool Editor_FoldoutPendingJobs { get; set; }
+        public bool Editor_FoldoutScheduledJobs { get; set; }
+        public bool Editor_FoldoutActiveJobs { get; set; }
+#endif
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

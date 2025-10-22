@@ -22,6 +22,10 @@ namespace Kokowolo.Utilities.Scheduling
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
+        #region Properties
+        
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
         #region Functions
 
         ~JobSequence() => Dispose(complete: false);
@@ -86,7 +90,7 @@ namespace Kokowolo.Utilities.Scheduling
 
         public override string ToString()
         {
-            return $"{nameof(JobSequence)}{(IsScheduled ? "(s)" : "")}:{instanceId}";
+            return $"{(IsScheduled ? "Scheduled" : "Non-Scheduled")}{nameof(JobSequence)}_{instanceId}";
         }
 
         #endregion

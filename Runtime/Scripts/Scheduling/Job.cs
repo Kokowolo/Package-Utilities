@@ -44,6 +44,11 @@ namespace Kokowolo.Utilities.Scheduling
         internal bool IsPending { get; set; } // marks for pending job removal
         internal bool IsScheduled { get; set; }
 
+#if UNITY_EDITOR
+        public bool Editor_Foldout { get; set; }
+        public string Editor_StackTrace { get; protected set; }
+#endif
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -108,6 +113,9 @@ namespace Kokowolo.Utilities.Scheduling
         internal Job(Action function, float time) : this(Utils.InvokeFunctionAfterTime(function, time)) {}
         internal Job(IEnumerator routine)
         {
+#if UNITY_EDITOR
+            Editor_StackTrace = Diagnostics.GetStackTrace(startingStackFrame: 2, getMethod: false);
+#endif
             this.routine = routine;
             instanceId = id++;
         }
@@ -186,7 +194,7 @@ namespace Kokowolo.Utilities.Scheduling
 
         public override string ToString()
         {
-            return $"{nameof(Job)}{(IsScheduled ? "(s)" : "")}:{instanceId}";
+            return $"{(IsScheduled ? "Scheduled" : "Non-Scheduled")}{nameof(Job)}_{instanceId}";
         }
 
         #endregion

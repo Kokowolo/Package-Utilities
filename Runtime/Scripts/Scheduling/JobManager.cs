@@ -140,21 +140,65 @@ namespace Kokowolo.Utilities.Scheduling
         public override void OnInspectorGUI()
         {
             base.OnInspectorGUI();
-            int pendingJobsCount = 0;
-            int scheduledJobsCount = 0;
-            int activeJobsCount = 0;
+            // int pendingJobsCount = 0;
+            // int scheduledJobsCount = 0;
+            // int activeJobsCount = 0;
+            // for (int i = 0; i < Target.JobSchedulers.Count; i++)
+            // {
+            //     var pendingJobs = Target.JobSchedulers[i].GetType().GetField($"pendingJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
+            //     pendingJobsCount += pendingJobs.Count;
+            //     var scheduledJobs = Target.JobSchedulers[i].GetType().GetField("scheduledJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
+            //     scheduledJobsCount += scheduledJobs.Count;
+            //     var activeJobs = Target.JobSchedulers[i].GetType().GetField("activeJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as List<Job>;
+            //     activeJobsCount += activeJobs.Count;
+            // }
+            // GUILayout.Label($"Total Number of Pending Jobs: {pendingJobsCount}");
+            // GUILayout.Label($"Total Number of Scheduled Jobs: {scheduledJobsCount}");
+            // GUILayout.Label($"Total Number of Active Jobs: {activeJobsCount}");
+
             for (int i = 0; i < Target.JobSchedulers.Count; i++)
             {
-                var pendingJobs = Target.JobSchedulers[i].GetType().GetField($"pendingJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
-                pendingJobsCount += pendingJobs.Count;
-                var scheduledJobs = Target.JobSchedulers[i].GetType().GetField("scheduledJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as Queue<Job>;
-                scheduledJobsCount += scheduledJobs.Count;
-                var activeJobs = Target.JobSchedulers[i].GetType().GetField("activeJobs", ReflectionUtils.AllFlags).GetValue(Target.JobSchedulers[i]) as List<Job>;
-                activeJobsCount += activeJobs.Count;
+                JobScheduler scheduler = Target.JobSchedulers[i];
+
+                // Show JobScheduler.instanceId
+                int instanceId = scheduler.GetType().GetField($"instanceId", ReflectionUtils.AllFlags).GetValue(scheduler) as int? ?? -1;
+                GUILayout.Label($"{nameof(JobScheduler)}_{instanceId} ({scheduler.ActiveJobCount})");
+                EditorGUI.indentLevel++;
+
+                // Show pending jobs
+                var pendingJobs = scheduler.GetType().GetField($"pendingJobs", ReflectionUtils.AllFlags).GetValue(scheduler) as Queue<Job>;
+                scheduler.Editor_FoldoutPendingJobs = EditorGUILayout.Foldout(scheduler.Editor_FoldoutPendingJobs, $"Pending Jobs ({pendingJobs.Count})");
+                if (scheduler.Editor_FoldoutPendingJobs) DrawJobs(pendingJobs);
+
+                // Show scheduled jobs
+                var scheduledJobs = scheduler.GetType().GetField($"scheduledJobs", ReflectionUtils.AllFlags).GetValue(scheduler) as Queue<Job>;
+                scheduler.Editor_FoldoutScheduledJobs = EditorGUILayout.Foldout(scheduler.Editor_FoldoutScheduledJobs, $"Scheduled Jobs ({scheduledJobs.Count})");
+                if (scheduler.Editor_FoldoutScheduledJobs) DrawJobs(scheduledJobs);
+
+                // Show active jobs
+                var activeJobs = scheduler.GetType().GetField($"activeJobs", ReflectionUtils.AllFlags).GetValue(scheduler) as List<Job>;
+                scheduler.Editor_FoldoutActiveJobs = EditorGUILayout.Foldout(scheduler.Editor_FoldoutActiveJobs, $"Active Jobs ({activeJobs.Count})");
+                if (scheduler.Editor_FoldoutActiveJobs) DrawJobs(activeJobs);
+
+                // Reset indentation
+                EditorGUI.indentLevel--;
             }
-            GUILayout.Label($"Total Number of Pending Jobs: {pendingJobsCount}");
-            GUILayout.Label($"Total Number of Scheduled Jobs: {scheduledJobsCount}");
-            GUILayout.Label($"Total Number of Active Jobs: {activeJobsCount}");
+        }
+
+        void DrawJobs(IEnumerable<Job> jobs)
+        {
+            EditorGUI.indentLevel++;
+            foreach (var job in jobs)
+            {
+                job.Editor_Foldout = EditorGUILayout.Foldout(job.Editor_Foldout, $"{job}");
+                if (job.Editor_Foldout)
+                { 
+                    EditorGUI.indentLevel++;
+                    GUILayout.Label(job.Editor_StackTrace);
+                    EditorGUI.indentLevel--;
+                }
+            }
+            EditorGUI.indentLevel--;
         }
 
         public override bool RequiresConstantRepaint()
@@ -165,5 +209,5 @@ namespace Kokowolo.Utilities.Scheduling
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }
-}
 #endif
+}

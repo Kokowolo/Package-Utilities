@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.133] - 2025-10-21
+### Added
+* `GetStackTrace` to `Diagnostics`
+* `Editor` only members to `Job` and `JobScheduler` to better draw `Job` objects within the `Editor`
+### Changed
+* `JobManagerEditor` to better draw `Job` objects within `the` Editor
+* `ToString` method within `Job` and `JobScheduler`
+
 ## [0.0.132] - 2025-10-20
 ### Added
 * `JobManagerEditor` within `JobManager.cs` to display the number of jobs in circulation for `JobManager`

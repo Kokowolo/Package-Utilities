@@ -19,6 +19,26 @@ namespace Kokowolo.Utilities//.Analytics
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        public static string GetStackTrace(int startingStackFrame = 1, bool getMethod = true)
+        {
+            string stackTraceString = "";
+            System.Diagnostics.StackTrace stackTrace = new System.Diagnostics.StackTrace(true);
+            for (int i = 0; i < stackTrace.FrameCount; i++)
+            {
+                if (i < startingStackFrame) continue;
+                System.Diagnostics.StackFrame sf = stackTrace.GetFrame(i);
+                if (getMethod)
+                {
+                    stackTraceString += $"{sf.GetFileName()}:{sf.GetMethod()}:{sf.GetFileLineNumber()}{(i + 1 == stackTrace.FrameCount ? "" : "\n")}";
+                }
+                else
+                {
+                    stackTraceString += $"{sf.GetFileName()}:{sf.GetFileLineNumber()}{(i + 1 == stackTrace.FrameCount ? "" : "\n")}";
+                }
+            }
+            return stackTraceString;
+        }
+
         public static double TimeFunctionWithStopwatch(Action function, int numberOfExecutions = 1, bool logElapsedTime = true)
         {
             double totalTime = 0;
@@ -41,7 +61,7 @@ namespace Kokowolo.Utilities//.Analytics
             Scheduling.Job.Add(TimeFunctionWithStopwatchCoroutine(routine, numberOfExecutions));
         }
 
-        private static IEnumerator TimeFunctionWithStopwatchCoroutine(IEnumerator routine, int numberOfExecutions = 1)
+        static IEnumerator TimeFunctionWithStopwatchCoroutine(IEnumerator routine, int numberOfExecutions = 1)
         {
             double totalTime = 0;
             System.Diagnostics.Stopwatch stopwatch = new System.Diagnostics.Stopwatch();
@@ -57,7 +77,7 @@ namespace Kokowolo.Utilities//.Analytics
             // return totalTime / numberOfExecutions;
         }
 
-        private static void LogElapsedTime(int numberOfExecutions, double totalTime)
+        static void LogElapsedTime(int numberOfExecutions, double totalTime)
         {
             if (numberOfExecutions != 1)
             {

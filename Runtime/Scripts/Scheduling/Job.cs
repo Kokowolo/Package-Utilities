@@ -61,6 +61,7 @@ namespace Kokowolo.Utilities.Scheduling
         {
             if (disposed) return;
             disposed = true;
+            GC.SuppressFinalize(this);
             // LogManager.Log($"Disposing {this}");
 
             // Set data

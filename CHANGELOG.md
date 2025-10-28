@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.135] - 2025-10-28
+### Added
+* `Standalone` directory for any class that functions independently from other components/classes
+* `Stat.cs` from previous Kokowolo projects
+* `StatPropertyDrawer.cs` from previous Kokowolo (Editor) projects
+
 ## [0.0.134] - 2025-10-23
 ### Added
 * `GC.SuppressFinalize(this);` to `IDisposable.Dispose()` within `Job`, `JobScheduler`, and `WaitForJob`

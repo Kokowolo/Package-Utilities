@@ -1,13 +1,14 @@
-﻿/**
-* Authors: Catlike Coding, Will Lacey
-* Date Created: September 24, 2020
-* 
-* Additional Comments: 
-*      The original version of this file can be found here: https://catlikecoding.com/unity/tutorials/hex-map/ within 
-*       Catlike Coding's tutorial series: Hex Map; this file has been updated it to better fit this repository
-*
-*       File Line Length: ~140
-**/
+﻿/*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved.
+ * Authors: Catlike Coding, Will Lacey
+ * Date Created: September 24, 2020
+ * 
+ * Additional Comments: 
+ *      The original version of this file can be found here: https://catlikecoding.com/unity/tutorials/hex-map/ within 
+ *       Catlike Coding's tutorial series: Hex Map; this file has been updated it to better fit this repository
+ *
+ *       File Line Length: ~140
+ */
 
 using System.Collections.Generic;
 

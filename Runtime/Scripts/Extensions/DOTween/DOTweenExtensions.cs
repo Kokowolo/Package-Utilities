@@ -1,11 +1,12 @@
 #if DOTWEEN
-/**
+/*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved.
  * Authors: Will Lacey
  * Date Created: June 03, 2025
  * 
  * Additional Comments: 
  *      File Line Length: ~140
- **/
+ */
 
 using System.Collections;
 using System.Collections.Generic;

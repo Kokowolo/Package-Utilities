@@ -1,4 +1,5 @@
 /*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved. 
  * Author(s): Kokowolo, Will Lacey
  * Date Created: April 26, 2022
  * 
@@ -42,6 +43,7 @@ namespace Kokowolo.Utilities.Editor
 
             string date = $"{DateTime.Now.ToString("MMMM")} {DateTime.Now.Day}, {DateTime.Now.Year}";
 
+            file = file.Replace("#YEAR#", $"{DateTime.Now.Year}");
             file = file.Replace("#DATE#", date);
             file = file.Replace("#COMPANYNAME#", PlayerSettings.companyName);
             file = file.Replace("#PRODUCTNAME#", PlayerSettings.productName);

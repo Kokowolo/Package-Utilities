@@ -1,4 +1,5 @@
-/**
+/*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved.
  * Authors: Will Lacey
  * Date Created: January 15, 2022
  * 
@@ -6,7 +7,7 @@
  *      File Line Length: ~140
  *      
  *      This script has also been created in Project-Fort; although it has been adapted to better fit this package
- **/
+ */
 
 using System.Collections;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-/**
+/*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved. 
  * Authors: Catlike Coding, Kokowolo, Will Lacey
  * Date Created: May 3, 2022
  * 
@@ -9,7 +10,7 @@
  *		File Line Length: ~140
  * 
  *		TODO: Generalize this script into a TransformOrbiter class
- **/
+ */
 
 using UnityEngine;
 using UnityEngine.InputSystem;

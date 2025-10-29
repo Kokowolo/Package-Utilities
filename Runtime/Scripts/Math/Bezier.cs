@@ -1,19 +1,20 @@
-﻿/**
-* Authors: Catlike Coding, Will Lacey
-* Date Created: October 8, 2020
-* 
-* Additional Comments: 
-*      The original version of this file can be found here: https://catlikecoding.com/unity/tutorials/hex-map/ within 
-*       Catlike Coding's tutorial series: Hex Map; this file has been updated it to better fit this repository
-*
-*       "A Bézier curve is defined by a sequence of points. It starts at the first point and ends at the last point, but 
-*       does not need to go through the intermediate points. Instead, those points pull the curve away from being a 
-*       straight line. [...] The idea of Bézier curves is that they are parametric. If you give it a value, typically 
-*       named t, between zero and one, you get a point on the curve. As t increases from zero to one, you move from the
-*       first point of the curve to the last point."
-*
-*       File Line Length: ~140
-**/
+﻿/*
+ * Copyright (c) 2025 Kokowolo. All Rights Reserved.
+ * Authors: Catlike Coding, Will Lacey
+ * Date Created: October 8, 2020
+ * 
+ * Additional Comments: 
+ *      The original version of this file can be found here: https://catlikecoding.com/unity/tutorials/hex-map/ within 
+ *       Catlike Coding's tutorial series: Hex Map; this file has been updated it to better fit this repository
+ *
+ *       "A Bézier curve is defined by a sequence of points. It starts at the first point and ends at the last point,  
+ *       but does not need to go through the intermediate points. Instead, those points pull the curve away from being a 
+ *       straight line. [...] The idea of Bézier curves is that they are parametric. If you give it a value, typically 
+ *       named t, between zero and one, you get a point on the curve. As t increases from zero to one, you move from the
+ *       first point of the curve to the last point."
+ *
+ *       File Line Length: ~140
+ */
 
 using System.Collections.Generic;
 using UnityEngine;

@@ -27,12 +27,27 @@ namespace Kokowolo.Utilities
 
         public static float GetAxisValue(this Vector3 vector, Axis axis)
         {
-            return axis switch
+            switch (axis)
             {
-                Axis.X => vector.x,
-                Axis.Y => vector.y,
-                Axis.Z => vector.z,
-                _ => throw new NotImplementedException(),
+                case Axis.XPos:
+                case Axis.X:
+                {
+                    return vector.x;
+                }
+                case Axis.YPos:
+                case Axis.Y:
+                {
+                    return vector.y;
+                }
+                case Axis.ZPos:
+                case Axis.Z:
+                {
+                    return vector.z;
+                }
+                default:
+                {
+                    throw new NotImplementedException();
+                }
             };
         }
 
@@ -40,16 +55,19 @@ namespace Kokowolo.Utilities
         {
             switch (axis)
             {
+                case Axis.XPos:
                 case Axis.X:
                 {
                     vector.x += value;
                     break;
                 }
+                case Axis.YPos:
                 case Axis.Y:
                 {
                     vector.y += value;
                     break;
                 }
+                case Axis.ZPos:
                 case Axis.Z:
                 {
                     vector.z += value;

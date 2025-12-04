@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.139] - 2025-12-04
+### Added
+* overloaded methods to `ReflectionUtils`
+### Changed
+* `ReflectionUtils` to have optional params to allow for fetching the base class
+
 ## [0.0.138] - 2025-11-24
 ### Added
 * `BoxCollider` and `BoxCollider2D` extensions scripts

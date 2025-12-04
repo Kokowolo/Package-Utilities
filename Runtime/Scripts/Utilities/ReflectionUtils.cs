@@ -7,6 +7,7 @@
  *      File Line Length: ~140
  */
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,30 +21,23 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        public static BindingFlags AllFlags => BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        public const BindingFlags AllFlags = BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static FieldInfo GetField<TTarget>(string name)
+        public static FieldInfo GetField<TTarget>(string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags) => GetField(typeof(TTarget), name, searchBaseTypes, flags);
+        public static FieldInfo GetField(this Type type, string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags)
         {
-            return typeof(TTarget).GetField(name, AllFlags);
+            FieldInfo fieldInfo;
+            while ((fieldInfo = type.GetField(name, flags)) == null && searchBaseTypes && (type = type.BaseType) != null);
+            return fieldInfo;
         }
 
-        public static TMember GetFieldValue<TTarget, TMember>(TTarget target, string name)
+        public static TMember GetFieldValue<TTarget, TMember>(TTarget target, string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags)
         {
-            return (TMember) GetField<TTarget>(name).GetValue(target);
-        }
-
-        public static PropertyInfo GetProperty<TTarget>(string name)
-        {
-            return typeof(TTarget).GetProperty(name, AllFlags);
-        }
-
-        public static TMember GetPropertyValue<TTarget, TMember>(TTarget target, string name)
-        {
-            return (TMember) GetProperty<TTarget>(name).GetValue(target);
+            return (TMember) GetField<TTarget>(name, searchBaseTypes, flags).GetValue(target);
         }
 
         // public static void SetField<TTarget>(FieldInfo fieldInfo, TTarget target, object value)
@@ -51,9 +45,25 @@ namespace Kokowolo.Utilities
         //     fieldInfo.SetValue(target, value);
         // }
 
-        public static MethodInfo GetMethod<TTarget>(string name)
+        public static PropertyInfo GetProperty<TTarget>(string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags) => GetProperty(typeof(TTarget), name, searchBaseTypes, flags);
+        public static PropertyInfo GetProperty(this Type type, string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags)
         {
-            return typeof(TTarget).GetMethod(name, AllFlags);
+           PropertyInfo propertyInfo;
+            while ((propertyInfo = type.GetProperty(name, flags)) == null && searchBaseTypes && (type = type.BaseType) != null);
+            return propertyInfo;
+        }
+
+        public static TMember GetPropertyValue<TTarget, TMember>(TTarget target, string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags)
+        {
+            return (TMember) GetProperty<TTarget>(name).GetValue(target);
+        }
+
+        public static MethodInfo GetMethod<TTarget>(string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags) => GetMethod(typeof(TTarget), name, searchBaseTypes, flags);
+        public static MethodInfo GetMethod(this Type type, string name, bool searchBaseTypes = true, BindingFlags flags = AllFlags)
+        {
+            MethodInfo methodInfo;
+            while ((methodInfo = type.GetMethod(name, flags)) == null && searchBaseTypes && (type = type.BaseType) != null);
+            return methodInfo;
         }
 
         // public static Type[] GetSubclasses<TTarget>()

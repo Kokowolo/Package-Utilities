@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.140] - 2025-12-19
+### Added
+* `ShowIf` `Attribute` and `PropertyDrawer` to show a specific member in the Editor if the condition is true
+* `StringExtensions.Convert` methods to convert a value/string from a base-N number system 
+
 ## [0.0.139] - 2025-12-04
 ### Added
 * overloaded methods to `ReflectionUtils`

@@ -20,6 +20,9 @@ namespace Kokowolo.Utilities
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
+
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
         
         public static List<TOut> Cast<TIn, TOut>(this List<TIn> list) where TOut : TIn
         {
@@ -27,6 +30,9 @@ namespace Kokowolo.Utilities
         }
 
         // someList.Sort((a, b) => a.SomeInteger.CompareTo(b.SomeInteger));
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

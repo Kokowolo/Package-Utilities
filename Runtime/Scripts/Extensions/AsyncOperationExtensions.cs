@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
+        
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
 
         public static void OnCompletedOrIfNull(this AsyncOperation operation, Action<AsyncOperation> completed)
         {
@@ -30,6 +33,13 @@ namespace Kokowolo.Utilities
                 operation.completed += completed;
             }
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

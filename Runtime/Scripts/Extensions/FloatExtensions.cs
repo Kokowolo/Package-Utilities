@@ -21,6 +21,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static float Abs(this float value)
         {
             return Mathf.Abs(value);
@@ -86,6 +89,9 @@ namespace Kokowolo.Utilities
         //     // check out https://stackoverflow.com/a/58733847/11319808 for optional decimal places
         //     return isOptional ? $"{value:G3}
         // }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

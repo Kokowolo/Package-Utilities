@@ -13,113 +13,122 @@ using UnityEngine;
 
 using System;
 
-public static class BoxCollider2DExtensions
+namespace Kokowolo.Utilities
 {
-    /*██████████████████████████████████████████████████████████*/
-    #region Enums
-
-    [Flags]
-    public enum BoxLocation
+    public static class BoxCollider2DExtensions
     {
-        None    = 0,
-        Center  = 1,
-        Pivot   = 2,
-        XPos    = 4,
-        XNeg    = 8,
-        YPos    = 16,
-        YNeg    = 32,
-    }
-    
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Properties
+        /*██████████████████████████████████████████████████████████*/
+        #region Enums
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Functions
-
-    public static Vector3 GetPosition(this BoxCollider2D box, BoxLocation fromLocation)
-    {
-        Vector3 center = box.bounds.center;
-        switch (fromLocation)
+        [Flags]
+        public enum BoxLocation
         {
-            case BoxLocation.XNeg:
-            case BoxLocation.XPos:
-            {
-                center.x += (fromLocation == BoxLocation.XPos ? 0.5f : -0.5f) * box.bounds.size.x;
-                return center;
-            }
-            case BoxLocation.YNeg:
-            case BoxLocation.YPos:
-            {
-                center.y += (fromLocation == BoxLocation.YPos ? 0.5f : -0.5f) * box.bounds.size.y;
-                return center;
-            }
-            case BoxLocation.Center:
-            {
-                return center;
-            }
-            case BoxLocation.Pivot:
-            {
-                return box.transform.position;
-            }
+            None    = 0,
+            Center  = 1,
+            Pivot   = 2,
+            XPos    = 4,
+            XNeg    = 8,
+            YPos    = 16,
+            YNeg    = 32,
         }
-        throw new System.Exception($"{nameof(BoxCollider)} {fromLocation} is not recognized");
-    }
+        
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
 
-    public static void SetSize(this BoxCollider2D box, float value, BoxLocation fromLocation = BoxLocation.Center)
-    {
-        Vector3 size = box.bounds.size;
-        if (fromLocation == BoxLocation.XPos || fromLocation == BoxLocation.XNeg) size.x = value;
-        if (fromLocation == BoxLocation.YPos || fromLocation == BoxLocation.YNeg) size.y = value;
-        SetSize(box, size, fromLocation);
-    }
-    
-    public static void SetSize(this BoxCollider2D box, Vector3 size, BoxLocation fromLocation)
-    {
-        Bounds bounds = box.bounds;
-        Vector3 position = GetPosition(box, fromLocation);
-        // 
-        // Vector3 center = bounds.center;
-        switch (fromLocation)
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
+        public static Vector3 GetPosition(this BoxCollider2D box, BoxLocation fromLocation)
         {
-            case BoxLocation.XNeg:
-            case BoxLocation.XPos:
+            Vector3 center = box.bounds.center;
+            switch (fromLocation)
             {
-                position.x += (fromLocation == BoxLocation.XPos ? -0.5f : 0.5f) * size.x;
-                break;
+                case BoxLocation.XNeg:
+                case BoxLocation.XPos:
+                {
+                    center.x += (fromLocation == BoxLocation.XPos ? 0.5f : -0.5f) * box.bounds.size.x;
+                    return center;
+                }
+                case BoxLocation.YNeg:
+                case BoxLocation.YPos:
+                {
+                    center.y += (fromLocation == BoxLocation.YPos ? 0.5f : -0.5f) * box.bounds.size.y;
+                    return center;
+                }
+                case BoxLocation.Center:
+                {
+                    return center;
+                }
+                case BoxLocation.Pivot:
+                {
+                    return box.transform.position;
+                }
             }
-            case BoxLocation.YNeg:
-            case BoxLocation.YPos:
-            {
-                position.y += (fromLocation == BoxLocation.YPos ? -0.5f : 0.5f) * size.y;
-                break;
-            }
-            case BoxLocation.Center:
-            {
-                break; // nada
-            }
-            case BoxLocation.Pivot:
-            {
-                // TODO: [HAT-103] Collider Resize From Pivot - add relative bounding box setting
-                throw new System.Exception($"SetSize not supported from {fromLocation}");
-            }
-            default:
-            {
-                throw new System.Exception($"SetSize not supported from {fromLocation}");
-            }
+            throw new System.Exception($"{nameof(BoxCollider)} {fromLocation} is not recognized");
         }
-        bounds.center = position;
-        bounds.size = 2 * new Vector3(size.x, size.y, size.z);
-        SetBounds(box, bounds);
-    }
 
-    public static void SetBounds(this BoxCollider2D box, Bounds bounds)
-    {
-        box.offset = box.transform.InverseTransformPoint(bounds.center);
-        box.size = bounds.extents;
-    }
+        public static void SetSize(this BoxCollider2D box, float value, BoxLocation fromLocation = BoxLocation.Center)
+        {
+            Vector3 size = box.bounds.size;
+            if (fromLocation == BoxLocation.XPos || fromLocation == BoxLocation.XNeg) size.x = value;
+            if (fromLocation == BoxLocation.YPos || fromLocation == BoxLocation.YNeg) size.y = value;
+            SetSize(box, size, fromLocation);
+        }
+        
+        public static void SetSize(this BoxCollider2D box, Vector3 size, BoxLocation fromLocation)
+        {
+            Bounds bounds = box.bounds;
+            Vector3 position = GetPosition(box, fromLocation);
+            // 
+            // Vector3 center = bounds.center;
+            switch (fromLocation)
+            {
+                case BoxLocation.XNeg:
+                case BoxLocation.XPos:
+                {
+                    position.x += (fromLocation == BoxLocation.XPos ? -0.5f : 0.5f) * size.x;
+                    break;
+                }
+                case BoxLocation.YNeg:
+                case BoxLocation.YPos:
+                {
+                    position.y += (fromLocation == BoxLocation.YPos ? -0.5f : 0.5f) * size.y;
+                    break;
+                }
+                case BoxLocation.Center:
+                {
+                    break; // nada
+                }
+                case BoxLocation.Pivot:
+                {
+                    // TODO: [HAT-103] Collider Resize From Pivot - add relative bounding box setting
+                    throw new System.Exception($"SetSize not supported from {fromLocation}");
+                }
+                default:
+                {
+                    throw new System.Exception($"SetSize not supported from {fromLocation}");
+                }
+            }
+            bounds.center = position;
+            bounds.size = 2 * new Vector3(size.x, size.y, size.z);
+            SetBounds(box, bounds);
+        }
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
+        public static void SetBounds(this BoxCollider2D box, Bounds bounds)
+        {
+            box.offset = box.transform.InverseTransformPoint(bounds.center);
+            box.size = bounds.extents;
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+    }
 }

@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         [System.Obsolete("use `LayerMaskExtensions.ContainsGameObject(GameObject)` instead")]
         public static bool IsInLayerMask(this GameObject gameObject, LayerMask layerMask)
         {
@@ -29,6 +32,9 @@ namespace Kokowolo.Utilities
             // NOTE: UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage()
             return gameObject.scene.name == null;
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

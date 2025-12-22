@@ -57,12 +57,12 @@ namespace Kokowolo.Utilities
 
         public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ, Color color, float duration)
         {
-            DrawBounds(BoundsUtils.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ), color, duration);
+            DrawBounds(BoundsExtensions.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ), color, duration);
         }
 
         public static void DrawBounds(Vector3 minPosition, Vector3 size, Color color, float duration)
         {
-            DrawBounds(BoundsUtils.CreateBounds(minPosition, size), color, duration);
+            DrawBounds(BoundsExtensions.CreateBounds(minPosition, size), color, duration);
         }
         
         public static void DrawBounds(Bounds bounds, Color color, float duration)

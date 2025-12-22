@@ -16,7 +16,7 @@ using System.Reflection;
 
 namespace Kokowolo.Utilities
 {
-    public static class ReflectionUtils
+    public static class ReflectionExtensions
     {
         /*██████████████████████████████████████████████████████████*/
         #region Properties

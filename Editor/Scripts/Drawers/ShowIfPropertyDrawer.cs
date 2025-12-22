@@ -125,7 +125,7 @@ public class ShowIfPropertyDrawer : PropertyDrawer
                 int index = int.Parse(element.Substring(element.IndexOf("[") + 1).TrimEnd(']'));
                 string arrayName = element.Substring(0, element.IndexOf("["));
                 
-                var arrField = ReflectionUtils.GetField(type, arrayName);
+                var arrField = ReflectionExtensions.GetField(type, arrayName);
                 var listObj = arrField?.GetValue(current);
 
                 if (listObj is System.Collections.IList list)
@@ -138,7 +138,7 @@ public class ShowIfPropertyDrawer : PropertyDrawer
             else
             {
                 // normal field
-                var field = type.GetField(element, ReflectionUtils.AllFlags);
+                var field = type.GetField(element, ReflectionExtensions.AllFlags);
                 if (field == null) return null;
 
                 current = field.GetValue(current);

@@ -18,15 +18,10 @@ namespace Kokowolo.Utilities
     public static class DOTweenExtensions
     {
         /*██████████████████████████████████████████████████████████*/
-        #region Fields
-
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
-        #region Properties
-
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
         #region Functions
+        
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
 
         public static Tween SetLinkAndId(this Tween tween, GameObject gameObject)
         {
@@ -65,16 +60,23 @@ namespace Kokowolo.Utilities
             void _Pause() => sequence.Pause();
         }
 
-        // public static Sequence CoroutineSequence(IEnumerator routine)
-        // {
-        //     return DOTween.Sequence().AppendCoroutine(routine);
-        // }
-
         // public static Sequence JoinCoroutine(this Sequence sequence, IEnumerator routine)
         // {
         //     return sequence.Join(CoroutineSequence(routine));
         // }
 
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        // public static Sequence CoroutineSequence(IEnumerator routine)
+        // {
+        //     return DOTween.Sequence().AppendCoroutine(routine);
+        // }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

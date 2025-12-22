@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static int Abs(this int value)
         {
             return Mathf.Abs(value);
@@ -27,6 +30,9 @@ namespace Kokowolo.Utilities
         {
             return Mathf.Clamp(value, min, max);
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

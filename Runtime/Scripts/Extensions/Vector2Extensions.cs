@@ -20,6 +20,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static Vector3 ToVector3(this Vector2 vector)
         {
             return new Vector3(vector.x, vector.y, 0);
@@ -65,6 +68,18 @@ namespace Kokowolo.Utilities
         {
             vector.SetAxisValue(axis, vector.GetAxisValue(axis) + value);
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        public static Vector3 GetDirection(Vector3 from, Vector3 to)
+        {
+            return to - from;
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

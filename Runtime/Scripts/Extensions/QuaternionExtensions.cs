@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static Vector3 ToDirectionVector(this Quaternion rotation)
         {
             return ToDirectionVector(rotation, Vector3.up);
@@ -28,6 +31,9 @@ namespace Kokowolo.Utilities
             // taken from https://discussions.unity.com/t/how-can-i-convert-a-quaternion-to-a-direction-vector/80376
             return rotation * axis;
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

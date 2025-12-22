@@ -18,64 +18,45 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static Vector2 WorldToScreenPoint(Vector3 worldPosition)
-        {
-            return WorldToScreenPoint(Camera.main, worldPosition);
-        }
-        
+        public static Vector2 WorldToScreenPoint(Vector3 worldPosition) => WorldToScreenPoint(Camera.main, worldPosition);
         public static Vector2 WorldToScreenPoint(Camera camera, Vector3 worldPosition)
         {
             return RectTransformUtility.WorldToScreenPoint(camera, worldPosition);
         }
 
-        public static Vector3 ScreenPointToWorld(Vector3 screenPoint)
-        {
-            return ScreenPointToWorld(Camera.main, screenPoint);
-        }
-
+        public static Vector3 ScreenPointToWorld(Vector3 screenPoint) => ScreenPointToWorld(Camera.main, screenPoint);
         public static Vector3 ScreenPointToWorld(Camera camera, Vector3 screenPoint)
         {
             return camera.ScreenToWorldPoint(screenPoint);
         }
 
         /// <summary>
+        /// Gets world position of mouse via the `nearClipPlane` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if 
+        /// collision detection is needed
+        /// </summary>
+        public static Vector3 GetMouseWorldPoint() => GetMouseWorldPoint(Camera.main);
+        /// <summary>
+        /// Gets world position of mouse via the `nearClipPlane` of `camera`; use `Raycasting.RaycastFromMouseScreenPoint` if collision 
+        /// detection is needed
+        /// </summary>
+        public static Vector3 GetMouseWorldPoint(Camera camera) => GetMouseWorldPoint(camera, camera.nearClipPlane);
+        /// <summary>
+        /// Gets world position of mouse via `depth` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if collision detection 
+        /// is needed
+        /// </summary>
+        public static Vector3 GetMouseWorldPoint(float depth) => GetMouseWorldPoint(Camera.main, depth);
+        /// <summary>
         /// Gets world position of mouse via depth from camera; use `Raycasting.RaycastFromMouseScreenPoint` if collision detection is
         /// needed
         /// </summary>
         public static Vector3 GetMouseWorldPoint(Camera camera, float depth)
         {
-            Vector3 screenPoint = InputManager.GetMouseScreenPoint();
+            Vector3 screenPoint = GetMouseScreenPoint();
             screenPoint.z = depth;
             return ScreenPointToWorld(camera, screenPoint);
         }
-
-        /// <summary>
-        /// Gets world position of mouse via the `nearClipPlane` of `camera`; use `Raycasting.RaycastFromMouseScreenPoint` if collision 
-        /// detection is needed
-        /// </summary>
-        public static Vector3 GetMouseWorldPoint(Camera camera)
-        {
-            return GetMouseWorldPoint(camera, camera.nearClipPlane);
-        }
-
-        /// <summary>
-        /// Gets world position of mouse via `depth` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if collision detection 
-        /// is needed
-        /// </summary>
-        public static Vector3 GetMouseWorldPoint(float depth)
-        {
-            return GetMouseWorldPoint(Camera.main, depth);
-        }
-
-        /// <summary>
-        /// Gets world position of mouse via the `nearClipPlane` of the main camera; use `Raycasting.RaycastFromMouseScreenPoint` if 
-        /// collision detection is needed
-        /// </summary>
-        public static Vector3 GetMouseWorldPoint()
-        {
-            return GetMouseWorldPoint(Camera.main);
-        }
         
+        // convenience method
         public static Vector2 GetMouseScreenPoint()
         {
             return InputManager.GetMouseScreenPoint();
@@ -83,7 +64,7 @@ namespace Kokowolo.Utilities
 
         public static Vector2 GetMouseScreenPointNormalized()
         {
-            return ToScreenPointNormalized(InputManager.GetMouseScreenPoint());
+            return ToScreenPointNormalized(GetMouseScreenPoint());
         }
 
         public static Vector2 ToScreenPointNormalized(Vector2 screenPoint)

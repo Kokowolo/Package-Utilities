@@ -19,7 +19,7 @@ using UnityEditor;
 
 namespace Kokowolo.Utilities.Editor
 {
-    public static class EditorUtils
+    public static class EditorExtensions
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -40,7 +40,7 @@ namespace Kokowolo.Utilities.Editor
 
         public static FieldInfo[] GetSerializeFields<T>(T target/*bool isOverrideInstance*/)
         {
-            return target.GetType().GetFields(ReflectionUtils.AllFlags)
+            return target.GetType().GetFields(ReflectionExtensions.AllFlags)
                 .Where(field => field.IsPublic || field.IsDefined(typeof(SerializeField)))
                 .Where(field => !field.IsDefined(typeof(HideInInspector)))
                 .ToArray();

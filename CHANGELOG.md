@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.141] - 2025-12-22
+### Added
+* some test scripts and scene for `KokoMath` and general `Utilities`
+### Changed
+* all Utils class to be contained within Extension classes if there was an existing one
+* `ReflectionUtils` to `ReflectionExtensions`
+* `EditorUtils` to `EditorExtensions`
+* `ScreenUtils` such that its class is easier to read
+### Fixed
+* `Kokowolo.Utilties` namespace not included in `BoundsIntExtensions`, `BoxCollider2DExtensions`, & `BoxColliderExtensions`
+
 ## [0.0.140] - 2025-12-19
 ### Added
 * `ShowIf` `Attribute` and `PropertyDrawer` to show a specific member in the Editor if the condition is true

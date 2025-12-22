@@ -37,6 +37,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         /// <summary>
         /// Randomizes IList with a Fisher-Yates shuffle; https://stackoverflow.com/a/1262619/11319808
         /// </summary>
@@ -118,6 +121,9 @@ namespace Kokowolo.Utilities
                 return list.ToString();
             }
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

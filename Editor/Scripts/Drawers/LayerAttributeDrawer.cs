@@ -35,12 +35,12 @@ namespace Kokowolo.Utilities.Editor
             }
             else
             {
-                if (LayerMaskUtils.ContainsMultipleLayers(property.intValue))
+                if (LayerMaskExtensions.ContainsMultipleLayers(property.intValue))
                 {
                     property.intValue = 0;
                 }
                 
-                int layer = EditorGUI.LayerField(position, label, LayerMaskUtils.LayerMaskToLayer(property.intValue));
+                int layer = EditorGUI.LayerField(position, label, LayerMaskExtensions.LayerMaskToLayer(property.intValue));
                 property.intValue = 1 << layer;
             }
             

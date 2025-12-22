@@ -25,7 +25,10 @@ namespace Kokowolo.Utilities
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
-        
+
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static void Play(this Animator animator, int layer, bool prewarm)
         {
             animator.Play(0, layer, prewarm ? UnityEngine.Random.Range(0f, 1f) : 0);
@@ -35,6 +38,13 @@ namespace Kokowolo.Utilities
         {
             animator.Play(stateName, layer, prewarm ? UnityEngine.Random.Range(0f, 1f) : 0);
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

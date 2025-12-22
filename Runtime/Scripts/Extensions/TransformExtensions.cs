@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static void SetLossyScale(this Transform transform, Vector3 scale)
         {
             transform.localScale = Vector3.one;
@@ -105,6 +108,9 @@ namespace Kokowolo.Utilities
         {
             return Quaternion.Inverse(transform.rotation) * rotation;
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

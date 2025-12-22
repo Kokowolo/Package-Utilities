@@ -58,7 +58,7 @@ namespace Kokowolo.Utilities.Editor
             float positionX = rect.x;
             
             // Get serializedFields
-            var serializeFields = EditorUtils.GetSerializeFields(stat);
+            var serializeFields = EditorExtensions.GetSerializeFields(stat);
             var maxValueProperty = property.FindPropertyRelative(serializeFields[0].Name);
             var currentValueProperty = property.FindPropertyRelative(serializeFields[1].Name);
 

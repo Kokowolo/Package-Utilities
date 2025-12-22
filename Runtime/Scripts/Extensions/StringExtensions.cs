@@ -22,7 +22,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Fields
         
-        const string digits = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const string Alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
         
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -52,7 +52,7 @@ namespace Kokowolo.Utilities
 
             while (number > 0)
             {
-                buffer[--index] = digits[number % toBase];
+                buffer[--index] = Alphanumeric[number % toBase];
                 number /= toBase;
             }
 

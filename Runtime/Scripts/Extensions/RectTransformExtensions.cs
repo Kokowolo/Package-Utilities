@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         // public static float GetWidth(this RectTransform rectTransform)
         // {
         //     return rectTransform.rect.width;
@@ -42,6 +45,9 @@ namespace Kokowolo.Utilities
         {
             return ScreenUtils.ToScreenPointNormalized(rectTransform.position);
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

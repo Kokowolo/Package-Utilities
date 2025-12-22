@@ -18,6 +18,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static void SetPositions(this LineRenderer lineRenderer, List<Vector3> positions)
         {
             lineRenderer.positionCount = positions.Count;
@@ -72,6 +75,9 @@ namespace Kokowolo.Utilities
         //     }
         //     return bezierPoints;
         // }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

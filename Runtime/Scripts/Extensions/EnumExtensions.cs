@@ -23,6 +23,9 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        /*——————————————————————————————————————————————————————————*/
+        #region Extensions
+
         public static string ToStringFromPascalCase(this Enum value)
         {
             string str = "";
@@ -52,6 +55,29 @@ namespace Kokowolo.Utilities
             }
             return value.ToString();
         }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Utilities
+
+        public static T[] GetValues<T>() 
+        {
+            return (T[])Enum.GetValues(typeof(T));
+        }
+
+        public static T GetLastValue<T>() 
+        {   
+            T[] values = GetValues<T>();
+            return values[values.Length - 1];
+        }
+
+        public static int GetCount<T>() 
+        {   
+            return GetValues<T>().Length;
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

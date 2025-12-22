@@ -300,12 +300,12 @@ namespace Kokowolo.Utilities
 
         public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ)
         {
-            DrawBounds(BoundsUtils.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ));
+            DrawBounds(BoundsExtensions.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ));
         }
 
         public static void DrawBounds(Vector3 minPosition, Vector3 size)
         {
-            DrawBounds(BoundsUtils.CreateBounds(minPosition, size));
+            DrawBounds(BoundsExtensions.CreateBounds(minPosition, size));
         }
         
         public static void DrawBounds(Bounds bounds)

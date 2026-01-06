@@ -19,7 +19,10 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class InputManager : MonoBehaviourSingleton<InputManager>
+    public class InputManager : InputManagerBase<InputManager> {}
+
+    [DefaultExecutionOrder(-100)]
+    public abstract class InputManagerBase<T> : MonoBehaviourSingleton<T> where T : InputManagerBase<T>
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields

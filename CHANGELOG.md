@@ -4,7 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.0.141] - 2025-12-22
+## [0.0.143] - 2026-01-08
+### Changed
+* `InputManager` to be just `InputManager` and now require extending classes to override the `Instance` property
+* singleton code to use the updated `FindAnyObjectByType` seen in the later versions of Unity
+* `MonoBehaviourSingleton`'s `_Instance` field to be virtual
+
+## [0.0.142] - 2025-12-22
 ### Fixed
 * `InputManager` to have both a `InputManagerBase<T>` implementation and an `InputManager` to allow for `Singleton`
 

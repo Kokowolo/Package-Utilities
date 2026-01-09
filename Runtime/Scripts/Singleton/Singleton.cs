@@ -20,14 +20,14 @@ namespace Kokowolo.Utilities
         #region Functions
 
         public static T Get<T>(
-            bool findObjectOfType = false, 
+            bool findAnyObjectByType = false, 
             bool dontDestroyOnLoad = false, 
             bool unparentGameObject = false) where T : MonoBehaviour
         {
-            if (findObjectOfType && SingletonInstance<T>.instance == null) 
+            if (findAnyObjectByType && SingletonInstance<T>.instance == null) 
             {
-                TrySet(Object.FindObjectOfType<T>(), dontDestroyOnLoad, unparentGameObject);
-                LogManager.Log($"called Get<{typeof(T)}>() before instance was set; calling FindObjectOfType<{typeof(T)}>");
+                TrySet(Object.FindAnyObjectByType<T>(), dontDestroyOnLoad, unparentGameObject);
+                LogManager.Log($"called Get<{typeof(T)}>() before instance was set; calling FindAnyObjectByType<{typeof(T)}>");
             }
             return SingletonInstance<T>.instance;
         }
@@ -37,7 +37,7 @@ namespace Kokowolo.Utilities
             bool dontDestroyOnLoad = false, 
             bool unparentGameObject = false) where T : MonoBehaviour
         {
-            // NOTE: method does not need to be called; BUT if called, FindObjectOfType() is avoided during lazy init
+            // NOTE: method does not need to be called; BUT if called, FindAnyObjectByType() is avoided during lazy init
             if (SingletonInstance<T>.instance != null)
             {
                 LogManager.Log($"{instance.name} called Set<{typeof(T)}>() when singleton already exists");

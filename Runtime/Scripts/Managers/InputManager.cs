@@ -4,7 +4,7 @@
  * Date Created: October 7, 2022
  * 
  * Additional Comments:
- *		File Line Length: ~140
+ *              File Line Length: ~140
  */
 
 using System.Collections;
@@ -19,10 +19,7 @@ using UnityEngine.InputSystem;
 namespace Kokowolo.Utilities
 {
     [DefaultExecutionOrder(-100)]
-    public class InputManager : InputManagerBase<InputManager> {}
-
-    [DefaultExecutionOrder(-100)]
-    public abstract class InputManagerBase<T> : MonoBehaviourSingleton<T> where T : InputManagerBase<T>
+    public class InputManager : MonoBehaviourSingleton<InputManager>
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields

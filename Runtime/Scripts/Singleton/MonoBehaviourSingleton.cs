@@ -31,7 +31,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        T _Instance => this as T; // NOTE: needed because `this` is MonoBehaviourSingleton<T> where `T` is a different type
+        protected virtual T _Instance => this as T; // NOTE: needed because `this` is MonoBehaviourSingleton<T> where `T` is a different type;
         public static T Instance => Singleton.Get<T>();
 
         #endregion
@@ -77,7 +77,7 @@ namespace Kokowolo.Utilities
         protected virtual void Singleton_OnEnable() {}
         protected virtual void Singleton_OnDisable() {}
 
-        public static T FindInstance() => Singleton.Get<T>(findObjectOfType: true);
+        public static T FindInstance() => Singleton.Get<T>(findAnyObjectByType: true);
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

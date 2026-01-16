@@ -22,25 +22,37 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static uint RotateLeft(uint value, int rotations)
+        public static bool Contains(int mask, int index)
         {
-            return RotateLeft(value, (byte) rotations);
+            // NOTE: 1 is shifted `layer` times; 000000001 -> 000010000 for layer 4
+            return (mask & (1 << index)) != 0;
+        }
+        
+        public static bool Contains(uint mask, int index)
+        {
+            // NOTE: 1 is shifted `layer` times; 000000001 -> 000010000 for layer 4
+            return (mask & (1 << index)) != 0;
         }
 
-        public static uint RotateLeft(uint value, byte rotations)
+        public static uint RotateLeft(uint mask, int rotations)
         {
-            return (value << rotations) | (value >> (32 - rotations));
+            return RotateLeft(mask, (byte) rotations);
         }
 
-        public static uint RotateLeft(uint value, int rotations, int numberOfBits)
+        public static uint RotateLeft(uint mask, byte rotations)
         {
-            return RotateLeft(value, (byte) rotations, numberOfBits);
+            return (mask << rotations) | (mask >> (32 - rotations));
         }
 
-        public static uint RotateLeft(uint value, byte rotations, int numberOfBits)
+        public static uint RotateLeft(uint mask, int rotations, int numberOfBits)
         {
-            uint shift = RotateLeft(value, rotations);
-            return value == shift ? value : shift % ((uint) (Mathf.Pow(2, numberOfBits) - 1));
+            return RotateLeft(mask, (byte) rotations, numberOfBits);
+        }
+
+        public static uint RotateLeft(uint mask, byte rotations, int numberOfBits)
+        {
+            uint shift = RotateLeft(mask, rotations);
+            return mask == shift ? mask : shift % ((uint) (Mathf.Pow(2, numberOfBits) - 1));
         }
 
         #endregion

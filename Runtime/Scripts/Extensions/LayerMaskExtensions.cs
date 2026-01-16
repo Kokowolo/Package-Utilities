@@ -28,8 +28,7 @@ namespace Kokowolo.Utilities
 
         public static bool ContainsLayer(this LayerMask layerMask, int layer)
         {
-            // NOTE: 1 is shifted `layer` times; 000000001 -> 000010000 for layer 4
-            return (layerMask & (1 << layer)) != 0;
+            return BitmaskUtils.Contains(layerMask, layer);
         }
 
         public static bool ContainsLayerMask(this LayerMask layerMaskA, LayerMask layerMaskB)

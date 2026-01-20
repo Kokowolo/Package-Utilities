@@ -22,7 +22,8 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Fields
         
-        const string Alphanumeric = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string Alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        public const string Alphanumeric = "0123456789" + Alphabet;
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

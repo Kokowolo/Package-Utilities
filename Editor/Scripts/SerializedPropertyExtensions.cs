@@ -10,17 +10,20 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System;
+using System.Linq;
+using System.Reflection;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
-using System.Reflection;
-using System.Linq;
-using System.Collections.Generic;
 
 namespace Kokowolo.Utilities.Editor
 {
     public static class SerializedPropertyExtensions
     {
-        // NOTE: made by AI, not sure if this works in every case, but it works now
+        /*——————————————————————————————————————————————————————————*/
+        #region AI Generated Functions // NOTE: made by AI, not sure if the following works in every case, but it works now
+        
         public static Type GetPropertyType(this SerializedProperty property)
         {
             Type parentType = property.serializedObject.targetObject.GetType();
@@ -47,6 +50,78 @@ namespace Kokowolo.Utilities.Editor
             }
             return currentType;
         }
+
+        public static T GetTargetObject<T>(this SerializedProperty property) => (T) GetTargetObject(property);
+        public static object GetTargetObject(this SerializedProperty property)
+        {
+            if (property == null) return null;
+
+            object obj = property.serializedObject.targetObject;
+            string path = property.propertyPath.Replace(".Array.data[", "[");
+
+            string[] elements = path.Split('.');
+
+            foreach (string element in elements)
+            {
+                if (element.Contains("["))
+                {
+                    string name = element.Substring(0, element.IndexOf("["));
+                    int index = Convert.ToInt32(
+                        element.Substring(element.IndexOf("["))
+                            .Replace("[", "")
+                            .Replace("]", "")
+                    );
+
+                    obj = GetValue(obj, name, index);
+                }
+                else
+                {
+                    obj = GetValue(obj, element);
+                }
+            }
+
+            return obj;
+        }
+
+        private static object GetValue(object source, string name)
+        {
+            if (source == null) return null;
+
+            Type type = source.GetType();
+
+            while (type != null)
+            {
+                FieldInfo field = type.GetField(
+                    name,
+                    BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Instance
+                );
+
+                if (field != null)
+                    return field.GetValue(source);
+
+                type = type.BaseType;
+            }
+
+            return null;
+        }
+
+        private static object GetValue(object source, string name, int index)
+        {
+            var enumerable = GetValue(source, name) as IEnumerable;
+            if (enumerable == null) return null;
+
+            IEnumerator enumerator = enumerable.GetEnumerator();
+            for (int i = 0; i <= index; i++)
+            {
+                if (!enumerator.MoveNext())
+                    return null;
+            }
+
+            return enumerator.Current;
+        }
+        
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
 
         /// <summary>
         /// Get the object the serialized property holds by using reflection

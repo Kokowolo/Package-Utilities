@@ -38,12 +38,39 @@ namespace Kokowolo.Utilities.Editor
             return texture;
         }
 
-        public static FieldInfo[] GetSerializeFields<T>(T target/*bool isOverrideInstance*/)
+        public static FieldInfo[] GetSerializeFields<T>(T target)
         {
             return target.GetType().GetFields(ReflectionExtensions.AllFlags)
                 .Where(field => field.IsPublic || field.IsDefined(typeof(SerializeField)))
                 .Where(field => !field.IsDefined(typeof(HideInInspector)))
                 .ToArray();
+        }
+
+        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedProperty property) 
+        {
+            try 
+            {
+                T target = (T) property.boxedValue;
+                return GetSerializedProperties(property, target);
+            }
+            catch (Exception)
+            {
+                return new List<SerializedProperty>();   
+            }
+        }
+
+        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedProperty property, T target)
+        {
+            List<SerializedProperty> properties = new List<SerializedProperty>();
+            foreach (FieldInfo field in GetSerializeFields(target))
+            {
+                var prop = property.FindPropertyRelative(field.Name);
+                if (prop != null)
+                {
+                    properties.Add(prop);
+                }
+            }
+            return properties;
         }
 
         public static void DrawSerializeFields<T>(Rect position, SerializedProperty property, GUIContent label)
@@ -57,7 +84,16 @@ namespace Kokowolo.Utilities.Editor
             }
         }
 
-        public static void DrawSerializeFields<T>(SerializedProperty property) => DrawSerializeFields((T) property.boxedValue, property);
+        public static void DrawSerializeFields<T>(SerializedProperty property)
+        {
+            try 
+            {
+                T target = (T) property.boxedValue;
+                DrawSerializeFields((T) property.boxedValue, property);
+            }
+            catch (Exception) {}
+        }
+        
         public static void DrawSerializeFields<T>(T target, SerializedProperty property)
         {
             FieldInfo[] serializeFields = GetSerializeFields(target);

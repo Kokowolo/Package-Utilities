@@ -38,34 +38,23 @@ namespace Kokowolo.Utilities.Editor
             return texture;
         }
 
-        public static FieldInfo[] GetSerializeFields<T>(T target)
+        public static FieldInfo[] GetSerializeFields<T>() => GetSerializeFields(typeof(T));
+        public static FieldInfo[] GetSerializeFields(Type type)
         {
-            return target.GetType().GetFields(ReflectionExtensions.AllFlags)
+            return type.GetFields(ReflectionExtensions.AllFlags)
                 .Where(field => field.IsPublic || field.IsDefined(typeof(SerializeField)))
                 .Where(field => !field.IsDefined(typeof(HideInInspector)))
                 .ToArray();
         }
 
-        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedProperty property) 
-        {
-            try 
-            {
-                T target = (T) property.boxedValue;
-                return GetSerializedProperties(property, target);
-            }
-            catch (Exception)
-            {
-                return new List<SerializedProperty>();   
-            }
-        }
-
-        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedProperty property, T target)
+        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedProperty property) => GetSerializedProperties(typeof(T), property);
+        public static List<SerializedProperty> GetSerializedProperties(Type type, SerializedProperty property)
         {
             List<SerializedProperty> properties = new List<SerializedProperty>();
-            foreach (FieldInfo field in GetSerializeFields(target))
+            foreach (FieldInfo field in GetSerializeFields(type))
             {
                 var prop = property.FindPropertyRelative(field.Name);
-                if (prop != null)
+                if (prop != null) // is this null check even needed?
                 {
                     properties.Add(prop);
                 }
@@ -73,43 +62,65 @@ namespace Kokowolo.Utilities.Editor
             return properties;
         }
 
-        public static void DrawSerializeFields<T>(Rect position, SerializedProperty property, GUIContent label)
+        public static List<SerializedProperty> GetSerializedProperties<T>(SerializedObject serializedObject) => GetSerializedProperties(typeof(T), serializedObject);
+        public static List<SerializedProperty> GetSerializedProperties(Type type, SerializedObject serializedObject)
         {
-            property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, label);
-            if (property.isExpanded)
+            List<SerializedProperty> properties = new List<SerializedProperty>();
+            foreach (FieldInfo field in GetSerializeFields(type))
             {
-                EditorGUI.indentLevel++;
-                DrawSerializeFields<T>(property);
-                EditorGUI.indentLevel--;
+                var prop = serializedObject.FindProperty(field.Name);
+                if (prop != null) // is this null check even needed?
+                {
+                    properties.Add(prop);
+                }
             }
+            return properties;
         }
 
-        public static void DrawSerializeFields<T>(SerializedProperty property)
+        public static float GetPropertyHeight<T>(SerializedProperty property) => GetPropertyHeight(typeof(T), property);
+        public static float GetPropertyHeight(Type type, SerializedProperty property)
         {
-            try 
+            float height = EditorGUIUtility.singleLineHeight;
+            if (property.isExpanded)
             {
-                T target = (T) property.boxedValue;
-                DrawSerializeFields((T) property.boxedValue, property);
+                foreach (var prop in GetSerializedProperties(type, property))
+                {
+                    height += EditorGUI.GetPropertyHeight(prop);
+                }
             }
-            catch (Exception) {}
+            return height;
         }
-        
-        public static void DrawSerializeFields<T>(T target, SerializedProperty property)
+
+        public static void DrawSerializeFields<T>(Rect position, SerializedProperty property, GUIContent label) => DrawSerializeFields(typeof(T), position, property, label);
+        public static void DrawSerializeFields(Type type, Rect position, SerializedProperty property, GUIContent label)
         {
-            FieldInfo[] serializeFields = GetSerializeFields(target);
-            // property.serializedObject.Update();
+            // Start SerializedProperty
             property.serializedObject.UpdateIfRequiredOrScript();
             EditorGUI.BeginChangeCheck();
 
-            foreach (FieldInfo field in serializeFields)
+            // Draw foldout
+            position = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
+            property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, label);
+            position.y += position.height;
+            if (property.isExpanded)
             {
-                var prop = property.FindPropertyRelative(field.Name);
-                if (prop != null)
-                {
-                    EditorGUILayout.PropertyField(prop, true);
-                }
-            }
+                // Enter foldout
+                EditorGUI.indentLevel++;
 
+                // Draw SerializedProperties
+                var properties = GetSerializedProperties(type, property);
+                foreach (var prop in properties)
+                {
+                    position = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(prop));
+                    EditorGUI.PropertyField(position, prop);
+                    position.y += position.height;
+                }
+
+                // Exit foldout
+                EditorGUI.indentLevel--;
+            }
+            
+            // End SerializedProperty
             if (EditorGUI.EndChangeCheck())
             {
                 property.serializedObject.ApplyModifiedProperties();
@@ -117,74 +128,53 @@ namespace Kokowolo.Utilities.Editor
             }
         }
 
-        public static void DrawSerializeFields(UnityEditor.Editor editor) => DrawSerializeFields(editor.target, editor.serializedObject);
-        public static void DrawSerializeFields<T>(T target, SerializedObject serializedObject)
+        // NOTE: the following does auto layout, consider calling EditorGUI variant of this function instead
+        public static void DrawSerializeFields<T>(SerializedProperty property) => DrawSerializeFields(typeof(T), property);
+        public static void DrawSerializeFields(Type type, SerializedProperty property)
         {
-            FieldInfo[] serializeFields = GetSerializeFields(target);
-            // serializedObject.Update();
+            // Start SerializedProperty
+            property.serializedObject.UpdateIfRequiredOrScript();
+            EditorGUI.BeginChangeCheck();
+
+            // Draw SerializedProperties
+            foreach (SerializedProperty prop in GetSerializedProperties(type, property))
+            {
+                EditorGUILayout.PropertyField(prop, true);
+            }
+
+            // End SerializedProperty
+            if (EditorGUI.EndChangeCheck())
+            {
+                property.serializedObject.ApplyModifiedProperties();
+                EditorUtility.SetDirty(property.serializedObject.targetObject);
+            }
+        }
+
+        [Obsolete("use DrawSerializeFields(Type type, SerializedObject property) instead")]
+        public static void DrawSerializeFields(UnityEditor.Editor editor) => DrawSerializeFields(editor.target, editor.serializedObject);
+        [Obsolete("use DrawSerializeFields(Type type, SerializedObject property) instead")]
+        public static void DrawSerializeFields<T>(T target, SerializedObject serializedObject) => DrawSerializeFields(typeof(T), serializedObject);
+
+        public static void DrawSerializeFields<T>(SerializedObject serializedObject) => DrawSerializeFields(typeof(T), serializedObject);
+        public static void DrawSerializeFields(Type type, SerializedObject serializedObject)
+        {
+            // Start SerializedObject
             serializedObject.UpdateIfRequiredOrScript();
             EditorGUI.BeginChangeCheck();
 
-            foreach (FieldInfo field in serializeFields)
+            // Draw SerializedProperties
+            foreach (SerializedProperty prop in GetSerializedProperties(type, serializedObject))
             {
-                var prop = serializedObject.FindProperty(field.Name);
-                if (prop != null)
-                {
-                    EditorGUILayout.PropertyField(prop, true);
-                }
+                EditorGUILayout.PropertyField(prop, true);
             }
 
+            // End SerializedObject
             if (EditorGUI.EndChangeCheck())
             {
                 serializedObject.ApplyModifiedProperties();
                 EditorUtility.SetDirty(serializedObject.targetObject);
             }
         }
-
-        /* // from UnityEditor.Editor.cs
-        public bool DoDrawDefaultInspector()
-        {
-            bool result;
-            using (new LocalizationGroup(target))
-            {
-                result = DoDrawDefaultInspector(serializedObject);
-                MonoBehaviour monoBehaviour = target as MonoBehaviour;
-                if (monoBehaviour == null )//|| !AudioUtil.HasAudioCallback(monoBehaviour) || AudioUtil.GetCustomFilterChannelCount(monoBehaviour) <= 0)
-                {
-                    return result;
-                }
-
-                // if (m_AudioFilterGUI == null)
-                // {
-                //     m_AudioFilterGUI = new AudioFilterGUI();
-                // }
-
-                // m_AudioFilterGUI.DrawAudioFilterGUI(monoBehaviour);
-            }
-
-            return result;
-        }
-
-        public static bool DoDrawDefaultInspector(SerializedObject obj)
-        {
-            EditorGUI.BeginChangeCheck();
-            obj.UpdateIfRequiredOrScript();
-            SerializedProperty iterator = obj.GetIterator();
-            bool enterChildren = true;
-            while (iterator.NextVisible(enterChildren))
-            {
-                using (new EditorGUI.DisabledScope("m_Script" == iterator.propertyPath))
-                {
-                    EditorGUILayout.PropertyField(iterator, true);
-                }
-
-                enterChildren = false;
-            }
-
-            obj.ApplyModifiedProperties();
-            return EditorGUI.EndChangeCheck();
-        }
-        // */
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

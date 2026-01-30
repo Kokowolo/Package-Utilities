@@ -53,6 +53,7 @@ namespace Kokowolo.Utilities
                 }
                 return _Instance;
             }
+            set => _Instance = value;
         }
 
         #endregion

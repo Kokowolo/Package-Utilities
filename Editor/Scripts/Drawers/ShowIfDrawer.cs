@@ -15,7 +15,7 @@ using UnityEngine;
 using Kokowolo.Utilities;
 
 [CustomPropertyDrawer(typeof(ShowIfAttribute))]
-public class ShowIfPropertyDrawer : PropertyDrawer
+public class ShowIfDrawer : PropertyDrawer
 {
     /*██████████████████████████████████████████████████████████*/
     #region Functions

@@ -16,7 +16,7 @@ using UnityEditor;
 namespace Kokowolo.Utilities.Editor
 {
     [CustomPropertyDrawer(typeof(LayerAttribute))]
-    public class LayerAttributeDrawer : PropertyDrawer
+    public class LayerDrawer : PropertyDrawer
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions

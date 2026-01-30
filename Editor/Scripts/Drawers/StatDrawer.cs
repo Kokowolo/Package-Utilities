@@ -18,7 +18,7 @@ using Kokowolo.Utilities;
 namespace Kokowolo.Utilities.Editor
 {
     [CustomPropertyDrawer(typeof(StatReadOnlyMaxAttribute))]
-    public class StatReadOnlyMaxAttributePropertyDrawer : PropertyDrawer
+    public class StatReadOnlyMaxDrawer : PropertyDrawer
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -41,7 +41,7 @@ namespace Kokowolo.Utilities.Editor
     }
 
     [CustomPropertyDrawer(typeof(Stat))]
-    public class StatPropertyDrawer : PropertyDrawer
+    public class StatDrawer : PropertyDrawer
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions

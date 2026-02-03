@@ -102,6 +102,11 @@ namespace Kokowolo.Utilities
             return index.Clamp(0, list.Count - 1);
         }
 
+        public static int IndexOf<T>(this IList<T> list, T item)
+        {
+            return list.IndexOf(item);
+        }
+
         public static string ToString<T>(this IList<T> list, bool formatElements, bool withNewlineCharacter = false)
         {
             if (formatElements)

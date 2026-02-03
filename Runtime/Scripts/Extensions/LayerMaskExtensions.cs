@@ -21,24 +21,15 @@ namespace Kokowolo.Utilities
         /*——————————————————————————————————————————————————————————*/
         #region Extensions
 
-        public static bool ContainsGameObject(this LayerMask layerMask, GameObject gameObject)
-        {
-            return ContainsLayer(layerMask, gameObject.layer);
-        }
-
-        public static bool ContainsLayer(this LayerMask layerMask, int layer)
+        public static bool Contains(this LayerMask layerMask, GameObject gameObject) => Contains(layerMask, gameObject.layer);
+        public static bool Contains(this LayerMask layerMask, int layer)
         {
             return BitmaskUtils.Contains(layerMask, layer);
         }
 
-        public static bool ContainsLayerMask(this LayerMask layerMaskA, LayerMask layerMaskB)
+        public static bool Contains(this LayerMask layerMaskA, LayerMask layerMaskB)
         {
             return (layerMaskA & layerMaskB) == layerMaskB;
-        }
-
-        public static int ToLayer(this LayerMask layerMask)
-        {
-            return LayerMaskToLayer(layerMask);
         }
 
         #endregion
@@ -50,15 +41,11 @@ namespace Kokowolo.Utilities
             return 1 << layer;
         }
 
-        public static int LayerMaskToLayer(LayerMask layerMask)
-        {
-            return ToLayer(layerMask.value);
-        }
-
+        public static int ToLayer(this LayerMask layerMask) => ToLayer(layerMask.value);
         public static int ToLayer(int bitmask) 
         {
             UnityEngine.Assertions.Assert.IsFalse(ContainsMultipleLayers(bitmask), 
-                $"{nameof(LayerMaskToLayer)} was passed an invalid mask containing multiple layers");
+                $"{nameof(ToLayer)} was passed an invalid mask containing multiple layers");
     
             int result = bitmask > 0 ? 0 : 31;
             while(bitmask > 1)

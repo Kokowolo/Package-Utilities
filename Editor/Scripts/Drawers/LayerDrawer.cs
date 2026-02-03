@@ -40,7 +40,7 @@ namespace Kokowolo.Utilities.Editor
                     property.intValue = 0;
                 }
                 
-                int layer = EditorGUI.LayerField(position, label, LayerMaskExtensions.LayerMaskToLayer(property.intValue));
+                int layer = EditorGUI.LayerField(position, label, LayerMaskExtensions.ToLayer(property.intValue));
                 property.intValue = 1 << layer;
             }
             

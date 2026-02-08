@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.151] - 2026-02-08
+### Added
+* `rotation` to `GizmosExtensions.DrawBounds`
+### Changed
+* `GizmosExtensions`'s `DrawBounds(BoundsInt)` to `DrawBoundsInt`
+### Fixed
+* (maybe) `Raycasting.RaycastToDestinationPoint` floating point errors
+
 ## [0.0.150] - 2026-02-06
 ### Added
 * new `PoolManager` and `IPoolable` code that makes new assumptions about pooling within Kokowolo projects

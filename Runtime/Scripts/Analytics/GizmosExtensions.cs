@@ -298,60 +298,58 @@ namespace Kokowolo.Utilities
             Gizmos.color = gizmosColor;
         }
 
+        public static void DrawBoundsInt(BoundsInt boundsInt) => DrawBoundsInt(boundsInt, Quaternion.identity);
+        public static void DrawBoundsInt(BoundsInt boundsInt, Quaternion rotation) => DrawBounds(new Bounds(boundsInt.center, boundsInt.size), rotation);
         public static void DrawBounds(float xMin, float yMin, float zMin, float sizeX, float sizeY, float sizeZ) => DrawBounds(BoundsExtensions.CreateBounds(xMin, yMin, zMin, sizeX, sizeY, sizeZ));
         public static void DrawBounds(Vector3 minPosition, Vector3 size) => DrawBounds(BoundsExtensions.CreateBounds(minPosition, size));
-        public static void DrawBounds(Bounds bounds)
+        public static void DrawBounds(Bounds bounds) => DrawBounds(bounds, Quaternion.identity);
+        public static void DrawBounds(Bounds bounds, Quaternion rotation)
         {
             Vector3 origin, start, end;
 
             // front 
-            origin = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
+            origin = rotation * new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
             start = origin;
-            end = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
             Gizmos.DrawLine(start, end);
             start = end;
-            end = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
             Gizmos.DrawLine(start, end);
             start = end;
-            end = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
             Gizmos.DrawLine(start, end);
             start = end;
             end = origin;
             Gizmos.DrawLine(start, end);
 
             // back 
-            origin = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
+            origin = rotation * new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
             start = origin;
-            end = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
             start = end;
-            end = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
             start = end;
-            end = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
+            end = rotation * new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
             start = end;
             end = origin;
             Gizmos.DrawLine(start, end);
 
             // connection 
-            start = new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
-            end = new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
+            start = rotation * new Vector3(bounds.min.x, bounds.min.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.min.x, bounds.min.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
-            start = new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
-            end = new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
+            start = rotation * new Vector3(bounds.max.x, bounds.min.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.min.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
-            start = new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
-            end = new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
+            start = rotation * new Vector3(bounds.max.x, bounds.max.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.max.x, bounds.max.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
-            start = new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
-            end = new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
+            start = rotation * new Vector3(bounds.min.x, bounds.max.y, bounds.min.z);
+            end = rotation * new Vector3(bounds.min.x, bounds.max.y, bounds.max.z);
             Gizmos.DrawLine(start, end);
-        }
-
-        public static void DrawBounds(BoundsInt bounds)
-        {
-            DrawBounds(new Bounds(bounds.center, bounds.size));
         }
 
         #endregion

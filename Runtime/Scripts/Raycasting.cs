@@ -18,11 +18,11 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static bool RaycastToDestinationPoint(Vector3 origin, Vector3 destination, out RaycastHit hitInfo, LayerMask layerMask)
+        public static bool RaycastToDestinationPoint(Vector3 from, Vector3 to, out RaycastHit hitInfo, LayerMask layerMask)
         {
-            Vector3 direction = (destination - origin).normalized;
-            float maxDistance = Vector3.Distance(origin, destination);
-            return Physics.Raycast(origin, direction, out hitInfo, maxDistance, layerMask);
+            Vector3 direction = (to - from).normalized;
+            float maxDistance = Vector3.Distance(from, to) + Mathf.Epsilon;
+            return Physics.Raycast(from, direction, out hitInfo, maxDistance, layerMask);
         }
 
         public static bool RaycastFromMouseScreenPoint(out RaycastHit hitInfo, LayerMask layerMask, 

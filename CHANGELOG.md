@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.150] - 2026-02-06
+### Added
+* new `PoolManager` and `IPoolable` code that makes new assumptions about pooling within Kokowolo projects
+### Deprecated
+* old `IPoolable` and `PoolSystem` in favor of newly added one
+### Removed
+* `Obsolete` directory and placed its filed within Kokowolo-Base project
+
 ## [0.0.149] - 2026-02-03
 ### Added
 * `IndexOf` to `IListExtensions`
@@ -21,7 +29,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `EditorExtensions.GetPropertyHeight`
 ### Changed
 * `EditorExtensions`' API to make it more stable and useable; now works with unbound generics
-* coding format for `GrizmosExtensions` slightly
+* coding format for `GizmosExtensions` slightly
 
 ## [0.0.146] - 2026-01-22
 ### Added
@@ -57,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `EditorUtils` to `EditorExtensions`
 * `ScreenUtils` such that its class is easier to read
 ### Fixed
-* `Kokowolo.Utilties` namespace not included in `BoundsIntExtensions`, `BoxCollider2DExtensions`, & `BoxColliderExtensions`
+* `Kokowolo.Utilities` namespace not included in `BoundsIntExtensions`, `BoxCollider2DExtensions`, & `BoxColliderExtensions`
 
 ## [0.0.140] - 2025-12-19
 ### Added
@@ -214,7 +222,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 * `Scheduling.Utils.WaitWhile` to return an `IEnumerator` from a `WaitWhile`
 * `Job.WaitWhile` to halt completion of a job until a `Func<bool>` parameter is false
 * `DOTweenJob` script for `Job` and `JobSequence` `DOTween` `WaitWhile` functionality
-* new tests to evaluate new `Job` system functionality and `DOTween` compatitbility
+* new tests to evaluate new `Job` system functionality and `DOTween` compatibility
 * `Abs(this float value)` extension to `FloatExtensions`
 ### Changed
 * `JobManager` to run multiple `JobScheduler`s and listen to their `OnEnable`/`OnDispose` events
@@ -233,7 +241,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.118] - 2025-07-18
 ### Added
 * `EditorOnlyUtils` to Runtime Scripts
-* replacement to `ScheduledEventManager`, i.e. the `Scheduling` namespace framework with most notibly `Scheduling.Job.Schedule(params)`
+* replacement to `ScheduledEventManager`, i.e. the `Scheduling` namespace framework with most notably `Scheduling.Job.Schedule(params)`
 * `Tests/Runtime/Kokowolo.Utilities.Tests.asmdef` with working unit tests
 * `Scheduling` namespace unit tests
 * `JobManager` prefab
@@ -405,7 +413,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 * `Axis.Opposite` which gets the oppose axis
 ### Removed
-* `Tween.cs` from packge in favor of `DG.DoTween`
+* `Tween.cs` from package in favor of `DG.DoTween`
 
 ## [0.0.92] - 2024-06-26
 ### Added
@@ -644,7 +652,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.58] - 2023-10-21
 ### Added
-* `ListPool.Release<T>(ref _)` to avoid mistakingly re-assigning a list in the future
+* `ListPool.Release<T>(ref _)` to avoid mistakenly re-assigning a list in the future
 * `TransformFacer` and moved related `CameraFacer`'s code to the class
 ### Changed
 * `CameraFacer` to extend from `TransformFacer`
@@ -742,7 +750,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.0.43] - 2023-04-06
 ### Added
 * reference NOTE comment to `ListPool`
-* optional parameters to `Math`.`Peturb` to apply/restrict noise in given axes
+* optional parameters to `Math`.`Perturb` to apply/restrict noise in given axes
 * convenience extension method to `ColorExtensions` to change the alpha value
 
 ## [0.0.42] - 2023-03-22
@@ -827,7 +835,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.0.31] - 2023-01-26
 ### Changed
-* `Singleton`.`Get<T>'`s defult parameter value from `true` to `false`
+* `Singleton`.`Get<T>'`s default parameter value from `true` to `false`
 * `BaseInputManager`'s and `PrefabManager`'s `Singleton` settings back to allow them to call `FindObjectOfType` `from Get<T>()`
 
 ## [0.0.30] - 2023-01-25

@@ -13,18 +13,27 @@ using UnityEngine;
 
 namespace Kokowolo.Utilities
 {
-    /// <summary>
-    /// A poolable class or struct. NOTE: there is no factory or manager for this to be compatible with out of the box
-    /// </summary>
-    public interface IPoolable
+    public interface IPoolableMonoBehaviour : IPoolable
     {
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
+
+        public Transform transform { get; }
+
+        #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
         
-        public void OnAddedToPool();
+        void IPoolable.OnAddedToPool()
+        {
+            transform.SetParent(PoolManager.Instance.transform);
+        }
 
-        public void OnRemovedFromPool();
-        
+        void IPoolable.OnRemovedFromPool()
+        {
+            transform.SetParent(null);
+        }
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

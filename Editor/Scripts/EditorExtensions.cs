@@ -77,16 +77,21 @@ namespace Kokowolo.Utilities.Editor
             return properties;
         }
 
-        public static float GetPropertyHeight<T>(SerializedProperty property) => GetPropertyHeight(typeof(T), property);
-        public static float GetPropertyHeight(Type type, SerializedProperty property)
+        public static float GetSerializedPropertyHeight<T>(SerializedProperty property) => GetSerializedPropertyHeight(typeof(T), property);
+        /// <summary>
+        /// Gets the height of the property. Warning, this function will overwrite the GUIContent label on to heap (which is used by Unity)
+        /// </summary>
+        public static float GetSerializedPropertyHeight(Type type, SerializedProperty property)
         {
-            float height = EditorGUIUtility.singleLineHeight;
-            if (property.isExpanded)
+            if (property == null) 
             {
-                foreach (var prop in GetSerializedProperties(type, property))
-                {
-                    height += EditorGUI.GetPropertyHeight(prop);
-                }
+                Debug.LogError($"[{nameof(EditorExtensions)}] property is null");
+                return 0;
+            }
+            float height = 0;
+            foreach (var prop in GetSerializedProperties(type, property))
+            {
+                height += EditorGUI.GetPropertyHeight(prop);
             }
             return height;
         }
@@ -94,9 +99,10 @@ namespace Kokowolo.Utilities.Editor
         public static void DrawSerializeFields<T>(Rect position, SerializedProperty property, GUIContent label) => DrawSerializeFields(typeof(T), position, property, label);
         public static void DrawSerializeFields(Type type, Rect position, SerializedProperty property, GUIContent label)
         {
-            // Start SerializedProperty
-            property.serializedObject.UpdateIfRequiredOrScript();
-            EditorGUI.BeginChangeCheck();
+            // Start SerializedProperty 
+            // EditorGUI.BeginProperty(position, label, property); // HACK: is this needed?
+            // property.serializedObject.UpdateIfRequiredOrScript(); // HACK: is this needed?
+            // EditorGUI.BeginChangeCheck();
 
             // Draw foldout
             position = new Rect(position.x, position.y, position.width, EditorGUIUtility.singleLineHeight);
@@ -112,7 +118,7 @@ namespace Kokowolo.Utilities.Editor
                 foreach (var prop in properties)
                 {
                     position = new Rect(position.x, position.y, position.width, EditorGUI.GetPropertyHeight(prop));
-                    EditorGUI.PropertyField(position, prop);
+                    EditorGUI.PropertyField(position, prop, includeChildren: true);
                     position.y += position.height;
                 }
 
@@ -121,11 +127,12 @@ namespace Kokowolo.Utilities.Editor
             }
             
             // End SerializedProperty
-            if (EditorGUI.EndChangeCheck())
-            {
-                property.serializedObject.ApplyModifiedProperties();
-                EditorUtility.SetDirty(property.serializedObject.targetObject);
-            }
+            // EditorGUI.EndProperty();
+            // if (EditorGUI.EndChangeCheck()) // HACK: this isn't needed?
+            // {
+            //     property.serializedObject.ApplyModifiedProperties();
+            //     EditorUtility.SetDirty(property.serializedObject.targetObject);
+            // }
         }
 
         // NOTE: the following does auto layout, consider calling EditorGUI variant of this function instead
@@ -133,8 +140,8 @@ namespace Kokowolo.Utilities.Editor
         public static void DrawSerializeFields(Type type, SerializedProperty property)
         {
             // Start SerializedProperty
-            property.serializedObject.UpdateIfRequiredOrScript();
-            EditorGUI.BeginChangeCheck();
+            // property.serializedObject.UpdateIfRequiredOrScript();
+            // EditorGUI.BeginChangeCheck();
 
             // Draw SerializedProperties
             foreach (SerializedProperty prop in GetSerializedProperties(type, property))
@@ -143,11 +150,12 @@ namespace Kokowolo.Utilities.Editor
             }
 
             // End SerializedProperty
-            if (EditorGUI.EndChangeCheck())
-            {
-                property.serializedObject.ApplyModifiedProperties();
-                EditorUtility.SetDirty(property.serializedObject.targetObject);
-            }
+            // EditorGUI.EndProperty();
+            // if (EditorGUI.EndChangeCheck()) // HACK: this isn't needed?
+            // {
+            //     property.serializedObject.ApplyModifiedProperties();
+            //     EditorUtility.SetDirty(property.serializedObject.targetObject);
+            // }
         }
 
         [Obsolete("use DrawSerializeFields(Type type, SerializedObject property) instead")]

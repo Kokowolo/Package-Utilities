@@ -30,7 +30,11 @@ namespace Kokowolo.Utilities
     }
 
     [Serializable]
+#if UNITY_EDITOR
+    public class Stat : ISerializationCallbackReceiver
+#else
     public class Stat
+#endif
     {
         /*██████████████████████████████████████████████████████████*/
         #region Enums
@@ -62,8 +66,8 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Fields
         
-        [SerializeField] float maxValue = 1;
-        [SerializeField] float currentValue = 1;
+        [SerializeField] float current = 1;
+        [SerializeField] float max = 1;
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
@@ -71,13 +75,13 @@ namespace Kokowolo.Utilities
 
         public string Name { get; private set; } = "Stat";
 
-        public float MaxValue => maxValue;
-        public float CurrentValue => currentValue;
+        public float CurrentValue => current;
+        public float MaxValue => max;
         /// <summary>
         /// Stat as a value between 0 and 1
         /// </summary>
-        public float NormalizedValue => currentValue / maxValue;
-        bool IsPositive => currentValue > 0;
+        public float NormalizedValue => current / max;
+        bool IsPositive => current > 0;
         StatStatus Status { get; set; } = StatStatus.None;
 
         public bool IsHealthy => Status == StatStatus.Healthy;
@@ -88,14 +92,14 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public Stat(Stat statHandler) : this(statHandler.Name, statHandler.maxValue, statHandler.currentValue) {}
+        public Stat(Stat statHandler) : this(statHandler.Name, statHandler.current, statHandler.max) {}
         public Stat(float maxValue) : this("Stat", maxValue, maxValue) {}
-        public Stat(float maxValue, float currentValue) : this("Stat", maxValue, currentValue) {}
-        public Stat(string name, float maxValue, float currentValue)
+        public Stat(float currentValue, float maxValue) : this("Stat", currentValue, maxValue) {}
+        public Stat(string name, float currentValue, float maxValue)
         {
             this.Name = name;
-            this.maxValue = maxValue;
-            this.currentValue = currentValue;
+            this.max = maxValue;
+            this.current = currentValue;
             RefreshStatus();
         }
 
@@ -118,13 +122,15 @@ namespace Kokowolo.Utilities
             Status = Status == StatStatus.Depleted ? StatStatus.Depleted : IsPositive ? StatStatus.Healthy : StatStatus.Depleting;
         }
 
-        public void SetStat(float max, float current, UpdateStateType updateStateType = UpdateStateType.Now)
+        [Obsolete("use Set now, which swizzles max and current values")]
+        public void SetStat(float max, float current, UpdateStateType updateStateType = UpdateStateType.Now) => Set(current, max, updateStateType);
+        public void Set(float current, float max, UpdateStateType updateStateType = UpdateStateType.Now)
         {
-            if (maxValue == max && current == currentValue) return;
+            if (current == this.current && this.max == max) return;
 
-            // NOTE: StatHandler cannot have negative values, is this okay?
-            maxValue = Mathf.Max(0, max);
-            currentValue = Mathf.Clamp(current, 0, maxValue);
+            // NOTE: Stat cannot have negative values, is this okay?
+            this.current = Mathf.Clamp(current, 0, this.max);
+            this.max = Mathf.Max(0, max);
 
             RefreshStatus();
             OnChanged?.Invoke();
@@ -146,19 +152,19 @@ namespace Kokowolo.Utilities
 
         public void ChangeMaxValueBy(float amount, UpdateStateType updateStateType = UpdateStateType.Now)
         {
-            SetStat(maxValue + amount, currentValue + amount, updateStateType);
+            Set(current + amount, max + amount, updateStateType);
         }
 
         public void ChangeValueBy(float amount, UpdateStateType updateStateType = UpdateStateType.Now)
         {
-            SetStat(maxValue, currentValue + amount, updateStateType);
+            Set(current + amount, max, updateStateType);
         }
 
         public void Deplete()
         {
             if (Status == StatStatus.Depleted) return;
             Status = StatStatus.Depleted;
-            SetStat(maxValue, 0, updateStateType: UpdateStateType.None);
+            Set(0, max, updateStateType: UpdateStateType.None);
             LogManager.Log($"{Name} has depleted");
             OnDepleted?.Invoke();
         }
@@ -175,10 +181,29 @@ namespace Kokowolo.Utilities
         public void Replenish()
         {
             Revive();
-            SetStat(maxValue, maxValue, updateStateType: UpdateStateType.None);
+            Set(max, max, updateStateType: UpdateStateType.None);
             LogManager.Log($"{Name} has replenished");
         }
 
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Editor
+#if UNITY_EDITOR
+        
+        public void OnBeforeSerialize()
+        {
+            if (current > max)
+            {
+                current = max;
+            }
+        }
+
+        public void OnAfterDeserialize()
+        {
+            
+        }
+        
+#endif
         #endregion
         /*██████████████████████████████████████████████████████████*/
     }

@@ -56,11 +56,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        public static void Add<T>(List<T> list)
-        {
-            Release(ref list);
-        }
-
+        public static void Add<T>(List<T> list) => Release(ref list);
         public static void Release<T>(ref List<T> list)
         {
             if (list == null) return;

@@ -21,7 +21,7 @@ namespace Kokowolo.Utilities
         public static bool RaycastToDestinationPoint(Vector3 from, Vector3 to, out RaycastHit hitInfo, LayerMask layerMask)
         {
             Vector3 direction = (to - from).normalized;
-            float maxDistance = Vector3.Distance(from, to) + Mathf.Epsilon;
+            float maxDistance = Vector3.Distance(from, to);
             return Physics.Raycast(from, direction, out hitInfo, maxDistance, layerMask);
         }
 

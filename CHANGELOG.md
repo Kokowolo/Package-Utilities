@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.152] - 2026-02-10
+### Added
+* `ISerializationCallbackReceiver` to `Stat` to validate its `max` and `current`
+### Changed 
+* `Stat` to make its values read `Current`/`Max` rather than `Max`/`Current`
+* `Stat` such that its members are `current`/`max` rather than `currentValue`/`maxValue`
+* `StatDrawer` to make it work better within the Editor
+* `EditorExtensions.GetPropertyHeight` to `EditorExtensions. GetSerializedPropertyHeight`
+### Fixed
+* bug within `EditorExtensions` `DrawSerializeFields` where `PropertyField` wasn't including children
+* assumption within `EditorExtensions` where `isExpanded` determined property height
+### Removed 
+* `EditorExtensions` code within `SerializedProperty` functions that validated the `SerializeObject`
+* `Raycasting.RaycastToDestinationPoint` floating point error fix, the `maxDistance` calculus onus should be on the caller
+
 ## [0.0.151] - 2026-02-08
 ### Added
 * `rotation` to `GizmosExtensions.DrawBounds`

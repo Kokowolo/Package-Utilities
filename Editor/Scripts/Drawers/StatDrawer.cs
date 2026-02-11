@@ -46,126 +46,39 @@ namespace Kokowolo.Utilities.Editor
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public override void OnGUI(Rect rect, SerializedProperty property, GUIContent label)
+        public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
         {
-            // Initalize variables and get serializeFields
-            StatReadOnlyMaxAttribute attribute = fieldInfo.GetCustomAttribute<StatReadOnlyMaxAttribute>();
-            Stat stat = (Stat) property.boxedValue;
-            bool modifiedProperties = false;
-            float headerWidth = rect.width * 0.3f;
-            float fieldLabelWidth = rect.width * 0.15f;
-            float fieldValueWidth = rect.width * 0.2f;
-            float positionX = rect.x;
-            
-            // Get serializedFields
-            var serializeFields = EditorExtensions.GetSerializeFields<Stat>();
-            var maxValueProperty = property.FindPropertyRelative(serializeFields[0].Name);
-            var currentValueProperty = property.FindPropertyRelative(serializeFields[1].Name);
-
-            // Draw Label
-            EditorGUI.LabelField(new Rect(positionX, rect.y, headerWidth, rect.height), label);
-            positionX += headerWidth;
-
-            // Draw maxValue property
-            {
-                bool enabled = GUI.enabled;
-                GUI.enabled = enabled && (attribute == null || !attribute.ReadOnlyMax);
-                EditorGUI.BeginChangeCheck();
-                EditorGUI.LabelField(new Rect(positionX, rect.y, fieldLabelWidth, rect.height), new GUIContent("Max"));
-                positionX += fieldLabelWidth;
-                EditorGUI.PropertyField(
-                    new Rect(positionX, rect.y, fieldValueWidth, rect.height), 
-                    maxValueProperty, 
-                    GUIContent.none, 
-                    true
-                );
-                positionX += fieldValueWidth;
-                if (EditorGUI.EndChangeCheck())
-                {
-                    maxValueProperty.floatValue = Mathf.Max(0, maxValueProperty.floatValue);
-                    currentValueProperty.floatValue = Mathf.Clamp(currentValueProperty.floatValue, 0, maxValueProperty.floatValue);
-                    modifiedProperties = true;
-                }
-                GUI.enabled = enabled;
-            }
-
-            // Draw currentValue property
-            {
-                EditorGUI.BeginChangeCheck();
-                EditorGUI.LabelField(new Rect(positionX, rect.y, fieldLabelWidth, rect.height), new GUIContent("Current"));
-                positionX += fieldLabelWidth;
-                EditorGUI.PropertyField(
-                    new Rect(positionX, rect.y, fieldValueWidth, rect.height), 
-                    currentValueProperty, 
-                    GUIContent.none, 
-                    true
-                );
-                if (EditorGUI.EndChangeCheck())
-                {
-                    currentValueProperty.floatValue = Mathf.Clamp(currentValueProperty.floatValue, 0, maxValueProperty.floatValue);
-                    modifiedProperties = true;
-                }
-            }
-
-            // Finish drawer and save fields
-            if (modifiedProperties)
-            {
-                property.serializedObject.ApplyModifiedProperties();
-                EditorUtility.SetDirty(property.serializedObject.targetObject);
-            }
+            return EditorGUIUtility.singleLineHeight;
         }
 
-        // NOTE: this does the exact same thing as above, but uses a Foldout instead rather than drawing fields in one line
-        // public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        // {
-        //     // Start drawer foldout
-        //     property.isExpanded = EditorGUI.Foldout(position, property.isExpanded, label);
-        //     if (!property.isExpanded) return;
-        //     EditorGUI.indentLevel++;
+        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+        {
+            var serializedProperties = EditorExtensions.GetSerializedProperties<Stat>(property);
 
-        //     // Initalize variables and get serializeFields
-        //     StatReadOnlyMaxAttribute attribute = fieldInfo.GetCustomAttribute<StatReadOnlyMaxAttribute>();
-        //     Stat stat = (Stat) property.boxedValue;
-        //     bool modifiedProperties = false;
+            // NOTE: header, field, and spacing need to add to 1
+            float headerWidthFactor     = 0.3f;
+            float spacingWidthFactor    = 0.1f;
+
+            float headerWidth       = headerWidthFactor * position.width;
+            float spacing           = spacingWidthFactor * position.width / serializedProperties.Count;
+            float fieldWidth        = (1f - headerWidthFactor - spacingWidthFactor) * position.width / serializedProperties.Count;
+            float prefixLabelWidth  = 0.5f * fieldWidth;
+
+            float x = position.x;
+            EditorGUI.LabelField(new Rect(x, position.y, headerWidth, position.height), label);
+            x += headerWidth + spacing;
             
-        //     // Get serializedFields
-        //     var serializeFields = EditorUtils.GetSerializeFields(stat);
-        //     var maxValueProperty = property.FindPropertyRelative(serializeFields[0].Name);
-        //     var currentValueProperty = property.FindPropertyRelative(serializeFields[1].Name);
-
-        //     // Draw maxValue property
-        //     {
-        //         GUI.enabled = attribute == null || !attribute.ReadOnlyMax;
-        //         EditorGUI.BeginChangeCheck();
-        //         EditorGUILayout.PropertyField(maxValueProperty, true);
-        //         if (EditorGUI.EndChangeCheck())
-        //         {
-        //             maxValueProperty.floatValue = Mathf.Max(0, maxValueProperty.floatValue);
-        //             currentValueProperty.floatValue = Mathf.Clamp(currentValueProperty.floatValue, 0, maxValueProperty.floatValue);
-        //             modifiedProperties = true;
-        //         }
-        //         GUI.enabled = true;
-        //     }
-
-        //     // Draw currentValue property
-        //     {
-        //         EditorGUI.BeginChangeCheck();
-        //         EditorGUILayout.PropertyField(currentValueProperty, true);
-        //         if (EditorGUI.EndChangeCheck())
-        //         {
-        //             currentValueProperty.floatValue = Mathf.Clamp(currentValueProperty.floatValue, 0, maxValueProperty.floatValue);
-        //             modifiedProperties = true;
-        //         }
-        //     }
-
-        //     // Close drawer and save fields
-        //     EditorGUI.indentLevel--;
-        //     if (modifiedProperties)
-        //     {
-        //         property.serializedObject.ApplyModifiedProperties();
-        //         EditorUtility.SetDirty(property.serializedObject.targetObject);
-        //     }
-        // }
+            for (int i = 0; i < serializedProperties.Count; i++)
+            {
+                Rect rect;
+                rect = new Rect(x, position.y, fieldWidth, position.height);
+                GUIContent prefix = new GUIContent($"{serializedProperties[i].displayName}");
+                EditorGUI.PrefixLabel(rect, prefix);
+                rect = new Rect(x + prefixLabelWidth, position.y, fieldWidth - prefixLabelWidth, position.height);
+                EditorGUI.PropertyField(rect, serializedProperties[i], GUIContent.none);
+                x += fieldWidth + (i == serializedProperties.Count - 1 ? 0 : spacing);
+            }
+        }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

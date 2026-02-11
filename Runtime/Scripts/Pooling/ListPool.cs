@@ -30,14 +30,10 @@ namespace Kokowolo.Utilities
             }
             else 
             {
+                // LogManager.Log($"Get: {typeof(T)} has {ListPoolStack<T>.stack.Count - 1} lists");
                 return ListPoolStack<T>.stack.Pop();
             }
         }
-
-        // public static List<T> Get<T>(int numberOfDefaultElements)
-        // {
-        //  return Get<T>(new T[numberOfDefaultElements]);
-        // }
 
         public static List<T> Get<T>(IEnumerable<T> collection)
         {
@@ -47,6 +43,7 @@ namespace Kokowolo.Utilities
             }
             else 
             {
+                // LogManager.Log($"{typeof(T)} has {ListPoolStack<T>.stack.Count - 1} lists");
                 List<T> list = ListPoolStack<T>.stack.Pop();
                 foreach (T element in collection)
                 {
@@ -56,11 +53,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        public static void Add<T>(List<T> list)
-        {
-            Release(ref list);
-        }
-
+        public static void Add<T>(List<T> list) => Release(ref list);
         public static void Release<T>(ref List<T> list)
         {
             if (list == null) return;
@@ -68,6 +61,7 @@ namespace Kokowolo.Utilities
             list.Clear();
             ListPoolStack<T>.stack.Push(list);
             list = null;
+            // LogManager.Log($"{typeof(T)} now has {ListPoolStack<T>.stack.Count} lists");
         }
 
         #endregion

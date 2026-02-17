@@ -118,7 +118,7 @@ namespace Kokowolo.Utilities.Scheduling
             if (!Enabled) return;
             Enabled = false;
 
-            // Prevent newly created jobs from intefering with this update
+            // Prevent newly created jobs from interfering with this update
             // var pendingJobs = new Queue<Job>();
             // foreach (var i in this.pendingJobs)
             // {

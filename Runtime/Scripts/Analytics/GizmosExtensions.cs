@@ -97,7 +97,7 @@ namespace Kokowolo.Utilities
             Gizmos.matrix = Matrix4x4.TRS(center, rotation, Vector3.one);
             Vector3 from = Vector3.forward * radius;
             var step = Mathf.RoundToInt(angle / segments);
-            for (int i = 0; i <= angle; i += step)
+            for (int i = 0; step != 0 && i <= angle; i += step)
             {
                 var to = new Vector3(radius * Mathf.Sin(i * Mathf.Deg2Rad), 0, radius * Mathf.Cos(i * Mathf.Deg2Rad));
                 Gizmos.DrawLine(from, to);

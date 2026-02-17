@@ -59,7 +59,7 @@ namespace Kokowolo.Utilities
         }
 
         /// <summary>
-        /// Evaluates if `t`, the chance of success, is successful
+        /// Evaluates if `t` [0f, 1f], the chance of success, is successful
         /// </summary>
         /// <param name="t">chance of success value between 0f and 1f</param>
         /// <returns>whether success was achieved</returns>

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2025 Kokowolo. All Rights Reserved.
+ * Copyright (c) 2026 Kokowolo. All Rights Reserved.
  * Author(s): Kokowolo, Will Lacey
  * Date Created: October 14, 2020
  * 
@@ -20,15 +20,6 @@ namespace Kokowolo.Utilities
     {
         /*██████████████████████████████████████████████████████████*/
         #region Functions
-
-        public static T CacheGetComponent<T>(this MonoBehaviour monoBehaviour, ref T component) where T : Component
-        {
-            if (!component) 
-            {
-                component = monoBehaviour.GetComponent<T>();
-            }
-            return component;
-        }
 
         public static string GetPersistentDataPath()
         {

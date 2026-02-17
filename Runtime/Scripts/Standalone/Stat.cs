@@ -58,7 +58,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Events
 
-        public event Action OnChanged;
+        public event Action OnSet;
         public event Action OnDepleted;
         public event Action OnRevived;
         
@@ -133,7 +133,7 @@ namespace Kokowolo.Utilities
             this.max = Mathf.Max(0, max);
 
             RefreshStatus();
-            OnChanged?.Invoke();
+            OnSet?.Invoke();
 
             switch (updateStateType)
             {
@@ -144,8 +144,7 @@ namespace Kokowolo.Utilities
                     UpdateState();
                     break;
                 case UpdateStateType.NextFrame:
-                    _ScheduleUpdateForNextFrame();
-                    void _ScheduleUpdateForNextFrame() => Kokowolo.Utilities.Scheduling.Job.Add(UpdateState); // declare local function
+                    Scheduling.Job.Add(UpdateState);
                     break;   
             }
         }

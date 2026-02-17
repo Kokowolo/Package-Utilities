@@ -65,6 +65,7 @@ namespace Kokowolo.Utilities.Editor
             float prefixLabelWidth  = 0.5f * fieldWidth;
 
             float x = position.x;
+            // label.text = $"{label.text} ({property.Name})"; // TODO: show the Name property
             EditorGUI.LabelField(new Rect(x, position.y, headerWidth, position.height), label);
             x += headerWidth + spacing;
             

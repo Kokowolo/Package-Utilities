@@ -77,18 +77,19 @@ namespace Kokowolo.Utilities.Editor
             return properties;
         }
 
-        public static float GetSerializedPropertyHeight<T>(SerializedProperty property) => GetSerializedPropertyHeight(typeof(T), property);
+        public static float GetSerializedPropertiesHeight<T>(SerializedProperty property) => GetSerializedPropertiesHeight(typeof(T), property);
         /// <summary>
-        /// Gets the height of the property. Warning, this function will overwrite the GUIContent label on to heap (which is used by Unity)
+        /// Gets the combined height of this property's SerializedProperties. Warning, this function will overwrite the GUIContent label on 
+        /// to heap (which is used by Unity)
         /// </summary>
-        public static float GetSerializedPropertyHeight(Type type, SerializedProperty property)
+        public static float GetSerializedPropertiesHeight(Type type, SerializedProperty property)
         {
             if (property == null) 
             {
                 Debug.LogError($"[{nameof(EditorExtensions)}] property is null");
                 return 0;
             }
-            float height = 0;
+            float height = 0; // UNDONE: this assumes that the property is expanded, is this correct?
             foreach (var prop in GetSerializedProperties(type, property))
             {
                 height += EditorGUI.GetPropertyHeight(prop);

@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.153] - 2026-02-17
+### Added
+* `ComponentExtensions` with `CacheGetComponent(this Component, Component)`
+### Changed
+* name of `EditorExtensions.GetSerializedPropertyHeight` to `GetSerializedPropertiesHeight` to alleviate confusion
+* `Stat.OnChanged` to `Stat.OnSet`
+* changed some comments
+### Fixed
+* bug within GizmosExtensions
+### Removed
+* `CacheGetComponent(this MonoBehaviour, Component)` from `General`
+* erroneous delegate function from `Set`
+
 ## [0.0.152] - 2026-02-10
 ### Added
 * `ISerializationCallbackReceiver` to `Stat` to validate its `max` and `current`

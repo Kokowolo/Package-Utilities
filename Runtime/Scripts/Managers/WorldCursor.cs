@@ -43,6 +43,8 @@ namespace Kokowolo.Utilities
         public Transform HitInfoTransform => hitInfo.transform;
         public Vector3 Position => hitInfo.point;
 
+        public GameObject Visual => visual;
+
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
@@ -63,7 +65,7 @@ namespace Kokowolo.Utilities
         //     }
         // }
         
-        void LateUpdate()
+        void Update() // NOTE: WorldCursor should execute before default execution order if order matters
         {
             DoRaycast();
             doRaycast = true;
@@ -86,7 +88,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        public void SetVisual(bool isActive, bool hasCollider)
+        public void SetActiveVisual(bool isActive, bool hasCollider)
         {
             visual.SetActive(isActive);
             if (visual.TryGetComponent(out Collider collider))
@@ -111,14 +113,14 @@ namespace Kokowolo.Utilities
             doRaycast = false;
         }
 
-        public new bool TryGetComponent<T>(out T component) where T : Component
+        public bool TryGetComponentInHit<T>(out T component) where T : Component
         {
             if (HitInfoTransform) return HitInfo.transform.TryGetComponent(out component);
             component = null;
             return false;
         }
 
-        public new T GetComponent<T>() where T : Component
+        public T GetComponentInHit<T>() where T : Component
         {
             if (HitInfoTransform) return HitInfo.transform.GetComponent<T>();
             return null;

@@ -72,7 +72,7 @@ namespace Kokowolo.Utilities
         /// <param name="rotation"></param>
         public static void DrawWireCircle(Vector3 center, float radius, int segments = 20, Quaternion rotation = default(Quaternion)) 
         {
-            DrawWireArc(center,radius,360,segments,rotation);
+            DrawWireArc(center, radius, 360, segments, rotation);
         }
 
         /// <summary>
@@ -87,6 +87,7 @@ namespace Kokowolo.Utilities
             Quaternion rotation = default(Quaternion))
         {
             var old = Gizmos.matrix;
+            segments = Mathf.Max(segments, 1);
 
             // Check if the rotation is the default Quaternion (identity), and if so, set it to Quaternion.identity
             if (rotation.Equals(default(Quaternion)))

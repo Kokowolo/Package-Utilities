@@ -13,127 +13,129 @@ using UnityEngine;
 
 using System;
 using UnityEngine.InputSystem;
-using Kokowolo.Utilities;
 
-[Obsolete("WorldCursorManager has been deprecated, please use new WorldCursor instance instead")]
-public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
+namespace Kokowolo.Utilities
 {
-    /*██████████████████████████████████████████████████████████*/
-    #region Events
-
-    public static event EventHandler OnHitInfoTransformChanged;
-    // public class OnHitInfoChangedEventArgs
-    // {
-    //     public bool IsValid => HasValidHitInfo;
-    // }
-    
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Fields
-
-    // OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
-
-    [Header("Cached References")]
-    [SerializeField] GameObject visual;
-
-    [Header("Settings")]
-    [Tooltip("layerMask the manager can interact with")]
-    [SerializeField] LayerMask layerMask;
-
-    RaycastHit hitInfo;
-    Transform previousTransform;
-
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Properties
-
-    public static LayerMask LayerMask 
-    { 
-        get => Instance.layerMask; 
-        set => Instance.layerMask = value; 
-    }
-
-    public static bool ValidHitInfo => HitInfo.transform != null;
-    public static RaycastHit HitInfo => Instance.hitInfo;
-
-    static bool doRaycast = true;
-
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
-    #region Functions
-
-    void LateUpdate()
+    [Obsolete("WorldCursorManager has been deprecated, please use new WorldCursor instance instead")]
+    public class WorldCursorManager : MonoBehaviourSingleton<WorldCursorManager>
     {
-        DoRaycast();
-        doRaycast = true;
-    }
+        /*██████████████████████████████████████████████████████████*/
+        #region Events
 
-    void DoRaycast()
-    {
-        if (!doRaycast) return;
+        public static event EventHandler OnHitInfoTransformChanged;
+        // public class OnHitInfoChangedEventArgs
+        // {
+        //     public bool IsValid => HasValidHitInfo;
+        // }
         
-        Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
-        if (visual)
-        {
-            visual.transform.position = hitInfo.point;
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+
+        // OnHitInfoChangedEventArgs args = new OnHitInfoChangedEventArgs();
+
+        [Header("Cached References")]
+        [SerializeField] GameObject visual;
+
+        [Header("Settings")]
+        [Tooltip("layerMask the manager can interact with")]
+        [SerializeField] LayerMask layerMask;
+
+        RaycastHit hitInfo;
+        Transform previousTransform;
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Properties
+
+        public static LayerMask LayerMask 
+        { 
+            get => Instance.layerMask; 
+            set => Instance.layerMask = value; 
         }
 
-        if (hitInfo.transform != previousTransform)
+        public static bool ValidHitInfo => HitInfo.transform != null;
+        public static RaycastHit HitInfo => Instance.hitInfo;
+
+        static bool doRaycast = true;
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Functions
+
+        void LateUpdate()
         {
-            OnHitInfoTransformChanged?.Invoke(this, EventArgs.Empty);
-            previousTransform = hitInfo.transform;
+            DoRaycast();
+            doRaycast = true;
         }
-    }
 
-    public static void SetVisual(bool isActive, bool hasCollider)
-    {
-        Instance.visual.SetActive(isActive);
-        Instance.visual.GetComponent<Collider>().enabled = hasCollider;
-    }
-
-    public static Vector3 GetWorldPosition()
-    {
-        return Instance.hitInfo.point;
-    }
-
-    public static void SetCursorWorldPosition(Vector3 worldPosition)
-    {
-        InputManager.SetCursorWorldPosition(worldPosition);
-
-        Instance.hitInfo.point = worldPosition;
-        if (Instance.visual)
+        void DoRaycast()
         {
-            Instance.visual.transform.position = worldPosition;
+            if (!doRaycast) return;
+            
+            Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask);
+            if (visual)
+            {
+                visual.transform.position = hitInfo.point;
+            }
+
+            if (hitInfo.transform != previousTransform)
+            {
+                OnHitInfoTransformChanged?.Invoke(this, EventArgs.Empty);
+                previousTransform = hitInfo.transform;
+            }
         }
-        doRaycast = false;
-    }
 
-    public static Vector3 GetMouseWorldPosition(LayerMask layerMask, float maxDistance = Mathf.Infinity, Camera camera = null)
-    {
-        GetMouseWorldPosition(out RaycastHit hitInfo, layerMask, maxDistance, camera);
-        return hitInfo.point;
-    }
+        public static void SetVisual(bool isActive, bool hasCollider)
+        {
+            Instance.visual.SetActive(isActive);
+            Instance.visual.GetComponent<Collider>().enabled = hasCollider;
+        }
 
-    public static Vector3 GetMouseWorldPosition(out RaycastHit hitInfo, LayerMask layerMask, 
-        float maxDistance = Mathf.Infinity, Camera camera = null)
-    {
-        Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask, maxDistance, camera);
-        return hitInfo.point;
-    }
+        public static Vector3 GetWorldPosition()
+        {
+            return Instance.hitInfo.point;
+        }
 
-    public static new bool TryGetComponent<T>(out T component) where T : Component
-    {
-        if (ValidHitInfo) return HitInfo.transform.TryGetComponent(out component);
-        component = null;
-        return false;
-    }
+        public static void SetCursorWorldPosition(Vector3 worldPosition)
+        {
+            InputManager.SetCursorWorldPosition(worldPosition);
 
-    public static new T GetComponent<T>() where T : Component
-    {
-        if (ValidHitInfo) return HitInfo.transform.GetComponent<T>();
-        return null;
-    }
+            Instance.hitInfo.point = worldPosition;
+            if (Instance.visual)
+            {
+                Instance.visual.transform.position = worldPosition;
+            }
+            doRaycast = false;
+        }
 
-    #endregion
-    /*██████████████████████████████████████████████████████████*/
+        public static Vector3 GetMouseWorldPosition(LayerMask layerMask, float maxDistance = Mathf.Infinity, Camera camera = null)
+        {
+            GetMouseWorldPosition(out RaycastHit hitInfo, layerMask, maxDistance, camera);
+            return hitInfo.point;
+        }
+
+        public static Vector3 GetMouseWorldPosition(out RaycastHit hitInfo, LayerMask layerMask, 
+            float maxDistance = Mathf.Infinity, Camera camera = null)
+        {
+            Raycasting.RaycastFromMouseScreenPoint(out hitInfo, layerMask, maxDistance, camera);
+            return hitInfo.point;
+        }
+
+        public static new bool TryGetComponent<T>(out T component) where T : Component
+        {
+            if (ValidHitInfo) return HitInfo.transform.TryGetComponent(out component);
+            component = null;
+            return false;
+        }
+
+        public static new T GetComponent<T>() where T : Component
+        {
+            if (ValidHitInfo) return HitInfo.transform.GetComponent<T>();
+            return null;
+        }
+
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+    }
 }

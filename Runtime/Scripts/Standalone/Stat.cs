@@ -105,7 +105,7 @@ namespace Kokowolo.Utilities
 
         public void UpdateState()
         {
-            LogManager.Log($"{Name} called {nameof(UpdateState)}");
+            // LogManager.Log($"{Name} called {nameof(UpdateState)}");
             if (Status == StatStatus.Depleting) 
             {
                 Deplete();
@@ -189,7 +189,7 @@ namespace Kokowolo.Utilities
         #region Editor
 #if UNITY_EDITOR
         
-        public void OnBeforeSerialize()
+        void ISerializationCallbackReceiver.OnBeforeSerialize()
         {
             if (current > max)
             {
@@ -197,7 +197,7 @@ namespace Kokowolo.Utilities
             }
         }
 
-        public void OnAfterDeserialize()
+        void ISerializationCallbackReceiver.OnAfterDeserialize()
         {
             
         }

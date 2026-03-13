@@ -190,7 +190,7 @@ namespace Kokowolo.Utilities
                 return false;
             }
             OpenRead(stream);
-            currentFileVersion = ReadInt32();
+            currentFileVersion = reader.ReadInt32();
             Load();
             Close();
             return true;
@@ -203,7 +203,7 @@ namespace Kokowolo.Utilities
             if (!IsValidFileName(fileName)) return;
             string path = GetSelectedPath(fileName);
             OpenWrite(File.Open(path, FileMode.Create));
-            Write(NewFileVersion);
+            writer.Write(NewFileVersion);
             Save();
             Close();
         }
@@ -211,24 +211,35 @@ namespace Kokowolo.Utilities
         protected abstract void Save();
 
         /*——————————————————————————————————————————————————————————*/
-        #region Reader Functions
+        #region Writer Functions
 
-        public int ReadInt32() => reader.ReadInt32();
-        public bool ReadBool() => reader.ReadBoolean();
-        public Vector2Int ReadVector2Int() => new Vector2Int(ReadInt32(), ReadInt32());
-        
-        #endregion
-        /*——————————————————————————————————————————————————————————*/
-        #region Writer Functions        
-
-        public void Write(int value) => writer.Write(value);
-        public void Write(bool value) => writer.Write(value);
         public void Write(Vector2Int value) 
         {
             writer.Write(value.x);
             writer.Write(value.y);
         }
-        
+
+        public void Write(Vector3 value) 
+        {
+            writer.Write(value.x);
+            writer.Write(value.y);
+            writer.Write(value.z);
+        }
+
+        #endregion
+        /*——————————————————————————————————————————————————————————*/
+        #region Reader Functions
+
+        public Vector2Int ReadVector2Int() 
+        {
+            return new Vector2Int(reader.ReadInt32(), reader.ReadInt32());
+        }
+
+        public Vector3 ReadVector3() 
+        {
+            return new Vector3(reader.ReadInt32(), reader.ReadInt32(), reader.ReadInt32());
+        }
+
         #endregion
         /*——————————————————————————————————————————————————————————*/
 

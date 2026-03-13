@@ -62,6 +62,16 @@ namespace Kokowolo.Utilities
             }
         }
 
+        public static bool Release<T>(T instance) where T : MonoBehaviour
+        {
+            if (SingletonInstance<T>.instance && ReferenceEquals(instance, SingletonInstance<T>.instance))
+            {
+                SingletonInstance<T>.instance = null;
+                return true;
+            }
+            return false;
+        }
+
         public static bool IsSingleton<T>(T instance) where T : MonoBehaviour
         {
             return ReferenceEquals(SingletonInstance<T>.instance, instance);

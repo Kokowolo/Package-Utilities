@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.155] - 2026-03-13
+### Added
+* `Release(T instance)` method to `Singleton`, which removes instance
+* `Release` method call to `MonoBehaviourSingleton.OnDestroy`
+### Changed
+* `GameIO` to no longer have basic type serialization, now just calls base reader/writer methods
+* layout and editor code within `Vector3Extensions` (no changes to functionality)
+### Removed
+* redundant logging in `Stat`
+### Fixed
+* confusing comment within `EditorExtensions`
+* `Stat` having implicit `ISerializationCallbackReceiver` methods
+
 ## [0.0.154] - 2026-03-06
 ### Added
 * bounds handling within `GizmosExtensions.DrawWireArc` where `segments` could be 0

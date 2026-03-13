@@ -159,9 +159,9 @@ namespace Kokowolo.Utilities.Editor
             // }
         }
 
-        [Obsolete("use DrawSerializeFields(Type type, SerializedObject property) instead")]
+        [Obsolete("use DrawSerializeFields(Type, SerializedObject) instead; i.e. DrawSerializeFields((Target Type) editor.target, editor.serializedObject); or consider calling base.OnInspectorGUI instead")]
         public static void DrawSerializeFields(UnityEditor.Editor editor) => DrawSerializeFields(editor.target, editor.serializedObject);
-        [Obsolete("use DrawSerializeFields(Type type, SerializedObject property) instead")]
+        [Obsolete("use DrawSerializeFields(Type, SerializedObject) instead")]
         public static void DrawSerializeFields<T>(T target, SerializedObject serializedObject) => DrawSerializeFields(typeof(T), serializedObject);
 
         public static void DrawSerializeFields<T>(SerializedObject serializedObject) => DrawSerializeFields(typeof(T), serializedObject);

@@ -51,6 +51,7 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
+                Singleton.Release(this);
                 Singleton_OnDestroy();
             }
         }

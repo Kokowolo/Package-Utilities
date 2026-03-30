@@ -26,13 +26,13 @@ namespace Kokowolo.Utilities
         #region Fields
 
         [Header("References")]
-        [SerializeField] GameObject visual;
+        [SerializeField] protected GameObject visual;
 
         [Header("Settings")]
-        public LayerMask layerMask;
+        [SerializeField] public LayerMask layerMask;
 
-        Transform previousTransform;
-        RaycastHit hitInfo;
+        protected Transform previousTransform;
+        protected RaycastHit hitInfo;
         bool doRaycast = true;
 
         #endregion
@@ -48,24 +48,8 @@ namespace Kokowolo.Utilities
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
-
-        // void Awake()
-        // {
-        //     if (WorldCursorManager.Cursor == null)
-        //     {
-        //         WorldCursorManager.Cursor = this;
-        //     }
-        // }
-
-        // void OnDestroy()
-        // {
-        //     if (WorldCursorManager.Cursor == this)
-        //     {
-        //         WorldCursorManager.Cursor = null;
-        //     }
-        // }
         
-        void Update() // NOTE: WorldCursor should execute before default execution order if order matters
+        protected virtual void Update() // NOTE: WorldCursor should execute before default execution order if order matters
         {
             DoRaycast();
             doRaycast = true;

@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.157] - 2026-04-03
+### Changed
+* `Singleton` to only allow `dontDestroyOnLoad` while the application is running
+### Fixed
+* bug within `MonoBehaviourSingleton.FindInstance` where `FindInstance` would not copy its `MonoBehaviourSingleton` fields
+
 ## [0.0.156] - 2026-03-30
 ### Changed
 * `WorldCursor` to have override-able members

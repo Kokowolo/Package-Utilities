@@ -52,7 +52,7 @@ namespace Kokowolo.Utilities
             {
                 SingletonInstance<T>.instance = instance;
                 if (unparentGameObject) instance.transform.SetParent(null);
-                if (dontDestroyOnLoad) Object.DontDestroyOnLoad(instance.gameObject);
+                if (dontDestroyOnLoad && Application.isPlaying) Object.DontDestroyOnLoad(instance.gameObject);
                 return true;
             }
             else

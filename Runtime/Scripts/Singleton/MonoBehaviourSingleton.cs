@@ -78,7 +78,19 @@ namespace Kokowolo.Utilities
         protected virtual void Singleton_OnEnable() {}
         protected virtual void Singleton_OnDisable() {}
 
-        public static T FindInstance() => Singleton.Get<T>(findAnyObjectByType: true);
+        public static T FindInstance() 
+        {
+            if (!Singleton.Get<T>())
+            {
+                T instance = FindAnyObjectByType<T>();
+                MonoBehaviourSingleton<T> monoBehaviourSingleton = instance as MonoBehaviourSingleton<T>;
+                if (monoBehaviourSingleton)
+                {
+                    Singleton.TrySet(instance, monoBehaviourSingleton.dontDestroyOnLoad, monoBehaviourSingleton.unparentGameObject);
+                }
+            }
+            return Singleton.Get<T>();
+        }
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

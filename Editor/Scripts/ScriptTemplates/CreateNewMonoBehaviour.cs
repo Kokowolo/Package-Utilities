@@ -21,8 +21,6 @@ namespace Kokowolo.Utilities.Editor
 
         const string PackageName = "com.kokowolo.utilities";
 
-        const int priority = -500;
-
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Menu Item Functions

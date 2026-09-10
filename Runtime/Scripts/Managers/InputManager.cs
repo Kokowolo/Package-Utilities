@@ -56,12 +56,13 @@ namespace Kokowolo.Utilities
 
         public static Vector2 GetMouseScreenPoint()
         {
-//#if ENABLE_INPUT_SYSTEM
-//            return Mouse.current.position.ReadValue();
-//#else
+#if ENABLE_INPUT_SYSTEM
+           return Mouse.current.position.ReadValue();
+#else
+            // HACK: I don't remember why note was documented, WarpCursorPosition does not call GetMouseScreenPoint so I am disregarding it
             // NOTE: using UnityEngine.Input over InputSystem due to bug within `Mouse.current.WarpCursorPosition(Vector2)`
             return Input.mousePosition; 
-//#endif
+#endif
         }
 
         public static void SetCursorWorldPosition(Vector3 worldPosition)

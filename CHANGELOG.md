@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.158] - 2026-04-03
+### Changed
+* `CameraFacer` to use `OnEnable` rather than `Start`
+* `TransformFacer` to be more readable and follow new changes within `CameraFacer` 
+* `InputManager`'s `GetMouseScreenPoint` to work with or without `InputSystem` package
+* `Vector3Extensions` `ProjectOnPlane` to no longer return a normalized vector
+### Removed
+* unused priority const within `CreateNewMonoBehaviour`
+
 ## [0.0.157] - 2026-04-03
 ### Changed
 * `Singleton` to only allow `dontDestroyOnLoad` while the application is running

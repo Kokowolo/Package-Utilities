@@ -130,7 +130,12 @@ namespace Kokowolo.Utilities
         public static float GetComponentInNormalizedDirection(Vector3 vector, Vector3 direction)
         {
 #if UNITY_EDITOR
-            Debug.Assert(direction.magnitude == 1);
+            bool isNormalized = direction.magnitude == 1;
+            Debug.Assert(isNormalized);
+            if (!isNormalized)
+            {
+                direction = direction.normalized;
+            }
 #endif
             // a * cosØ == a ⋅ b / |b|
             float dot = Vector3.Dot(vector, direction);
@@ -139,12 +144,12 @@ namespace Kokowolo.Utilities
         }
 
         /// <summary>
-        /// Aligns a direction vector along a plane using its normal; see more:
+        /// Aligns a vector along a plane using its normal; see more:
         /// https://catlikecoding.com/unity/tutorials/movement/physics/slopes/projecting-vector.png
         /// </summary>
-        public static Vector3 ProjectOnPlane(Vector3 direction, Vector3 normal) 
+        public static Vector3 ProjectOnPlane(Vector3 vector, Vector3 normal) 
         {
-            return (direction - normal * Vector3.Dot(direction, normal)).normalized;
+            return vector - normal * Vector3.Dot(vector, normal);
             // NOTE: Why not use Vector3.ProjectOnPlane? That method does the same but doesn't assume that the provided normal vector is of unit 
             //       length. It divides the result by the squared length of the normal, which is always 1, so it's not needed.
         }

@@ -37,8 +37,8 @@ namespace Kokowolo.Utilities
         [SerializeField] Transform _Target = null;
         
         [Header("Settings")]
-        [SerializeField] protected FaceDirection faceDirection = FaceDirection.Y;
-        [SerializeField] protected bool faceAwayFromCamera = false;
+        [SerializeField] protected FaceDirection faceDirection = FaceDirection.Z;
+        [SerializeField] protected bool faceAwayFrom = true;
         [SerializeField] protected Quaternion _Offset;
 
         Vector3 eulerAngles;
@@ -65,16 +65,16 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected virtual void Start() 
+        protected virtual void OnEnable()
         {
             if (!Target)
             {
                 LogManager.LogError($"{nameof(Target)} has not been set");
             }
+            LateUpdate();
         }
 
-        // TODO: convert this to Quaternion, otherwise it looks like there is gimbal lock
-        protected virtual void FixedUpdate()
+        protected virtual void LateUpdate()
         {
             switch (faceDirection)
             {
@@ -83,14 +83,14 @@ namespace Kokowolo.Utilities
                     eulerAngles = new Vector3(
                         TargetEulerAngles.z, 
                         TargetEulerAngles.y + 90,
-                        faceAwayFromCamera ? TargetEulerAngles.x + 180 : TargetEulerAngles.x
+                        faceAwayFrom ? TargetEulerAngles.x + 180 : TargetEulerAngles.x
                     );
                     break;
                 }
                 case FaceDirection.Y:
                 {
                     eulerAngles = new Vector3(
-                        faceAwayFromCamera ? TargetEulerAngles.x + 90 : TargetEulerAngles.x - 90, 
+                        faceAwayFrom ? TargetEulerAngles.x + 90 : TargetEulerAngles.x - 90, 
                         TargetEulerAngles.y, 
                         TargetEulerAngles.z
                     );
@@ -99,7 +99,7 @@ namespace Kokowolo.Utilities
                 case FaceDirection.Z:
                 {
                     eulerAngles = new Vector3(
-                        faceAwayFromCamera ? TargetEulerAngles.x : TargetEulerAngles.x + 180, 
+                        faceAwayFrom ? TargetEulerAngles.x : TargetEulerAngles.x + 180, 
                         TargetEulerAngles.y, 
                         TargetEulerAngles.z
                     );

@@ -21,13 +21,14 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected override void Start() 
+        protected override void OnEnable()
         {
             if (!Target)
             {
                 LogManager.Log($"{nameof(Target)} has not been set, using Camera.main");   
                 Target = Camera.main.transform; 
             }
+            base.OnEnable();
         }
 
         #endregion

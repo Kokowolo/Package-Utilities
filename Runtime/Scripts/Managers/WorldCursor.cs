@@ -97,17 +97,17 @@ namespace Kokowolo.Utilities
             doRaycast = false;
         }
 
-        public bool TryGetComponentInHit<T>(out T component) where T : Component
+        public bool TryGetComponentInHit<T>(out T component)
         {
             if (HitInfoTransform) return HitInfo.transform.TryGetComponent(out component);
-            component = null;
+            component = default;
             return false;
         }
 
-        public T GetComponentInHit<T>() where T : Component
+        public T GetComponentInHit<T>()
         {
             if (HitInfoTransform) return HitInfo.transform.GetComponent<T>();
-            return null;
+            return default;
         }
 
         #endregion

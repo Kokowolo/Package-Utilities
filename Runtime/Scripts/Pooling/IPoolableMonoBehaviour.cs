@@ -23,15 +23,17 @@ namespace Kokowolo.Utilities
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
-        
+
         void IPoolable.OnAddedToPool()
         {
             transform.SetParent(PoolManager.Instance.transform);
+            transform.gameObject.SetActive(false);
         }
 
         void IPoolable.OnRemovedFromPool()
         {
             transform.SetParent(null);
+            transform.gameObject.SetActive(true);
         }
 
         #endregion

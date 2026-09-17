@@ -129,8 +129,8 @@ namespace Kokowolo.Utilities
             if (current == this.current && this.max == max) return;
 
             // NOTE: Stat cannot have negative values, is this okay?
-            this.current = Mathf.Clamp(current, 0, this.max);
             this.max = Mathf.Max(0, max);
+            this.current = Mathf.Clamp(current, 0, this.max);
 
             RefreshStatus();
             OnSet?.Invoke();

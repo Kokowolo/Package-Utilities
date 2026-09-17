@@ -24,6 +24,11 @@ namespace Kokowolo.Utilities.Editor
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
+        public static SerializedProperty FindEncapsulatedPropertyRelative(this SerializedProperty property, string relativePropertyPath)
+        {
+            return property.FindPropertyRelative($"<{relativePropertyPath}>k__BackingField");
+        }
+
         public static Texture2D RenderStaticPreview(Sprite sprite, int width, int height)
         {
             if (sprite == null) return null;

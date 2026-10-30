@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.161] - 2026-10-30
+### Added
+* `Runtime/Scripts/Archiving` directory and added several older scripts to it
+* `Vector2IntExtensions`
+* `Id` from `Project-DSA`
+* `WeightedList` from `Project-DSA` and its `PropertyDrawer` class
+### Changed
+* `Raycasting` to reside within `Standalone` directory
+
 ## [0.0.160] - 2026-09-17
 ### Added
 * `EditorExtensions.FindPropertyBackingFieldRelative`

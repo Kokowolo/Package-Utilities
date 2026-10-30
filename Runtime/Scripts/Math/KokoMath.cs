@@ -1,6 +1,6 @@
 /*
  * Copyright (c) 2025 Kokowolo. All Rights Reserved.
- * Authors: Will Lacey
+ * Author(s): Kokowolo, Will Lacey
  * Date Created: January 15, 2022
  * 
  * Additional Comments: 

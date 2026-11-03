@@ -29,8 +29,33 @@ namespace Kokowolo.Utilities.Editor
             return property.FindPropertyRelative($"<{relativePropertyPath}>k__BackingField");
         }
 
+        // HACK: refactor and expand this method to be slightly more useable for additional purposes (like use both height and width maybe?)
+        public static void RenderTexture(Rect position, Sprite sprite, float height = 40f)
+        {
+            if (sprite == null) return;
+
+            Texture2D tex = sprite.texture;
+            Rect r = sprite.textureRect;
+
+            // resize to Editor-Space
+            float width = r.width / r.height * height;
+
+            Rect texRect = new Rect(
+                position.x - width, 
+                position.y + EditorGUIUtility.singleLineHeight * 2f - height, // center image (this may not be what we want)
+                width,
+                height
+            );
+
+            // Normalized UVs of the sprite within its texture/atlas
+            Rect uv = new Rect(r.x / tex.width, r.y / tex.height, r.width / tex.width, r.height / tex.height);
+
+            GUI.DrawTextureWithTexCoords(texRect, tex, uv, alphaBlend: true); // do not draw alpha
+        }
+
         public static Texture2D RenderStaticPreview(Sprite sprite, int width, int height)
         {
+            // NOTE: see RenderTexture method above for another method of drawing this in editor
             if (sprite == null) return null;
 
             Type type = EditorOnlyUtils.GetType("UnityEditor.SpriteUtility");

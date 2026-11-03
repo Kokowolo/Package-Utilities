@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.162] - 2026-11-03
+### Added
+* `EditorExtensions.RenderTexture` for a simpler method to draw a `Sprite` in the editor
+* comments to `Id.cs`
+* `TilemapExtensions` and method to fetch tilemap positions (notably this can already be done natively, but it's nice to document)
+
 ## [0.0.161] - 2026-10-30
 ### Added
 * `Runtime/Scripts/Archiving` directory and added several older scripts to it

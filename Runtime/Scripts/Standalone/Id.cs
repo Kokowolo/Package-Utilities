@@ -19,17 +19,21 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Properties
 
-        [field: NonSerialized] public int Value { get; set; }
+        // HACK: this is public but IdValue<T>.Id is not, setting value directly may cause non-unique ids
+        [field: NonSerialized] public int Value { get; set; } 
 
         #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        public static void ResetIterator<T>()
-        {
-            IdValue<T>.Reset();
-        }
+        // public void Init<T>(T obj) => Init<T>(); // convenience method
+        // public void Init<T>()
+        // {
+        //     if (Value != 0) return;
+        //     Value = IdValue<T>.GetValue();
+        // }
         
+        // NOTE: call this instead of Init
         public static Id Create<T>(T obj) => Create<T>(); // convenience method
         public static Id Create<T>()
         {
@@ -37,6 +41,11 @@ namespace Kokowolo.Utilities
             {
                 Value = IdValue<T>.GetValue()
             };
+        }
+
+        public static void ResetIterator<T>()
+        {
+            IdValue<T>.Reset();
         }
 
         public bool Equals(Id other) => this == other;

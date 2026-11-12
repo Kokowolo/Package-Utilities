@@ -107,12 +107,12 @@ namespace Kokowolo.Utilities.Editor
             return properties;
         }
 
-        public static float GetSerializedPropertiesHeight<T>(SerializedProperty property) => GetSerializedPropertiesHeight(typeof(T), property);
+        public static float GetSerializedPropertyHeight<T>(SerializedProperty property) => GetSerializedPropertyHeight(typeof(T), property);
         /// <summary>
         /// Gets the combined height of this property's SerializedProperties. Warning, this function will overwrite the GUIContent label on 
         /// to heap (which is used by Unity)
         /// </summary>
-        public static float GetSerializedPropertiesHeight(Type type, SerializedProperty property)
+        public static float GetSerializedPropertyHeight(Type type, SerializedProperty property)
         {
             if (property == null) 
             {

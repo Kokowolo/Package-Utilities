@@ -18,7 +18,7 @@ using UnityEngine.SceneManagement;
 
 namespace Kokowolo.Utilities.Editor
 {
-    [CreateAssetMenu(menuName = "Kokowolo/Utilities/ScenesInBuildManager Asset", fileName = nameof(ScenesInBuildManager))]
+    [CreateAssetMenu(menuName = "Kokowolo/Utilities/ScenesInBuildManager Asset")]
     public sealed class ScenesInBuildManager : ScriptableObject
     {
         /*██████████████████████████████████████████████████████████*/

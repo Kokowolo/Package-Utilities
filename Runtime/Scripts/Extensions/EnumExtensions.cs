@@ -10,8 +10,9 @@
  */
 
 using System;
-using System.Reflection;
 using System.ComponentModel;
+using System.Linq;
+using System.Reflection;
 
 namespace Kokowolo.Utilities
 {
@@ -34,7 +35,7 @@ namespace Kokowolo.Utilities
             for (int i = 1; i <= name.Length; i++)
             {
                 str += name[i - 1];
-                if (i < name.Length && Char.IsUpper(name[i])) str += " ";   
+                if (i < name.Length && char.IsUpper(name[i])) str += " ";   
             }
             return str;
         }
@@ -48,36 +49,80 @@ namespace Kokowolo.Utilities
                 FieldInfo field = type.GetField(name);
                 if (field != null)
                 {
-                    DescriptionAttribute attr = 
-                        Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) as DescriptionAttribute;
-                    if (attr != null) return attr.Description;
+                    if (Attribute.GetCustomAttribute(field, typeof(DescriptionAttribute)) is DescriptionAttribute a) return a.Description;
                 }
             }
             return value.ToString();
+        }
+
+        /// <summary>Returns the next defined value of the enum. Wraps to the first value by default.</summary>
+        public static T Next<T>(this T value, bool wrap = true) where T : struct, Enum
+        {
+            T[] values = GetValues<T>();
+            int index = Array.IndexOf(values, value);
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(value), value, $"{value} is not a defined {typeof(T).Name} value.");
+
+            int next = index + 1;
+            if (next < values.Length) return values[next];
+            return wrap ? values[0] : values[^1];
+        }
+
+        /// <summary>Returns the previous defined value of the enum. Wraps to the last value by default.</summary>
+        public static T Previous<T>(this T value, bool wrap = true) where T : struct, Enum
+        {
+            T[] values = GetValues<T>();
+            int index = Array.IndexOf(values, value);
+            if (index < 0) throw new ArgumentOutOfRangeException(nameof(value), value, $"{value} is not a defined {typeof(T).Name} value.");
+
+            int prev = index - 1;
+            if (prev >= 0) return values[prev];
+            return wrap ? values[^1] : values[0];
         }
 
         #endregion
         /*——————————————————————————————————————————————————————————*/
         #region Utilities
 
-        public static T[] GetValues<T>() 
+        public static T[] GetValues<T>() where T : struct, Enum
         {
-            return (T[])Enum.GetValues(typeof(T));
+            // NOTE: this does not cache or remove instances where enums are equal, i.e. { Dog = 0, Cat = 0}
+            // return (T[])Enum.GetValues(typeof(T));
+            return EnumCache<T>.Values;
         }
 
-        public static T GetLastValue<T>() 
+        public static T GetLastValue<T>() where T : struct, Enum
         {   
-            T[] values = GetValues<T>();
-            return values[values.Length - 1];
+            return GetValues<T>()[^1];
         }
 
-        public static int GetCount<T>() 
+        public static int GetCount<T>() where T : struct, Enum
         {   
             return GetValues<T>().Length;
         }
 
         #endregion
         /*——————————————————————————————————————————————————————————*/
+        
+        #endregion
+        /*██████████████████████████████████████████████████████████*/
+        #region Subclasses
+        
+        private static class EnumCache<T> where T : struct, Enum
+        {
+            static T[] _Values;
+            public static T[] Values
+            {
+                get
+                {
+                    if (_Values == null)
+                    {
+                        _Values = Enum.GetValues(typeof(T)).Cast<T>().Distinct().ToArray();
+                        LogManager.LogWarning($"Caching values for Enum {nameof(T)}");
+                    }
+                    return _Values;
+                }
+            }
+        }
         
         #endregion
         /*██████████████████████████████████████████████████████████*/

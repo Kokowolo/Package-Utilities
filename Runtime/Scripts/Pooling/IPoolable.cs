@@ -21,8 +21,14 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
         
+        /// <summary>
+        /// Called when IPoolable is added to pool
+        /// </summary>
         public void OnAddedToPool();
 
+        /// <summary>
+        /// Called when IPoolable is created or removed from pool
+        /// </summary>
         public void OnRemovedFromPool();
         
         #endregion

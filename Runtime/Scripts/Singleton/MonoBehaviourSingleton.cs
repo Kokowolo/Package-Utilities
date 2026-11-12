@@ -86,6 +86,7 @@ namespace Kokowolo.Utilities
                 MonoBehaviourSingleton<T> monoBehaviourSingleton = instance as MonoBehaviourSingleton<T>;
                 if (monoBehaviourSingleton)
                 {
+                    // NOTE: not calling Get<T>(findAnyObjectByType: true) because we reference: dontDestroyOnLoad & unparentGameObject
                     Singleton.TrySet(instance, monoBehaviourSingleton.dontDestroyOnLoad, monoBehaviourSingleton.unparentGameObject);
                 }
             }

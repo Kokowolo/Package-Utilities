@@ -17,32 +17,20 @@ using Kokowolo.Utilities;
 
 namespace Kokowolo.Utilities.Editor
 {
-    [CustomPropertyDrawer(typeof(StatReadOnlyMaxAttribute))]
-    public class StatReadOnlyMaxDrawer : PropertyDrawer
-    {
-        /*██████████████████████████████████████████████████████████*/
-        #region Functions
-
-        public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-        {
-            try 
-            {
-                Stat stat = (Stat) property.boxedValue;
-                EditorGUI.PropertyField(position, property, label, true); // Draws class below
-            }
-            catch
-            {
-                EditorGUI.LabelField(position, label.text, $"Use [{nameof(StatReadOnlyMaxAttribute)}] with {nameof(Stat)}");
-            }
-        }
-
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
-    }
-
     [CustomPropertyDrawer(typeof(Stat))]
     public class StatDrawer : PropertyDrawer
     {
+        /*██████████████████████████████████████████████████████████*/
+        #region Fields
+        
+        // NOTE: header, field, and spacing need to add to 1
+        private const float HeaderWidthFactor       = 0.3f;
+        private const float SpacingWidthFactor      = 0.1f;
+        private const float PrefixLabelWidthFactor  = 0.5f;
+
+        private static readonly GUIContent tempContent = new GUIContent();
+
+        #endregion
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
@@ -53,31 +41,51 @@ namespace Kokowolo.Utilities.Editor
 
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
+            // Enables prefab override bolding, right-click revert/copy/paste, and multi-edit mixed values for the whole row
+            label = EditorGUI.BeginProperty(position, label, property);
+
             var serializedProperties = EditorExtensions.GetSerializedProperties<Stat>(property);
+            int count = serializedProperties.Count;
 
-            // NOTE: header, field, and spacing need to add to 1
-            float headerWidthFactor     = 0.3f;
-            float spacingWidthFactor    = 0.1f;
+            float headerWidth = HeaderWidthFactor * position.width;
+            EditorGUI.LabelField(new Rect(position.x, position.y, headerWidth, position.height), label); // respects indent
 
-            float headerWidth       = headerWidthFactor * position.width;
-            float spacing           = spacingWidthFactor * position.width / serializedProperties.Count;
-            float fieldWidth        = (1f - headerWidthFactor - spacingWidthFactor) * position.width / serializedProperties.Count;
-            float prefixLabelWidth  = 0.5f * fieldWidth;
-
-            float x = position.x;
-            // label.text = $"{label.text} ({property.Name})"; // TODO: show the Name property
-            EditorGUI.LabelField(new Rect(x, position.y, headerWidth, position.height), label);
-            x += headerWidth + spacing;
-            
-            for (int i = 0; i < serializedProperties.Count; i++)
+            if (count == 0)
             {
-                Rect rect;
-                rect = new Rect(x, position.y, fieldWidth, position.height);
-                GUIContent prefix = new GUIContent($"{serializedProperties[i].displayName}");
-                EditorGUI.PrefixLabel(rect, prefix);
-                rect = new Rect(x + prefixLabelWidth, position.y, fieldWidth - prefixLabelWidth, position.height);
-                EditorGUI.PropertyField(rect, serializedProperties[i], GUIContent.none);
-                x += fieldWidth + (i == serializedProperties.Count - 1 ? 0 : spacing);
+                EditorGUI.EndProperty();
+                return;
+            }
+
+            float spacing           = SpacingWidthFactor * position.width / count;
+            float fieldWidth        = (1f - HeaderWidthFactor - SpacingWidthFactor) * position.width / count;
+            float prefixLabelWidth  = PrefixLabelWidthFactor * fieldWidth;
+
+            // Child rects are already laid out manually, so indent would only shift/squish them when nested
+            int indentLevel = EditorGUI.indentLevel;
+            EditorGUI.indentLevel = 0;
+
+            try
+            {
+                float x = position.x + headerWidth + spacing;
+                for (int i = 0; i < count; i++)
+                {
+                    SerializedProperty child = serializedProperties[i];
+
+                    // LabelField clips to its rect, unlike PrefixLabel which sizes itself from EditorGUIUtility.labelWidth
+                    tempContent.text    = child.displayName;
+                    tempContent.tooltip = child.tooltip;
+                    EditorGUI.LabelField(new Rect(x, position.y, prefixLabelWidth, position.height), tempContent);
+
+                    Rect fieldRect = new Rect(x + prefixLabelWidth, position.y, fieldWidth - prefixLabelWidth, position.height);
+                    EditorGUI.PropertyField(fieldRect, child, GUIContent.none);
+
+                    x += fieldWidth + spacing;
+                }
+            }
+            finally
+            {
+                EditorGUI.indentLevel = indentLevel;
+                EditorGUI.EndProperty();
             }
         }
 

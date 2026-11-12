@@ -45,6 +45,18 @@ namespace Kokowolo.Utilities
             items = new List<WeightedListItem>();
         }
 
+        public int IndexOf(T item)
+        {
+            if (items == null) return -1;
+
+            EqualityComparer<T> comparer = EqualityComparer<T>.Default;
+            for (int i = 0; i < items.Count; i++)
+            {
+                if (comparer.Equals(items[i].value, item)) return i;
+            }
+            return -1;
+        }
+
         public T GetRandomItem()
         {
             // Check if empty
@@ -70,10 +82,7 @@ namespace Kokowolo.Utilities
             throw new Exception("exceeded bounds of weighted list");
         }
 
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            yield return GetEnumerator();
-        }
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
         public IEnumerator<T> GetEnumerator()
         {
             for (int i = 0; i < items.Count; i++)
@@ -97,7 +106,7 @@ namespace Kokowolo.Utilities
             {
                 float percent = totalWeight > 0f ? 
                     items[i].weight / totalWeight * 100f : 
-                    i == 0 ? 100 : 0f;
+                    1f / Count * 100f;
                 items[i].SetPercent(percent);
             }
         }

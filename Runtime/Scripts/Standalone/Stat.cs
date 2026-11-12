@@ -15,20 +15,6 @@ using System;
 
 namespace Kokowolo.Utilities
 {
-    /// <summary>
-    /// Attribute for Stat class to specify the ReadOnly nature of its max value
-    /// </summary>
-    public class StatReadOnlyMaxAttribute : PropertyAttribute
-    {
-        /*██████████████████████████████████████████████████████████*/
-        #region Properties
-        
-        public bool ReadOnlyMax { get; set; } = true;
-
-        #endregion
-        /*██████████████████████████████████████████████████████████*/
-    }
-
     [Serializable]
 #if UNITY_EDITOR
     public class Stat : ISerializationCallbackReceiver

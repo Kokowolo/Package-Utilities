@@ -68,15 +68,15 @@ namespace Kokowolo.Utilities
             // Return first index if 1
             if (items.Count == 1) return items[0].value;
 
-            float roll = UnityEngine.Random.value * totalWeight;
+            float roll = UnityEngine.Random.value * 100;
 
             for (int i = 0; i < items.Count; i++)
             {
-                if (roll <= items[i].weight)
+                if (roll <= items[i].percent)
                 {
                     return items[i].value;
                 }
-                roll -= items[i].weight;
+                roll -= items[i].percent;
             }
 
             throw new Exception("exceeded bounds of weighted list");

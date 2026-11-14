@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.0.164] - 2026-11-13
+### Changed
+* `MonoBehaviourSingleton<T>`'s generic type to be a `MonoBehaviourSingleton<T>` rather than a `MonoBehaviour`
+* `MonoBehaviourSingleton`'s `Singleton_X` methods to `MonoBehaviourSingleton_X`
+### Fixed 
+* `WeightedList` using `weight` rather than `percent` when calculating `GetRandomItem`
+
 ## [0.0.163] - 2026-11-12
 ### Added
 * helper functions to `EnumExtensions`

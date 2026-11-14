@@ -16,7 +16,7 @@ namespace Kokowolo.Utilities
     /// <summary>
     /// Class specifically for the implementation of MonoBehaviour Singletons through abstraction
     /// </summary>
-    public abstract class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviour
+    public abstract class MonoBehaviourSingleton<T> : MonoBehaviour where T : MonoBehaviourSingleton<T>
     {
         /*██████████████████████████████████████████████████████████*/
         #region Fields
@@ -43,7 +43,7 @@ namespace Kokowolo.Utilities
             Singleton.TrySet(_Instance, dontDestroyOnLoad, unparentGameObject);
             if (Singleton.IsSingleton(_Instance))
             {
-                Singleton_Awake();
+                MonoBehaviourSingleton_Awake();
             }
         }
 
@@ -52,7 +52,7 @@ namespace Kokowolo.Utilities
             if (Singleton.IsSingleton(_Instance))
             {
                 Singleton.Release(this);
-                Singleton_OnDestroy();
+                MonoBehaviourSingleton_OnDestroy();
             }
         }
 
@@ -60,7 +60,7 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                Singleton_OnEnable();
+                MonoBehaviourSingleton_OnEnable();
             }
         }
 
@@ -68,15 +68,15 @@ namespace Kokowolo.Utilities
         {
             if (Singleton.IsSingleton(_Instance))
             {
-                Singleton_OnDisable();
+                MonoBehaviourSingleton_OnDisable();
             }
         }
         
-        protected virtual void Singleton_Awake() {}
-        protected virtual void Singleton_OnDestroy() {}
+        protected virtual void MonoBehaviourSingleton_Awake() {}
+        protected virtual void MonoBehaviourSingleton_OnDestroy() {}
         
-        protected virtual void Singleton_OnEnable() {}
-        protected virtual void Singleton_OnDisable() {}
+        protected virtual void MonoBehaviourSingleton_OnEnable() {}
+        protected virtual void MonoBehaviourSingleton_OnDisable() {}
 
         public static T FindInstance() 
         {

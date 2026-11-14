@@ -30,7 +30,7 @@ namespace Kokowolo.Utilities
         /*██████████████████████████████████████████████████████████*/
         #region Functions
 
-        protected override void Singleton_Awake()
+        protected override void MonoBehaviourSingleton_Awake()
         {
 #if ENABLE_INPUT_SYSTEM
             enabled = true;

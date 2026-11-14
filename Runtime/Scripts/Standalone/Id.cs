@@ -48,20 +48,22 @@ namespace Kokowolo.Utilities
             IdValue<T>.Reset();
         }
 
-        public bool Equals(Id other) => this == other;
-        public override bool Equals(object obj) => Equals((Id) obj);
+        public readonly bool IsValid() => Value != 0;
+
+        public readonly bool Equals(Id other) => this == other;
+        public override readonly bool Equals(object obj) => Equals((Id) obj);
         public static bool operator !=(Id a, Id b) => !(a == b);
         public static bool operator ==(Id a, Id b)
         {
             return a.Value == b.Value;
         }
         
-        public override int GetHashCode()
+        public override readonly int GetHashCode()
         {
             return HashCode.Combine(Value);
         }
 
-        public override string ToString() => $"{nameof(Id)}{Value}";
+        public override readonly string ToString() => $"{nameof(Id)}{Value}";
 
         #endregion
         /*██████████████████████████████████████████████████████████*/

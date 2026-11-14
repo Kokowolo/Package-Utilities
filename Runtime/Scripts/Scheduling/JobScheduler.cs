@@ -113,7 +113,11 @@ namespace Kokowolo.Utilities.Scheduling
             if (isJobSystemScheduler) JobSystem.SetScheduler(null);
         }
 
-        internal void Update() // NOTE: called from JobSystem, not via MonoBehaviour
+        /// <summary>
+        /// Flushes jobs that are pending (either scheduled or merely deferred execution); NOTE: called from <see cref="JobManager"/>, not 
+        /// via <see cref="MonoBehaviour"/>
+        /// </summary>
+        internal void Update()
         {
             if (!Enabled) return;
             Enabled = false;
@@ -130,7 +134,7 @@ namespace Kokowolo.Utilities.Scheduling
             while (pendingJobs.Count > 0)
             {
                 Job job = pendingJobs.Dequeue();
-                if (job.IsPending) 
+                if (job.IsPending)
                 {
                     job.IsPending = false;
                     if (job.IsScheduled)
